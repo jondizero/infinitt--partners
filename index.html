@@ -215,7 +215,7 @@ html, body {
   align-items: center;
   justify-content: center;
   min-height: 70vh;
-  padding: 70px 10px 24px;
+  padding: 44px 10px 24px;
   text-align: center;
   position: relative;
   gap: 0;
@@ -319,7 +319,7 @@ html, body {
   line-height: 1.12;
   color: var(--white);
   letter-spacing: -0.01em;
-  max-width: 800px;
+  max-width: 890px;
   animation: fadeUp 0.8s 0.18s ease both;
   position: relative;
   z-index: 1;
@@ -541,6 +541,179 @@ html, body {
   to {
     opacity:1;
     transform:translateY(0);
+  }
+}
+
+/* ─── RESPONSIVE ─── */
+
+@media (max-height: 800px) {
+  .hero {
+    min-height: auto;
+    padding: 24px 10px 16px;
+  }
+
+  .pre-hl {
+    margin-bottom: 16px;
+  }
+
+  .ornament {
+    margin: 14px auto;
+  }
+
+  .cta-wrap {
+    margin-top: 18px;
+  }
+
+  .stat-cell {
+    padding: 14px 10px;
+  }
+
+  .stat-value {
+    font-size: 22px;
+  }
+
+  .footer-note {
+    padding: 10px 40px 8px;
+  }
+}
+
+@media (max-height: 680px) {
+  .pre-hl {
+    margin-bottom: 10px;
+  }
+
+  .ornament {
+    margin: 10px auto;
+  }
+
+  .cta-wrap {
+    margin-top: 12px;
+    gap: 8px;
+  }
+
+  .cta-btn {
+    padding: 12px 36px;
+  }
+
+  .stat-cell {
+    padding: 10px 8px;
+  }
+
+  .stat-value {
+    font-size: 18px;
+  }
+}
+
+/* ─── MOBILE ─── */
+
+@media (max-width: 640px) {
+
+  /* Nav: mostra só logo + live */
+  .hud-nav {
+    grid-template-columns: 42px 1fr 42px;
+  }
+
+  .hud-nav-cell:nth-child(3),
+  .hud-nav-cell:nth-child(4) {
+    display: none;
+  }
+
+  /* Remove os trilhos laterais */
+  .page {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .rail {
+    display: none;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: auto;
+    padding: 48px 20px 32px;
+  }
+
+  /* Esconde labels HUD que ficam fora do hero em mobile */
+  .hud-label.tl,
+  .hud-label.tr,
+  .hud-label.bl,
+  .hud-label.br {
+    display: none;
+  }
+
+  /* Pre-headline */
+  .pre-hl {
+    font-size: 9px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  /* Headline */
+  .hl-l1 {
+    font-size: clamp(28px, 8vw, 38px);
+    line-height: 1.18;
+  }
+
+  .hl-l3 {
+    font-size: clamp(18px, 5.5vw, 26px);
+    margin-top: 10px;
+  }
+
+  /* Ornamento */
+  .ornament {
+    margin: 20px auto;
+  }
+
+  /* Sub headline */
+  .sub-hl {
+    font-size: 11px;
+    line-height: 1.75;
+    max-width: 100%;
+    padding: 0 4px;
+  }
+
+  /* CTA */
+  .cta-wrap {
+    margin-top: 28px;
+    width: 100%;
+  }
+
+  .cta-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 18px 24px;
+    font-size: 10.5px;
+  }
+
+  /* Stats: 2 colunas + última centralizada */
+  .stats-inner {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stat-cell:last-child {
+    grid-column: 1 / -1;
+    border-right: none;
+    border-top: 0.5px solid var(--line);
+  }
+
+  .stat-value {
+    font-size: 24px;
+  }
+
+  .stat-label {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+  }
+
+  /* Footer */
+  .footer-note {
+    padding: 16px 20px 20px;
+  }
+
+  .footer-note p {
+    font-size: 9px;
+    line-height: 1.9;
   }
 }
 </style>
