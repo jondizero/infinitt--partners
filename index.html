@@ -707,6 +707,8 @@ html, body {
 
 <body>
 
+<canvas id="grid-shimmer" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+
 <div class="ticker-wrap">
   <div class="ticker-track" id="ticker-track"></div>
 </div>
@@ -916,6 +918,67 @@ function tick() {
 
 tick();
 setInterval(tick, 30000);
+</script>
+
+<script>
+(function(){
+  const cv = document.getElementById('grid-shimmer');
+  const g = cv.getContext('2d');
+  const CELL = 56;
+  let sparks = [];
+
+  function initSparks(){
+    const W = cv.width, H = cv.height;
+    sparks = [
+      { h:true,  track: Math.round(H * 0.32 / CELL) * CELL, t: 0,   speed: 0.7,  len: 85 },
+      { h:false, track: Math.round(W * 0.62 / CELL) * CELL, t: 140, speed: 0.45, len: 65 },
+      { h:true,  track: Math.round(H * 0.68 / CELL) * CELL, t: 270, speed: 0.9,  len: 75 },
+    ];
+  }
+
+  function resize(){
+    cv.width  = window.innerWidth;
+    cv.height = window.innerHeight;
+    initSparks();
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+
+  function draw(){
+    g.clearRect(0, 0, cv.width, cv.height);
+
+    sparks.forEach(s => {
+      s.t += s.speed;
+      const max = (s.h ? cv.width : cv.height) + s.len;
+      if(s.t > max) s.t = -s.len;
+
+      const p  = s.t;
+      const x1 = s.h ? p - s.len : s.track;
+      const y1 = s.h ? s.track   : p - s.len;
+      const x2 = s.h ? p + s.len : s.track;
+      const y2 = s.h ? s.track   : p + s.len;
+
+      const gr = g.createLinearGradient(x1, y1, x2, y2);
+      gr.addColorStop(0,   'transparent');
+      gr.addColorStop(0.4, 'rgba(201,169,110,0.28)');
+      gr.addColorStop(0.5, 'rgba(245,226,168,0.82)');
+      gr.addColorStop(0.6, 'rgba(201,169,110,0.28)');
+      gr.addColorStop(1,   'transparent');
+
+      g.strokeStyle = gr;
+      g.lineWidth   = 1;
+      g.beginPath();
+      if(s.h){ g.moveTo(x1, s.track); g.lineTo(x2, s.track); }
+      else   { g.moveTo(s.track, y1); g.lineTo(s.track, y2); }
+      g.stroke();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+})();
 </script>
 
 </body>
