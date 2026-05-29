@@ -204,7 +204,6 @@ html, body {
   display: grid;
   grid-template-rows: 1fr auto auto;
   position: relative;
-  overflow: hidden;
 }
 
 /* ─── HERO ─── */
@@ -313,6 +312,20 @@ html, body {
   display: block;
   font-size: clamp(30px, 5.8vw, 50px);
   font-weight: 700;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f8f3eb 18%,
+    #efe5d2 42%,
+    #dcc39a 78%,
+    #c9a96e 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 18px rgba(201,169,110,0.06));
+  line-height: 1.1;
+  padding-bottom: 0.15em;
 }
 
 .hl-l2 {
@@ -320,6 +333,7 @@ html, body {
   font-style: normal;
   color: var(--gold);
   font-weight: 800;
+  -webkit-text-fill-color: var(--gold); /
 }
 
 .hl-l3 {
