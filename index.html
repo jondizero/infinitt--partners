@@ -423,6 +423,7 @@ html, body {
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  isolation: isolate;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
@@ -436,8 +437,10 @@ html, body {
 }
 
 .cta-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 36px rgba(201,169,110,0.26);
+  transform: translateY(-1px);
+  box-shadow:
+    0 8px 30px rgba(201,169,110,0.18),
+    inset 0 0 0 1px rgba(255,255,255,0.05);
 }
 
 .cta-btn:hover::before { opacity: 1; }
@@ -458,6 +461,89 @@ html, body {
   height: 11px;
   opacity: 0.45;
 }
+
+
+
+/* APPLE STYLE LIGHT SWEEP */
+
+.cta-btn::after {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: -40%;
+  width: 22%;
+  height: 220%;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,0.06) 20%,
+    rgba(255,255,255,0.35) 50%,
+    rgba(255,255,255,0.06) 80%,
+    transparent 100%
+  );
+  filter: blur(10px);
+  transform: translateX(-180%) skewX(-24deg);
+  opacity: 0;
+}
+
+.cta-btn:hover::after {
+  animation: luxurySweepLoop 3.4s ease-in-out infinite;
+}
+
+@keyframes luxurySweepLoop {
+
+  0% {
+    opacity: 0;
+    transform:
+      translateX(-180%)
+      skewX(-24deg);
+  }
+
+  8% {
+    opacity: 1;
+  }
+
+  28% {
+    opacity: 1;
+  }
+
+  35% {
+    opacity: 0;
+    transform:
+      translateX(700%)
+      skewX(-24deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translateX(700%)
+      skewX(-24deg);
+  }
+
+}
+
+
+/* ─── CTA ANIMATIONS ─── */
+
+/* Arrow March — anima, pausa ~1s, repete */
+.cta-arrows { display: inline-flex; gap: 4px; }
+.cta-arr    { display: inline-block; }
+
+.cta-btn:hover .cta-arr:nth-child(1) { animation: cta-march 2s 0s   ease-in-out infinite; }
+.cta-btn:hover .cta-arr:nth-child(2) { animation: cta-march 2s 0.2s ease-in-out infinite; }
+.cta-btn:hover .cta-arr:nth-child(3) { animation: cta-march 2s 0.4s ease-in-out infinite; }
+
+@keyframes cta-march {
+  0%   { transform: translateX(0);    opacity: 1; }
+  18%  { transform: translateX(8px);  opacity: 0; }
+  19%  { transform: translateX(-6px); opacity: 0; }
+  36%  { transform: translateX(0);    opacity: 1; }
+  100% { transform: translateX(0);    opacity: 1; }
+}
+
+
 
 /* ─── STATS ─── */
 
@@ -814,7 +900,10 @@ html, body {
       <div class="cta-wrap">
 
         <a href="https://www.instagram.com/direct/t/115335963192552/" target="_blank" rel="noopener noreferrer" class="cta-btn">
-          Explore Partnership ➤ ➤ ➤
+          Explore Partnership
+          <span class="cta-arrows">
+            <span class="cta-arr">➤</span><span class="cta-arr">➤</span><span class="cta-arr">➤</span>
+          </span>
         </a>
 
         <span class="cta-note">
@@ -994,6 +1083,8 @@ setInterval(tick, 30000);
   draw();
 })();
 </script>
+
+
 
 </body>
 </html>
