@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robert — Funnel Audit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root, [data-theme="dark"]{
+    --bg:#050506;--surface:#0d0e10;--surface-2:#141519;
+    --ink:#f2f4f3;--ink-soft:#b9c1c3;--ink-muted:#767f82;--line:rgba(255,255,255,0.09);
+    --accent-fill:#6214CD;--accent-text:#6214CD;--accent-soft:rgba(98,20,205,0.1);
+    --danger-fill:#ff5266;--danger-text:#ff5266;--danger-soft:rgba(255,82,102,0.1);
+    --shadow-soft:rgba(0,0,0,0.6);--dot-color:#333;--on-accent:#ffffff;
+    --display:'Space Grotesk',sans-serif;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  [data-theme="light"]{
+    --bg:#e6e6e6;--surface:#ffffff;--surface-2:#f1f1f1;
+    --ink:#14151a;--ink-soft:#4a4d54;--ink-muted:#82858c;--line:rgba(0,0,0,0.1);
+    --accent-fill:#6214CD;--accent-text:#6214CD;--accent-soft:rgba(98,20,205,0.1);
+    --danger-fill:#ff5266;--danger-text:#c81f3f;--danger-soft:rgba(200,31,63,0.1);
+    --shadow-soft:rgba(0,0,0,0.14);--dot-color:#cfcfcf;--on-accent:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  ::selection{background:var(--accent-fill);color:#000}
+
+  .slide{min-height:100vh;padding:clamp(32px,6vw,88px);scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;position:relative;border-bottom:1px solid var(--line)}
+  .slide-inner{max-width:1180px;margin:0 auto;width:100%;position:relative;z-index:1}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  .slide.visible .reveal{opacity:1;transform:translateY(0)}
+  .slide.visible .reveal:nth-child(1){transition-delay:.05s}
+  .slide.visible .reveal:nth-child(2){transition-delay:.13s}
+  .slide.visible .reveal:nth-child(3){transition-delay:.21s}
+  .slide.visible .reveal:nth-child(4){transition-delay:.29s}
+
+  .kicker{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:22px}
+  .kicker::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent-fill);box-shadow:0 0 8px var(--accent-fill)}
+  .kicker.is-problem::before{background:var(--danger-fill);box-shadow:0 0 8px var(--danger-fill)}
+  .kicker.is-problem{color:var(--danger-text)}
+  .kicker.is-solution{color:var(--accent-text)}
+
+  h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-0.02em;line-height:1.08;color:var(--ink)}
+  h2{font-size:clamp(30px,4vw,50px);max-width:20ch}
+  p{color:var(--ink-soft);font-size:clamp(16px,1.35vw,18.5px);line-height:1.6;max-width:56ch}
+
+  .slide-meta{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:11px;color:var(--ink-muted);letter-spacing:.1em}
+  .slide-meta .dot{width:3px;height:3px;border-radius:50%;background:var(--ink-muted)}
+
+  /* cover */
+  .slide-cover{align-items:center;text-align:center}
+  .slide-cover .slide-inner{display:flex;flex-direction:column;align-items:center}
+  .cover-logo{height:34px;margin-bottom:40px;filter:brightness(0) invert(1)}
+  .slide-cover h1{font-size:clamp(38px,6.5vw,76px);margin-bottom:22px}
+  .slide-cover h1 em{color:var(--accent-text);font-style:normal}
+  .cover-tag{font-family:var(--mono);font-size:12px;color:var(--ink-muted);letter-spacing:.1em}
+
+  /* intro / section */
+  .slide-section{align-items:center;text-align:center}
+  .slide-section .slide-inner{display:flex;flex-direction:column;align-items:center}
+  .stat-row{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;justify-content:center}
+  .stat-chip{font-family:var(--mono);font-size:13px;color:var(--ink-soft);border:1px solid var(--line);border-radius:100px;padding:9px 18px;background:var(--surface)}
+  .stat-chip b{color:var(--accent-text)}
+
+  /* split (fact/fix) */
+  .slide-split .slide-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .split-media{order:1}.split-text{order:2}
+  .slide-split.flip .split-media{order:2}.slide-split.flip .split-text{order:1}
+
+  .shot{border-radius:14px;overflow:hidden;background:var(--surface);border:1px solid var(--line);box-shadow:0 30px 60px -20px var(--shadow-soft)}
+  .shot-bar{display:flex;gap:6px;padding:10px 12px;background:var(--surface-2);border-bottom:1px solid var(--line)}
+  .shot-bar span{width:8px;height:8px;border-radius:50%;background:var(--dot-color)}
+  .shot img{display:block;width:100%;height:auto}
+  .shot.duo{display:flex;flex-direction:column;gap:1px;background:var(--line)}
+  .shot.duo .shot-frame{background:var(--surface)}
+  .shot.duo img{display:block}
+  .shot-wrap{position:relative}
+  .badge{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:var(--accent-fill);color:var(--on-accent);padding:6px 12px;border-radius:100px;font-weight:600}
+
+  .list-terminal{list-style:none;margin-top:26px}
+  .list-terminal li{font-family:var(--mono);font-size:14.5px;color:var(--ink-soft);padding:9px 0;border-bottom:1px solid var(--line);display:flex;gap:10px}
+  .list-terminal li:first-child{border-top:1px solid var(--line)}
+  .list-terminal.is-problem li::before{content:"›";color:var(--danger-text);font-weight:700}
+  .list-terminal.is-solution li::before{content:"✓";color:var(--accent-text);font-weight:700}
+
+  .flow{display:flex;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap}
+  .flow-step{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;font-family:var(--mono);font-size:13px;color:var(--ink-soft);text-align:center;flex:1;min-width:140px}
+  .flow-step b{display:block;font-family:var(--display);font-size:16px;color:var(--ink);margin-bottom:4px;font-weight:600}
+  .flow-arrow{color:var(--accent-text);font-size:20px}
+
+  /* icon grid */
+  .icon-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:16px;margin-top:40px;max-width:640px}
+  .icon-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 12px;display:flex;flex-direction:column;align-items:center;gap:12px}
+  .icon-card img{width:34px;height:34px;object-fit:contain;border-radius:6px}
+  .icon-card span{font-family:var(--mono);font-size:11px;color:var(--ink-muted);text-align:center}
+
+  /* icon circle layout */
+  .icon-circle{position:relative;width:min(420px,88vw);aspect-ratio:1;margin:48px auto 0}
+  .icon-circle::before{content:"";position:absolute;inset:12%;border:1px dashed var(--line);border-radius:50%}
+  .icon-circle .icon-card{position:absolute;width:108px;transform:translate(-50%,-50%)}
+  @media (max-width:520px){.icon-circle .icon-card{width:84px;padding:14px 8px}.icon-circle .icon-card img{width:26px;height:26px}}
+
+  /* closing */
+  .slide-closing{align-items:center;text-align:center}
+  .slide-closing .slide-inner{display:flex;flex-direction:column;align-items:center}
+  .cta-btn{margin-top:32px;display:inline-flex;align-items:center;gap:10px;border:1px solid var(--accent-fill);border-radius:100px;padding:16px 32px;font-family:var(--mono);font-size:13px;color:var(--on-accent);letter-spacing:.06em;background:var(--accent-fill);text-decoration:none;font-weight:600;transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+  .cta-btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px -8px var(--accent-soft)}
+
+  .progress{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(255,255,255,.06);z-index:100}
+  .progress-bar{height:100%;background:var(--accent-fill);transition:width .15s linear;box-shadow:0 0 10px var(--accent-fill)}
+  .kbd-hint{position:fixed;bottom:18px;right:22px;font-family:var(--mono);font-size:10.5px;color:var(--ink-muted);letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:8px;background:rgba(13,14,16,.85);backdrop-filter:blur(8px);padding:7px 14px;border-radius:100px;border:1px solid var(--line);z-index:50}
+  .kbd-hint kbd{font-family:var(--mono);background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:2px 6px;font-size:10px;color:var(--ink-soft)}
+
+  @media (max-width:860px){
+    .slide-split .slide-inner{grid-template-columns:1fr;gap:28px}
+    .slide-split.flip .split-media,.slide-split.flip .split-text{order:unset}
+    .kbd-hint{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){.reveal{transition:none;opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+<div class="kbd-hint"><kbd>↓</kbd><kbd>↑</kbd> navigate</div>
+
+<!-- 01 — COVER -->
+<section class="slide slide-cover visible">
+  <div class="slide-inner">
+    <img src="images/logo-robert.png" alt="Robert" class="cover-logo reveal" style="filter:none;height:64px;border-radius:8px">
+    <h1 class="reveal">Robert<br><em>Funnel Audit</em></h1>
+    <div class="cover-tag reveal">ROBERT · JULY 2026</div>
+  </div>
+  <div class="slide-meta"><span>01</span><span class="dot"></span><span>11</span></div>
+</section>
+
+<!-- 02 — INTRO -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <div class="kicker reveal">FUNNEL AUDIT</div>
+    <h2 class="reveal">Robert, I checked SOME parts of your info setup as if I were your customer</h2>
+    <p class="reveal" style="margin:20px auto 0">From your landing page to the checkout, here's what I found, and what I believe could bring a better ROI for you.</p>
+    <div class="stat-row reveal">
+      <div class="stat-chip"><b>3</b> facts found</div>
+      <div class="stat-chip"><b>3</b> fixes proposed</div>
+      <div class="stat-chip">+ 2 new opportunities ahead</div>
+    </div>
+  </div>
+  <div class="slide-meta"><span>02</span><span class="dot"></span><span>11</span></div>
+</section>
+
+<!-- 03 — FACT 01 -->
+<section class="slide slide-split">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="flow">
+        <div class="flow-step"><b>Visitor lands</b>No trust signals</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><b>Scrolls past</b>No proof, no reason to stay</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><b>Leaves</b>Never opts in</div>
+      </div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-problem">FACT 01</div>
+      <h2>Your Landing Page Has Nothing to Prove Itself</h2>
+      <p>The capture page has no testimonials, no numbers, no authority logos. A visitor has zero reason to trust you before handing over their email.</p>
+      <ul class="list-terminal is-problem">
+        <li>No testimonials anywhere on the page</li>
+        <li>No student count or results shown</li>
+        <li>Trust has to be assumed, not earned</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>03</span><span class="dot"></span><span>11</span></div>
+</section>
+
+<!-- 04 — FIX 01 -->
+<section class="slide slide-split flip">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="flow">
+        <div class="flow-step"><b>Headline</b>Same as before</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><b>+ Proof block</b>Testimonials + student count</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><b>Opt-in</b>Higher conversion</div>
+      </div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-solution">FIX 01</div>
+      <h2>Let the Page Prove It For You</h2>
+      <p>A proof block — testimonials and a student counter — goes right under the headline, before the visitor has to decide whether to trust you.</p>
+      <ul class="list-terminal is-solution">
+        <li>Testimonials placed above the fold</li>
+        <li>Student/result counter for social proof</li>
+        <li>Trust established before the ask</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>04</span><span class="dot"></span><span>11</span></div>
+</section>
+
+<!-- 05 — FACT 02 -->
+<section class="slide slide-split">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="flow">
+        <div class="flow-step"><b>Opt-in</b>Lead joins list</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><b>Silence</b>No emails sent</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><b>Webinar invite</b>Cold, no warm-up</div>
+      </div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-problem">FACT 02</div>
+      <h2>Leads Go Cold Before the Webinar</h2>
+      <p>Once someone opts in, the only email they get is the webinar invite itself. There's no nurture sequence warming them up in between.</p>
+      <ul class="list-terminal is-problem">
+        <li>Zero emails between opt-in and webinar</li>
+        <li>No value delivered before the pitch</li>
+        <li>Show-up rates suffer from cold leads</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>05</span><span class="dot"></span><span>11</span></div>
+</section>
+
+<!-- 06 — FIX 02 -->
+<section class="slide slide-split flip">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="flow">
+        <div class="flow-step"><b>Opt-in</b>Lead joins list</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><b>3 value emails</b>Warm-up sequence</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><b>Webinar invite</b>Warm, ready to show up</div>
+      </div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-solution">FIX 02</div>
+      <h2>Warm Them Up Before the Pitch</h2>
+      <p>A 3-email nurture sequence sits between opt-in and webinar invite, delivering value and building familiarity before asking for a show-up.</p>
+      <ul class="list-terminal is-solution">
+        <li>3 value-first emails pre-webinar</li>
+        <li>Builds trust ahead of the pitch</li>
+        <li>Higher expected show-up rate</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>06</span><span class="dot"></span><span>11</span></div>
+</section>
+
+<!-- 07 — FACT 03 -->
+<section class="slide slide-split">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="flow">
+        <div class="flow-step"><b>9 fields</b>Full checkout form</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><b>Friction</b>CPF, address, more</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><b>Drop-off</b>Before seeing the offer</div>
+      </div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-problem">FACT 03</div>
+      <h2>Checkout Asks Too Much, Too Soon</h2>
+      <p>The checkout form has 9 fields — including full ID number and address — before the buyer even sees a summary of what they're getting.</p>
+      <ul class="list-terminal is-problem">
+        <li>9 fields required before purchase</li>
+        <li>No offer summary shown upfront</li>
+        <li>Friction drives abandoned checkouts</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>07</span><span class="dot"></span><span>11</span></div>
+</section>
+
+<!-- 08 — FIX 03 -->
+<section class="slide slide-split flip">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="flow">
+        <div class="flow-step"><b>4 fields</b>Name, email, card, phone</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><b>Purchase</b>Fast, low friction</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><b>Post-purchase</b>Extra info collected after</div>
+      </div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-solution">FIX 03</div>
+      <h2>Reduce the Form, Keep the Data</h2>
+      <p>Checkout drops to 4 essential fields. Everything else — CPF, address — moves to a short post-purchase step, after the sale is already secured.</p>
+      <ul class="list-terminal is-solution">
+        <li>Checkout cut down to 4 fields</li>
+        <li>Non-essential data collected post-sale</li>
+        <li>Fewer drop-offs at the point of payment</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>08</span><span class="dot"></span><span>11</span></div>
+</section>
+
+<!-- 09 — OPPORTUNITY 01 -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <div class="kicker reveal">OPPORTUNITY 01</div>
+    <h2 class="reveal">Scale Without Depending on Live Dates</h2>
+    <p class="reveal" style="margin:20px auto 0">The recorded webinar can be repurposed into an evergreen funnel, running on autopilot with automated email sequences instead of fixed live dates.</p>
+    <div class="icon-grid reveal">
+      <div class="icon-card"><img src="/assets/icons/webinar-generic.png" alt="Evergreen Webinar"><span>Evergreen Webinar</span></div>
+      <div class="icon-card"><img src="/assets/icons/gmail.png" alt="Automated Email"><span>Automated Email</span></div>
+    </div>
+  </div>
+  <div class="slide-meta"><span>09</span><span class="dot"></span><span>11</span></div>
+</section>
+
+<!-- 10 — OPPORTUNITY 02 -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <div class="kicker reveal">OPPORTUNITY 02</div>
+    <h2 class="reveal">Re-Engage The Ones Who Disappeared</h2>
+    <p class="reveal" style="margin:20px auto 0">Automated Instagram DMs can reach out to leads who abandoned checkout, bringing back revenue that would otherwise be left on the table.</p>
+    <div class="icon-grid reveal">
+      <div class="icon-card"><img src="/assets/icons/instagram.png" alt="Instagram DM"><span>Instagram DM</span></div>
+    </div>
+  </div>
+  <div class="slide-meta"><span>10</span><span class="dot"></span><span>11</span></div>
+</section>
+
+
+<!-- 11 — CLOSING -->
+<section class="slide slide-closing">
+  <div class="slide-inner">
+    <div class="kicker reveal">NEXT STEPS</div>
+    <h2 class="reveal">Does This Make Sense?</h2>
+    <p class="reveal" style="margin:20px auto 0">If so, just click the button and shoot me a message on IG.</p>
+    <a href="https://www.instagram.com/direct/t/115335963192552/" target="_blank" rel="noopener" class="cta-btn reveal">Message me on Instagram →</a>
+  </div>
+  <div class="slide-meta"><span>11</span><span class="dot"></span><span>11</span></div>
+</section>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const progressBar = document.getElementById('progressBar');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+  },{threshold:0.3});
+  slides.forEach(s=>io.observe(s));
+
+  function updateProgress(){
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop/docHeight)*100 : 0;
+    progressBar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, {passive:true});
+  updateProgress();
+
+  function currentIndex(){
+    let idx = 0, min = Infinity;
+    slides.forEach((s,i)=>{
+      const d = Math.abs(s.getBoundingClientRect().top);
+      if(d < min){ min = d; idx = i; }
+    });
+    return idx;
+  }
+  window.addEventListener('keydown', (e)=>{
+    if(e.key === 'ArrowDown' || e.key === 'PageDown'){
+      e.preventDefault();
+      const i = Math.min(currentIndex()+1, slides.length-1);
+      slides[i].scrollIntoView({behavior:'smooth'});
+    }
+    if(e.key === 'ArrowUp' || e.key === 'PageUp'){
+      e.preventDefault();
+      const i = Math.max(currentIndex()-1, 0);
+      slides[i].scrollIntoView({behavior:'smooth'});
+    }
+  });
+</script>
+</body>
+</html>
