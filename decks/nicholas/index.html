@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<base href="/decks/nicholas/">
+<title>Nicholas — Funnel Audit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root, [data-theme="dark"]{
+    --bg:#050506;--surface:#0d0e10;--surface-2:#141519;
+    --ink:#f2f4f3;--ink-soft:#b9c1c3;--ink-muted:#767f82;--line:rgba(255,255,255,0.09);
+    --accent-fill:#D62A40;--accent-text:#D62A40;--accent-soft:rgba(214,42,64,0.1);
+    --danger-fill:#ff5266;--danger-text:#ff5266;--danger-soft:rgba(255,82,102,0.1);
+    --shadow-soft:rgba(0,0,0,0.6);--dot-color:#333;--on-accent:#fff;
+    --display:'Space Grotesk',sans-serif;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  [data-theme="light"]{
+    --bg:#e6e6e6;--surface:#ffffff;--surface-2:#f1f1f1;
+    --ink:#14151a;--ink-soft:#4a4d54;--ink-muted:#82858c;--line:rgba(0,0,0,0.1);
+    --accent-fill:#00ff94;--accent-text:#00915c;--accent-soft:rgba(0,145,92,0.1);
+    --danger-fill:#ff5266;--danger-text:#c81f3f;--danger-soft:rgba(200,31,63,0.1);
+    --shadow-soft:rgba(0,0,0,0.14);--dot-color:#cfcfcf;--on-accent:#00130b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  ::selection{background:var(--accent-fill);color:#000}
+
+  .slide{min-height:100vh;padding:clamp(32px,6vw,88px);scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;position:relative;border-bottom:1px solid var(--line)}
+  .slide-inner{max-width:1180px;margin:0 auto;width:100%;position:relative;z-index:1}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  .slide.visible .reveal{opacity:1;transform:translateY(0)}
+  .slide.visible .reveal:nth-child(1){transition-delay:.05s}
+  .slide.visible .reveal:nth-child(2){transition-delay:.13s}
+  .slide.visible .reveal:nth-child(3){transition-delay:.21s}
+  .slide.visible .reveal:nth-child(4){transition-delay:.29s}
+
+  .kicker{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:22px}
+  .kicker::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent-fill);box-shadow:0 0 8px var(--accent-fill)}
+  .kicker.is-problem::before{background:var(--danger-fill);box-shadow:0 0 8px var(--danger-fill)}
+  .kicker.is-problem{color:var(--danger-text)}
+  .kicker.is-solution{color:var(--accent-text)}
+
+  h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-0.02em;line-height:1.08;color:var(--ink)}
+  h2{font-size:clamp(30px,4vw,50px);max-width:20ch}
+  p{color:var(--ink-soft);font-size:clamp(16px,1.35vw,18.5px);line-height:1.6;max-width:56ch}
+
+  .slide-meta{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:11px;color:var(--ink-muted);letter-spacing:.1em}
+  .slide-meta .dot{width:3px;height:3px;border-radius:50%;background:var(--ink-muted)}
+
+  /* cover */
+  .slide-cover{align-items:center;text-align:center}
+  .slide-cover .slide-inner{display:flex;flex-direction:column;align-items:center}
+  .cover-logo{height:34px;margin-bottom:40px;filter:brightness(0) invert(1)}
+  .slide-cover h1{font-size:clamp(38px,6.5vw,76px);margin-bottom:22px}
+  .slide-cover h1 em{color:var(--accent-text);font-style:normal}
+  .cover-tag{font-family:var(--mono);font-size:12px;color:var(--ink-muted);letter-spacing:.1em}
+
+  /* intro / section */
+  .slide-section{align-items:center;text-align:center}
+  .slide-section .slide-inner{display:flex;flex-direction:column;align-items:center}
+  .stat-row{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;justify-content:center}
+  .stat-chip{font-family:var(--mono);font-size:13px;color:var(--ink-soft);border:1px solid var(--line);border-radius:100px;padding:9px 18px;background:var(--surface)}
+  .stat-chip b{color:var(--accent-text)}
+
+  /* split (fact/fix) */
+  .slide-split .slide-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .split-media{order:1}.split-text{order:2}
+  .slide-split.flip .split-media{order:2}.slide-split.flip .split-text{order:1}
+
+  .shot{border-radius:14px;overflow:hidden;background:var(--surface);border:1px solid var(--line);box-shadow:0 30px 60px -20px var(--shadow-soft)}
+  .shot-bar{display:flex;gap:6px;padding:10px 12px;background:var(--surface-2);border-bottom:1px solid var(--line)}
+  .shot-bar span{width:8px;height:8px;border-radius:50%;background:var(--dot-color)}
+  .shot img{display:block;width:100%;height:auto}
+  .shot.duo{display:flex;flex-direction:column;gap:1px;background:var(--line)}
+  .shot.duo .shot-frame{background:var(--surface)}
+  .shot.duo img{display:block}
+  .shot-wrap{position:relative}
+  .badge{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:var(--accent-fill);color:var(--on-accent);padding:6px 12px;border-radius:100px;font-weight:600}
+
+  .list-terminal{list-style:none;margin-top:26px}
+  .list-terminal li{font-family:var(--mono);font-size:14.5px;color:var(--ink-soft);padding:9px 0;border-bottom:1px solid var(--line);display:flex;gap:10px}
+  .list-terminal li:first-child{border-top:1px solid var(--line)}
+  .list-terminal.is-problem li::before{content:"›";color:var(--danger-text);font-weight:700}
+  .list-terminal.is-solution li::before{content:"✓";color:var(--accent-text);font-weight:700}
+
+  .flow{display:flex;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap}
+  .flow-step{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;font-family:var(--mono);font-size:13px;color:var(--ink-soft);text-align:center;flex:1;min-width:140px}
+  .flow-step b{display:block;font-family:var(--display);font-size:16px;color:var(--ink);margin-bottom:4px;font-weight:600}
+  .flow-arrow{color:var(--accent-text);font-size:20px}
+
+  /* icon grid */
+  .icon-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:16px;margin-top:40px;max-width:640px}
+  .icon-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 12px;display:flex;flex-direction:column;align-items:center;gap:12px}
+  .icon-card img{width:34px;height:34px;object-fit:contain;border-radius:6px}
+  .icon-card span{font-family:var(--mono);font-size:11px;color:var(--ink-muted);text-align:center}
+
+  /* icon circle layout */
+  .icon-circle{position:relative;width:min(420px,88vw);aspect-ratio:1;margin:48px auto 0}
+  .icon-circle::before{content:"";position:absolute;inset:12%;border:1px dashed var(--line);border-radius:50%}
+  .icon-circle .icon-card{position:absolute;width:108px;transform:translate(-50%,-50%)}
+  @media (max-width:520px){.icon-circle .icon-card{width:84px;padding:14px 8px}.icon-circle .icon-card img{width:26px;height:26px}}
+
+  /* closing */
+  .slide-closing{align-items:center;text-align:center}
+  .slide-closing .slide-inner{display:flex;flex-direction:column;align-items:center}
+  .cta-btn{margin-top:32px;display:inline-flex;align-items:center;gap:10px;border:1px solid var(--accent-fill);border-radius:100px;padding:16px 32px;font-family:var(--mono);font-size:13px;color:var(--on-accent);letter-spacing:.06em;background:var(--accent-fill);text-decoration:none;font-weight:600;transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+  .cta-btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px -8px var(--accent-soft)}
+
+  .progress{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(255,255,255,.06);z-index:100}
+  .progress-bar{height:100%;background:var(--accent-fill);transition:width .15s linear;box-shadow:0 0 10px var(--accent-fill)}
+  .kbd-hint{position:fixed;bottom:18px;right:22px;font-family:var(--mono);font-size:10.5px;color:var(--ink-muted);letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:8px;background:rgba(13,14,16,.85);backdrop-filter:blur(8px);padding:7px 14px;border-radius:100px;border:1px solid var(--line);z-index:50}
+  .kbd-hint kbd{font-family:var(--mono);background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:2px 6px;font-size:10px;color:var(--ink-soft)}
+
+  @media (max-width:860px){
+    .slide-split .slide-inner{grid-template-columns:1fr;gap:28px}
+    .slide-split.flip .split-media,.slide-split.flip .split-text{order:unset}
+    .kbd-hint{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){.reveal{transition:none;opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+<div class="kbd-hint"><kbd>↓</kbd><kbd>↑</kbd> navigate</div>
+
+<!-- 01 — COVER -->
+<section class="slide slide-cover visible">
+  <div class="slide-inner">
+    <h1 class="reveal">Nicholas<br><em>Funnel Audit</em></h1>
+    <div class="cover-tag reveal">NIC · JULY 2026</div>
+  </div>
+  <div class="slide-meta"><span>01</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 02 — INTRO -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <div class="kicker reveal">IT ONLY TAKES 45 SECONDS</div>
+    <h2 class="reveal">I went through your info setup (funnel) and a few things stood out.</h2>
+    <p class="reveal" style="margin:20px auto 0">Some are quietly costing you revenue. Others are opportunities that could increase your return without increasing your work.</p>
+    <div class="stat-row reveal">
+      <div class="stat-chip"><b>4</b> facts found</div>
+      <div class="stat-chip"><b>4</b> fixes proposed</div>
+      <div class="stat-chip">+ new opportunities ahead</div>
+    </div>
+  </div>
+  <div class="slide-meta"><span>02</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 03 — FACT 01 (no mentorship page) -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <div class="kicker is-problem reveal">FACT 01</div>
+    <h2 class="reveal">Your Highest-Ticket Offer Doesn't Exist Online</h2>
+    <p class="reveal" style="margin:20px auto 0">You confirmed it yourself — there's a mentorship offer ready to sell. But right now there's no page, no link, nowhere for a buyer to say yes.</p>
+    <ul class="list-terminal is-problem reveal" style="text-align:left;max-width:520px;margin-top:26px">
+      <li>No dedicated page or link anywhere</li>
+      <li>No way for a hot lead to convert</li>
+      <li>Your highest-ticket offer is invisible</li>
+    </ul>
+  </div>
+  <div class="slide-meta"><span>03</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 04 — FIX 01 -->
+<section class="slide slide-split flip">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot-wrap">
+        <div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><img src="images/fix-01-mentorship-page.png" alt="Dedicated mentorship landing page reference"></div>
+        <div class="badge">reference</div>
+      </div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-solution">FIX 01</div>
+      <h2>Make the Mentorship the Flagship Offer</h2>
+      <p>A dedicated funnel — landing page, VSL, and a clear path to apply — built specifically to sell the mentorship as your core offer.</p>
+      <ul class="list-terminal is-solution">
+        <li>Dedicated landing page + VSL</li>
+        <li>Clear application/booking flow</li>
+        <li>Positioned as the flagship offer</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>04</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 05 — FACT 02 ($9 offer treated as core) -->
+<section class="slide slide-split">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><img src="images/fact-02-offer-pricing.png" alt="Current pricing, $9.99 as entry point"></div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-problem">FACT 02</div>
+      <h2>Your Cheapest Offer Is Carrying the Business</h2>
+      <p>The $9.99 trial is positioned as the main entry point, with $97 as the "best value" ceiling — there's no path to anything higher.</p>
+      <ul class="list-terminal is-problem">
+        <li>$9.99 treated as the core offer</li>
+        <li>$97 is the highest tier shown</li>
+        <li>No bridge to a premium price point</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>05</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 06 — FIX 02 -->
+<section class="slide slide-split flip">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><img src="images/fix-02-offer-ladder.png" alt="New offer ladder with high ticket tiers"></div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-solution">FIX 02</div>
+      <h2>Turn One Offer Into a Ladder</h2>
+      <p>The $9.99 stays as the entry point — but now it feeds into $1,500 and $3,500 tiers, with the mentorship as the real destination.</p>
+      <ul class="list-terminal is-solution">
+        <li>$9.99 becomes the entry point, not the ceiling</li>
+        <li>Mid and high tiers added above it</li>
+        <li>Every buyer has somewhere to go next</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>06</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 07 — FACT 03 (no bumpsells/upsells) -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <div class="kicker is-problem reveal">FACT 03</div>
+    <h2 class="reveal">Every Sale Ends at Checkout</h2>
+    <p class="reveal" style="margin:20px auto 0">The $9 checkout closes the deal and stops there — no bump, no upsell, no attempt to raise the average order value.</p>
+    <ul class="list-terminal is-problem reveal" style="text-align:left;max-width:520px;margin-top:26px">
+      <li>No order bump at checkout</li>
+      <li>No post-purchase upsell</li>
+      <li>AOV capped at the entry price</li>
+    </ul>
+  </div>
+  <div class="slide-meta"><span>07</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 08 — FIX 03 (flow diagram) -->
+<section class="slide slide-split flip">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="flow">
+        <div class="flow-step"><b>$9 Checkout</b>Entry offer</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><b>+ Order Bump</b>Complementary offer</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><b>Upsell</b>Toward the mentorship</div>
+      </div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-solution">FIX 03</div>
+      <h2>Capture More From Every Buyer</h2>
+      <p>Add a bump and an upsell right where buying intent is highest — inside the checkout flow, not in a follow-up email nobody opens.</p>
+      <ul class="list-terminal is-solution">
+        <li>Order bump at checkout</li>
+        <li>Upsell immediately post-purchase</li>
+        <li>Higher AOV, same traffic</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>08</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 09 — FACT 04 (dead social media) -->
+<section class="slide slide-split">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><img src="images/fact-04-dead-social.png" alt="YouTube video with 66 views in 7 days"></div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-problem">FACT 04</div>
+      <h2>YouTube and X Are Going Nowhere</h2>
+      <p>Videos like this pull 66 views in a week — the channels exist, but nobody's using them to bring in clients.</p>
+      <ul class="list-terminal is-problem">
+        <li>Low, inconsistent output</li>
+        <li>No content-to-funnel connection</li>
+        <li>Two channels sitting mostly idle</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>09</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 10 — FIX 04 (flow diagram) -->
+<section class="slide slide-split flip">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="flow">
+        <div class="flow-step"><b>Content</b>YouTube + X</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><b>Audience</b>Built with intent</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><b>Funnel</b>Clear CTA every post</div>
+      </div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-solution">FIX 04</div>
+      <h2>Content Built to Bring In Clients</h2>
+      <p>A content strategy for YouTube and X focused on one job: pulling viewers into the funnel, not just posting for the sake of it.</p>
+      <ul class="list-terminal is-solution">
+        <li>Consistent content calendar</li>
+        <li>Every piece points to an offer</li>
+        <li>YouTube and X become acquisition channels</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>10</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 11 — NEXT-LEVEL OPPORTUNITY 01 -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <div class="kicker reveal">NEXT-LEVEL OPPORTUNITY 01</div>
+    <h2 class="reveal">A System to Move Buyers Up</h2>
+    <p class="reveal" style="margin:20px auto 0">A process that takes your hottest leads and buyers and moves them toward the higher-ticket offers — instead of leaving them at the entry point.</p>
+  </div>
+  <div class="slide-meta"><span>11</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 12 — NEXT-LEVEL OPPORTUNITY 02 -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <div class="kicker reveal">NEXT-LEVEL OPPORTUNITY 02</div>
+    <h2 class="reveal">More Ways In, Not Just One</h2>
+    <p class="reveal" style="margin:20px auto 0">Give people different ways to enter — webinar, free training — instead of a single path that isn't working for everyone.</p>
+    <div class="icon-grid reveal">
+      <div class="icon-card"><img src="/assets/icons/webinar-generic.png" alt="Webinar"><span>Webinar</span></div>
+      <div class="icon-card"><img src="/assets/icons/free-training-generic.png" alt="Free Training"><span>Free Training</span></div>
+    </div>
+  </div>
+  <div class="slide-meta"><span>12</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 13 — NEXT-LEVEL OPPORTUNITY 03 -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <div class="kicker reveal">NEXT-LEVEL OPPORTUNITY 03</div>
+    <h2 class="reveal">A Content Strategy That Sells</h2>
+    <p class="reveal" style="margin:20px auto 0">Beyond fixing what's dead, an ongoing content strategy across social gives you a real acquisition engine, not just a presence.</p>
+    <div class="icon-grid reveal">
+      <div class="icon-card"><img src="/assets/icons/youtube.png" alt="YouTube"><span>YouTube</span></div>
+      <div class="icon-card"><img src="/assets/icons/x.png" alt="X"><span>X</span></div>
+    </div>
+  </div>
+  <div class="slide-meta"><span>13</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 14 — THE BIG PICTURE -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <div class="kicker reveal">THE BIG PICTURE</div>
+    <h2 class="reveal">What I See Is Leverage.</h2>
+    <p class="reveal" style="margin:22px auto 0">None of these recommendations are about adding complexity. They're about creating leverage.</p>
+    <ul class="list-terminal is-solution reveal" style="text-align:left;max-width:44ch">
+      <li>Leverage that turns more visitors into buyers</li>
+      <li>Leverage that turns buyers into long-term customers</li>
+      <li>Leverage that makes future growth easier than past growth</li>
+    </ul>
+    <p class="reveal" style="margin:22px auto 0">That's the opportunity I believe is sitting in front of you.</p>
+  </div>
+  <div class="slide-meta"><span>14</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 15 — CLOSING -->
+<section class="slide slide-closing">
+  <div class="slide-inner">
+    <div class="kicker reveal">NEXT STEPS</div>
+    <h2 class="reveal">If this resonates, let's talk.</h2>
+    <p class="reveal" style="margin:20px auto 0">I already have a few ideas on how I'd approach this. If you'd like to explore them together, click the button below and we'll take it from there.</p>
+    <a href="https://www.instagram.com/direct/t/115335963192552/" target="_blank" rel="noopener" class="cta-btn reveal">Message me on Instagram →</a>
+  </div>
+  <div class="slide-meta"><span>15</span><span class="dot"></span><span>15</span></div>
+</section>
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const progressBar = document.getElementById('progressBar');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+  },{threshold:0.3});
+  slides.forEach(s=>io.observe(s));
+
+  function updateProgress(){
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop/docHeight)*100 : 0;
+    progressBar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, {passive:true});
+  updateProgress();
+
+  function currentIndex(){
+    let idx = 0, min = Infinity;
+    slides.forEach((s,i)=>{
+      const d = Math.abs(s.getBoundingClientRect().top);
+      if(d < min){ min = d; idx = i; }
+    });
+    return idx;
+  }
+  window.addEventListener('keydown', (e)=>{
+    if(e.key === 'ArrowDown' || e.key === 'PageDown'){
+      e.preventDefault();
+      const i = Math.min(currentIndex()+1, slides.length-1);
+      slides[i].scrollIntoView({behavior:'smooth'});
+    }
+    if(e.key === 'ArrowUp' || e.key === 'PageUp'){
+      e.preventDefault();
+      const i = Math.max(currentIndex()-1, 0);
+      slides[i].scrollIntoView({behavior:'smooth'});
+    }
+  });
+</script>
+</body>
+</html>
