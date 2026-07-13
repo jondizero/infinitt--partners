@@ -5,7 +5,7 @@
 // O resto do arquivo não precisa mudar.
 const DECKS = [
   { client: "GAR Capital", slug: "gar-capital", date: "2026-07-08", color: "#00ff94", status: "Sent" },
-  { client: "Doyle Exchange", slug: "doyle", date: "2026-07-11", color: "#FF0808", status: "Sent" }
+  { client: "Logan Fullmer", slug: "logan-fullmer", date: "2026-07-13", color: "#BC8621", status: "Sent" }
 ];
 
 function checkAuth(req) {
