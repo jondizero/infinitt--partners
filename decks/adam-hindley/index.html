@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<base href="/decks/adam-hindley/">
+<title>Adam Hindley — Info Operation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root, [data-theme="dark"]{
+    --bg:#050506;--surface:#0d0e10;--surface-2:#141519;
+    --ink:#f2f4f3;--ink-soft:#b9c1c3;--ink-muted:#767f82;--line:rgba(255,255,255,0.09);
+    --accent-fill:#EFB532;--accent-text:#EFB532;--accent-soft:rgba(239,181,50,0.1);
+    --danger-fill:#ff5266;--danger-text:#ff5266;--danger-soft:rgba(255,82,102,0.1);
+    --shadow-soft:rgba(0,0,0,0.6);--dot-color:#333;--on-accent:#2a1f00;
+    --display:'Space Grotesk',sans-serif;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  [data-theme="light"]{
+    --bg:#e6e6e6;--surface:#ffffff;--surface-2:#f1f1f1;
+    --ink:#14151a;--ink-soft:#4a4d54;--ink-muted:#82858c;--line:rgba(0,0,0,0.1);
+    --accent-fill:#EFB532;--accent-text:#EFB532;--accent-soft:rgba(239,181,50,0.1);
+    --danger-fill:#ff5266;--danger-text:#c81f3f;--danger-soft:rgba(200,31,63,0.1);
+    --shadow-soft:rgba(0,0,0,0.14);--dot-color:#cfcfcf;--on-accent:#2a1f00;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  ::selection{background:var(--accent-fill);color:#000}
+
+  .slide{min-height:100vh;padding:clamp(32px,6vw,88px);scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;position:relative;border-bottom:1px solid var(--line)}
+  .slide-inner{max-width:1180px;margin:0 auto;width:100%;position:relative;z-index:1}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  .slide.visible .reveal{opacity:1;transform:translateY(0)}
+  .slide.visible .reveal:nth-child(1){transition-delay:.05s}
+  .slide.visible .reveal:nth-child(2){transition-delay:.13s}
+  .slide.visible .reveal:nth-child(3){transition-delay:.21s}
+  .slide.visible .reveal:nth-child(4){transition-delay:.29s}
+
+  .kicker{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:22px}
+  .kicker::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent-fill);box-shadow:0 0 8px var(--accent-fill)}
+  .kicker.is-problem::before{background:var(--danger-fill);box-shadow:0 0 8px var(--danger-fill)}
+  .kicker.is-problem{color:var(--danger-text)}
+  .kicker.is-solution{color:var(--accent-text)}
+
+  h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-0.02em;line-height:1.08;color:var(--ink)}
+  h2{font-size:clamp(30px,4vw,50px);max-width:20ch}
+  p{color:var(--ink-soft);font-size:clamp(16px,1.35vw,18.5px);line-height:1.6;max-width:56ch}
+
+  .slide-meta{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:11px;color:var(--ink-muted);letter-spacing:.1em}
+  .slide-meta .dot{width:3px;height:3px;border-radius:50%;background:var(--ink-muted)}
+
+  /* cover */
+  .slide-cover{align-items:center;text-align:center}
+  .slide-cover .slide-inner{display:flex;flex-direction:column;align-items:center}
+  .cover-logo{height:34px;margin-bottom:40px}
+  .slide-cover h1{font-size:clamp(38px,6.5vw,76px);margin-bottom:22px}
+  .slide-cover h1 em{color:var(--accent-text);font-style:normal}
+  .cover-tag{font-family:var(--mono);font-size:12px;color:var(--ink-muted);letter-spacing:.1em}
+
+  /* intro / section */
+  .slide-section{align-items:center;text-align:center}
+  .slide-section .slide-inner{display:flex;flex-direction:column;align-items:center}
+  .stat-row{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;justify-content:center}
+  .stat-chip{font-family:var(--mono);font-size:13px;color:var(--ink-soft);border:1px solid var(--line);border-radius:100px;padding:9px 18px;background:var(--surface)}
+  .stat-chip b{color:var(--accent-text)}
+
+  /* split (fact/fix) */
+  .slide-split .slide-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .split-media{order:1}.split-text{order:2}
+  .slide-split.flip .split-media{order:2}.slide-split.flip .split-text{order:1}
+
+  .shot{border-radius:14px;overflow:hidden;background:var(--surface);border:1px solid var(--line);box-shadow:0 30px 60px -20px var(--shadow-soft)}
+  .shot-bar{display:flex;gap:6px;padding:10px 12px;background:var(--surface-2);border-bottom:1px solid var(--line)}
+  .shot-bar span{width:8px;height:8px;border-radius:50%;background:var(--dot-color)}
+  .shot img{display:block;width:100%;height:auto}
+  .shot.duo{display:flex;flex-direction:column;gap:1px;background:var(--line)}
+  .shot.duo .shot-frame{background:var(--surface)}
+  .shot.duo img{display:block}
+  .shot-wrap{position:relative}
+  .badge{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:var(--accent-fill);color:var(--on-accent);padding:6px 12px;border-radius:100px;font-weight:600}
+
+  .list-terminal{list-style:none;margin-top:26px}
+  .list-terminal li{font-family:var(--mono);font-size:14.5px;color:var(--ink-soft);padding:9px 0;border-bottom:1px solid var(--line);display:flex;gap:10px}
+  .list-terminal li:first-child{border-top:1px solid var(--line)}
+  .list-terminal.is-problem li::before{content:"›";color:var(--danger-text);font-weight:700}
+  .list-terminal.is-solution li::before{content:"✓";color:var(--accent-text);font-weight:700}
+
+  .flow{display:flex;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap}
+  .flow-step{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;font-family:var(--mono);font-size:13px;color:var(--ink-soft);text-align:center;flex:1;min-width:140px}
+  .flow-step b{display:block;font-family:var(--display);font-size:16px;color:var(--ink);margin-bottom:4px;font-weight:600}
+  .flow-arrow{color:var(--accent-text);font-size:20px}
+  .flow-row{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+
+  /* icon grid */
+  .icon-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:16px;margin-top:40px;max-width:640px}
+  .icon-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 12px;display:flex;flex-direction:column;align-items:center;gap:12px}
+  .icon-card img{width:34px;height:34px;object-fit:contain;border-radius:6px}
+  .icon-card span{font-family:var(--mono);font-size:11px;color:var(--ink-muted);text-align:center}
+
+  /* closing */
+  .slide-closing{align-items:center;text-align:center}
+  .slide-closing .slide-inner{display:flex;flex-direction:column;align-items:center}
+  .cta-btn{margin-top:32px;display:inline-flex;align-items:center;gap:12px;border:none;border-radius:10px;padding:22px 48px;font-family:var(--mono);font-size:15px;color:var(--on-accent);letter-spacing:.06em;background:var(--accent-fill);text-decoration:none;font-weight:700;transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s var(--ease);box-shadow:0 14px 34px -12px var(--accent-soft)}
+  .cta-btn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 20px 45px -12px var(--accent-soft)}
+  .cta-btn:active{transform:translateY(-1px) scale(.99)}
+
+  .progress{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(255,255,255,.06);z-index:100}
+  .progress-bar{height:100%;background:var(--accent-fill);transition:width .15s linear;box-shadow:0 0 10px var(--accent-fill)}
+  .kbd-hint{position:fixed;bottom:18px;right:22px;font-family:var(--mono);font-size:10.5px;color:var(--ink-muted);letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:8px;background:rgba(13,14,16,.85);backdrop-filter:blur(8px);padding:7px 14px;border-radius:100px;border:1px solid var(--line);z-index:50}
+  .kbd-hint kbd{font-family:var(--mono);background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:2px 6px;font-size:10px;color:var(--ink-soft)}
+
+  @media (max-width:860px){
+    .slide-split .slide-inner{grid-template-columns:1fr;gap:28px}
+    .slide-split.flip .split-media,.slide-split.flip .split-text{order:unset}
+    .kbd-hint{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){.reveal{transition:none;opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+<div class="kbd-hint"><kbd>↓</kbd><kbd>↑</kbd> navigate</div>
+
+<!-- 01 — COVER -->
+<section class="slide slide-cover visible">
+  <div class="slide-inner">
+    <h1 class="reveal">Adam Hindley<br><em>Info Operation</em></h1>
+    <div class="cover-tag reveal">· JULY 2026 ·</div>
+  </div>
+  <div class="slide-meta"><span>01</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 02 — MARKET CONTEXT -->
+<section class="slide slide-split">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot"><img src="/assets/market-context/market-growth.png" alt="Global online education market growth statistics"></div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-solution">THE ONLINE EDUCATION MARKET KEEPS EXPANDING</div>
+      <h2>Expertise is no longer what separates the winners</h2>
+      <p>More creators launch courses. More coaches enter the market. More money flows into education every year. But as the market matures, the winners aren't simply the ones with the best offer. They're the businesses with the systems that convert more visitors, recover more buyers, and increase customer value over time.</p>
+    </div>
+  </div>
+  <div class="slide-meta"><span>02</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 03 — WHERE GROWTH LEAKS -->
+<section class="slide slide-split flip">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot"><img src="/assets/market-context/growth-leaks.png" alt="Diagram showing where growth actually leaks: slow funnels, poor follow-up, weak onboarding, disconnected automations, lost momentum before booking"></div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-problem">WHERE GROWTH ACTUALLY LEAKS</div>
+      <h2>Growth isn't usually lost at the top of the funnel</h2>
+      <p>It's everything that happens after someone clicks. The slow funnels. Poor follow-up. Weak onboarding. Disconnected automations. Prospects who lose momentum before booking. Each one feels small. Together, they quietly become one of the largest costs in the business.</p>
+    </div>
+  </div>
+  <div class="slide-meta"><span>03</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 04 — INTRO -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <div class="kicker is-solution reveal">IT ONLY TAKES 45 SECONDS</div>
+    <h2 class="reveal">Adam, I went through your info setup (funnel) and a few things stood out.</h2>
+    <p class="reveal" style="margin:20px auto 0">Some are quietly costing you revenue. Others are opportunities that could increase your return without increasing your work.</p>
+    <div class="stat-row reveal">
+      <div class="stat-chip"><b>3</b> facts found</div>
+      <div class="stat-chip"><b>3</b> fixes proposed</div>
+      <div class="stat-chip">+ new opportunities ahead</div>
+    </div>
+  </div>
+  <div class="slide-meta"><span>04</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 05 — FACT 01 -->
+<section class="slide slide-split">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><img src="images/bottleneck1-fact.png" alt="Public Facebook post with visible copy errors marked in red"></div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-problem">FACT 01</div>
+      <h2>Small Details Can Quietly Hurt Credibility</h2>
+      <p>Before prospects evaluate the offer itself, they evaluate how polished the business feels. Small mistakes in high-visibility assets can create unnecessary doubt at the exact moment you're trying to build trust.</p>
+      <ul class="list-terminal is-problem">
+        <li>Public-facing copy contains avoidable errors</li>
+        <li>First impressions lose professionalism</li>
+        <li>Credibility is reduced before the offer begins</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>05</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 06 — FIX 01 -->
+<section class="slide slide-split flip">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot-wrap">
+        <div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><img src="images/bottleneck1-fix.png" alt="Clean, polished version of the same post with the errors removed"></div>
+        <div class="badge">after</div>
+      </div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-solution">FIX 01</div>
+      <h2>Polish Every Customer-Facing Touchpoint</h2>
+      <p>Create a simple quality-control process so every page, ad, and campaign reflects the premium standard of the business.</p>
+      <ul class="list-terminal is-solution">
+        <li>Final review before publishing</li>
+        <li>Consistent brand presentation</li>
+        <li>Stronger first impressions</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>06</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 07 — FACT 02 -->
+<section class="slide slide-split">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><img src="images/bottleneck2-fact.png" alt="Broken 404 page where an interested prospect's journey dead-ends"></div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-problem">FACT 02</div>
+      <h2>Interested Prospects Are Reaching A Dead End</h2>
+      <p>When someone is ready to learn more, every extra second of friction increases the chance they'll leave instead. Right now, one of your primary entry points isn't leading anywhere.</p>
+      <ul class="list-terminal is-problem">
+        <li>Broken customer journey</li>
+        <li>High-intent visitors can't continue</li>
+        <li>Valuable opportunities are lost</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>07</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 08 — FIX 02 -->
+<section class="slide slide-split flip">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot-wrap">
+        <div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><img src="images/bottleneck2-fix.png" alt="Active landing page with a working CTA replacing the broken link"></div>
+        <div class="badge">after</div>
+      </div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-solution">FIX 02</div>
+      <h2>Make Every Path Lead Somewhere Meaningful</h2>
+      <p>Regularly audit every link and customer touchpoint so interested prospects always reach the next intended step.</p>
+      <ul class="list-terminal is-solution">
+        <li>Active destination for every CTA</li>
+        <li>Friction-free customer journey</li>
+        <li>More opportunities captured</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>08</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 09 — FACT 03 -->
+<section class="slide slide-split">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><img src="images/bottleneck3-fact.png" alt="Pricing table with unlimited premium access priced at entry-level rates"></div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-problem">FACT 03</div>
+      <h2>You're Giving Premium Access At A Non-Premium Price</h2>
+      <p>Unlimited calls, direct messaging, and personal access are some of the most valuable things a coach can offer. Pricing them at a few hundred dollars a month makes that level of access feel ordinary instead of exclusive.</p>
+      <ul class="list-terminal is-problem">
+        <li>Unlimited access at entry-level pricing</li>
+        <li>Time isn't treated as a premium asset</li>
+        <li>Price lowers the perceived value of the experience</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>09</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 10 — FIX 03 -->
+<section class="slide slide-split flip">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot-wrap">
+        <div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><img src="images/bottleneck3-fix.png" alt="Restructured pricing table with premium tiers priced to match the access they offer"></div>
+        <div class="badge">after</div>
+      </div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-solution">FIX 03</div>
+      <h2>Turn Access Into Your Highest-Value Asset</h2>
+      <p>Restructure your offers so deeper access comes at progressively higher investment — protecting your time while increasing the perceived value of every tier.</p>
+      <ul class="list-terminal is-solution">
+        <li>Premium access for premium clients</li>
+        <li>Clear value ladder</li>
+        <li>Pricing that reinforces exclusivity</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>10</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 11 — OPPORTUNITY 01 -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <div class="kicker is-solution reveal">NEXT-LEVEL OPPORTUNITY 01</div>
+    <h2 class="reveal">Create More Ways To Enter Your Business</h2>
+    <p class="reveal" style="margin:20px auto 0">Not every prospect is ready for the same commitment. Expanding your entry points allows people to begin the relationship at the stage that feels right for them before naturally progressing toward your premium offers.</p>
+    <ul class="list-terminal is-solution reveal" style="text-align:left;max-width:44ch">
+      <li>More qualified leads</li>
+      <li>Better buyer progression</li>
+      <li>Higher conversion opportunities</li>
+    </ul>
+    <div class="reveal" style="display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:8px;max-width:680px">
+      <div class="flow-row">
+        <div class="flow-step"><b>VSL</b></div>
+        <div class="flow-step"><b>Webinar</b></div>
+        <div class="flow-step"><b>Low Ticket</b></div>
+        <div class="flow-step"><b>Email</b></div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step" style="max-width:220px"><b>Offer</b></div>
+    </div>
+  </div>
+  <div class="slide-meta"><span>11</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 12 — OPPORTUNITY 02 -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <div class="kicker is-solution reveal">NEXT-LEVEL OPPORTUNITY 02</div>
+    <h2 class="reveal">Expand The Reach Of Your Expertise</h2>
+    <p class="reveal" style="margin:20px auto 0">Your knowledge has the potential to influence far more people than it currently does. A broader content strategy compounds visibility, trust, and demand over time.</p>
+    <ul class="list-terminal is-solution reveal" style="text-align:left;max-width:44ch">
+      <li>Greater organic reach</li>
+      <li>Stronger authority</li>
+      <li>More inbound opportunities</li>
+    </ul>
+    <div class="reveal" style="display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:8px;max-width:720px">
+      <div class="flow-row">
+        <div class="flow-step"><b>YouTube</b></div>
+        <div class="flow-step"><b>X</b></div>
+        <div class="flow-step"><b>LinkedIn</b></div>
+        <div class="flow-step"><b>Threads</b></div>
+        <div class="flow-step"><b>Facebook</b></div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step" style="max-width:260px"><b>Qualified Leads</b></div>
+    </div>
+  </div>
+  <div class="slide-meta"><span>12</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 13 — OPPORTUNITY 03 -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <div class="kicker is-solution reveal">NEXT-LEVEL OPPORTUNITY 03</div>
+    <h2 class="reveal">Build A Business That Scales Beyond Your Time</h2>
+    <p class="reveal" style="margin:20px auto 0">Your expertise can scale infinitely. Your time can't. Restructuring your offer ecosystem allows the business to grow without every additional dollar requiring more personal involvement.</p>
+    <ul class="list-terminal is-solution reveal" style="text-align:left;max-width:44ch">
+      <li>More scalable fulfillment</li>
+      <li>Higher margins</li>
+      <li>Greater freedom</li>
+    </ul>
+  </div>
+  <div class="slide-meta"><span>13</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 14 — THE BIG PICTURE (slide fixo) -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <div class="kicker is-solution reveal">THE BIG PICTURE</div>
+    <h2 class="reveal">What I See Is Leverage.</h2>
+    <p class="reveal" style="margin:22px auto 0">None of these recommendations are about adding complexity. We want to create leverage.</p>
+    <ul class="list-terminal is-solution reveal" style="text-align:left;max-width:44ch">
+      <li>Leverage that turns more visitors into buyers</li>
+      <li>Leverage that turns buyers into long-term customers</li>
+      <li>Leverage that makes future growth easier than past growth</li>
+    </ul>
+    <p class="reveal" style="margin:22px auto 0">That's the opportunity I believe is sitting in front of you.</p>
+  </div>
+  <div class="slide-meta"><span>14</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<!-- 15 — CLOSING (slide fixo) -->
+<section class="slide slide-closing">
+  <div class="slide-inner">
+    <div class="kicker is-solution reveal">NEXT STEPS</div>
+    <h2 class="reveal">If this resonates, let's talk.</h2>
+    <p class="reveal" style="margin:20px auto 0">I already have a few ideas on how I'd approach this. If you'd like to explore them together, click the button below and we'll take it from there.</p>
+    <a href="https://www.instagram.com/direct/t/115335963192552/" target="_blank" rel="noopener" class="cta-btn reveal">Message me on Instagram →</a>
+  </div>
+  <div class="slide-meta"><span>15</span><span class="dot"></span><span>15</span></div>
+</section>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const progressBar = document.getElementById('progressBar');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+  },{threshold:0.3});
+  slides.forEach(s=>io.observe(s));
+
+  function updateProgress(){
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop/docHeight)*100 : 0;
+    progressBar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, {passive:true});
+  updateProgress();
+
+  function currentIndex(){
+    let idx = 0, min = Infinity;
+    slides.forEach((s,i)=>{
+      const d = Math.abs(s.getBoundingClientRect().top);
+      if(d < min){ min = d; idx = i; }
+    });
+    return idx;
+  }
+  window.addEventListener('keydown', (e)=>{
+    if(e.key === 'ArrowDown' || e.key === 'PageDown'){
+      e.preventDefault();
+      const i = Math.min(currentIndex()+1, slides.length-1);
+      slides[i].scrollIntoView({behavior:'smooth'});
+    }
+    if(e.key === 'ArrowUp' || e.key === 'PageUp'){
+      e.preventDefault();
+      const i = Math.max(currentIndex()-1, 0);
+      slides[i].scrollIntoView({behavior:'smooth'});
+    }
+  });
+</script>
+</body>
+</html>
