@@ -124,7 +124,7 @@
 <body>
 
 <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
-<div class="kbd-hint"><kbd>↓</kbd><kbd>↑</kbd> navigate</div>
+<div class="kbd-hint"><kbd id="navDown" style="cursor:pointer">↓</kbd><kbd id="navUp" style="cursor:pointer">↑</kbd> navigate</div>
 
 <!-- 01 — COVER -->
 <section class="slide slide-cover visible">
@@ -510,6 +510,19 @@
       slides[i].scrollIntoView({behavior:'smooth'});
     }
   });
+
+  function goNext(){
+    const i = Math.min(currentIndex()+1, slides.length-1);
+    slides[i].scrollIntoView({behavior:'smooth'});
+  }
+  function goPrev(){
+    const i = Math.max(currentIndex()-1, 0);
+    slides[i].scrollIntoView({behavior:'smooth'});
+  }
+  const navDown = document.getElementById('navDown');
+  const navUp = document.getElementById('navUp');
+  if(navDown) navDown.addEventListener('click', goNext);
+  if(navUp) navUp.addEventListener('click', goPrev);
 </script>
 </body>
 </html>
