@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<base href="/decks/noah-huff/">
+<title>Noah Huff — Info Operation</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root, [data-theme="dark"]{
+    --bg:#050506;--surface:#0d0e10;--surface-2:#141519;
+    --ink:#f2f4f3;--ink-soft:#b9c1c3;--ink-muted:#767f82;--line:rgba(255,255,255,0.09);
+    --accent-fill:#009ADB;--accent-text:#009ADB;--accent-soft:rgba(0,154,219,0.14);
+    --danger-fill:#ff5266;--danger-text:#ff5266;--danger-soft:rgba(255,82,102,0.1);
+    --shadow-soft:rgba(0,0,0,0.6);--dot-color:#333;--on-accent:#03222f;
+    --display:'Space Grotesk',sans-serif;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  [data-theme="light"]{
+    --bg:#e6e6e6;--surface:#ffffff;--surface-2:#f1f1f1;
+    --ink:#14151a;--ink-soft:#4a4d54;--ink-muted:#82858c;--line:rgba(0,0,0,0.1);
+    --accent-fill:#009ADB;--accent-text:#0077a8;--accent-soft:rgba(0,119,168,0.12);
+    --danger-fill:#ff5266;--danger-text:#c81f3f;--danger-soft:rgba(200,31,63,0.1);
+    --shadow-soft:rgba(0,0,0,0.14);--dot-color:#cfcfcf;--on-accent:#03222f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  ::selection{background:var(--accent-fill);color:#000}
+
+  .slide{min-height:100vh;padding:clamp(32px,6vw,88px);scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;position:relative;border-bottom:1px solid var(--line)}
+  .slide-inner{max-width:1180px;margin:0 auto;width:100%;position:relative;z-index:1}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  .slide.visible .reveal{opacity:1;transform:translateY(0)}
+  .slide.visible .reveal:nth-child(1){transition-delay:.05s}
+  .slide.visible .reveal:nth-child(2){transition-delay:.13s}
+  .slide.visible .reveal:nth-child(3){transition-delay:.21s}
+  .slide.visible .reveal:nth-child(4){transition-delay:.29s}
+
+  .kicker{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:22px}
+  .kicker::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent-fill);box-shadow:0 0 8px var(--accent-fill)}
+  .kicker.is-problem::before{background:var(--danger-fill);box-shadow:0 0 8px var(--danger-fill)}
+  .kicker.is-problem{color:var(--danger-text)}
+  .kicker.is-solution{color:var(--accent-text)}
+
+  h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-0.02em;line-height:1.08;color:var(--ink)}
+  h2{font-size:clamp(30px,4vw,50px);max-width:20ch}
+  p{color:var(--ink-soft);font-size:clamp(16px,1.35vw,18.5px);line-height:1.6;max-width:56ch}
+
+  .slide-meta{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:11px;color:var(--ink-muted);letter-spacing:.1em}
+  .slide-meta .dot{width:3px;height:3px;border-radius:50%;background:var(--ink-muted)}
+
+  .slide-cover{align-items:center;text-align:center}
+  .slide-cover .slide-inner{display:flex;flex-direction:column;align-items:center}
+  .cover-logo{height:64px;margin-bottom:40px}
+  .slide-cover h1{font-size:clamp(38px,6.5vw,76px);margin-bottom:22px}
+  .slide-cover h1 em{color:var(--accent-text);font-style:normal}
+  .cover-tag{font-family:var(--mono);font-size:12px;color:var(--ink-muted);letter-spacing:.1em}
+
+  .slide-section{align-items:center;text-align:center}
+  .slide-section .slide-inner{display:flex;flex-direction:column;align-items:center}
+  .stat-row{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;justify-content:center}
+  .stat-chip{font-family:var(--mono);font-size:13px;color:var(--ink-soft);border:1px solid var(--line);border-radius:100px;padding:9px 18px;background:var(--surface)}
+  .stat-chip b{color:var(--accent-text)}
+
+  .slide-split .slide-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .split-media{order:1}.split-text{order:2}
+  .slide-split.flip .split-media{order:2}.slide-split.flip .split-text{order:1}
+
+  .shot{border-radius:14px;overflow:hidden;background:var(--surface);border:1px solid var(--line);box-shadow:0 30px 60px -20px var(--shadow-soft)}
+  .shot-bar{display:flex;gap:6px;padding:10px 12px;background:var(--surface-2);border-bottom:1px solid var(--line)}
+  .shot-bar span{width:8px;height:8px;border-radius:50%;background:var(--dot-color)}
+  .shot-frame{height:420px;display:flex;align-items:center;justify-content:center;background:var(--surface-2);overflow:hidden}
+  .shot-frame img{width:100%;height:100%;object-fit:contain;display:block}
+  .shot-wrap{position:relative}
+  .badge{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:var(--accent-fill);color:var(--on-accent);padding:6px 12px;border-radius:100px;font-weight:600}
+
+  .list-terminal{list-style:none;margin-top:26px}
+  .list-terminal li{font-family:var(--mono);font-size:14.5px;color:var(--ink-soft);padding:9px 0;border-bottom:1px solid var(--line);display:flex;gap:10px}
+  .list-terminal li:first-child{border-top:1px solid var(--line)}
+  .list-terminal.is-problem li::before{content:"›";color:var(--danger-text);font-weight:700}
+  .list-terminal.is-solution li::before{content:"✓";color:var(--accent-text);font-weight:700}
+
+  .flow{display:flex;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap;justify-content:center}
+  .flow-step{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;font-family:var(--mono);font-size:13px;color:var(--ink-soft);text-align:center;flex:1;min-width:140px}
+  .flow-step b{display:block;font-family:var(--display);font-size:16px;color:var(--ink);margin-bottom:4px;font-weight:600}
+  .flow-arrow{color:var(--accent-text);font-size:20px}
+
+  .icon-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 12px;display:flex;flex-direction:column;align-items:center;gap:12px}
+  .icon-card img{width:34px;height:34px;object-fit:contain;border-radius:6px}
+  .icon-card span{font-family:var(--mono);font-size:11px;color:var(--ink-muted);text-align:center}
+
+  .example-btn{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--on-accent);background:var(--accent-fill);border:none;border-radius:8px;padding:14px 26px;cursor:pointer;margin-top:24px;transition:transform .2s var(--ease),box-shadow .2s var(--ease);box-shadow:0 10px 24px -8px var(--accent-soft)}
+  .example-btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px -8px var(--accent-soft)}
+
+  .modal-overlay{position:fixed;inset:0;background:rgba(10,10,10,.6);display:none;align-items:center;justify-content:center;z-index:200;padding:24px}
+  .modal-overlay.open{display:flex}
+  .modal-box{background:var(--surface);border-radius:16px;max-width:560px;width:100%;padding:28px;box-shadow:0 30px 60px -20px rgba(0,0,0,.4);max-height:85vh;overflow:auto}
+  .modal-box.wide{max-width:960px;padding:0;overflow:hidden;display:flex;flex-direction:column;max-height:88vh}
+  .modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+  .modal-box.wide .modal-header{padding:20px 24px 0;margin-bottom:14px}
+  .modal-title{font-family:var(--display);font-weight:700;font-size:16px;color:var(--ink)}
+  .modal-close{cursor:pointer;font-size:20px;color:var(--ink-muted);background:none;border:none;line-height:1}
+  .modal-tabs{display:flex;gap:8px;margin-bottom:18px}
+  .modal-box.wide .modal-tabs{padding:0 24px}
+  .modal-tab{flex:1;text-align:center;font-family:var(--mono);font-size:12px;font-weight:700;color:var(--ink-muted);padding:10px 0;border:none;border-bottom:2px solid var(--line);background:none;cursor:pointer}
+  .modal-tab.active{color:var(--accent-text);border-bottom-color:var(--accent-fill)}
+  .modal-email-label{font-size:11px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+  .modal-email-subject{font-weight:700;font-size:15px;margin-bottom:16px;color:var(--ink)}
+  .modal-email-body{font-size:13.5px;line-height:1.7;color:var(--ink-soft);white-space:pre-line;max-height:320px;overflow-y:auto}
+  .modal-iframe-wrap{width:100%;height:70vh}
+  .modal-iframe-wrap iframe{width:100%;height:100%;border:none;display:block}
+  .modal-img-wrap{overflow-y:auto;max-height:70vh}
+  .modal-img-wrap img{width:100%;display:block}
+
+  .slide-closing{align-items:center;text-align:center}
+  .slide-closing .slide-inner{display:flex;flex-direction:column;align-items:center}
+  .cta-btn{margin-top:32px;display:inline-flex;align-items:center;gap:12px;border:none;border-radius:10px;padding:22px 48px;font-family:var(--mono);font-size:15px;color:var(--on-accent);letter-spacing:.06em;background:var(--accent-fill);text-decoration:none;font-weight:700;transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s var(--ease);box-shadow:0 14px 34px -12px var(--accent-soft);animation:cta-pulse 2.4s ease-in-out infinite}
+  .cta-btn:hover{transform:translateY(-3px) scale(1.02) !important;box-shadow:0 20px 45px -12px var(--accent-soft) !important;animation-play-state:paused}
+  .cta-btn:active{transform:translateY(-1px) scale(.99) !important}
+  @keyframes cta-pulse{0%,100%{box-shadow:0 14px 34px -12px var(--accent-soft)}50%{box-shadow:0 20px 42px -10px var(--accent-soft)}}
+  @media (prefers-reduced-motion:reduce){.cta-btn{animation:none}}
+
+  .progress{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(255,255,255,.06);z-index:100}
+  .progress-bar{height:100%;background:var(--accent-fill);transition:width .15s linear;box-shadow:0 0 10px var(--accent-fill)}
+  .kbd-hint{position:fixed;bottom:18px;right:22px;font-family:var(--mono);font-size:10.5px;color:var(--ink-muted);letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:8px;background:rgba(13,14,16,.85);backdrop-filter:blur(8px);padding:7px 14px;border-radius:100px;border:1px solid var(--line);z-index:50}
+  .kbd-hint kbd{font-family:var(--mono);background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:2px 6px;font-size:10px;color:var(--ink-soft)}
+
+  @media (max-width:860px){
+    .slide-split .slide-inner{grid-template-columns:1fr;gap:28px}
+    .slide-split.flip .split-media,.slide-split.flip .split-text{order:unset}
+    .kbd-hint{display:none}
+    .modal-iframe-wrap{height:60vh}
+  }
+  @media (prefers-reduced-motion:reduce){.reveal{transition:none;opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+<div class="kbd-hint"><kbd id="navDown" style="cursor:pointer">↓</kbd><kbd id="navUp" style="cursor:pointer">↑</kbd> navigate</div>
+
+<!-- 01 — COVER -->
+<section class="slide slide-cover visible">
+  <div class="slide-inner">
+    <img class="cover-logo reveal" src="images/logo.png" alt="Huff Performance">
+    <h1 class="reveal">Noah Huff<br><em>Info Operation</em></h1>
+    <div class="cover-tag reveal">· AUGUST 2026 ·</div>
+  </div>
+  <div class="slide-meta"><span>01</span><span class="dot"></span><span>20</span></div>
+</section>
+
+<!-- 02 — MARKET CONTEXT -->
+<section class="slide slide-split">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot"><div class="shot-frame"><img src="/assets/market-context/market-growth.png" alt="Global online education market growth statistics"></div></div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-solution">THE ONLINE EDUCATION MARKET KEEPS EXPANDING</div>
+      <h2>Expertise is no longer what separates the winners</h2>
+      <p>More creators launch courses. More coaches enter the market. More money flows into education every year. But as the market matures, the winners aren't simply the ones with the best offer. They're the businesses with the systems that convert more visitors, recover more buyers, and increase customer value over time.</p>
+    </div>
+  </div>
+  <div class="slide-meta"><span>02</span><span class="dot"></span><span>20</span></div>
+</section>
+
+<!-- 03 — WHERE GROWTH LEAKS -->
+<section class="slide slide-split flip">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot"><div class="shot-frame"><img src="/assets/market-context/growth-leaks.png" alt="Diagram showing where growth actually leaks: slow funnels, poor follow-up, weak onboarding, disconnected automations, lost momentum before booking"></div></div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-problem">WHERE GROWTH ACTUALLY LEAKS</div>
+      <h2>Growth isn't usually lost at the top of the funnel</h2>
+      <p>It's everything that happens after someone clicks. The slow funnels. Poor follow-up. Weak onboarding. Disconnected automations. Prospects who lose momentum before booking. Each one feels small. Together, they quietly become one of the largest costs in the business.</p>
+    </div>
+  </div>
+  <div class="slide-meta"><span>03</span><span class="dot"></span><span>20</span></div>
+</section>
+
+<!-- 04 — INTRO -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <div class="kicker is-solution reveal">IT ONLY TAKES 45 SECONDS</div>
+    <h2 class="reveal">Noah, I went through your info setup (funnel) and a few things stood out.</h2>
+    <p class="reveal" style="margin:20px auto 0">Some are quietly costing you revenue. Others are opportunities that could increase your return without increasing your work.</p>
+    <div class="stat-row reveal">
+      <div class="stat-chip"><b>5</b> facts found</div>
+      <div class="stat-chip"><b>5</b> fixes proposed</div>
+      <div class="stat-chip">+ <b>3</b> new opportunities ahead</div>
+    </div>
+  </div>
+  <div class="slide-meta"><span>04</span><span class="dot"></span><span>20</span></div>
+</section>
+
+<!-- 05 — OBSERVATION 01 -->
+<section class="slide slide-split">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><img src="images/bottleneck1-fact.png" alt="Inbox showing only a single email after completing the application"></div></div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-problem">OBSERVATION 01</div>
+      <h2>The conversation goes quiet after completing application.</h2>
+      <p>Once someone completes your form, there's a valuable window to reinforce their decision, answer common questions, and build excitement before the conversation. Right now, that opportunity is being left unused.</p>
+      <ul class="list-terminal is-problem">
+        <li>Missed trust-building opportunities</li>
+        <li>Lower call show rate potential</li>
+        <li>Less prepared prospects</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>05</span><span class="dot"></span><span>20</span></div>
+</section>
+
+<!-- 06 — RECOMMENDATION 01 (with Email Examples modal) -->
+<section class="slide slide-split flip">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot-wrap">
+        <div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><img src="images/bottleneck1-fix.png" alt="Inbox showing a consistent sequence of follow-up emails"></div></div>
+        <div class="badge">after</div>
+      </div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-solution">RECOMMENDATION 01</div>
+      <h2>Stay present between booking and the call.</h2>
+      <p>Use strategic pre-call touchpoints—such as email sequences, reminders, FAQs, testimonials, and educational assets—to increase commitment before the conversation takes place.</p>
+      <ul class="list-terminal is-solution">
+        <li>Higher show rates</li>
+        <li>Better-prepared prospects</li>
+        <li>More productive sales calls</li>
+      </ul>
+      <button class="example-btn" onclick="openModal('modal-emails')">Email Examples →</button>
+    </div>
+  </div>
+  <div class="slide-meta"><span>06</span><span class="dot"></span><span>20</span></div>
+</section>
+
+<!-- 07 — OBSERVATION 02 -->
+<section class="slide slide-split">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><img src="images/bottleneck2-fact.png" alt="Booking confirmation with client success stories but no clear next-step sequence"></div></div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-problem">OBSERVATION 02</div>
+      <h2>The booking confirmation could build more momentum.</h2>
+      <p>Immediately after booking is one of the highest-attention moments in the customer journey. Instead of simply confirming the appointment, this touchpoint can reinforce commitment and prepare prospects for what's next.</p>
+      <ul class="list-terminal is-problem">
+        <li>Missed opportunity to increase show rates</li>
+        <li>Lower buyer commitment</li>
+        <li>Underutilized customer journey</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>07</span><span class="dot"></span><span>20</span></div>
+</section>
+
+<!-- 08 — RECOMMENDATION 02 -->
+<section class="slide slide-split flip">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot-wrap">
+        <div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><img src="images/bottleneck2-fix.png" alt="Structured next-steps page with VSL and objection handling"></div></div>
+        <div class="badge">after</div>
+      </div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-solution">RECOMMENDATION 02</div>
+      <h2>Turn the confirmation page into a strategic asset.</h2>
+      <p>Use your thank-you page to reinforce the decision, set clear expectations, introduce the next steps, and prepare prospects before the conversation takes place.</p>
+      <ul class="list-terminal is-solution">
+        <li>Higher show rates</li>
+        <li>Better-prepared prospects</li>
+        <li>Stronger buying intent</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>08</span><span class="dot"></span><span>20</span></div>
+</section>
+
+<!-- 09 — OBSERVATION 03 -->
+<section class="slide slide-split">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><img src="images/bottleneck3-fact.png" alt="Application form with no financial or commitment qualification question"></div></div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-problem">OBSERVATION 03</div>
+      <h2>The qualification process isn't filtering effectively.</h2>
+      <p>Not every prospect is the right fit for your offer. An effective qualification process helps identify the best opportunities early, improving sales conversations while reducing time spent on unqualified leads.</p>
+      <ul class="list-terminal is-problem">
+        <li>Limited lead qualification</li>
+        <li>Sales calls become less efficient</li>
+        <li>Opportunity to improve lead quality</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>09</span><span class="dot"></span><span>20</span></div>
+</section>
+
+<!-- 10 — RECOMMENDATION 03 (skip -> flow diagram) -->
+<section class="slide slide-split flip">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="flow reveal" style="max-width:520px">
+        <div class="flow-step"><b>Application</b></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><b>Budget Check</b></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><b>Qualified Call</b></div>
+      </div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-solution">RECOMMENDATION 03</div>
+      <h2>Qualify for financial fit before the call.</h2>
+      <p>Make sure prospects meet the basic financial requirements before they reach the sales conversation. This creates a cleaner pipeline and lets the sales team focus on opportunities with real commercial potential.</p>
+      <ul class="list-terminal is-solution">
+        <li>Qualify ability to invest</li>
+        <li>Prioritize financially viable prospects</li>
+        <li>Increase sales efficiency</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>10</span><span class="dot"></span><span>20</span></div>
+</section>
+
+<!-- 11 — OBSERVATION 04 -->
+<section class="slide slide-split">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><img src="images/bottleneck4-fact.png" alt="Application form allowing submission without validating email or phone number"></div></div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-problem">OBSERVATION 04</div>
+      <h2>Not every lead entering the pipeline is necessarily real.</h2>
+      <p>Right now, the form allows prospects to submit without validating whether their contact information is genuine. Meaning someone can enter fake contact details and still make it through the journey. Beyond cluttering the database, this creates unnecessary work and can take valuable attention away from genuine opportunities.</p>
+      <ul class="list-terminal is-problem">
+        <li>Fake information can pass through unchecked.</li>
+        <li>Follow-up time can be wasted on unreachable prospects.</li>
+        <li>Sales capacity gets allocated to leads that don't exist.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>11</span><span class="dot"></span><span>20</span></div>
+</section>
+
+<!-- 12 — RECOMMENDATION 04 (skip -> flow diagram) -->
+<section class="slide slide-split flip">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="flow reveal" style="max-width:600px">
+        <div class="flow-step"><b>Submit</b></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><b>Verify Email / Phone</b></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><b>Real Lead</b></div>
+      </div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-solution">RECOMMENDATION 04</div>
+      <h2>Protect the pipeline from bad data.</h2>
+      <p>Validate key contact details before allowing prospects to continue, ensuring the sales process is built around real, reachable opportunities.</p>
+      <ul class="list-terminal is-solution">
+        <li>Verify emails and phone numbers.</li>
+        <li>Block invalid information early.</li>
+        <li>Keep sales capacity focused on real buyers.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>12</span><span class="dot"></span><span>20</span></div>
+</section>
+
+<!-- 13 — OBSERVATION 05 -->
+<section class="slide slide-split">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><img src="images/bottleneck5-fact.png" alt="Clean quiz link with no UTM parameters attached"></div></div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-problem">OBSERVATION 05</div>
+      <h2>No UTM links.</h2>
+      <p>You can't clearly see where your best leads are coming from. The quiz links aren't currently carrying source information, so there's no clear way to distinguish whether a lead came from YouTube, paid traffic or another channel. Without that visibility, it's harder to know what's actually working and where to put more resources.</p>
+      <ul class="list-terminal is-problem">
+        <li>Lead sources aren't clearly attributed.</li>
+        <li>Channel performance is harder to compare.</li>
+        <li>Acquisition decisions are being made with incomplete data.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>13</span><span class="dot"></span><span>20</span></div>
+</section>
+
+<!-- 14 — RECOMMENDATION 05 -->
+<section class="slide slide-split flip">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot-wrap">
+        <div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><img src="images/bottleneck5-fix.png" alt="Example UTM link structure with source, medium, campaign, and content parameters explained"></div></div>
+        <div class="badge">after</div>
+      </div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-solution">RECOMMENDATION 05</div>
+      <h2>Track the source of every lead.</h2>
+      <p>Track the source of every lead entering the quiz so you can understand which channels are driving real opportunities and make better acquisition decisions.</p>
+      <ul class="list-terminal is-solution">
+        <li>Capture source data automatically.</li>
+        <li>Identify your strongest acquisition channels.</li>
+        <li>Invest more confidently in what works.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>14</span><span class="dot"></span><span>20</span></div>
+</section>
+
+<!-- 15 — TRANSITION -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <h2 class="reveal">The Next Stage of Growth</h2>
+    <p class="reveal" style="margin:20px auto 0">The recommendations you've seen improve performance today. The opportunities below are about building a stronger, more scalable business for tomorrow.</p>
+  </div>
+  <div class="slide-meta"><span>15</span><span class="dot"></span><span>20</span></div>
+</section>
+
+<!-- 16 — OPPORTUNITY 01 (See Examples: tabs webinar/low ticket/vsl) -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <div class="kicker is-solution reveal">NEXT-LEVEL OPPORTUNITY 01</div>
+    <h2 class="reveal">Capture demand in more than one way.</h2>
+    <p class="reveal" style="margin:20px auto 0">Every buyer has a different preference for how they engage with a business. Offering multiple entry points increases accessibility while reducing dependence on any single acquisition strategy.</p>
+    <ul class="list-terminal is-solution reveal" style="text-align:left;max-width:44ch">
+      <li>Diversify how prospects enter the business.</li>
+      <li>Reduce reliance on one customer journey.</li>
+      <li>Create a more resilient growth system.</li>
+    </ul>
+    <button class="example-btn reveal" onclick="openModal('modal-entry-examples')">See Examples →</button>
+  </div>
+  <div class="slide-meta"><span>16</span><span class="dot"></span><span>20</span></div>
+</section>
+
+<!-- 17 — OPPORTUNITY 02 (See Example: post image) -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <div class="kicker is-solution reveal">NEXT-LEVEL OPPORTUNITY 02</div>
+    <h2 class="reveal">Make your content work harder.</h2>
+    <p class="reveal" style="margin:20px auto 0">Every piece of content should have a purpose. Instead of simply creating content, build a strategy that attracts, educates, and converts your ideal clients.</p>
+    <ul class="list-terminal is-solution reveal" style="text-align:left;max-width:44ch">
+      <li>Higher-quality leads</li>
+      <li>Stronger authority</li>
+      <li>More consistent client acquisition</li>
+    </ul>
+    <button class="example-btn reveal" onclick="openModal('modal-post-example')">See Example →</button>
+  </div>
+  <div class="slide-meta"><span>17</span><span class="dot"></span><span>20</span></div>
+</section>
+
+<!-- 18 — OPPORTUNITY 03 (skip -> flow diagram) -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <div class="kicker is-solution reveal">NEXT-LEVEL OPPORTUNITY 03</div>
+    <h2 class="reveal">Engineer every step of the customer journey.</h2>
+    <p class="reveal" style="margin:20px auto 0">The buying experience shouldn't happen by chance. Intentionally designing each stage from first touch to conversion creates more momentum, stronger trust, and more deals.</p>
+    <div class="flow reveal" style="max-width:780px">
+      <div class="flow-step"><b>Lead</b></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><b>Email Sequence</b></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><b>Booked Call</b></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><b>Customer</b></div>
+    </div>
+    <ul class="list-terminal is-solution reveal" style="text-align:left;max-width:44ch">
+      <li>Increased show rates</li>
+      <li>Better conversion efficiency</li>
+      <li>Higher customer satisfaction</li>
+    </ul>
+  </div>
+  <div class="slide-meta"><span>18</span><span class="dot"></span><span>20</span></div>
+</section>
+
+<!-- 19 — THE BIG PICTURE (slide fixo) -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <div class="kicker is-solution reveal">THE BIG PICTURE</div>
+    <h2 class="reveal">What I See Is Leverage.</h2>
+    <p class="reveal" style="margin:22px auto 0">None of these recommendations are about adding complexity. We want to create leverage.</p>
+    <ul class="list-terminal is-solution reveal" style="text-align:left;max-width:44ch">
+      <li>Leverage that turns more visitors into buyers</li>
+      <li>Leverage that turns buyers into long-term customers</li>
+      <li>Leverage that makes future growth easier than past growth</li>
+    </ul>
+    <p class="reveal" style="margin:22px auto 0">That's the opportunity I believe is sitting in front of you.</p>
+  </div>
+  <div class="slide-meta"><span>19</span><span class="dot"></span><span>20</span></div>
+</section>
+
+<!-- 20 — CLOSING (slide fixo) -->
+<section class="slide slide-closing">
+  <div class="slide-inner">
+    <div class="kicker is-solution reveal">NEXT STEPS</div>
+    <h2 class="reveal">If this resonates, let's talk.</h2>
+    <p class="reveal" style="margin:20px auto 0">I already have a few ideas on how I'd approach this. If you'd like to explore them together, click the button below and we'll take it from there.</p>
+    <a href="https://www.instagram.com/direct/t/115335963192552/" target="_blank" rel="noopener" class="cta-btn reveal">Message me on Instagram →</a>
+  </div>
+  <div class="slide-meta"><span>20</span><span class="dot"></span><span>20</span></div>
+</section>
+
+<!-- MODAL: Email Examples -->
+<div class="modal-overlay" id="modal-emails">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span class="modal-title">Pre-Call Email Sequence</span>
+      <button class="modal-close" onclick="closeModal('modal-emails')">×</button>
+    </div>
+    <div class="modal-tabs">
+      <button class="modal-tab active" data-email="1" onclick="switchEmailTab(this)">Email 1</button>
+      <button class="modal-tab" data-email="2" onclick="switchEmailTab(this)">Email 2</button>
+      <button class="modal-tab" data-email="3" onclick="switchEmailTab(this)">Email 3</button>
+    </div>
+
+    <div id="email-content-1" class="email-content">
+      <p class="modal-email-label">Subject</p>
+      <p class="modal-email-subject">Your consultation is booked, {{first_name}}</p>
+      <p class="modal-email-label">Body</p>
+      <div class="modal-email-body">Hey {{first_name}},
+
+One last thing before we speak.
+
+The goal is not just to make your shoulder feel better while you avoid everything you enjoy. That is a very low bar.
+
+The goal is to help you build enough capacity that you can get back to the life and training you actually care about.
+
+That might mean benching without constantly bracing for the next twinge. Pulling without wondering whether the shoulder will be worse tomorrow. Returning to overhead work. Training hard without the endless cycle of flare-up, rest, and starting over. Or simply reaching into a cupboard, sleeping on your side, and getting through the day without your shoulder dictating every decision.
+
+The business is not built around promising a magic fix. It is built around a process.
+
+Assess. Rebuild. Lock in.
+
+First, we need to understand your current situation. That includes how the pain behaves, which movements provoke it, what you have already tried, how you train, and what demands you need your shoulder to handle.
+
+Then we rebuild. Not just with isolated exercises, but with a custom training system that considers your lifts, your mobility work, your accessories, your whole-body strength, and the level you are trying to reach.
+
+Then we lock it in. Because getting through a few pain-free sessions is not the same as being prepared for heavier weights, more volume, or a return to sport. Capacity has to be progressed.
+
+That is the part most people skip when they start feeling better. They either rush back to the old workload or stay cautious forever. Neither is the answer. You need a progression that teaches your shoulder to tolerate the demands you are asking of it.
+
+I've seen this work with people who were told to rest, people who went through PT, people who tried injections, and people who had already invested a lot of time and money without getting back to the training they wanted.
+
+Tony was 51 and described the coaching as knowledgeable and worth the investment. Michael was 58 and had become stronger, more flexible, leaner, and happier through the training. Raul had dealt with shoulder pain for over a year, tried PT, and even took time away from the gym. Within the first few weeks of working with Huff Performance, he said his pain had started easing.
+
+Those are not promises that your shoulder will follow the exact same timeline. Your shoulder, history, goals, and response to training are your own. They are examples of what becomes possible when someone stops guessing alone and starts following a system built around their actual situation.
+
+On the call, we're going to look at whether you are a fit for that system. I'll want to know what you've tried, what still hurts, what you've stopped doing, and what "fixed" would actually mean to you.
+
+If I think I can help, I'll explain how the coaching works. If I don't think it's the right fit, I'll tell you that too.
+
+Noah
+
+P.S. This is 1-on-1 remote coaching, not a generic programme sent to everyone. There are only 2–3 coaching spots available each week, so come to the call ready to be honest about your situation and serious about doing the work.</div>
+    </div>
+
+    <div id="email-content-2" class="email-content" style="display:none">
+      <p class="modal-email-label">Subject</p>
+      <p class="modal-email-subject">You're not weak. You're guessing.</p>
+      <p class="modal-email-label">Body</p>
+      <div class="modal-email-body">Hey {{first_name}},
+
+I want to tell you something that might surprise you.
+
+You probably don't have a shoulder pain problem because you failed to work hard enough. You've probably worked hard.
+
+You went to PT. You did the band exercises. You rested it. You changed your grip. You stopped pressing for a while. Maybe you tried cortisone, PRP, or even surgery.
+
+And then, somehow, you still ended up in the same place. A flare-up after pressing. A pinch when you reach overhead. A shoulder that feels fine until you try to train the way you actually want to train.
+
+So you do what most people do. You start guessing.
+
+Maybe I need more mobility. Maybe I need to stretch more. Maybe I should stop benching. Maybe my shoulder is just getting old. Maybe I'm one bad rep away from making it permanently worse.
+
+And the more uncertain you become, the more random your training gets. You try a few drills. Feel a little better. Load it again. It flares up. You pull back. Repeat.
+
+That cycle can go on for months.
+
+The hardest part is not always the pain itself. It's not knowing what the pain means, what you can safely load, and what you should actually do next.
+
+That's the part I learned to take seriously while working inside the Los Angeles Dodgers organisation. At that level, keeping athletes healthy under heavy training loads is not optional. You don't just give someone a few isolated exercises and hope they remember them when they get back to training.
+
+You assess what is happening. You rebuild the weak links. Then you progressively expose the body to the demands it needs to handle.
+
+That is the thinking behind Huff Performance. Not random rehab drills. Not "just rest it." Not a generic programme that ignores the way you lift, work, move, or play sport.
+
+A system built around three things: assess what is actually going on with your shoulder and movement, rebuild your capacity with a custom training system, and lock in the result by progressively loading you back toward the demands you care about.
+
+That last part is where most plans fall apart. Because feeling better in a quiet room is not the same as being ready to press, pull, lift overhead, or train hard again.
+
+On our call, we'll look at your situation and figure out whether this approach makes sense for you. No hype. No pretending I can diagnose your entire shoulder from a sales call. Just a clear conversation about where you are, what you've tried, and what the next sensible step may be.
+
+Talk soon,
+Noah
+
+P.S. If you only remember one thing before the call, remember this: the goal is not to avoid loading your shoulder forever. The goal is to rebuild its ability to handle the load you actually want it to handle.</div>
+    </div>
+
+    <div id="email-content-3" class="email-content" style="display:none">
+      <p class="modal-email-label">Subject</p>
+      <p class="modal-email-subject">Let me lovingly drag you for a second</p>
+      <p class="modal-email-label">Body</p>
+      <div class="modal-email-body">Hey {{first_name}},
+
+Let me lovingly drag you for a second.
+
+Most people with shoulder pain don't have an effort problem. They have a plan problem.
+
+They do one workout that feels bad and immediately change everything. "Pressing is off limits." "My shoulder is wrecked." "I need to stop training completely."
+
+Then they rest for two weeks, feel a little better, and assume the problem is solved. Until they try to return to normal training. Then the pain comes back, and now they are even more convinced that their shoulder cannot handle anything.
+
+No. One painful session does not tell you the whole story. It gives you information. The question is whether you know how to use it.
+
+Was the issue the movement itself? The position? The amount of load? The volume? The speed? The range? The way the exercise was programmed around everything else you were doing? Or did you simply go from avoiding the movement to asking the shoulder to tolerate too much too soon?
+
+That distinction matters. Because if every flare-up makes you emotional, you'll keep making emotional decisions. You'll take things personally. You'll assume the worst. You'll bounce between complete rest and testing the exact movement that irritated you in the first place. And you'll never build a reliable understanding of what your shoulder can actually do.
+
+When I coached performance inside the Dodgers organisation, every training response was information. We looked at what happened, why it may have happened, and what needed to change before progressing. That doesn't mean treating the athlete like a fragile object. It means respecting the signal without letting the signal control the entire plan.
+
+That is the difference between a rehab plan and a return-to-performance system. A rehab plan might give you a list of drills. A return-to-performance system has to answer different questions: what can you do right now, what needs to be rebuilt, how do we keep you training while improving the shoulder's capacity, and how do we progress the load, volume, and range without constantly throwing you back to zero.
+
+Inside Huff Performance, we use video-based shoulder and movement analysis to understand your starting point. Then your training is built around your actual goals—your pressing, your pulling, your overhead work, your sport, or simply being able to live without constantly protecting the shoulder. Every lift, mobility drill, and accessory has a reason for being there, and the plan can adjust as your body and goals change.
+
+That's what we'll talk about on the call. What's working. What's not. What you need to stop guessing about. And what a realistic path back to pain-free training could look like.
+
+See you soon,
+Noah
+
+P.S. You don't need to arrive with the perfect explanation of your shoulder. Just be ready to tell me what hurts, what you've tried, what movements you miss, and what you want to get back to doing.</div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Entry Point Examples (Webinar / Low Ticket / VSL) -->
+<div class="modal-overlay" id="modal-entry-examples">
+  <div class="modal-box wide">
+    <div class="modal-header">
+      <span class="modal-title">Entry Point Examples</span>
+      <button class="modal-close" onclick="closeModal('modal-entry-examples')">×</button>
+    </div>
+    <div class="modal-tabs">
+      <button class="modal-tab active" data-key="webinar" onclick="switchEntryTab(this)">Webinar</button>
+      <button class="modal-tab" data-key="lowticket" onclick="switchEntryTab(this)">Low Ticket</button>
+      <button class="modal-tab" data-key="vsl" onclick="switchEntryTab(this)">VSL</button>
+    </div>
+    <div class="modal-iframe-wrap">
+      <iframe id="entryExampleFrame" title="Entry point example"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Post Example (image) -->
+<div class="modal-overlay" id="modal-post-example">
+  <div class="modal-box wide" style="max-width:480px">
+    <div class="modal-header">
+      <span class="modal-title">Example Post</span>
+      <button class="modal-close" onclick="closeModal('modal-post-example')">×</button>
+    </div>
+    <div class="modal-img-wrap">
+      <img src="images/opp2-post-example.png" alt="Example educational thread about shoulder impingement">
+    </div>
+  </div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const progressBar = document.getElementById('progressBar');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+  },{threshold:0.3});
+  slides.forEach(s=>io.observe(s));
+
+  function updateProgress(){
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop/docHeight)*100 : 0;
+    progressBar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, {passive:true});
+  updateProgress();
+
+  function currentIndex(){
+    let idx = 0, min = Infinity;
+    slides.forEach((s,i)=>{
+      const d = Math.abs(s.getBoundingClientRect().top);
+      if(d < min){ min = d; idx = i; }
+    });
+    return idx;
+  }
+  window.addEventListener('keydown', (e)=>{
+    const anyModalOpen = document.querySelector('.modal-overlay.open');
+    if(anyModalOpen) return;
+    if(e.key === 'ArrowDown' || e.key === 'PageDown'){
+      e.preventDefault();
+      const i = Math.min(currentIndex()+1, slides.length-1);
+      slides[i].scrollIntoView({behavior:'smooth'});
+    }
+    if(e.key === 'ArrowUp' || e.key === 'PageUp'){
+      e.preventDefault();
+      const i = Math.max(currentIndex()-1, 0);
+      slides[i].scrollIntoView({behavior:'smooth'});
+    }
+  });
+
+  function goNext(){
+    const i = Math.min(currentIndex()+1, slides.length-1);
+    slides[i].scrollIntoView({behavior:'smooth'});
+  }
+  function goPrev(){
+    const i = Math.max(currentIndex()-1, 0);
+    slides[i].scrollIntoView({behavior:'smooth'});
+  }
+  const navDown = document.getElementById('navDown');
+  const navUp = document.getElementById('navUp');
+  if(navDown) navDown.addEventListener('click', goNext);
+  if(navUp) navUp.addEventListener('click', goPrev);
+
+  function openModal(id){ document.getElementById(id).classList.add('open'); }
+  function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+  document.querySelectorAll('.modal-overlay').forEach(m=>{
+    m.addEventListener('click', e=>{ if(e.target === m) m.classList.remove('open'); });
+  });
+  window.addEventListener('keydown', e=>{
+    if(e.key === 'Escape'){
+      document.querySelectorAll('.modal-overlay.open').forEach(m=>m.classList.remove('open'));
+    }
+  });
+  function switchEmailTab(el){
+    document.querySelectorAll('#modal-emails .modal-tab').forEach(t=>t.classList.remove('active'));
+    el.classList.add('active');
+    const n = el.getAttribute('data-email');
+    document.querySelectorAll('.email-content').forEach(c=>c.style.display='none');
+    document.getElementById('email-content-'+n).style.display='block';
+  }
+
+  const entryExamples = {"webinar": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><meta name=\"theme-color\" content=\"#0b3630\"><title>Huff Performance \u2014 Free Shoulder Workshop</title>\n<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin><link href=\"https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=DM+Sans:wght@400;500;600;700;800&display=swap\" rel=\"stylesheet\">\n<style>\n:root{--ink:#102f2a;--muted:#536c67;--teal:#12b8a6;--deep:#0b3630;--paper:#f3f8f7;--line:#d7e4e1;--orange:#e69c36}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-width:320px;background:var(--paper);color:var(--ink);font-family:\"DM Sans\",Arial,sans-serif}body:before{content:\"\";position:fixed;inset:0;pointer-events:none;opacity:.17;background-image:url(\"data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E\")}.top{min-height:30px;display:flex;justify-content:center;align-items:center;gap:9px;padding:7px 14px;background:var(--deep);color:#effbf8;font-size:10px;font-weight:800;letter-spacing:.16em}.dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 3px #12b8a622}.stars{color:#f3c847;font-size:11px;letter-spacing:.04em;margin-left:6px}.wrap{max-width:970px;margin:auto;padding:54px 24px 68px;text-align:center}.brand{display:inline-flex;align-items:center;gap:9px;margin-bottom:26px;color:#143c35;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}.mark{width:28px;height:28px;display:grid;place-items:center;border:2px solid var(--teal);border-radius:50%;color:var(--teal);font:700 19px Georgia;transform:rotate(-12deg)}.eyebrow{margin:0;color:#159b8d;font-size:10px;font-weight:800;letter-spacing:.22em}.headline{max-width:900px;margin:17px auto 21px;color:#102f2a;font-family:\"Cormorant Garamond\",Georgia,serif;font-size:clamp(44px,5.7vw,76px);font-weight:600;line-height:.94;letter-spacing:-.045em}.headline em{color:#159b8d;font-style:italic}.subhead{max-width:710px;margin:0 auto;color:#405d58;font-family:\"Cormorant Garamond\",Georgia,serif;font-size:clamp(21px,2.1vw,28px);line-height:1.18}.subhead strong{color:#183d36;font-weight:700}.form-wrap{max-width:640px;margin:29px auto 0;text-align:left}.form-card{padding:28px;border:1px solid #1c5c511f;border-radius:15px;background:#ffffffd9;box-shadow:0 18px 48px #16453c18,0 2px 5px #16453c0b;backdrop-filter:blur(8px)}.field{margin-bottom:12px}.field label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}.input{height:53px;display:flex;align-items:center;gap:10px;padding:0 15px;border:2px solid #224840;border-radius:10px;background:#fff;color:#159b8d;transition:.18s ease}.input:focus-within{border-color:var(--teal);box-shadow:0 0 0 4px #12b8a622;transform:translateY(-1px)}.input input{min-width:0;flex:1;border:0;outline:0;background:transparent;color:#143a33;font:14px \"DM Sans\",Arial}.input input::placeholder{color:#6b817d}.country{padding-right:8px;border-right:1px solid #d1e1de;color:#365c55;font-size:13px;white-space:nowrap}.button{width:100%;min-height:76px;margin-top:4px;border:0;border-radius:10px;background:var(--teal);color:#062c26;font-size:19px;font-weight:800;letter-spacing:.03em;box-shadow:0 10px 20px #12b8a63d;transition:.16s ease;cursor:pointer}.button:hover{background:#21c5b4;box-shadow:0 14px 26px #12b8a64a;transform:translateY(-2px)}.button:active{transform:scale(.98)}.button span{display:block;font-size:11px;letter-spacing:.19em;margin-top:6px}.note{margin:7px 0 0;color:#6b8680;text-align:center;font-size:9px;font-weight:800;letter-spacing:.18em}.health-note{max-width:470px;margin:12px auto 0;color:#78918b;text-align:center;font-size:10px;line-height:1.45}.counter{display:flex;justify-content:center;align-items:center;gap:9px;max-width:620px;margin:18px auto 0;padding:16px 18px;border:1px solid #1c5c5118;border-radius:13px;background:#ffffffc8;color:#54726c;font-size:12px;line-height:1.4;box-shadow:0 8px 22px #18463e12}.counter .dot{flex:none;background:#35ad79;box-shadow:0 0 0 4px #35ad791c}.counter strong{color:#193d36}.trust{max-width:860px;margin:0 auto;padding:23px 25px 25px;border:1px solid #174b4114;border-radius:13px;background:#ffffffbd;text-align:center;box-shadow:0 10px 28px #20534b0c}.trust-kicker{margin:0;color:#159b8d;font-size:9px;font-weight:800;letter-spacing:.27em}.trust-row{display:flex;justify-content:center;flex-wrap:wrap;gap:12px 45px;margin-top:15px;color:#66807a;font-family:\"Cormorant Garamond\",Georgia,serif;font-size:18px;font-weight:700}.trust-row span:before{content:\"\u2713\";display:inline-block;margin-right:6px;color:var(--teal);font-family:Arial;font-size:12px}.details{max-width:970px;margin:auto;padding:76px 24px 84px}.pill{display:inline-flex;padding:8px 12px;border-radius:99px;background:#dcf5f0;color:#159b8d;font-size:9px;font-weight:800;letter-spacing:.16em}.details h2{max-width:620px;margin:18px auto 14px;font-family:\"Cormorant Garamond\",Georgia,serif;font-size:clamp(42px,5vw,65px);line-height:.95;letter-spacing:-.04em}.details>p{max-width:600px;margin:0 auto;color:#607873;font-size:15px;line-height:1.65;text-align:center}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:44px;text-align:left}.step{min-height:170px;padding:22px 19px;border-top:2px solid var(--teal);background:#ffffff82}.step small{color:#149e8f;font-size:11px;font-weight:800;letter-spacing:.15em}.step h3{margin:26px 0 8px;color:#143c35;font-family:\"Cormorant Garamond\",Georgia,serif;font-size:26px}.step p{margin:0;color:#607873;font-size:13px;line-height:1.55}.footer{display:flex;justify-content:center;align-items:center;gap:9px;padding:20px 18px;border-top:1px solid #1650461a;color:#78918c;font-size:11px;text-align:center}.success{min-height:265px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;text-align:left}.success-mark{width:47px;height:47px;display:grid;place-items:center;margin-bottom:18px;border-radius:50%;background:#d9f5ef;color:#139f90;font-size:25px}.success-kicker{margin:0 0 8px;color:#159b8d;font-size:10px;font-weight:800;letter-spacing:.18em}.success h2{margin:0;color:#123b34;font-family:\"Cormorant Garamond\",Georgia,serif;font-size:41px;line-height:1}.success p{max-width:350px;margin:12px 0 0;color:#607873;font-size:14px;line-height:1.55}@media(max-width:600px){.top{font-size:8px;letter-spacing:.1em;gap:6px}.stars{font-size:9px;margin-left:2px}.wrap{padding:40px 18px 48px}.brand{margin-bottom:22px}.headline{font-size:49px;line-height:.95}.subhead{font-size:21px}.form-wrap{margin-top:25px}.form-card{padding:21px 18px}.button{font-size:17px;min-height:72px}.button span{font-size:9px}.counter{font-size:11px}.trust{margin:0 18px;padding:20px 14px}.trust-row{gap:9px 17px;font-size:15px}.details{padding:65px 18px 64px}.steps{grid-template-columns:1fr;gap:10px}.step{min-height:0}.step h3{margin:18px 0 8px}}\n</style>\n</head>\n<body>\n<div class=\"top\"><span class=\"dot\"></span><span>100% FREE WORKSHOP TONIGHT</span><span class=\"stars\">\u2605\u2605\u2605\u2605\u2605</span><span>4.9+ STAR RATED</span></div>\n<main>\n<section class=\"wrap\"><div class=\"brand\"><span class=\"mark\">H</span><span>Huff Performance</span></div><p class=\"eyebrow\">FREE LIVE WORKSHOP \u00b7 SHOULDER REHAB UNDER LOAD</p><h1 class=\"headline\">Former Los Angeles Dodgers Performance Coach Reveals the Shoulder Rehab Framework He Uses to <em>Rebuild Capacity Under Load.</em></h1><p class=\"subhead\">Learn how a performance-based rehab system can help you understand your shoulder, keep training, and build a clearer path back to the lifts and activities you care about.</p><div class=\"form-wrap\"><div class=\"form-card\" id=\"formCard\"><form id=\"registerForm\"><div class=\"field\"><label for=\"first\">First name</label><div class=\"input\"><span>\u2659</span><input id=\"first\" type=\"text\" placeholder=\"First name\" required></div></div><div class=\"field\"><label for=\"email\">Email address</label><div class=\"input\"><span>\u2709</span><input id=\"email\" type=\"email\" placeholder=\"Email address\" required></div></div><div class=\"field\"><label for=\"phone\">Mobile number</label><div class=\"input\"><span class=\"country\">\ud83c\uddfa\ud83c\uddf8 +1</span><input id=\"phone\" type=\"tel\" placeholder=\"Mobile number\" required></div></div><button class=\"button\" type=\"submit\">YES \u2014 SAVE MY SEAT<span>FREE SEATS FOR THIS WORKSHOP ARE LIMITED</span></button><p class=\"note\">GET THE WORKSHOP LINK + SHOULDER TRAINING GUIDE</p><p class=\"health-note\">Educational content only. This workshop is not medical advice or a substitute for individual diagnosis or treatment.</p></form></div><div class=\"counter\"><span class=\"dot\"></span><span><strong>Limited workshop seats</strong> are available for lifters ready to rebuild their shoulder with a clearer plan.</span></div></div></section>\n<section class=\"trust\"><p class=\"trust-kicker\">WHAT YOU'LL LEARN INSIDE</p><div class=\"trust-row\"><span>Assess your movement</span><span>Rebuild capacity</span><span>Train with confidence</span><span>Remote-friendly system</span></div></section>\n<section class=\"details\"><span class=\"pill\">THE HUFF PERFORMANCE METHOD</span><h2>Stop choosing between fixing your shoulder and staying strong.</h2><p>This free workshop breaks down the framework behind a more complete approach to shoulder rehab \u2014 one that respects the demands of real lifting instead of treating training as the problem.</p><div class=\"steps\"><article class=\"step\"><small>01</small><h3>Assess</h3><p>Understand the positions, movement patterns, and training demands that shape your plan.</p></article><article class=\"step\"><small>02</small><h3>Rebuild</h3><p>Explore how progressive loading can help rebuild strength, stability, and tolerance.</p></article><article class=\"step\"><small>03</small><h3>Lock in</h3><p>See how the right progressions can guide your return to heavier weights and better confidence.</p></article></div></section>\n</main>\n<footer class=\"footer\"><span class=\"mark\">H</span><span>Huff Performance \u00b7 Free educational workshop</span></footer>\n<script>document.getElementById('registerForm').addEventListener('submit',function(e){e.preventDefault();document.getElementById('formCard').innerHTML='<div class=\"success\" role=\"status\"><div class=\"success-mark\">\u2713</div><p class=\"success-kicker\">YOU\\u2019RE ON THE LIST</p><h2>Your seat is reserved.</h2><p>Check your inbox for the workshop link and your shoulder training guide.</p></div>';});<\/script>\n</body>\n</html>\n", "lowticket": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <meta name=\"theme-color\" content=\"#111111\" />\n  <title>The 14-Day Shoulder Reset \u2014 Noah Huff</title>\n  <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n  <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n  <link href=\"https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Roboto+Condensed:wght@500;600;700&display=swap\" rel=\"stylesheet\">\n  <style>\n    :root{--blue:#145ad1;--blue2:#2e72e8;--red:#e33b2e;--ink:#101820;--muted:#596269;--paper:#f7f8fa;--line:#dce1e6;--gold:#f3c64e;--green:#229665}\n    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-width:320px;background:var(--paper);color:var(--ink);font-family:\"DM Sans\",Arial,sans-serif}a{text-decoration:none;color:inherit}button{font:inherit;cursor:pointer}\n    .topbar{height:43px;display:flex;justify-content:space-between;align-items:center;padding:0 max(22px,calc((100vw - 1240px)/2));background:#111;color:#fff}.logo{font-family:\"Roboto Condensed\",Arial,sans-serif;font-size:20px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}.logo small{display:block;margin-top:-4px;color:#b7bdc2;font-size:8px;letter-spacing:.19em;text-align:center}.help{color:#f1f1f1;font-size:12px}.help span{color:#c3cbd0}\n    .page{max-width:1240px;margin:auto;padding:15px 21px 44px}.audience{max-width:940px;margin:0 auto 11px;padding:8px 17px;border-radius:99px;background:linear-gradient(90deg,#4268ed,#4160d9);color:#fff;text-align:center;font-size:13px;font-weight:800;line-height:1.3}.headline{max-width:1000px;margin:0 auto;text-align:center;font-family:\"Roboto Condensed\",Arial,sans-serif;font-size:clamp(34px,4.1vw,57px);font-weight:700;line-height:1.04;letter-spacing:-.025em}.headline .blue{color:#1356bc}.headline .regular{font-weight:500}.subhead{max-width:850px;margin:12px auto 13px;text-align:center;color:#222;font-family:\"Roboto Condensed\",Arial,sans-serif;font-size:clamp(20px,2.2vw,31px);line-height:1.04}.checks{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 14px;margin:0 auto 18px;color:#36434a;font-size:13px}.checks span:before{content:\"\u2713\";margin-right:3px;color:#20a45f;font-size:15px;font-weight:800}\n    .main-grid{display:grid;grid-template-columns:minmax(0,1.78fr) minmax(310px,.82fr);gap:22px;align-items:start}.video-area{min-width:0}.video-box{position:relative;aspect-ratio:16/9;display:grid;place-items:center;overflow:hidden;background:linear-gradient(135deg,#17344f,#2974b5 54%,#b8d3e7);border:1px solid #b8c4ce;box-shadow:0 2px 4px #0000001c}.video-box:before{content:\"VIDEO\";position:absolute;right:12%;top:9%;color:#fff3;font:700 clamp(55px,9vw,130px) \"Roboto Condensed\";letter-spacing:.05em;transform:rotate(-8deg)}.video-box:after{content:\"[ ADD VSL THUMBNAIL OR EMBED ]\";position:absolute;bottom:18px;color:#fff;font-size:11px;font-weight:800;letter-spacing:.15em}.play{position:relative;z-index:1;width:85px;height:85px;display:grid;place-items:center;border:2px solid #fff;border-radius:50%;background:#146fe4d9;box-shadow:0 5px 18px #0005;color:#fff;font-size:38px;padding-left:7px;transition:.18s ease}.play:hover{background:#287feb;transform:scale(1.05)}.video-caption{position:absolute;left:0;right:0;bottom:0;padding:38px 18px 18px;background:linear-gradient(transparent,#000a);color:#fff;font-size:14px;font-weight:700}.social-strip{display:flex;justify-content:center;gap:12px;margin:8px 0 0}.social-strip span{padding:5px 12px;border-radius:99px;background:#132132;color:#fff;font-size:10px;font-weight:800}.offer-preview{display:flex;align-items:center;gap:18px;margin-top:22px;padding:12px 18px;border:2px dotted #262626;background:#fff}.book-stack{width:115px;min-width:115px;height:86px;position:relative}.book{position:absolute;width:58px;height:76px;padding:8px 5px;background:#145ad1;color:#fff;box-shadow:2px 3px 0 #0c3782;font:700 9px \"Roboto Condensed\";line-height:1.05;text-align:center;transform:rotate(-10deg)}.book:nth-child(2){left:30px;top:8px;background:#f1a12f;transform:rotate(8deg)}.book:nth-child(3){left:60px;top:1px;background:#1b2d3b;transform:rotate(16deg)}.offer-preview h3{margin:0;font-family:\"Roboto Condensed\";font-size:25px;line-height:1.02;text-transform:uppercase}.offer-preview h3 span{color:var(--blue)}.offer-preview p{margin:7px 0 0;color:#4f5d63;font-size:13px}\n    .sales-card{position:sticky;top:15px;overflow:hidden;border:2px solid #4d72d8;border-radius:13px;background:#fff;box-shadow:0 3px 8px #00000014;text-align:center}.trusted{padding:12px 10px 7px;color:#192930;font-size:11px;font-weight:800}.faces{display:flex;justify-content:center;margin-bottom:5px}.face{width:27px;height:27px;margin-left:-4px;display:grid;place-items:center;border:2px solid #fff;border-radius:50%;background:linear-gradient(145deg,#546e7a,#f0a35b);color:#fff;font-size:9px}.face:first-child{margin-left:0}.closing{padding:9px;background:var(--red);color:#fff;font-size:13px;font-weight:800;line-height:1.25}.closing small{font-size:11px;font-weight:500}.card-content{padding:12px 13px 15px}.product-art{height:102px;display:flex;justify-content:center;align-items:center;margin:0 auto 10px}.product-art .book{position:relative;left:auto;top:auto;width:64px;height:85px}.product-art .book:nth-child(2){left:-10px}.product-art .book:nth-child(3){left:-21px}.rating-placeholder{margin:5px 0;color:#66805b;font-size:12px;font-weight:700}.price-label{margin:8px 0 0;color:#e04032;font-family:\"Roboto Condensed\";font-size:16px;font-weight:700}.price{margin:0;color:#d52f22;font-family:\"Roboto Condensed\";font-size:38px;font-weight:700;line-height:1}.old-price{color:#657178;font-size:12px}.offer-copy{margin:13px 0;color:#4d5a60;font-size:12px;line-height:1.4}.buy{display:block;width:100%;padding:15px 8px;background:#2178e8;color:#fff;box-shadow:inset 0 -2px 0 #1259bf;font-size:17px;font-weight:800;line-height:1.1;transition:.18s ease}.buy:hover{background:#3588f3;transform:translateY(-1px)}.buy small{display:block;margin-top:4px;font-size:10px;font-weight:500}.secure{margin:13px 0 0;color:#21976b;font-size:10px;font-weight:700}.guarantee{margin-top:13px;padding:12px 9px;background:#fff8d9;color:#624e22;font-size:11px;line-height:1.4}.guarantee strong{display:block;margin-bottom:3px;font-family:\"Roboto Condensed\";font-size:17px;text-transform:uppercase}.edit-note{display:block;padding:8px;background:#f0f2f4;color:#78838a;font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}\n    .below{max-width:1000px;margin:34px auto 0;padding:26px 0;border-top:1px solid var(--line)}.below h2{margin:0 0 9px;color:#15242b;font-family:\"Roboto Condensed\";font-size:31px;text-transform:uppercase}.below p{max-width:750px;margin:0;color:#5e6b72;font-size:14px;line-height:1.55}.bonus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:18px}.bonus{padding:17px;background:#fff;border:1px solid var(--line)}.bonus b{color:var(--blue);font-family:\"Roboto Condensed\";font-size:20px}.bonus p{margin-top:7px;font-size:12px}.footer{padding:24px 18px;border-top:1px solid #d7dadd;color:#78848a;text-align:center;font-size:11px}.footer strong{color:#34444b}\n    @media(max-width:850px){.main-grid{grid-template-columns:1fr}.sales-card{position:relative;top:auto;max-width:500px;margin:auto}.video-box{max-width:900px}.page{padding-left:16px;padding-right:16px}}\n    @media(max-width:560px){.topbar{height:41px;padding:0 13px}.logo{font-size:16px}.help{font-size:10px}.audience{font-size:11px}.headline{font-size:37px}.subhead{font-size:22px}.checks{font-size:11px}.video-box{aspect-ratio:4/3}.play{width:67px;height:67px;font-size:29px}.offer-preview{gap:8px;padding:10px}.book-stack{transform:scale(.75);transform-origin:left center;min-width:90px;width:90px}.offer-preview h3{font-size:20px}.offer-preview p{font-size:11px}.sales-card{max-width:100%}.bonus-grid{grid-template-columns:1fr}.below h2{font-size:27px}}\n  </style>\n</head>\n<body>\n  <header class=\"topbar\"><div class=\"logo\">Noah Huff<br><small>Huff Performance</small></div><div class=\"help\">\u2709 Need Help? Contact Us</div></header>\n  <main class=\"page\">\n    <div class=\"audience\">For Lifters Who Want To Rebuild Their Shoulder Without Giving Up The Training They Love</div>\n    <h1 class=\"headline\"><span class=\"blue\">How Lifters Are Rebuilding Shoulder Mobility and Training Confidence In Just 14 Days.</span> <span class=\"regular\">With a Daily Rehab-Under-Load Reset \u2014 Without Giving Up the Training They Love</span></h1>\n    <p class=\"subhead\">A self-guided 2-week program with daily mobility, activation, and modified lifting templates for a smarter way to train around your shoulder.</p>\n    <div class=\"checks\"><span>Daily mobility and activation</span><span>Modified lifting templates</span><span>Rehab-under-load philosophy</span><span>Self-guided for 14 days</span></div>\n    <section class=\"main-grid\">\n      <div class=\"video-area\">\n        <div class=\"video-box\" id=\"videoBox\"><button class=\"play\" type=\"button\" aria-label=\"Play video\">\u25b6</button><div class=\"video-caption\">Your Video Is Playing<br><small>Click To Unmute</small></div></div>\n        <div class=\"social-strip\"><span>\u25b6 VSL</span><span>FREE TRAINING</span><span>INSTANT ACCESS</span></div>\n        <div class=\"offer-preview\"><div class=\"book-stack\"><div class=\"book\">14-DAY<br>RESET</div><div class=\"book\">MOBILITY<br>PLAN</div><div class=\"book\">LIFTING<br>TEMPLATES</div></div><div><h3>Get instant access to <span>The 14-Day Shoulder Reset</span></h3><p>Daily guidance to help you move, activate, and modify your training with more intention.</p></div></div>\n      </div>\n      <aside class=\"sales-card\"><div class=\"trusted\"><div class=\"faces\"><span class=\"face\">N</span><span class=\"face\">H</span><span class=\"face\">P</span><span class=\"face\">R</span><span class=\"face\">T</span></div>Built by Noah Huff \u00b7 Huff Performance</div><div class=\"closing\">The Shoulder Reset Is Available Now<br><small>Start your 14-day plan today</small></div><div class=\"card-content\"><div class=\"product-art\"><div class=\"book\">14-DAY<br>RESET</div><div class=\"book\">MOBILITY<br>GUIDE</div><div class=\"book\">LIFTING<br>PLAN</div></div><div class=\"rating-placeholder\">A practical starting point for your next phase of training</div><div class=\"price-label\">Regularly <span class=\"old-price\">$97</span> <span class=\"price\">$47</span> Today</div><div class=\"old-price\">One-time payment \u00b7 Instant access</div><p class=\"offer-copy\">Get The 14-Day Shoulder Reset: daily mobility, activation, and modified lifting templates built around the rehab-under-load philosophy.</p><a class=\"buy\" href=\"#checkout\">Yes! Get Instant Access \u2192<small>Start The 14-Day Reset</small></a><p class=\"secure\">\ud83d\udee1 Secure checkout \u00b7 One-time payment</p><div class=\"guarantee\"><strong>14-Day Training Reset</strong>Move through the program at your own pace with a clear daily structure and practical templates.</div></div><span class=\"edit-note\">The 14-Day Shoulder Reset \u00b7 $47</span></aside>\n    </section>\n    \n  </main>\n  <footer class=\"footer\"><strong>The 14-Day Shoulder Reset</strong> \u00b7 By Noah Huff / Huff Performance \u00b7 Secure checkout</footer>\n  <script>document.querySelector('.play').addEventListener('click',function(){document.getElementById('videoBox').classList.toggle('playing');this.textContent=document.getElementById('videoBox').classList.contains('playing')?'\u275a\u275a':'\u25b6'});<\/script>\n</body>\n</html>\n", "vsl": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><meta name=\"theme-color\" content=\"#ffffff\"><title>Huff Performance \u2014 Shoulder Pain Training</title>\n<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin><link href=\"https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Roboto+Condensed:wght@600;700;800&display=swap\" rel=\"stylesheet\">\n<style>\n:root{--blue:#0758b8;--navy:#101820;--ink:#111820;--muted:#5d6870;--line:#cbd5dc;--red:#e84336;--green:#20a462;--soft:#f7f9fb}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-width:320px;background:#fff;color:var(--ink);font-family:\"DM Sans\",Arial,sans-serif}button,input,select{font:inherit}.top{height:34px;display:flex;justify-content:center;align-items:center;background:#111;color:#fff;font-size:10px;font-weight:700;letter-spacing:.13em}.top span{color:#a9bac4}.page{max-width:920px;margin:auto;padding:15px 21px 55px;text-align:center}.eyebrow{margin:0 0 7px;color:#17252c;font-size:10px;font-weight:800;letter-spacing:.08em}.headline{max-width:865px;margin:0 auto;color:var(--ink);font-family:\"Roboto Condensed\",Arial,sans-serif;font-size:clamp(33px,4.8vw,57px);font-weight:800;line-height:1.03;letter-spacing:-.03em}.headline .blue{color:var(--blue)}.headline .red{color:var(--red)}.subheadline{margin:6px auto 8px;font-family:\"Roboto Condensed\",Arial,sans-serif;font-size:clamp(21px,2.6vw,30px);font-weight:500;line-height:1.1}.credibility{margin:0 auto 13px;max-width:850px;color:#2e3940;font-size:10px;font-style:italic;font-weight:700;line-height:1.35}.credibility strong{color:var(--blue)}.step{max-width:870px;margin:0 auto 5px;text-align:left;color:#1e2c34;font-size:10px;font-weight:700}.step span{display:inline-block;margin-right:4px;color:#fff;background:var(--blue);border-radius:2px;padding:1px 4px;font-size:9px}.video{position:relative;max-width:870px;aspect-ratio:16/9;margin:auto;overflow:hidden;background:linear-gradient(135deg,#4b2f27 0%,#a85f3b 44%,#233640 100%);box-shadow:0 1px 4px #0003}.video:before{content:\"ADD VSL VIDEO\";position:absolute;inset:0;display:grid;place-items:center;color:#fff1;font:800 clamp(55px,9vw,125px) \"Roboto Condensed\";letter-spacing:.05em;transform:rotate(-6deg)}.video:after{content:\"[ REPLACE WITH VIDEO EMBED OR THUMBNAIL ]\";position:absolute;left:0;right:0;bottom:13px;color:#fff;font-size:9px;font-weight:800;letter-spacing:.15em}.video-cover{position:absolute;z-index:2;left:50%;top:50%;width:min(54%,370px);min-height:208px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;transform:translate(-50%,-50%);border:1px solid #ffffffa8;border-radius:3px;background:#1c70dfc9;color:#fff;box-shadow:0 10px 25px #0003}.speaker{font-size:40px;line-height:1}.video-cover strong{font-size:20px;line-height:1.15}.video-cover small{font-size:16px;font-weight:600}.video-cover:hover{background:#267cea}.video-button{border:0;background:transparent;color:inherit;cursor:pointer}.divider{max-width:870px;margin:0 auto;border:0;border-top:1px solid #6f8ba1}.form-section{max-width:790px;margin:0 auto;padding:34px 0 0;text-align:left}.form-section h2{margin:0 0 24px;font:700 24px \"Roboto Condensed\";color:#273942}.question{max-width:680px;margin:0 auto 18px;color:#313e45;font-size:14px;line-height:1.5}.question strong{color:var(--blue)}.form-card{max-width:590px;margin:0 auto;padding:21px 24px;border:1px solid #e0e6ea;border-radius:6px;background:#f4f7fa;box-shadow:0 4px 16px #10212d12}.form-card label{display:block;margin-bottom:6px;color:#46545b;font-size:11px;font-weight:700}.form-card input,.form-card select{width:100%;height:43px;margin-bottom:12px;padding:0 12px;border:1px solid #ccd7de;border-radius:4px;background:#fff;color:#24323a;font-size:13px;outline:0}.form-card input:focus,.form-card select:focus{border-color:var(--blue);box-shadow:0 0 0 3px #0758b81c}.radio-label{display:flex!important;align-items:center;gap:8px;margin:8px 0!important;padding:8px;border-radius:4px;background:#fff;font-weight:500!important;cursor:pointer}.radio-label input{width:14px;height:14px;margin:0}.continue{display:block;margin:16px auto 0;padding:12px 28px;border:0;border-radius:3px;background:var(--blue);color:#fff;font-size:13px;font-weight:800;cursor:pointer}.continue:hover{background:#146bd1}.powered{margin:16px 0 0;text-align:right;color:#8d9ba2;font-size:9px}.success{padding:23px;text-align:center}.success-mark{width:42px;height:42px;display:grid;place-items:center;margin:0 auto 10px;border-radius:50%;background:#dff5e9;color:var(--green);font-size:25px}.success h3{margin:0;font:700 29px \"Roboto Condensed\"}.success p{margin:8px 0 0;color:var(--muted);font-size:13px;line-height:1.5}.footer{padding:20px;border-top:1px solid #e3e8eb;color:#89969d;text-align:center;font-size:10px}.footer strong{color:#46535b}@media(max-width:600px){.top{font-size:8px;letter-spacing:.08em}.page{padding:15px 14px 40px}.eyebrow{font-size:9px}.headline{font-size:37px;line-height:1.02}.subheadline{font-size:22px}.credibility{font-size:9px}.video{aspect-ratio:4/3}.video-cover{width:65%;min-height:145px}.video-cover strong{font-size:15px}.video-cover small{font-size:12px}.speaker{font-size:30px}.form-section{padding-top:28px}.form-section h2{font-size:22px}.question{font-size:13px}.form-card{padding:18px 15px}}\n</style>\n</head>\n<body>\n<div class=\"top\">FREE SHOULDER TRAINING \u00b7 WATCH THE SHORT EXPLAINER BELOW</div>\n<main class=\"page\">\n  <p class=\"eyebrow\">For Lifters Who Are Tired Of Working Around Shoulder Pain</p>\n  <h1 class=\"headline\"><span class=\"blue\">How Everyday Lifters Struggling With Shoulder Pain Are Getting Their Mobility Back</span> Using This Secret \"Rehab Framework\" <span class=\"red\">Hidden By The Elite Sports Teams</span></h1>\n  <p class=\"subheadline\">(A Practical Shoulder Approach From Former LA Dodgers Performance Coach)</p>\n  <p class=\"credibility\">Learn how mobility work, activation, and smarter exercise modifications can help you build a clearer path back to pressing, pulling, and training with more confidence.</p>\n  <div class=\"step\"><span>\u25b6</span>Step 1: Watch The Short Explainer Video To Learn How This Shoulder Framework Works</div>\n  <div class=\"video\" id=\"video\"><button class=\"video-cover video-button\" type=\"button\" aria-label=\"Play video\"><span class=\"speaker\">\ud83d\udd0a</span><strong>Your Video Is Playing</strong><small>Click To Unmute</small></button></div>\n  <hr class=\"divider\">\n  <section class=\"form-section\" id=\"apply\">\n    <h2><span class=\"step\"><span>\u270e</span>Step 2: See If Huff Performance Is A Fit For You</span></h2>\n    <p class=\"question\"><strong>1</strong> To continue, you are filling this out because you want to learn more about working on your shoulder pain and getting back to the training you care about. Is that correct?</p>\n    <div class=\"form-card\" id=\"formCard\">\n      <form id=\"fitForm\">\n        <label for=\"name\">First name</label><input id=\"name\" required type=\"text\" placeholder=\"Your first name\">\n        <label for=\"email\">Email address</label><input id=\"email\" required type=\"email\" placeholder=\"Your email address\">\n        <button class=\"continue\" type=\"submit\">Continue \u2192</button>\n        <p class=\"powered\">Secure form \u00b7 Huff Performance</p>\n      </form>\n    </div>\n  </section>\n</main>\n<footer class=\"footer\"><strong>Huff Performance</strong> \u00b7 Educational content only. This page does not replace medical diagnosis or treatment.</footer>\n<script>\ndocument.querySelector('.video-button').addEventListener('click',function(){this.innerHTML='<span class=\"speaker\">\u275a\u275a</span><strong>Video Placeholder Active</strong><small>Replace this block with your VSL embed</small>'});\ndocument.getElementById('fitForm').addEventListener('submit',function(e){e.preventDefault();document.getElementById('formCard').innerHTML='<div class=\"success\"><div class=\"success-mark\">\u2713</div><h3>Thanks \u2014 we received your details.</h3><p>The next step is to review your situation and determine whether Huff Performance is the right fit.</p></div>'});\n<\/script>\n</body>\n</html>\n"};
+
+  function switchEntryTab(el){
+    document.querySelectorAll('#modal-entry-examples .modal-tab').forEach(t=>t.classList.remove('active'));
+    el.classList.add('active');
+    const key = el.getAttribute('data-key');
+    document.getElementById('entryExampleFrame').srcdoc = entryExamples[key];
+  }
+  document.getElementById('entryExampleFrame').srcdoc = entryExamples['webinar'];
+</script>
+</body>
+</html>
