@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nick Fowler - Funnel Audit Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #e6e6e6;
+      --text: #1a1a1a;
+      --text-muted: #555555;
+      --card-bg: #ffffff;
+      --accent: #F59231;
+      --accent-light: rgba(245, 146, 49, 0.1);
+      --border: #d1d1d1;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    html {
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    body { overflow-x: hidden; }
+
+    .slide {
+      height: 100vh;
+      width: 100vw;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .slide-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .kicker {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .kicker.is-solution {
+      color: var(--accent);
+    }
+
+    h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; line-height: 1.1; margin-bottom: 1rem; }
+    h2 { font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 600; line-height: 1.2; margin-bottom: 1.5rem; }
+    p { font-size: 1.125rem; color: var(--text-muted); margin-bottom: 1.5rem; max-width: 65ch; }
+
+    ul { list-style: none; margin-bottom: 2rem; }
+    li { 
+      position: relative; 
+      padding-left: 1.5rem; 
+      margin-bottom: 0.75rem; 
+      font-size: 1.1rem; 
+      color: var(--text);
+    }
+    li::before {
+      content: "•";
+      color: var(--accent);
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .logo-placeholder {
+      width: 120px;
+      height: 120px;
+      background-color: var(--card-bg);
+      border: 2px dashed var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-align: center;
+    }
+
+    .screenshot-container {
+      margin-top: 2rem;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+    }
+    .screenshot-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Flow Diagram Component */
+    .flow-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 2rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .flow-box {
+      flex: 1;
+      min-width: 150px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.95rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .flow-box.accent {
+      border-color: var(--accent);
+      background: var(--accent-light);
+      color: var(--text);
+    }
+    .flow-arrow {
+      color: var(--accent);
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    /* List Terminal */
+    .list-terminal {
+      background: var(--card-bg);
+      border-left: 4px solid var(--accent);
+      padding: 1.5rem 2rem;
+      border-radius: 0 8px 8px 0;
+      margin: 2rem 0;
+    }
+    .list-terminal.is-solution {
+      border-left-color: var(--accent);
+    }
+    .list-terminal li { margin-bottom: 1rem; }
+    .list-terminal li:last-child { margin-bottom: 0; }
+
+    /* Modal for Templates */
+    .modal-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+      margin-top: 1rem;
+      transition: opacity 0.2s;
+    }
+    .modal-trigger:hover { opacity: 0.9; }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 2rem;
+    }
+    .modal-overlay.active { display: flex; }
+    
+    .modal-content {
+      background: var(--bg);
+      width: 100%;
+      max-width: 900px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 12px;
+      padding: 2rem;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: none; border: none;
+      font-size: 1.5rem; cursor: pointer;
+      color: var(--text-muted);
+    }
+    .template-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .template-card h3 { color: var(--accent); margin-bottom: 0.5rem; font-size: 1.1rem; }
+    .template-card p { font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .template-tag {
+      display: inline-block;
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .slide-meta {
+      position: absolute;
+      bottom: 2rem;
+      right: 2rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .flow-diagram { flex-direction: column; }
+      .flow-arrow { transform: rotate(90deg); margin: 0.5rem 0; }
+      .slide { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SLIDE 1: COVER -->
+  <section class="slide">
+    <div class="slide-inner">
+      <div class="logo-placeholder">
+        <img src="assets/nick-fowler-logo.png" alt="Nick Fowler" style="width:100%; height:100%; object-fit:cover; border-radius:50%; display:none;" onerror="this.style.display='none'; this.parentElement.innerText='Foto/Logo\n(assets/nick-fowler-logo.png)'">
+      </div>
+      <h1>Nick Fowler</h1>
+      <p style="font-size: 1.25rem; color: var(--text);">Funnel Audit & Growth Opportunities</p>
+      <p style="font-size: 0.9rem; margin-top: 2rem;">OCTOBER 2026</p>
+    </div>
+    <div class="slide-meta">01 / 10</div>
+  </section>
+
+  <!-- SLIDE 2: OBSERVATION 01 -->
+  <section class="slide">
+    <div class="slide-inner">
+      <span class="kicker">OBSERVATION 01</span>
+      <h2>The headline isn't carrying the weight of the offer.</h2>
+      <p>For most visitors, the headline determines whether they stay or leave. It should instantly communicate who the offer is for, what outcome it promises, and why it's worth paying attention to.</p>
+      <ul>
+        <li>Suboptimal first impression</li>
+        <li>Limited clarity and relevance</li>
+        <li>Doesn't fully communicate the opportunity</li>
+      </ul>
+      <div class="screenshot-container">
+        <img src="https://i.imgur.com/V0VSACF.png" alt="Current Headline Observation">
+      </div>
+    </div>
+    <div class="slide-meta">02 / 10</div>
+  </section>
+
+  <!-- SLIDE 3: RECOMMENDATION 01 -->
+  <section class="slide">
+    <div class="slide-inner">
+      <span class="kicker is-solution">RECOMMENDATION 01</span>
+      <h2>Let the headline work as hard as your offer.</h2>
+      <p>Craft a headline that immediately communicates the transformation, speaks directly to your ideal client, and makes it impossible for the right person to scroll past.</p>
+      <ul>
+        <li>Instant clarity on who it's for</li>
+        <li>Clear promise of outcome</li>
+        <li>Stronger first impression</li>
+      </ul>
+    </div>
+    <div class="slide-meta">03 / 10</div>
+  </section>
+
+  <!-- SLIDE 4: OBSERVATION 02 -->
+  <section class="slide">
+    <div class="slide-inner">
+      <span class="kicker">OBSERVATION 02</span>
+      <h2>The booking confirmation isn't building momentum.</h2>
+      <p>Immediately after booking is one of the highest-attention moments in the customer journey. Instead of simply confirming the appointment, this touchpoint can reinforce commitment and prepare prospects for what's next.</p>
+      <ul>
+        <li>Missed opportunity to increase show rates</li>
+        <li>Lower buyer commitment</li>
+        <li>Underutilized customer journey</li>
+      </ul>
+    </div>
+    <div class="slide-meta">04 / 10</div>
+  </section>
+
+  <!-- SLIDE 5: RECOMMENDATION 02 -->
+  <section class="slide">
+    <div class="slide-inner">
+      <span class="kicker is-solution">RECOMMENDATION 02</span>
+      <h2>Turn the confirmation page into a strategic asset.</h2>
+      <p>Use your thank-you page to reinforce the decision, set clear expectations, introduce the next steps, and prepare prospects before the conversation takes place.</p>
+      <ul>
+        <li>Higher show rates</li>
+        <li>Better-prepared prospects</li>
+        <li>Stronger buying intent</li>
+      </ul>
+    </div>
+    <div class="slide-meta">05 / 10</div>
+  </section>
+
+  <!-- SLIDE 6: OBSERVATION 03 -->
+  <section class="slide">
+    <div class="slide-inner">
+      <span class="kicker">OBSERVATION 03</span>
+      <h2>Trust stops building after the application.</h2>
+      <p>Submitting an application isn't the end of the buying journey—it's the beginning of the decision-making process. Right now, prospects only receive logistical reminders, missing the chance to address unspoken questions and build excitement before the call.</p>
+      <ul>
+        <li>Little reinforcement after opting in</li>
+        <li>No continued confidence-building (indoctrination)</li>
+        <li>The waiting period isn't being used strategically</li>
+      </ul>
+    </div>
+    <div class="slide-meta">06 / 10</div>
+  </section>
+
+  <!-- SLIDE 7: RECOMMENDATION 03 (With Flow Diagram) -->
+  <section class="slide">
+    <div class="slide-inner">
+      <span class="kicker is-solution">RECOMMENDATION 03</span>
+      <h2>Use the waiting period to strengthen buying intent.</h2>
+      <p>Every minute between booking and the call is an opportunity to increase confidence. Introduce a strategic indoctrination sequence.</p>
+      
+      <div class="flow-diagram">
+        <div class="flow-box">Book Call</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box accent">Email 1:<br>Reinforce Decision</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box accent">Email 2:<br>Social Proof</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">High-Intent Call</div>
+      </div>
+    </div>
+    <div class="slide-meta">07 / 10</div>
+  </section>
+
+  <!-- SLIDE 8: TRANSITION (FIXED) -->
+  <section class="slide">
+    <div class="slide-inner" style="text-align: center;">
+      <h2 class="reveal">The Next Stage of Growth</h2>
+      <p class="reveal" style="margin: 20px auto 0; max-width: 60ch;">The recommendations you've seen improve performance today. The opportunities below are about building a stronger, more scalable business for tomorrow.</p>
+    </div>
+    <div class="slide-meta">08 / 10</div>
+  </section>
+
+  <!-- SLIDE 9: OPPORTUNITY 01 -->
+  <section class="slide">
+    <div class="slide-inner">
+      <span class="kicker is-solution">NEXT-LEVEL OPPORTUNITY 01</span>
+      <h2>Stop Relying on a Single Point of Entry</h2>
+      <p>Every prospect has a different level of awareness, trust, and urgency. Offering multiple ways to engage allows more people to enter your ecosystem without changing your core offer.</p>
+      <ul>
+        <li>More consistent lead flow</li>
+        <li>Better fit across different buyer types</li>
+        <li>Higher conversion into premium services</li>
+      </ul>
+      <button class="modal-trigger" onclick="document.getElementById('templateModal').classList.add('active')">
+        ▶ View entry point examples
+      </button>
+    </div>
+    <div class="slide-meta">09 / 10</div>
+  </section>
+
+  <!-- SLIDE 10: THE BIG PICTURE (FIXED) -->
+  <section class="slide">
+    <div class="slide-inner">
+      <span class="kicker is-solution">THE BIG PICTURE</span>
+      <h2>What I See Is Leverage.</h2>
+      <p>None of these recommendations are about adding complexity. We want to create leverage.</p>
+      
+      <ul class="list-terminal is-solution">
+        <li>Leverage that turns more visitors into buyers</li>
+        <li>Leverage that turns buyers into long-term customers</li>
+        <li>Leverage that makes future growth easier than past growth</li>
+      </ul>
+      
+      <p style="margin-top: 2rem; font-weight: 600; color: var(--text);">That's the opportunity I believe is sitting in front of you.</p>
+    </div>
+    <div class="slide-meta">10 / 10</div>
+  </section>
+
+  <!-- MODAL: ENTRY POINT EXAMPLES -->
+  <div id="templateModal" class="modal-overlay" onclick="if(event.target === this) this.classList.remove('active')">
+    <div class="modal-content">
+      <button class="modal-close" onclick="document.getElementById('templateModal').classList.remove('active')">&times;</button>
+      <h2 style="margin-bottom: 2rem;">Entry Point Templates for Nick Fowler</h2>
+      
+      <div class="template-card">
+        <span class="template-tag">TOP OF FUNNEL</span>
+        <h3>Webinar Registration Page</h3>
+        <p><strong>Headline:</strong> "Free Training: How to [Specific Outcome] Without [Common Pain Point]"</p>
+        <p><strong>Structure:</strong> Short registration form (Name, Email, Phone) + Live countdown timer + 3 bullet points of what will be learned.</p>
+        <p><strong>Goal:</strong> Low-friction top-of-funnel capture for live or replay webinar.</p>
+      </div>
+
+      <div class="template-card">
+        <span class="template-tag">MID FUNNEL</span>
+        <h3>VSL + Application Page</h3>
+        <p><strong>Headline:</strong> "How [Ideal Client] Achieves [Desired Result] in [Timeframe]"</p>
+        <p><strong>Structure:</strong> Embedded Video Sales Letter (VSL) explaining the unique mechanism → Qualification questions → "Apply to Work With Nick" button.</p>
+        <p><strong>Goal:</strong> Qualifies fit and builds value before booking a call.</p>
+      </div>
+
+      <div class="template-card">
+        <span class="template-tag">SELF-SERVE</span>
+        <h3>Low-Ticket Offer Page</h3>
+        <p><strong>Headline:</strong> "The [Name of Blueprint/System] - $47"</p>
+        <p><strong>Structure:</strong> Long-form sales copy, tokenized pricing, clear deliverables, 14-day money-back guarantee, and direct checkout.</p>
+        <p><strong>Goal:</strong> Monetize traffic that isn't ready for a high-ticket commitment, building a buyer list.</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
