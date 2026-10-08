@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>TikTok Shop Content Vault — A plug-and-play content system for busy professionals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#12181f;--muted:#5c6a72;--line:#e2e6e9;--paper:#faf7f2;
+  --primary:#e0472c;--primary-dark:#b8371f;--success:#1f9d55;--destructive:#d9342b;--gold:#e0a83c;
+  --shadow-card:0 4px 16px rgba(0,0,0,.06);--shadow-cta:0 10px 24px rgba(224,71,44,.35);
+  --gradient-hero:linear-gradient(180deg,#fff 0%,#faf1ec 100%);--gradient-cta:linear-gradient(180deg,var(--primary),var(--primary-dark));
+}
+*{box-sizing:border-box}body{margin:0;background:#fff;color:var(--ink);font-family:"DM Sans",Arial,sans-serif}
+.wrap{max-width:960px;margin:auto;padding:0 20px}
+.header{background:var(--ink)}.header .wrap{display:flex;justify-content:space-between;align-items:center;padding:14px 20px}
+.logo-slot{height:34px;padding:0 16px;display:flex;align-items:center;border:1px dashed #ffffff40;border-radius:4px;color:#ffffffb0;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.header a{color:#fff;font-size:13px;font-weight:700;text-decoration:none}
+section{padding:56px 0}
+.hero{background:var(--gradient-hero)}
+.eyebrow-pill{display:block;width:fit-content;margin:0 auto 20px;padding:8px 20px;border-radius:6px;background:var(--primary);color:#fff;font-size:13px;font-weight:800;text-align:center}
+h1{max-width:760px;margin:0 auto 14px;text-align:center;font-size:clamp(24px,3.6vw,34px);line-height:1.2}
+h1 .accent{color:var(--primary)}
+.proof-list{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 26px;margin:0 auto 30px;max-width:700px;list-style:none;padding:0}
+.proof-list li{display:flex;align-items:center;gap:6px;font-weight:700;font-size:14px}
+.video-block{max-width:760px;margin:0 auto;aspect-ratio:16/9;border-radius:12px;border:2px dashed var(--primary);background:#fff5f2;display:grid;place-items:center;color:var(--primary);font-weight:800;text-transform:uppercase;font-size:13px;letter-spacing:.1em}
+.price-card{max-width:420px;margin:26px auto 0;padding:22px;border-radius:12px;border:2px solid var(--primary);background:#fff;text-align:center;box-shadow:var(--shadow-card)}
+.price-card .price{font-size:26px;font-weight:800;color:var(--destructive)}
+.price-card .price s{color:var(--muted);font-weight:600;margin-right:6px}
+.cta-btn{display:block;width:100%;max-width:520px;margin:18px auto 0;padding:18px 20px;border:0;border-radius:999px;background:var(--gradient-cta);color:#fff;font-size:16px;font-weight:800;text-align:center;text-decoration:none;text-transform:uppercase;box-shadow:var(--shadow-cta)}
+.guarantee-line{text-align:center;margin-top:10px;font-size:12px;font-weight:700;color:var(--muted)}
+
+h2.section-title{max-width:640px;margin:0 auto 36px;text-align:center;font-size:clamp(22px,3vw,30px)}
+.module{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;margin-bottom:28px;padding:20px;border:1px solid var(--line);border-radius:14px}
+.module .img-slot{aspect-ratio:16/9;border-radius:10px;border:2px dashed var(--line);display:grid;place-items:center;color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase}
+.module h3{margin:0 0 10px;font-size:19px}
+.module ul{margin:0 0 14px;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.6}
+.bonus{display:grid;grid-template-columns:160px 1fr;gap:20px;padding:20px;border:1px solid var(--line);border-radius:14px;margin-bottom:16px}
+.bonus .img-slot{aspect-ratio:3/4;border-radius:10px;border:2px dashed var(--gold);display:grid;place-items:center;color:var(--gold);font-size:10px;font-weight:700;text-transform:uppercase}
+.bonus-kicker{color:var(--primary);font-size:11px;font-weight:800;text-transform:uppercase}
+.bonus h3{margin:6px 0 8px;font-size:18px}
+
+.compare{max-width:700px;margin:0 auto;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.compare-row{display:grid;grid-template-columns:1fr 100px 100px}
+.compare-row.head{background:var(--gradient-cta);color:#fff;font-weight:800;font-size:11px;text-transform:uppercase}
+.compare-row div{padding:12px;text-align:center;border-top:1px solid var(--line)}
+.compare-row.head div{border-top:0;text-align:left}
+.compare-row div:first-child{text-align:left}
+.compare-row.head div:first-child{text-align:left}
+.ok{color:var(--success);font-weight:800}.no{color:var(--destructive);font-weight:800}
+
+.guarantee-block{background:var(--paper);display:grid;grid-template-columns:180px 1fr;gap:24px;align-items:center;max-width:760px;margin:0 auto;padding:26px;border-radius:14px}
+.guarantee-block .img-slot{aspect-ratio:1/1;border-radius:50%;border:2px dashed var(--gold);display:grid;place-items:center;color:var(--gold);font-size:10px;font-weight:700;text-transform:uppercase}
+
+.authority{display:grid;grid-template-columns:1fr 220px;gap:30px;align-items:center;max-width:840px;margin:0 auto}
+.authority .img-slot{aspect-ratio:4/5;border-radius:12px;border:2px dashed var(--line);display:grid;place-items:center;color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase}
+
+.faq-item{max-width:700px;margin:0 auto 12px;border:1px solid var(--line);border-radius:10px;padding:14px 18px}
+.faq-item summary{font-weight:700;cursor:pointer}
+.faq-item p{color:var(--muted);font-size:14px;line-height:1.6;margin:10px 0 0}
+
+.final-cta{background:var(--ink);color:#fff;text-align:center}
+.final-cta h2{color:#fff}
+.countdown{display:flex;justify-content:center;gap:14px;margin:16px 0}
+.countdown div{background:#ffffff1a;border-radius:8px;padding:10px 16px;font-weight:800;font-size:20px}
+footer{padding:36px 20px;text-align:center;color:var(--muted);font-size:11px}
+@media(max-width:680px){.module,.bonus,.guarantee-block,.authority{grid-template-columns:1fr}}
+</style>
+</head>
+<body id="get-access">
+
+<header class="header"><div class="wrap"><div class="logo-slot">NICK FOWLER</div><a href="#contact">Need help? Contact us</a></div></header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow-pill">For 9–5 workers who want an extra income stream without becoming influencers</span>
+    <h1><span class="accent">Download The EXACT, Plug-and-Play TikTok Shop Content Templates</span> I Used To Make $10M+ In Sales — Adapted For A 30-Minute-A-Day Workflow</h1>
+    <ul class="proof-list">
+      <li>✓ Built from proven affiliate content patterns</li><li>✓ Designed for 30-minute work blocks</li><li>✓ No audience required to start</li><li>✓ Plug-and-play hooks + formats</li>
+    </ul>
+    <div class="video-block">VSL PREVIEW — paste video embed here</div>
+    <div class="price-card">
+      <p class="price"><s>$97 </s>$27  Today</p>
+      <a class="cta-btn" href="#get-access">Get Instant Access</a>
+      <p class="guarantee-line">30-Day Money-Back Guarantee</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 class="section-title">Everything You Need To Create Your First Batch</h2>
+    <!-- Repeat this .module block once per curriculum module (source had 6) -->
+    <div class="module">
+      <div class="img-slot">Module image</div>
+      <div><h3>Module 1: The 30-Minute Content Batch</h3>
+        <ul><li>Pick a product worth testing</li><li>Use the hook + demo templates</li><li>Batch multiple videos without starting from zero</li></ul>
+        <a class="cta-btn" style="max-width:260px;padding:10px 16px;font-size:12px" href="#get-access">Get Access</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--paper)">
+  <div class="wrap">
+    <h2 class="section-title">Get 3 Plug-And-Play Bonuses Included</h2>
+    <!-- Repeat this .bonus block once per bonus (source had 9) -->
+    <div class="bonus">
+      <div class="img-slot">Bonus cover</div>
+      <div><p class="bonus-kicker">FREE BONUS #1: Hook Swipe File</p>
+        <h3>50 Hooks To Stop The Scroll</h3>
+        <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.6"><li>Curiosity, problem, proof and demo angles</li><li>Built for fast recording</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 class="section-title">Why Use A Template System?</h2>
+    <div class="compare">
+      <div class="compare-row head"><div>Feature</div><div>TEMPLATE SYSTEM</div><div>START FROM ZERO</div></div>
+      <div class="compare-row"><div>Know what to film</div><div class="ok">✓</div><div class="no">✗</div></div>
+      <div class="compare-row"><div>Create faster</div><div class="ok">✓</div><div class="no">✗</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap guarantee-block">
+    <div class="img-slot">Guarantee badge</div>
+    <div><h2 style="margin:0 0 10px">Try It Without The Guesswork</h2>
+      <p style="color:var(--muted);line-height:1.6">Use the templates, record your first batch, and decide whether the system is useful for you. If not, use the 30-day guarantee.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap authority">
+    <div><h2 style="text-align:left">Meet Nick Fowler</h2>
+      <p style="color:var(--muted);line-height:1.7">Nick Fowler is a TikTok Shop expert and creator mentor who has built a large affiliate-content business and teaches the underlying process to people starting from very different backgrounds.</p>
+      <a class="cta-btn" style="margin:16px 0 0" href="#get-access">Get Instant Access</a>
+    </div>
+    <div class="img-slot">Photo of Nick Fowler</div>
+  </div>
+</section>
+
+<section style="background:var(--paper)">
+  <div class="wrap">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <details class="faq-item" open><summary>Do I need to quit my job?</summary><p>No. The positioning is designed around building the system alongside an existing job.</p></details>
+    <details class="faq-item"><summary>Do I need to be an influencer?</summary><p>No. The model is affiliate content and product-driven short-form content, not building a large personal brand first.</p></details>
+    <details class="faq-item"><summary>How much time do I need?</summary><p>The entry-point promise is a 30-minute daily workflow. Your actual workload depends on your goals and how quickly you want to scale.</p></details>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="wrap">
+    <h2>Start With One 30-Minute Block</h2>
+    <p style="opacity:.8">Doors close: Registration open now</p>
+    <div class="countdown"><div>00<br><small style="font-size:9px">HRS</small></div><div>00<br><small style="font-size:9px">MIN</small></div><div>00<br><small style="font-size:9px">SEC</small></div></div>
+    <a class="cta-btn" href="#get-access">Get TikTok Shop Content Vault For $27 </a>
+  </div>
+</section>
+
+<footer>© 2026 — TikTok Shop Content Vault. <a href="#terms">Terms</a> · <a href="#privacy">Privacy</a> · <a href="#refunds">Refunds</a></footer>
+
+</body>
+</html>
