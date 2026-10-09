@@ -295,6 +295,36 @@ body {
     font-size: 8px;
   }
 }
+
+/* Responsive fit: keep the full VSL hero, player and CTA visible without clipping. */
+@media (min-width: 701px) {
+  .page { height: 100svh; min-height: 0; }
+  .hero { padding: clamp(8px, 1.25vh, 15px) 18px 8px; }
+  .headline { width: min(980px, 96vw); font-size: clamp(25px, 3.1vw, 42px); line-height: 1.06; }
+  .subheadline { margin: clamp(5px, .8vh, 9px) 0 clamp(7px, 1.1vh, 12px); font-size: clamp(12px, 1.35vw, 17px); line-height: 1.25; }
+  .video { width: min(610px, 52vw); max-height: 34vh; aspect-ratio: 16 / 9; flex: 0 1 auto; }
+  .date { margin-top: clamp(4px, .7vh, 8px); }
+  .cta { margin-top: clamp(6px, 1vh, 11px); max-width: min(610px, 72vw); }
+  .proof-row { margin-top: clamp(4px, .8vh, 9px); }
+  .count-label, .countdown { margin-top: clamp(3px, .6vh, 7px); }
+}
+@media (max-height: 760px) and (min-width: 701px) {
+  .headline { font-size: clamp(22px, 2.65vw, 34px); }
+  .subheadline { font-size: 12px; margin: 4px 0 6px; }
+  .video { width: min(520px, 46vw); max-height: 29vh; }
+  .date, .proof-row, .count-label, .countdown { margin-top: 3px; }
+  .cta { margin-top: 5px; padding-top: 8px; padding-bottom: 8px; }
+}
+@media (max-width: 700px) {
+  html, body { height: auto; min-height: 100%; overflow-x: hidden; overflow-y: auto; }
+  .page { height: auto; min-height: 100svh; overflow: visible; }
+  .hero { padding: 18px 14px 22px; }
+  .headline { width: 100%; font-size: clamp(27px, 7vw, 38px); line-height: 1.08; }
+  .subheadline { width: 100%; font-size: 15px; margin: 10px 0 14px; }
+  .video { width: min(100%, 560px); max-height: none; aspect-ratio: 16 / 9; flex: none; }
+  .cta { width: 100%; max-width: 560px; }
+}
+
 </style>
 </head>
 
