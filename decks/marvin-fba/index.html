@@ -15,7 +15,7 @@
     --ink:#f2f4f3;--ink-soft:#b9c1c3;--ink-muted:#767f82;--line:rgba(255,255,255,0.09);
     --accent-fill:#16866B;--accent-text:#16866B;--accent-soft:rgba(22,134,107,0.1);
     --danger-fill:#ff5266;--danger-text:#ff5266;--danger-soft:rgba(255,82,102,0.1);
-    --shadow-soft:rgba(0,0,0,0.6);--dot-color:#333;--on-accent:#141400;
+    --shadow-soft:rgba(0,0,0,0.6);--dot-color:#333;--on-accent:#ffffff;
     --display:'Space Grotesk',sans-serif;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;
     --ease:cubic-bezier(.16,1,.3,1);
   }
@@ -24,7 +24,7 @@
     --ink:#14151a;--ink-soft:#4a4d54;--ink-muted:#82858c;--line:rgba(0,0,0,0.1);
     --accent-fill:#16866B;--accent-text:#16866B;--accent-soft:rgba(22,134,107,0.1);
     --danger-fill:#ff5266;--danger-text:#c81f3f;--danger-soft:rgba(200,31,63,0.1);
-    --shadow-soft:rgba(0,0,0,0.14);--dot-color:#cfcfcf;--on-accent:#141400;
+    --shadow-soft:rgba(0,0,0,0.14);--dot-color:#cfcfcf;--on-accent:#ffffff;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
@@ -123,66 +123,455 @@
     .kbd-hint{display:none}
   }
   @media (prefers-reduced-motion:reduce){.reveal{transition:none;opacity:1;transform:none}}
-.preview-trigger{cursor:pointer}.modal{position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);z-index:200;display:none;align-items:center;justify-content:center;padding:24px}.modal.open{display:flex}.modal-card{width:min(1200px,96vw);height:min(88vh,900px);background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;position:relative;display:flex;flex-direction:column}.modal-close{position:absolute;top:12px;right:14px;z-index:3;background:var(--surface-2);color:var(--ink);border:1px solid var(--line);border-radius:8px;width:36px;height:36px;cursor:pointer;font:700 18px var(--mono)}.modal-tabs{height:54px;display:flex;gap:8px;align-items:center;padding:8px 56px 8px 14px;border-bottom:1px solid var(--line)}.modal-tabs button{background:var(--surface-2);border:1px solid var(--line);color:var(--ink-soft);padding:9px 12px;border-radius:8px;cursor:pointer;font:600 11px var(--mono)}.modal-tabs button.active{background:var(--accent-fill);color:var(--on-accent)}.email-tabs{height:58px;gap:10px}.email-tabs button{border-radius:999px;min-width:100px;padding:10px 18px}.email-wrap{padding:34px;overflow:auto;height:calc(100% - 58px)}.email-card{max-width:900px;margin:0 auto 16px;background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:24px}.email-card .eyebrow{font:700 11px var(--mono);color:var(--accent-text);letter-spacing:.1em}.email-card h3{margin:8px 0 14px;font-size:22px}.email-card p{font-size:14px;line-height:1.65;margin:10px 0}.modal-frame{width:100%;height:calc(100% - 54px);border:0;background:#fff}@media(max-width:650px){.modal{padding:7px}.modal-card{width:100%;height:94svh}.modal-tabs{padding-right:54px}.email-wrap{padding:16px}.email-card{padding:18px}.email-tabs button{min-width:0;padding:9px 12px}}</style>
-<style>
-.cover-wordmark{display:flex;align-items:center;gap:12px;margin-bottom:42px;font:700 17px var(--display);letter-spacing:.1em}.cover-mark{width:46px;height:46px;display:grid;place-items:center;background:var(--accent-fill);color:#fff;border-radius:14px;font-size:23px}.shot-frame iframe{width:100%;height:100%;border:0;background:var(--surface-2)}.visual-panel{width:100%;padding:24px 20px;background:linear-gradient(145deg,var(--surface),var(--surface-2));border:1px solid var(--accent-soft);border-radius:14px;box-shadow:0 24px 50px -30px var(--shadow-soft)}.visual-label{font:700 10px var(--mono);letter-spacing:.14em;color:var(--accent-text);margin-bottom:18px}.storyline{display:grid;gap:9px}.story-card{padding:15px 16px;border:1px solid var(--line);border-radius:10px;background:var(--surface);display:grid;gap:6px}.story-card small{font:10px var(--mono);color:var(--ink-muted);letter-spacing:.1em}.story-card b{font:700 17px var(--display);color:var(--ink)}.story-card span{font-size:12px;color:var(--ink-soft);line-height:1.5}.story-card.featured{border-color:var(--accent-fill);background:var(--accent-soft)}.story-card.featured small,.story-card.featured b{color:var(--accent-text)}.story-connector{text-align:center;color:var(--accent-text);font-size:22px;line-height:1}.journey{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:8px}.journey-step{padding:14px 8px;border:1px solid var(--line);border-radius:9px;background:var(--surface);text-align:center;display:grid;gap:7px}.journey-step b{font:10px var(--mono);color:var(--accent-text)}.journey-step strong{font:700 14px var(--display)}.journey-step span{font-size:10px;line-height:1.4;color:var(--ink-muted)}.journey-step.highlighted{border-color:var(--accent-fill);background:var(--accent-soft)}.journey>i{font-style:normal;color:var(--accent-text)}.recovery-strip{margin-top:14px;padding:14px;border-radius:8px;background:var(--accent-soft);display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;font-size:11px;color:var(--ink-soft)}.recovery-strip b{color:var(--accent-text)}.value-ladder{display:grid;gap:10px}.value-ladder>div{display:grid;grid-template-columns:86px 1fr;gap:4px 12px;align-items:center;padding:13px 15px;border:1px solid var(--line);border-radius:9px;background:var(--surface)}.value-ladder>div:nth-child(2){border-color:var(--accent-fill);background:var(--accent-soft)}.value-ladder small{grid-row:span 2;font:10px var(--mono);color:var(--accent-text)}.value-ladder b{font:700 15px var(--display)}.value-ladder span{font-size:11px;color:var(--ink-muted)}.visual-foot{font-size:11px!important;margin:14px 0 0!important}.phone-stage{display:flex;gap:18px;align-items:center;justify-content:center}.phone{width:190px;flex:none;padding:13px;border:2px solid var(--ink-muted);border-radius:25px;background:var(--surface)}.phone-speaker{width:50px;height:5px;background:var(--line);border-radius:9px;margin:0 auto 16px}.phone-eyebrow{font:7px var(--mono);color:var(--accent-text);text-align:center;letter-spacing:.08em}.phone-head{font:700 15px/1.1 var(--display);text-align:center;margin:9px 0}.phone-video{aspect-ratio:16/9;background:linear-gradient(135deg,#12382e,#16866b);display:grid;place-items:center;border-radius:6px;color:#fff}.phone-video span{width:28px;height:28px;border-radius:50%;background:#ffffff35;display:grid;place-items:center}.phone-button{margin-top:9px;background:var(--accent-fill);color:#fff;text-align:center;padding:8px 3px;border-radius:4px;font:700 7px var(--mono)}.phone-lines{height:24px;margin-top:9px;background:repeating-linear-gradient(to bottom,var(--line) 0 2px,transparent 2px 7px)}.phone-notes{display:grid;gap:11px;font-size:11px;color:var(--ink-soft)}.phone-notes span:before{content:'✓';color:var(--accent-text);font-weight:800;margin-right:7px}.opp-icon{width:54px;height:54px;margin:0 auto 20px;display:grid;place-items:center;border:1px solid var(--accent-fill);background:var(--accent-soft);color:var(--accent-text);border-radius:16px;font:700 24px var(--display)}.opp-actions{margin-top:30px;display:flex;flex-direction:column;align-items:center;gap:15px}.cta-btn.small{margin:0;padding:16px 22px;font-size:12px;cursor:pointer}.entry-pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}.entry-pills span{font:10px var(--mono);padding:8px 11px;border:1px solid var(--line);border-radius:100px;color:var(--ink-muted)}.preview-modal{display:none;position:fixed;inset:0;z-index:200;background:#050506d9;backdrop-filter:blur(10px);padding:3vh 3vw;align-items:center;justify-content:center}.preview-modal.open{display:flex}.preview-card{position:relative;width:min(1250px,96vw);height:min(92vh,1000px);background:var(--surface);border:1px solid var(--line);border-radius:15px;overflow:hidden}.modal-close{position:absolute;right:12px;top:10px;z-index:4;width:35px;height:35px;border-radius:8px;background:var(--surface);border:1px solid var(--line);color:var(--ink);font-size:22px;cursor:pointer}.modal-tabs{height:58px;display:flex;gap:8px;align-items:center;padding:8px 58px 8px 14px;border-bottom:1px solid var(--line)}.modal-tabs button,.email-selector button{padding:10px 14px;border:1px solid var(--line);border-radius:100px;background:var(--surface-2);color:var(--ink-soft);font:10px var(--mono);cursor:pointer}.modal-tabs button.active,.email-selector button.active{background:var(--accent-fill);border-color:var(--accent-fill);color:#fff}.modal-frame{width:100%;height:calc(100% - 58px);border:0;background:#fff}.email-content{height:calc(100% - 58px);overflow:auto;padding:clamp(18px,4vw,42px)}.email-selector{display:flex;gap:8px;justify-content:center;margin-bottom:22px}.email-card{max-width:720px;margin:0 auto;padding:clamp(20px,3vw,36px);border:1px solid var(--line);border-radius:14px;background:var(--surface-2)}.email-kicker{font:10px var(--mono);color:var(--accent-text);letter-spacing:.12em}.email-subject{margin:12px 0 18px;font:600 13px var(--mono);color:var(--ink)}.email-card p{max-width:none;margin:12px 0;font-size:14px}.xwindow{height:calc(100% - 58px);overflow:auto;background:#f5f8fa;color:#0f1419;padding:clamp(12px,3vw,30px)}.tweet{max-width:650px;margin:0 auto;background:#fff;border:1px solid #e2e8ea;border-radius:16px;padding:22px;font:15px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;white-space:pre-line}.tweethead{display:flex;gap:11px;align-items:center;margin-bottom:15px}.avatar{width:46px;height:46px;flex:none;border-radius:50%;background:#dce9e3;color:#16866b;display:grid;place-items:center;font-weight:800}.verified{display:inline-grid;place-items:center;background:#1d9bf0;color:#fff;width:16px;height:16px;border-radius:50%;font-size:10px}.handle{font-size:13px;font-weight:400;color:#64727b}.yt{display:flex;gap:7px;align-items:center;color:#e62117;font-weight:700;margin:0 0 15px;font-size:10px;letter-spacing:.08em}.yt svg{width:23px;height:17px}.tweetactions{display:flex;justify-content:space-between;color:#657580;font-size:12px;margin-top:20px}.big-picture-list{max-width:44ch;text-align:left;margin:25px auto 0}.slide-closing .slide-inner{display:flex;flex-direction:column;align-items:center}.slide-closing{text-align:center}.slide-closing h2{max-width:18ch}.slide-closing p{max-width:54ch}.list-terminal.is-solution li{font-family:var(--sans);font-size:15px;padding:12px 0}.list-terminal.is-problem li{font-family:var(--sans);font-size:14px;line-height:1.5}
-@media(max-width:650px){.journey{grid-template-columns:1fr}.journey>i{transform:rotate(90deg);text-align:center}.phone-stage{flex-direction:column}.phone{width:175px}.preview-modal{padding:7px}.preview-card{width:100%;height:94svh}.modal-tabs{gap:5px;padding-left:8px}.modal-tabs button{padding:9px 8px;font-size:9px}.tweet{padding:15px;font-size:14px}.value-ladder>div{grid-template-columns:70px 1fr}.recovery-strip{align-items:flex-start;flex-direction:column}}
+
+  /* modals */
+  .flow-step.is-btn{cursor:pointer;font-family:var(--mono);transition:border-color .2s var(--ease),transform .2s var(--ease)}
+  .flow-step.is-btn:hover{border-color:var(--accent-fill);transform:translateY(-2px)}
+  .flow-step small{display:block;margin-top:6px;font-size:10.5px;letter-spacing:.08em;color:var(--accent-text);text-transform:uppercase}
+  .modal{position:fixed;inset:0;z-index:200;background:rgba(5,5,6,.66);display:none;align-items:center;justify-content:center;padding:clamp(10px,3vw,36px)}
+  .modal.open{display:flex}
+  .modal-box{width:100%;max-width:980px;height:min(88vh,860px);background:var(--surface);border:1px solid var(--line);border-radius:16px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 40px 90px -20px rgba(0,0,0,.6)}
+  .modal-bar{display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--surface-2);flex-wrap:wrap}
+  .modal-title{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted);margin-right:auto;padding-left:4px}
+  .tab{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);border-radius:100px;padding:8px 14px;cursor:pointer}
+  .tab.active{background:var(--accent-fill);color:var(--on-accent);border-color:var(--accent-fill)}
+  .modal-close{font-family:var(--mono);font-size:16px;line-height:1;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;width:34px;height:34px;cursor:pointer}
+  .modal-body{flex:1;min-height:0;position:relative;overflow:auto}
+  .pane{display:none;height:100%}.pane.active{display:block}
+  .pane iframe{width:100%;height:100%;border:0;display:block;background:#fff}
+  .email{max-width:680px;margin:0 auto;padding:28px 24px 40px}
+  .email-meta{font-family:var(--mono);font-size:12px;color:var(--ink-muted);line-height:1.8;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:22px}
+  .email-meta b{color:var(--ink);font-weight:500}
+  .email p{max-width:none;font-size:15.5px;color:var(--ink-soft);margin-top:14px}
+  .email p.q{color:var(--ink);font-weight:500;border-left:3px solid var(--accent-fill);padding-left:14px}
+  .email a{color:var(--accent-text);word-break:break-all}
+  .xpost{max-width:560px;margin:0 auto;padding:30px 20px}
+  .x-tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--ink-muted);text-transform:uppercase;margin-bottom:14px}
+  .x-card{border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:18px 18px 14px}
+  .x-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .x-head img.av{width:44px;height:44px;border-radius:50%;object-fit:cover}
+  .x-name{font-weight:700;color:var(--ink);font-size:15px;line-height:1.2}
+  .x-handle{color:var(--ink-muted);font-size:14px}
+  .x-head .xi{margin-left:auto;width:20px;height:20px;object-fit:contain;opacity:.8}
+  .x-text{white-space:pre-line;color:var(--ink);font-size:16px;line-height:1.5;max-width:none;margin:0}
+  .x-foot{display:flex;gap:26px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-muted)}
 </style>
 </head>
-<body><div class="progress"><div class="progress-bar" id="progressBar"></div></div><div class="kbd-hint"><kbd id="navDown" style="cursor:pointer">↓</kbd><kbd id="navUp" style="cursor:pointer">↑</kbd> navigate</div><section class="slide slide-cover visible"><div class="slide-inner"><div class="cover-wordmark reveal"><img src="https://i.imgur.com/agW6rAh.png" alt="Marvin FBA logo" style="width:46px;height:46px;object-fit:contain;border-radius:10px"> MARVIN FBA</div><h1 class="reveal">Marvin FBA<br><em>Info Operation</em></h1><div class="cover-tag reveal">· OCTOBER 2026 ·</div><a class="open-ref" href="https://i.imgur.com/agW6rAh.png" target="_blank" rel="noopener">VIEW PROVIDED LOGO ↗</a></div><div class="slide-meta"><span>01</span><span class="dot"></span><span>18</span></div></section>
-<section class="slide slide-split"><div class="slide-inner"><div class="split-media reveal"><div class="shot"><div class="shot-frame"><img src="/assets/market-context/market-growth.png" alt="Online education market context"></div></div></div><div class="split-text reveal"><div class="kicker is-solution">THE ONLINE EDUCATION MARKET KEEPS EXPANDING</div><h2>Expertise is no longer what separates the winners</h2><p>More creators launch courses. More coaches enter the market. More money flows into education every year. But as the market matures, the winners aren't simply the ones with the best offer. They're the businesses with the systems that convert more visitors, recover more buyers, and increase customer value over time.</p></div></div><div class="slide-meta"><span>02</span><span class="dot"></span><span>18</span></div></section>
-<section class="slide slide-split flip"><div class="slide-inner"><div class="split-media reveal"><div class="shot"><div class="shot-frame"><img src="/assets/market-context/growth-leaks.png" alt="Where growth leaks across the customer journey"></div></div></div><div class="split-text reveal"><div class="kicker is-problem">WHERE GROWTH ACTUALLY LEAKS</div><h2>Growth isn't usually lost at the top of the funnel</h2><p>It's everything that happens after someone clicks. The slow funnels. Poor follow-up. Weak onboarding. Disconnected automations. Prospects who lose momentum before booking. Each one feels small. Together, they quietly become one of the largest costs in the business.</p></div></div><div class="slide-meta"><span>03</span><span class="dot"></span><span>18</span></div></section>
-<section class="slide slide-section"><div class="slide-inner"><div class="kicker is-solution reveal">IT ONLY TAKES 45 SECONDS</div><h2 class="reveal">Marvin, I went through your info setup (funnel) and a few things stood out.</h2><p class="reveal" style="margin:20px auto 0">Some are quietly costing you revenue. Others are opportunities that could increase your return without increasing your work.</p><div class="stat-row reveal"><div class="stat-chip"><b>4</b> observations</div><div class="stat-chip"><b>4</b> recommendations</div><div class="stat-chip"><b>3</b> opportunities</div></div></div><div class="slide-meta"><span>04</span><span class="dot"></span><span>18</span></div></section>
-<section class="slide slide-split "><div class="slide-inner"><div class="split-media reveal"><div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><img src="https://i.imgur.com/OKDzWAg.png" alt="Marvin FBA VSL screenshot" loading="lazy" style="width:100%;height:100%;object-fit:contain"></div></div><a class="open-ref" href="https://i.imgur.com/OKDzWAg.png" target="_blank" rel="noopener">OPEN ORIGINAL SCREENSHOT ↗</a></div><div class="split-text reveal"><div class="kicker is-problem">OBSERVATION 01</div><h2>The VSL is mostly proof based.</h2><p>The VSL is mostly proof based. I ran it on SI and it showed that over 4 minutes of the 7 is spend on proving results. But proof alone isn't enough to overcome deep skepticism. Without a logical framework explaining your own method and why this one succeeds, the proof feels like an anomaly rather than a repeatable system.</p><ul class="list-terminal is-problem"><li>Skepticism remains unaddressed</li><li>Lack of logical framework</li><li>Proof feels like an exception</li></ul></div></div><div class="slide-meta"><span>05</span><span class="dot"></span><span>18</span></div></section>
-<section class="slide slide-split flip"><div class="slide-inner"><div class="split-media reveal"><div class="visual-panel reveal"><div class="visual-label">VSL PRESENTATION ARCHITECTURE</div><div class="storyline"><div class="story-card"><small>01 · CONTEXT</small><b>Surface the skepticism</b><span>Clarify what prospects may doubt</span></div><div class="story-connector">↓</div><div class="story-card featured"><small>02 · METHODOLOGY</small><b>Explain how the model works</b><span>Established brands → suppliers → approval → product economics</span></div><div class="story-connector">↓</div><div class="story-card"><small>03 · EVIDENCE</small><b>Place proof in context</b><span>Results support the explanation instead of replacing it</span></div></div></div></div><div class="split-text reveal"><div class="kicker is-solution">RECOMMENDATION 01</div><h2>Balance social proof with a presentation and explanation of the methodology.</h2><p>Introduce an "Old Way vs. New Way" narrative to logically dismantle objections before presenting the results.</p><ul class="list-terminal is-solution"><li>Logical dismantling of objections</li><li>Stronger framework for belief</li><li>More persuasive argumentation</li></ul></div></div><div class="slide-meta"><span>06</span><span class="dot"></span><span>18</span></div></section>
-<section class="slide slide-split "><div class="slide-inner"><div class="split-media reveal"><div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><img src="https://i.imgur.com/rNgyACq.png" alt="Marvin FBA checkout screenshot" loading="lazy" style="width:100%;height:100%;object-fit:contain"></div></div><a class="open-ref" href="https://i.imgur.com/rNgyACq.png" target="_blank" rel="noopener">OPEN ORIGINAL SCREENSHOT ↗</a></div><div class="split-text reveal"><div class="kicker is-problem">OBSERVATION 02</div><h2>The path goes straight to checkout.</h2><p>Sending traffic straight to checkout captures zero data from non-buyers. Anyone who isn't ready to purchase immediately disappears from the ecosystem, leaving existing demand on the table.</p><ul class="list-terminal is-problem"><li>No lead capture before purchase</li><li>Drop-offs can't be re-engaged</li><li>Missed opportunity to build an audience</li></ul></div></div><div class="slide-meta"><span>07</span><span class="dot"></span><span>18</span></div></section>
-<section class="slide slide-split flip"><div class="slide-inner"><div class="split-media reveal"><div class="visual-panel reveal"><div class="visual-label">CAPTURE BEFORE CHECKOUT</div><div class="journey"><div class="journey-step"><b>01</b><strong>Traffic</strong><span>Interested visitor</span></div><i>→</i><div class="journey-step highlighted"><b>02</b><strong>Lead capture</strong><span>Name + email</span></div><i>→</i><div class="journey-step"><b>03</b><strong>Checkout</strong><span>Ready to buy</span></div></div><div class="recovery-strip"><span>Not ready yet?</span><b>Email follow-up + retargeting</b><span>Continue the conversation</span></div></div></div><div class="split-text reveal"><div class="kicker is-solution">RECOMMENDATION 02</div><h2>Implement a low-friction lead capture or application step before the checkout.</h2><p>This secures contact information and allows you to nurture prospects who need more time to decide.</p><ul class="list-terminal is-solution"><li>Build a retargetable audience</li><li>Maintain momentum with non-buyers</li><li>Higher overall funnel conversion</li></ul></div></div><div class="slide-meta"><span>08</span><span class="dot"></span><span>18</span></div></section>
-<section class="slide slide-split "><div class="slide-inner"><div class="split-media reveal"><div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><img src="https://i.imgur.com/rI6FAMu.png" alt="Marvin FBA mentorship pricing screenshot" loading="lazy" style="width:100%;height:100%;object-fit:contain"></div></div><a class="open-ref" href="https://i.imgur.com/rI6FAMu.png" target="_blank" rel="noopener">OPEN ORIGINAL SCREENSHOT ↗</a></div><div class="split-text reveal"><div class="kicker is-problem">OBSERVATION 03</div><h2>The mentorship is priced too low for the level of access.</h2><p>Charging $2.5k for a full year of 1-1 mentorship is financially unsustainable and fails to capture the actual ROI you deliver. It treats a high-leverage service like a commodity.</p><ul class="list-terminal is-problem"><li>Unsustainable business model for 1-1 work</li><li>Fails to capture the true ROI delivered</li><li>Commoditizes a highly personalized service</li></ul></div></div><div class="slide-meta"><span>09</span><span class="dot"></span><span>18</span></div></section>
-<section class="slide slide-split flip"><div class="slide-inner"><div class="split-media reveal"><div class="visual-panel reveal"><div class="visual-label">MENTORSHIP OFFER ARCHITECTURE</div><div class="value-ladder"><div><small>CORE</small><b>Repeatable system</b><span>Curriculum, process, resources</span></div><div><small>GROUP</small><b>Group mentorship</b><span>Coaching, reviews, accountability</span></div><div><small>PREMIUM</small><b>Private 1:1 access</b><span>Limited access with clear boundaries</span></div></div><p class="visual-foot">Separate tiers by access and delivery — not just by duration.</p></div></div><div class="split-text reveal"><div class="kicker is-solution">RECOMMENDATION 03</div><h2>Restructure the pricing model to reflect the actual business or life ROI the client receives.</h2><p>Build a premium pricing structure that makes the business highly profitable and scalable.</p><ul class="list-terminal is-solution"><li>Sustainable and highly profitable model</li><li>Pricing based on delivered ROI, not just time</li><li>Freedom to focus on fewer, higher-impact clients</li></ul></div></div><div class="slide-meta"><span>10</span><span class="dot"></span><span>18</span></div></section>
-<section class="slide slide-split "><div class="slide-inner"><div class="split-media reveal"><div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><img src="https://i.imgur.com/HFnC8oQ.jpeg" alt="Marvin FBA mobile page screenshot" loading="lazy" style="width:100%;height:100%;object-fit:contain"></div></div><a class="open-ref" href="https://i.imgur.com/HFnC8oQ.jpeg" target="_blank" rel="noopener">OPEN ORIGINAL SCREENSHOT ↗</a></div><div class="split-text reveal"><div class="kicker is-problem">OBSERVATION 04</div><h2>The mobile page has a large empty area above the content.</h2><p>The mobile page has a large empty area above the content, while the video is cut off by the bottom of the first screen. Neither issue is necessarily a major conversion blocker on its own, but together they make the opening experience feel unfinished.</p><ul class="list-terminal is-problem"><li>The page doesn't use limited mobile screen space efficiently.</li><li>The main video is less visible at the moment it matters most.</li><li>A few small layout adjustments could make the experience feel much cleaner.</li></ul></div></div><div class="slide-meta"><span>11</span><span class="dot"></span><span>18</span></div></section>
-<section class="slide slide-split flip"><div class="slide-inner"><div class="split-media reveal"><div class="visual-panel reveal"><div class="visual-label">MOBILE FIRST SCREEN</div><div class="phone-stage"><div class="phone"><div class="phone-speaker"></div><div class="phone-eyebrow">THE WHOLESALE UNDERGROUND</div><div class="phone-head">Understand the Amazon wholesale model</div><div class="phone-video"><span>▶</span></div><div class="phone-button">WATCH THE TRAINING</div><div class="phone-lines"></div></div><div class="phone-notes"><span>Reduce excess top spacing</span><span>Show more of the video above the fold</span><span>Test real mobile sizes</span></div></div></div></div><div class="split-text reveal"><div class="kicker is-solution">RECOMMENDATION 04</div><h2>Polish the mobile experience.</h2><p>Make a few focused adjustments to ensure the page looks intentional and the main content is easy to access.</p><ul class="list-terminal is-solution"><li>Fix the excessive top spacing.</li><li>Reposition or resize the video so more of it is visible above the fold.</li><li>Verify the layout on real mobile screen sizes.</li></ul></div></div><div class="slide-meta"><span>12</span><span class="dot"></span><span>18</span></div></section>
-<section class="slide slide-section"><div class="slide-inner"><h2 class="reveal">The Next Stage of Growth</h2><p class="reveal" style="margin:20px auto 0">The recommendations you've seen improve performance today. The opportunities below are about building a stronger, more scalable business for tomorrow.</p></div><div class="slide-meta"><span>13</span><span class="dot"></span><span>18</span></div></section>
-<section class="slide slide-section"><div class="slide-inner"><div class="kicker is-solution reveal">NEXT-LEVEL OPPORTUNITY 01</div><h2 class="reveal">More Doors to Business</h2><p class="reveal" style="margin:20px auto 0">Give the same Amazon wholesale offer more than one way to earn attention and convert interest — with a webinar for education and a low-ticket resource for a smaller first step.</p><div class="opp-actions reveal"><button class="cta-btn preview-trigger" data-modal="entryModal">Preview 2 Examples →</button></div></div><div class="slide-meta"><span>14</span><span class="dot"></span><span>18</span></div></section>
-<section class="slide slide-section"><div class="slide-inner"><div class="kicker is-solution reveal">NEXT-LEVEL OPPORTUNITY 02</div><h2 class="reveal">Expand the content engine beyond the sales page.</h2><p class="reveal" style="margin:20px auto 0">Turn the core ideas behind the Amazon wholesale model into useful short-form posts that educate people before they reach the offer — and repurpose longer YouTube content into native X posts.</p><div class="opp-actions reveal"><button class="cta-btn preview-trigger" data-modal="xPostModal">See Post Example</button></div></div><div class="slide-meta"><span>15</span><span class="dot"></span><span>18</span></div></section>
-<section class="slide slide-section"><div class="slide-inner"><div class="kicker is-solution reveal">NEXT-LEVEL OPPORTUNITY 03</div><h2 class="reveal">Build an email layer that keeps prospects moving.</h2><p class="reveal" style="margin:20px auto 0">Use a short, useful email sequence to explain the wholesale model, help prospects understand supplier outreach, and guide them toward the next relevant step instead of relying on a single visit.</p><div class="opp-actions reveal"><button class="cta-btn preview-trigger" data-modal="emailModal">Preview the 3-email sequence →</button></div></div><div class="slide-meta"><span>16</span><span class="dot"></span><span>18</span></div></section>
-<section class="slide slide-section"><div class="slide-inner"><div class="kicker is-solution reveal">THE BIG PICTURE</div><h2 class="reveal">What I See Is Leverage.</h2><p class="reveal" style="margin:20px auto 0">None of these recommendations are about adding complexity. We want to create leverage.</p><ul class="list-terminal is-solution"><li>Leverage that turns more visitors into buyers</li><li>Leverage that turns buyers into long-term customers</li><li>Leverage that makes future growth easier than past growth</li></ul><p class="reveal" style="margin:20px auto 0">That's the opportunity I believe is sitting in front of you.</p></div><div class="slide-meta"><span>17</span><span class="dot"></span><span>18</span></div></section>
-<section class="slide slide-closing"><div class="slide-inner"><div class="kicker is-solution reveal">NEXT STEPS</div><h2 class="reveal">If this resonates, let's talk.</h2><p class="reveal" style="margin:20px auto 0">I already have a few ideas on how I'd approach this. If you'd like to explore them together, click the button below and we'll take it from there.</p><a class="cta-btn reveal" href="https://www.instagram.com/direct/t/115335963192552/" target="_blank" rel="noopener">Message me on Instagram →</a></div><div class="slide-meta"><span>18</span><span class="dot"></span><span>18</span></div></section><div class="modal" id="entryModal"><div class="modal-card"><button class="modal-close" data-close>×</button><div class="modal-tabs"><button class="active" data-frame="webinarFrame">WEBINAR</button><button data-frame="lowFrame">LOW TICKET</button></div><iframe class="modal-frame" id="webinarFrame" src="/decks/marvin-fba/entry-points/webinar/index.html" title="Webinar page"></iframe><iframe class="modal-frame" id="lowFrame" src="/decks/marvin-fba/entry-points/low-ticket/index.html" title="Low-ticket page" style="display:none"></iframe></div></div>
-<div class="modal" id="xPostModal"><div class="modal-card" style="width:min(760px,96vw);height:min(88vh,1000px);overflow:auto;background:#f7f9f9"><button class="modal-close" data-close>×</button><div style="max-width:600px;margin:0 auto;padding:28px 14px 34px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:#0f1419">
-  <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#16866B;font-weight:800;margin:0 0 14px">X POST EXAMPLE · DRAFT</div>
-  <article style="background:#fff;border:1px solid #eff3f4;border-radius:16px;padding:20px 20px 14px">
-    <div style="display:flex;gap:12px;align-items:flex-start">
-      <img src="https://i.imgur.com/agW6rAh.png" alt="Marvin FBA" style="width:48px;height:48px;object-fit:cover;border-radius:50%;flex:none">
-      <div style="min-width:0;flex:1">
-        <div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;font-size:15px;font-weight:800;color:#0f1419">Marvin FBA <svg aria-label="Verified account" viewBox="0 0 22 22" style="width:17px;height:17px;flex:none" role="img"><path fill="#1D9BF0" d="M20.396 11a3.2 3.2 0 0 0-.9-2.22 3.2 3.2 0 0 0-.7-3.1 3.2 3.2 0 0 0-3.1-.7 3.2 3.2 0 0 0-2.22-.9 3.2 3.2 0 0 0-2.22.9 3.2 3.2 0 0 0-3.1.7 3.2 3.2 0 0 0-.7 3.1 3.2 3.2 0 0 0 .9 3.1 3.2 3.2 0 0 0 .7 3.1 3.2 3.2 0 0 0 3.1.7 3.2 3.2 0 0 0 2.22.9 3.2 3.2 0 0 0 2.22-.9 3.2 3.2 0 0 0 3.1-.7 3.2 3.2 0 0 0 .7-3.1 3.2 3.2 0 0 0 .9-2.22Z"/><path fill="#fff" d="m9.35 14.55-3.1-3.1 1.4-1.4 1.7 1.7 4.8-4.8 1.4 1.4z"/></svg><span style="font-size:14px;font-weight:400;color:#536471">@marv.fba · Draft</span><span style="margin-left:auto;font-size:19px;line-height:1;color:#536471">𝕏</span></div>
-        <div style="font-size:15px;line-height:1.55;margin-top:12px;white-space:pre-line">If I were starting Amazon wholesale today, I wouldn't begin by hunting for a “winning product.”
+<body>
 
-I'd start with the supplier.
+<div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+<div class="kbd-hint"><kbd id="navDown" style="cursor:pointer">↓</kbd><kbd id="navUp" style="cursor:pointer">↑</kbd> navigate</div>
 
-Because a product can look great in a spreadsheet and still be a dead end if you can't get a legitimate source for it.
+<!-- 01 — COVER -->
+<section class="slide slide-cover visible">
+  <div class="slide-inner">
+    <img src="https://i.ibb.co/TqWFz39c/395198980-351973933945065-2934463836193746549-n.jpg" alt="Marvin FBA logo" class="cover-logo reveal">
+    <h1 class="reveal">Marvin FBA<br><em>Info Operation</em></h1>
+    <div class="cover-tag reveal">· OCTOBER 2026 ·</div>
+  </div>
+  <div class="slide-meta"><span>01</span><span class="dot"></span><span>18</span></div>
+</section>
 
-My order would be:
-
-1. Understand what a supplier actually requires to open an account.
-2. Get the business basics and documents in order before applying.
-3. Learn how to approach brands and distributors like a real business — not someone asking for a shortcut.
-4. Research products only after I understand the supply side.
-5. Run the numbers before I commit money to inventory.
-
-Most beginners jump straight to product research because it's the exciting part.
-
-But access to the right products comes first. Then you can make a sensible buying decision.
-
-Wholesale isn't “easy money.” It's a process — and the order you do things in matters.</div>
-        <div style="display:flex;justify-content:space-between;gap:8px;max-width:440px;margin-top:20px;color:#536471;font-size:12px">
-          <span style="display:flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5 8 8 0 0 1-3.5-.8L4 20l1.3-4A7.5 7.5 0 1 1 20 11.5Z"/></svg></span>
-          <span style="display:flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></svg></span>
-          <span style="display:flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg></span>
-          <span style="display:flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6"><path d="M4 4v16M4 5h13l-2 4 2 4H4"/></svg></span>
-        </div>
-      </div>
+<!-- 02 — MARKET CONTEXT -->
+<section class="slide slide-split">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot"><div class="shot-frame"><img src="/assets/market-context/market-growth.png" alt="Global online education market growth statistics"></div></div>
     </div>
-  </article>
-</div></div></div><div class="modal" id="emailModal"><div class="modal-card"><button class="modal-close" data-close>×</button><div class="modal-tabs email-tabs"><button class="active" data-email="0">EMAIL 01</button><button data-email="1">EMAIL 02</button><button data-email="2">EMAIL 03</button></div><div class="email-wrap">
-<div class="email-card" data-email-card="0"><div class="eyebrow">EMAIL 01</div><h3>Subject: Your call is booked, {{first_name}}</h3><p>{{first_name}},</p><p>You booked your call. Good.</p><p>Quick frame on what to expect: the call is about one thing — <strong>whether the Amazon wholesale model and The Wholesale Underground are the right fit for you.</strong> We're not going to spend an hour trying to convince you that Amazon exists. We'll talk through your situation, what you're trying to build, and whether the next step makes sense.</p><p>Between now and the call, I'll send a few short emails. These aren't reminders; they're here to answer the questions people usually have about supplier approval, product selection, and whether wholesale is a realistic fit alongside their current commitments.</p><p>If you only review one thing before we talk, start with the overview here: <strong>[WHOLESALE UNDERGROUND / ROADMAP LINK]</strong></p><p>It'll give you the context for the model so we can focus on your situation rather than starting from zero.</p><p>Show up on time, somewhere quiet, with enough time to talk. If you need to reschedule, use the link in your calendar invite.</p><p>Talk soon,<br>Marvin</p><p><strong>P.S.</strong> If you haven't looked at the overview yet, take a few minutes before the call: <strong>[ROADMAP LINK]</strong></p></div>
-<div class="email-card" data-email-card="1" hidden style="display:none"><div class="eyebrow">EMAIL 02</div><h3>Subject: Is Amazon wholesale too saturated?</h3><p>{{first_name}},</p><p>Every so often, someone declares Amazon dead, wholesale too saturated, or says there's no room left for new sellers.</p><p>That headline skips the more useful question: <strong>what kind of business model are you actually looking at, and how are you making decisions?</strong></p><p>Amazon wholesale isn't the same as inventing a product and hoping people want it. The model centers on established brands, legitimate supplier relationships, account requirements, and evaluating products where demand already exists.</p><p>That doesn't make it easy or automatic. Suppliers choose who they approve, products have restrictions, and the numbers only work when you account for the real costs — Amazon fees, shipping, prep, storage, and purchase price.</p><p>But “the market is saturated” isn't a substitute for learning how to assess those factors. The useful work is building a repeatable process: research carefully, understand supplier requirements, and check the economics before committing capital.</p><p>Other paths can require a different mix of time, capital, audience-building, or risk. The right choice depends on your situation — not on a blanket claim that one model is dead.</p><p>Before our call, review the breakdown here: <strong>[WHOLESALE UNDERGROUND / ROADMAP LINK]</strong></p><p>We'll talk through what applies to your situation.</p><p>— Marvin</p></div>
-<div class="email-card" data-email-card="2" hidden style="display:none"><div class="eyebrow">EMAIL 03</div><h3>Subject: [MEMBER NAME] — [VERIFIED OUTCOME OR MILESTONE]</h3><p>{{first_name}},</p><p>I want to tell you about [MEMBER NAME].</p><p>[MEMBER NAME] started from [RELEVANT STARTING POINT — for example, full-time job, beginner, or previous attempt that didn't work]. Before joining, [BRIEF, VERIFIED CONTEXT ABOUT WHAT THEY HAD TRIED AND WHAT WAS HOLDING THEM BACK].</p><p>After working through the process, [DESCRIBE THE VERIFIED MILESTONE OR RESULT, INCLUDING A REALISTIC TIMEFRAME]. The important part wasn't a shortcut or a guaranteed outcome. It was the specific change they made: [EXPLAIN THE PROCESS, DECISION, OR SUPPORT THAT HELPED].</p><p>In their own words: “[INSERT AN APPROVED, VERBATIM MEMBER QUOTE].”</p><p>I’m sharing this story because it gives a concrete picture of the work involved — not because one person's result guarantees what will happen for anyone else.</p><p>If you see parts of your situation in theirs, we'll talk through what a sensible path could look like for you on our call.</p><p>Before we speak, here's the longer breakdown: <strong>[CASE STUDY / ROADMAP LINK]</strong></p><p>— Marvin</p></div></div></div></div><script>const slides=document.querySelectorAll('.slide'),progressBar=document.getElementById('progressBar');const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.3});slides.forEach(s=>io.observe(s));function updateProgress(){const d=document.documentElement.scrollHeight-window.innerHeight;progressBar.style.width=(d>0?(window.scrollY/d)*100:0)+'%'}window.addEventListener('scroll',updateProgress,{passive:true});updateProgress();function currentIndex(){let i=0,m=Infinity;slides.forEach((s,n)=>{const d=Math.abs(s.getBoundingClientRect().top);if(d<m){m=d;i=n}});return i}function goNext(){slides[Math.min(currentIndex()+1,slides.length-1)].scrollIntoView({behavior:'smooth'})}function goPrev(){slides[Math.max(currentIndex()-1,0)].scrollIntoView({behavior:'smooth'})}document.addEventListener('keydown',e=>{if(e.key==='ArrowDown'||e.key==='PageDown'){e.preventDefault();goNext()}if(e.key==='ArrowUp'||e.key==='PageUp'){e.preventDefault();goPrev()}});document.getElementById('navDown')?.addEventListener('click',goNext);document.getElementById('navUp')?.addEventListener('click',goPrev);document.querySelectorAll('.preview-trigger').forEach(b=>b.addEventListener('click',()=>document.getElementById(b.dataset.modal)?.classList.add('open')));document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>b.closest('.modal').classList.remove('open')));document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')}));document.querySelectorAll('#entryModal .modal-tabs button').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('#entryModal .modal-tabs button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('#entryModal .modal-frame').forEach(f=>f.style.display='none');document.getElementById(btn.dataset.frame).style.display='block'}));document.querySelectorAll('#emailModal .email-tabs button').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('#emailModal .email-tabs button').forEach(b=>b.classList.toggle('active',b===btn));document.querySelectorAll('#emailModal [data-email-card]').forEach(card=>{card.hidden=card.dataset.emailCard!==btn.dataset.email;card.style.display=card.hidden?'none':'block'})}));</script></body></html>
+    <div class="split-text reveal">
+      <div class="kicker is-solution">THE ONLINE EDUCATION MARKET KEEPS EXPANDING</div>
+      <h2>Expertise is no longer what separates the winners</h2>
+      <p>More creators launch courses. More coaches enter the market. More money flows into education every year. But as the market matures, the winners aren't simply the ones with the best offer. They're the businesses with the systems that convert more visitors, recover more buyers, and increase customer value over time.</p>
+    </div>
+  </div>
+  <div class="slide-meta"><span>02</span><span class="dot"></span><span>18</span></div>
+</section>
+
+<!-- 03 — WHERE GROWTH LEAKS -->
+<section class="slide slide-split flip">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot"><div class="shot-frame"><img src="/assets/market-context/growth-leaks.png" alt="Diagram showing where growth actually leaks: slow funnels, poor follow-up, weak onboarding, disconnected automations, lost momentum before booking"></div></div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-problem">WHERE GROWTH ACTUALLY LEAKS</div>
+      <h2>Growth isn't usually lost at the top of the funnel</h2>
+      <p>It's everything that happens after someone clicks. The slow funnels. Poor follow-up. Weak onboarding. Disconnected automations. Prospects who lose momentum before booking. Each one feels small. Together, they quietly become one of the largest costs in the business.</p>
+    </div>
+  </div>
+  <div class="slide-meta"><span>03</span><span class="dot"></span><span>18</span></div>
+</section>
+
+<!-- 04 — INTRO -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <div class="kicker is-solution reveal">IT ONLY TAKES 45 SECONDS</div>
+    <h2 class="reveal">Marvin, I went through your info setup (funnel) and a few things stood out.</h2>
+    <p class="reveal" style="margin:20px auto 0">Some are quietly costing you revenue. Others are opportunities that could increase your return without increasing your work.</p>
+    <div class="stat-row reveal">
+      <div class="stat-chip"><b>4</b> facts found</div>
+      <div class="stat-chip"><b>4</b> fixes proposed</div>
+      <div class="stat-chip"><b>3</b> new opportunities ahead</div>
+    </div>
+  </div>
+  <div class="slide-meta"><span>04</span><span class="dot"></span><span>18</span></div>
+</section>
+
+<!-- 05 — OBSERVATION 01 -->
+<section class="slide slide-split">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><img src="https://i.ibb.co/bgdhpcZJ/Opera-Instant-neo-2026-10-10-105450-chat-qwen-ai.png" alt="VSL breakdown showing most of its runtime spent on proof"></div></div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-problem">OBSERVATION 01</div>
+      <h2>Your VSL proves the results, but never explains the method.</h2>
+      <p>In my review, over 4 of the VSL's 7 minutes go to proving results. But proof alone isn't enough to overcome deep skepticism. Without a logical framework explaining your method and why it works, the proof feels like an anomaly rather than a repeatable system.</p>
+      <ul class="list-terminal is-problem"><li>Skepticism remains unaddressed</li><li>Lack of logical framework</li><li>Proof feels like an exception</li></ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>05</span><span class="dot"></span><span>18</span></div>
+</section>
+
+<!-- 06 — RECOMMENDATION 01 (flow diagram) -->
+<section class="slide slide-split flip">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="flow"><div class="flow-step"><b>Old Way</b>Why it fails</div><div class="flow-arrow">→</div><div class="flow-step"><b>New Way</b>Your method</div><div class="flow-arrow">→</div><div class="flow-step"><b>Proof</b>Now it makes sense</div></div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-solution">RECOMMENDATION 01</div>
+      <h2>Let the method carry as much weight as the proof.</h2>
+      <p>Balance social proof with a clear presentation of your methodology. Introduce an &ldquo;Old Way vs. New Way&rdquo; narrative to logically dismantle objections before presenting the results.</p>
+      <ul class="list-terminal is-solution"><li>Logical dismantling of objections</li><li>Stronger framework for belief</li><li>More persuasive argumentation</li></ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>06</span><span class="dot"></span><span>18</span></div>
+</section>
+
+<!-- 07 — OBSERVATION 02 -->
+<section class="slide slide-split">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><img src="https://i.ibb.co/kFCStJv/Opera-Instant-neo-2026-10-10-105509-docs-google-com.png" alt="Checkout page that visitors land on with no lead capture step before it"></div></div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-problem">OBSERVATION 02</div>
+      <h2>Traffic goes straight to checkout, and non-buyers disappear.</h2>
+      <p>Sending traffic straight to checkout captures zero data from non-buyers. Anyone who isn't ready to purchase immediately leaves the ecosystem, and existing demand is left on the table.</p>
+      <ul class="list-terminal is-problem"><li>No lead capture before purchase</li><li>Drop-offs can't be re-engaged</li><li>Missed opportunity to build an audience</li></ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>07</span><span class="dot"></span><span>18</span></div>
+</section>
+
+<!-- 08 — RECOMMENDATION 02 (flow diagram) -->
+<section class="slide slide-split flip">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="flow"><div class="flow-step"><b>Traffic</b>Ads &amp; organic</div><div class="flow-arrow">→</div><div class="flow-step"><b>Lead Capture</b>Form or application</div><div class="flow-arrow">→</div><div class="flow-step"><b>Checkout</b>Ready buyers + nurture the rest</div></div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-solution">RECOMMENDATION 02</div>
+      <h2>Capture the lead before the checkout.</h2>
+      <p>Implement a low-friction lead capture or application step before the checkout. This secures contact information and lets you nurture prospects who need more time to decide.</p>
+      <ul class="list-terminal is-solution"><li>Build a retargetable audience</li><li>Maintain momentum with non-buyers</li><li>Higher overall funnel conversion</li></ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>08</span><span class="dot"></span><span>18</span></div>
+</section>
+
+<!-- 09 — OBSERVATION 03 -->
+<section class="slide slide-split">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><img src="https://i.ibb.co/C5Df9b6Q/Opera-Instant-neo-2026-10-10-105619-docs-google-com.png" alt="Current mentorship pricing tiers for 3, 6 and 12 months"></div></div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-problem">OBSERVATION 03</div>
+      <h2>The pricing doesn't reflect the value you deliver.</h2>
+      <p>Charging $2.5k for a full year of 1-on-1 mentorship is financially unsustainable and fails to capture the actual ROI you deliver. It treats a high-leverage service like a commodity.</p>
+      <ul class="list-terminal is-problem"><li>Unsustainable business model for 1-on-1 work</li><li>Fails to capture the true ROI delivered</li><li>Commoditizes a highly personalized service</li></ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>09</span><span class="dot"></span><span>18</span></div>
+</section>
+
+<!-- 10 — RECOMMENDATION 03 (flow diagram) -->
+<section class="slide slide-split flip">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="flow"><div class="flow-step"><b>Time-Based</b>Cheap and capped</div><div class="flow-arrow">→</div><div class="flow-step"><b>ROI-Based</b>Premium pricing</div><div class="flow-arrow">→</div><div class="flow-step"><b>Fewer Clients</b>Higher impact</div></div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-solution">RECOMMENDATION 03</div>
+      <h2>Price for the ROI, not the hours.</h2>
+      <p>Restructure the pricing model to reflect the business or life ROI your clients actually receive. Build a premium pricing structure that makes the business highly profitable and scalable.</p>
+      <ul class="list-terminal is-solution"><li>Sustainable and highly profitable model</li><li>Pricing based on delivered ROI, not just time</li><li>Freedom to focus on fewer, higher-impact clients</li></ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>10</span><span class="dot"></span><span>18</span></div>
+</section>
+
+<!-- 11 — OBSERVATION 04 -->
+<section class="slide slide-split">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><img src="https://i.ibb.co/gMW24ZwP/Opera-Instant-neo-2026-10-10-105725-docs-google-com.png" alt="Mobile page with empty space above the content and the video cut off"></div></div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-problem">OBSERVATION 04</div>
+      <h2>The mobile experience feels unfinished.</h2>
+      <p>The mobile page has a large empty area above the content, while the video is cut off by the bottom of the first screen. Neither issue is necessarily a major conversion blocker on its own, but together they make the opening experience feel unfinished.</p>
+      <ul class="list-terminal is-problem"><li>The page doesn't use limited mobile screen space efficiently</li><li>The main video is less visible at the moment it matters most</li><li>A few small layout adjustments could make the experience feel much cleaner</li></ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>11</span><span class="dot"></span><span>18</span></div>
+</section>
+
+<!-- 12 — RECOMMENDATION 04 (flow diagram) -->
+<section class="slide slide-split flip">
+  <div class="slide-inner">
+    <div class="split-media reveal">
+      <div class="flow"><div class="flow-step"><b>Tighter Layout</b>Less empty space</div><div class="flow-arrow">→</div><div class="flow-step"><b>Video Above Fold</b>Visible right away</div><div class="flow-arrow">→</div><div class="flow-step"><b>Real-Device Test</b>Checked on mobile</div></div>
+    </div>
+    <div class="split-text reveal">
+      <div class="kicker is-solution">RECOMMENDATION 04</div>
+      <h2>Polish the mobile experience.</h2>
+      <p>Make a few focused adjustments to ensure the page looks intentional and the main content is easy to access.</p>
+      <ul class="list-terminal is-solution"><li>Fix the excessive top spacing</li><li>Reposition or resize the video so more of it is visible above the fold</li><li>Verify the layout on real mobile screen sizes</li></ul>
+    </div>
+  </div>
+  <div class="slide-meta"><span>12</span><span class="dot"></span><span>18</span></div>
+</section>
+
+<!-- 13 — TRANSITION -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <h2 class="reveal">The Next Stage of Growth</h2>
+    <p class="reveal" style="margin:20px auto 0">The recommendations you've seen improve performance today. The opportunities below are about building a stronger, more scalable business for tomorrow.</p>
+  </div>
+  <div class="slide-meta"><span>13</span><span class="dot"></span><span>18</span></div>
+</section>
+
+<!-- 14 — OPPORTUNITY 01 -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <div class="kicker is-solution reveal">NEXT-LEVEL OPPORTUNITY 01</div>
+    <h2 class="reveal">Create more ways to work with you.</h2>
+    <p class="reveal" style="margin:20px auto 0">Not every prospect is ready for the same level of commitment. Adding a webinar and a low-ticket entry point alongside your VSL gives different levels of awareness a place to enter, while naturally progressing toward the premium mentorship.</p>
+    <div class="flow reveal" style="margin-top:30px;align-items:stretch;max-width:680px">
+      <div class="flow-step"><div class="flow-lines"><b>Webinar</b><b>Low Ticket</b></div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><b>Mentorship</b>Premium offer</div>
+    </div>
+    <button type="button" class="cta-btn reveal" style="padding:18px 38px;font-size:13px" data-open="m-entry">Preview 2 Examples →</button>
+  </div>
+  <div class="slide-meta"><span>14</span><span class="dot"></span><span>18</span></div>
+</section>
+
+<!-- 15 — OPPORTUNITY 02 -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <div class="kicker is-solution reveal">NEXT-LEVEL OPPORTUNITY 02</div>
+    <h2 class="reveal">Expand the reach of your expertise.</h2>
+    <p class="reveal" style="margin:20px auto 0">The expertise is already there. The opportunity is to distribute it consistently across multiple channels, especially X and YouTube, so the same ideas can create discovery, trust, and inbound demand long before someone sees the offer.</p>
+    <div class="flow reveal" style="margin-top:30px;align-items:stretch;max-width:520px">
+      <div class="flow-step"><img src="/assets/icons/x.png" alt="X"><b>X</b></div>
+      <div class="flow-step"><img src="/assets/icons/youtube.png" alt="YouTube"><b>YouTube</b></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><b>Inbound Demand</b></div>
+    </div>
+    <button type="button" class="cta-btn reveal" style="padding:18px 38px;font-size:13px" data-open="m-x">See Post Example →</button>
+  </div>
+  <div class="slide-meta"><span>15</span><span class="dot"></span><span>18</span></div>
+</section>
+
+<!-- 16 — OPPORTUNITY 03 -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <div class="kicker is-solution reveal">NEXT-LEVEL OPPORTUNITY 03</div>
+    <h2 class="reveal">Engineer every step of the customer journey.</h2>
+    <p class="reveal" style="margin:20px auto 0">The buying experience shouldn't happen by chance. Intentionally designing each stage from first touch to conversion creates more momentum, stronger trust, and more deals.</p>
+    <div class="flow reveal" style="margin-top:30px;align-items:stretch;max-width:820px">
+      <button type="button" class="flow-step is-btn" data-open="m-email" data-tab="0"><b>Email 01</b>Booking confirmation<small>Preview ↗</small></button>
+      <div class="flow-arrow">→</div>
+      <button type="button" class="flow-step is-btn" data-open="m-email" data-tab="1"><b>Email 02</b>Belief shift<small>Preview ↗</small></button>
+      <div class="flow-arrow">→</div>
+      <button type="button" class="flow-step is-btn" data-open="m-email" data-tab="2"><b>Email 03</b>Customer story<small>Preview ↗</small></button>
+    </div>
+    <ul class="list-terminal is-solution reveal" style="text-align:left;max-width:44ch">
+      <li>Increased show rates</li>
+      <li>Better conversion efficiency</li>
+      <li>Higher customer satisfaction</li>
+    </ul>
+  </div>
+  <div class="slide-meta"><span>16</span><span class="dot"></span><span>18</span></div>
+</section>
+
+<!-- 17 — THE BIG PICTURE (slide fixo) -->
+<section class="slide slide-section">
+  <div class="slide-inner">
+    <div class="kicker is-solution reveal">THE BIG PICTURE</div>
+    <h2 class="reveal">What I See Is Leverage.</h2>
+    <p class="reveal" style="margin:22px auto 0">None of these recommendations are about adding complexity. We want to create leverage.</p>
+    <ul class="list-terminal is-solution reveal" style="text-align:left;max-width:44ch">
+      <li>Leverage that turns more visitors into buyers</li>
+      <li>Leverage that turns buyers into long-term customers</li>
+      <li>Leverage that makes future growth easier than past growth</li>
+    </ul>
+    <p class="reveal" style="margin:22px auto 0">That's the opportunity I believe is sitting in front of you.</p>
+  </div>
+  <div class="slide-meta"><span>17</span><span class="dot"></span><span>18</span></div>
+</section>
+
+<!-- 18 — CLOSING (slide fixo) -->
+<section class="slide slide-closing">
+  <div class="slide-inner">
+    <div class="kicker is-solution reveal">NEXT STEPS</div>
+    <h2 class="reveal">If this resonates, let's talk.</h2>
+    <p class="reveal" style="margin:20px auto 0">I already have a few ideas on how I'd approach this. If you'd like to explore them together, click the button below and we'll take it from there.</p>
+    <a href="https://www.instagram.com/direct/t/115335963192552/" target="_blank" rel="noopener" class="cta-btn reveal">Message me on Instagram →</a>
+  </div>
+  <div class="slide-meta"><span>18</span><span class="dot"></span><span>18</span></div>
+</section>
+
+<!-- MODALS -->
+<div class="modal" id="m-entry" role="dialog" aria-modal="true" aria-label="Entry point examples">
+  <div class="modal-box">
+    <div class="modal-bar"><span class="modal-title">Entry Point Examples</span>
+      <button type="button" class="tab active" data-tab="0">Webinar</button>
+      <button type="button" class="tab" data-tab="1">Low Ticket</button>
+      <button type="button" class="modal-close" aria-label="Close">×</button></div>
+    <div class="modal-body">
+      <div class="pane active"><iframe data-src="entry-points/webinar/index.html" title="Webinar page example"></iframe></div>
+      <div class="pane"><iframe data-src="entry-points/low-ticket/index.html" title="Low ticket page example"></iframe></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="m-x" role="dialog" aria-modal="true" aria-label="X post example">
+  <div class="modal-box" style="max-width:640px;height:auto;max-height:88vh">
+    <div class="modal-bar"><span class="modal-title">X Post Example · Draft</span><button type="button" class="modal-close" aria-label="Close">×</button></div>
+    <div class="modal-body"><div class="xpost">
+      <div class="x-tag">X post example · draft</div>
+      <div class="x-card">
+        <div class="x-head"><img class="av" src="https://i.ibb.co/TqWFz39c/395198980-351973933945065-2934463836193746549-n.jpg" alt="Marvin FBA"><div><div class="x-name">Marvin FBA</div><div class="x-handle">@marv.fba · 2h</div></div><img class="xi" src="/assets/icons/x.png" alt="X"></div>
+        <p class="x-text">I quit my job and built a full-time income selling brand-name products on Amazon.
+
+No product of my own. No technical skills. No huge investment.
+
+If I were starting over today, this is the loop I'd follow:
+
+1. Pick brands people already search for
+2. Get suppliers to approve your account
+3. Verify the product before you buy it
+4. Get ungated in the brands that matter
+5. Reorder what sells, drop what doesn't
+
+Boring? Yes. It's also why you don't need to invent anything.
+
+Some of my students built this around full-time jobs. Want the breakdown? Reply "wholesale" and I'll send it.</p>
+        <div class="x-foot"><span>💬 Reply</span><span>🔁 Repost</span><span>♡ Like</span><span>📊 Views</span></div>
+      </div>
+    </div></div>
+  </div>
+</div>
+
+<div class="modal" id="m-email" role="dialog" aria-modal="true" aria-label="Pre-call email sequence">
+  <div class="modal-box">
+    <div class="modal-bar"><span class="modal-title">Pre-Call Email Sequence</span>
+      <button type="button" class="tab active" data-tab="0">Email 01</button>
+      <button type="button" class="tab" data-tab="1">Email 02</button>
+      <button type="button" class="tab" data-tab="2">Email 03</button>
+      <button type="button" class="modal-close" aria-label="Close">×</button></div>
+    <div class="modal-body">
+      <div class="pane active"><div class="email"><div class="email-meta"><div>From: <b>Marvin</b></div><div>Subject: <b>Your call is booked, Sarah</b></div></div><p>Sarah,</p><p>You booked your call!</p><p>That alone puts you ahead of everyone who got curious, read a few things, and never took the next step.</p><p>The link is in your calendar, and you'll get it again 10 minutes before we start.</p><p>Quick frame on the call so you know what to expect.</p><p class="q">The call is mainly about one thing: is this the right move for you, or not? That's it.</p><p>I'm not going to pitch you for an hour. If it's not a fit, I'll tell you. I'd rather work with people who actually do the work than collect payments from people who quit.</p><p>Between now and the call, you'll get a couple of short emails from me. They're not reminders. They're real answers to the questions and fears most people have before starting with Amazon wholesale: whether it's too late, whether you need experience, and what it actually looks like when someone does it around a full-time job.</p><p>If you only read one thing before we talk, read the program breakdown. It covers how the mentorship works, what's inside the training, and what you'll learn about suppliers, product research and ungating:</p><p><a href="https://the-wholesale-underground.mykajabi.com/twu-2-0" target="_blank" rel="noopener">https://the-wholesale-underground.mykajabi.com/twu-2-0</a></p><p>Show up on time. Camera on. Quiet space. Not from the car, not while cooking, not on a break at work.</p><p>Talk soon,<br>Marvin</p><p>P.S. Need to reschedule? Do it now, not the day of the call. The reschedule link is in your calendar invite.</p></div></div>
+      <div class="pane"><div class="email"><div class="email-meta"><div>From: <b>Marvin</b></div><div>Subject: <b>Amazon wholesale is saturated (no, it's not)</b></div></div><p>Sarah,</p><p>Every few months, someone online declares Amazon wholesale dead.</p><p>Too saturated. Too late. Too competitive. And every few months, people keep building real income by reselling brands that shoppers already know and buy.</p><p>Here's what I think people actually mean when they say it's saturated: the lazy version got harder. Picking random products, emailing a supplier once, and hoping for the best doesn't work like it used to. That's true.</p><p>But that's a process problem, not a market problem.</p><p>Here's why I like this model for people with a full-time job:</p><p class="q">You don't have to invent a product. You don't have to create demand. You're selling brand-name products people are already searching for.</p><p>No manufacturing. No building a brand from zero. No guessing whether anyone wants it.</p><p>So where do most people get stuck? Not in the idea. In three places: getting suppliers to approve your account, verifying that a product is actually worth buying, and getting ungated in the brands that matter. That's the part nobody explains properly, and it's exactly what I teach.</p><p>You also don't need technical skills, a big budget or prior e-commerce experience to start. You need a clear system and someone telling you what to do next.</p><p>So when someone says the market is saturated, they're usually selling you something else, or they tried it without guidance and quit. The market isn't the problem. Doing it blind is.</p><p>We'll look at your specific situation on the call.</p><p>— Marvin</p><p>P.S. The full breakdown of what's inside the program is here: <a href="https://the-wholesale-underground.mykajabi.com/twu-2-0" target="_blank" rel="noopener">https://the-wholesale-underground.mykajabi.com/twu-2-0</a></p></div></div>
+      <div class="pane"><div class="email"><div class="email-meta"><div>From: <b>Marvin</b></div><div>Subject: <b>Leo and Pauline: full-time jobs, $250K first year</b></div></div><p>Sarah,</p><p>I want to tell you about Leo and Pauline.</p><p>If there's one story I'd want you to read before we get on a call, it's theirs.</p><p>They didn't start with a free calendar. They had full-time jobs.</p><p>That's the detail I want you to notice. They built this around the job, not instead of it.</p><p>In their first year, they reached over $250,000 in sales on Amazon, while still working those jobs.</p><p>When you build alongside a job, every decision is calmer. You can test a product properly instead of betting money you can't afford to lose. You can take a slow week without panicking. You can follow a process instead of rushing because you "need this to work by Friday."</p><p class="q">The difference isn't talent or luck. It's having a system, and someone who tells you the next move instead of leaving you to guess.</p><p>That's what the 1-on-1 mentorship is for. You're not figuring out suppliers, products and ungating alone in a group chat. You have someone looking at your next step with you.</p><p>I'm telling you about Leo and Pauline instead of the biggest result I could pick, because they did it the way most people reading this will have to: with a job still in the picture.</p><p>If you see yourself in that, their path is the realistic version of what's possible. Not an overnight story. Steady work, the right system, and guidance when something isn't working.</p><p>We'll map out what your version looks like on the call.</p><p>— Marvin</p><p>P.S. More on how the program works, and what students say about it: <a href="https://the-wholesale-underground.mykajabi.com/twu-2-0" target="_blank" rel="noopener">https://the-wholesale-underground.mykajabi.com/twu-2-0</a></p></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const progressBar = document.getElementById('progressBar');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+  },{threshold:0.3});
+  slides.forEach(s=>io.observe(s));
+
+  function updateProgress(){
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop/docHeight)*100 : 0;
+    progressBar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, {passive:true});
+  updateProgress();
+
+  function currentIndex(){
+    let idx = 0, min = Infinity;
+    slides.forEach((s,i)=>{
+      const d = Math.abs(s.getBoundingClientRect().top);
+      if(d < min){ min = d; idx = i; }
+    });
+    return idx;
+  }
+  window.addEventListener('keydown', (e)=>{
+    if(openModal){ if(e.key === 'Escape') closeM(); return; }
+    if(e.key === 'ArrowDown' || e.key === 'PageDown'){
+      e.preventDefault();
+      const i = Math.min(currentIndex()+1, slides.length-1);
+      slides[i].scrollIntoView({behavior:'smooth'});
+    }
+    if(e.key === 'ArrowUp' || e.key === 'PageUp'){
+      e.preventDefault();
+      const i = Math.max(currentIndex()-1, 0);
+      slides[i].scrollIntoView({behavior:'smooth'});
+    }
+  });
+
+  function goNext(){
+    const i = Math.min(currentIndex()+1, slides.length-1);
+    slides[i].scrollIntoView({behavior:'smooth'});
+  }
+  function goPrev(){
+    const i = Math.max(currentIndex()-1, 0);
+    slides[i].scrollIntoView({behavior:'smooth'});
+  }
+  const navDown = document.getElementById('navDown');
+  const navUp = document.getElementById('navUp');
+  if(navDown) navDown.addEventListener('click', goNext);
+  if(navUp) navUp.addEventListener('click', goPrev);
+
+  /* modals */
+  let openModal = null;
+  function setTab(m,i){
+    m.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('active',j===i));
+    m.querySelectorAll('.pane').forEach((p,j)=>{
+      p.classList.toggle('active',j===i);
+      if(j===i){ p.querySelectorAll('iframe[data-src]').forEach(f=>{ f.src=f.dataset.src; f.removeAttribute('data-src'); }); }
+    });
+  }
+  function openM(id,tab){
+    const m=document.getElementById(id); if(!m) return;
+    m.classList.add('open'); openModal=m;
+    document.documentElement.style.overflow='hidden';
+    setTab(m,tab||0);
+    const body=m.querySelector('.modal-body'); if(body) body.scrollTop=0;
+  }
+  function closeM(){
+    if(!openModal) return;
+    openModal.classList.remove('open'); openModal=null;
+    document.documentElement.style.overflow='';
+  }
+  document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>openM(b.dataset.open, b.dataset.tab?parseInt(b.dataset.tab,10):0)));
+  document.querySelectorAll('.modal').forEach(m=>{
+    m.addEventListener('click',e=>{ if(e.target===m) closeM(); });
+    m.querySelector('.modal-close').addEventListener('click',closeM);
+    m.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>setTab(m,parseInt(t.dataset.tab,10))));
+  });
+</script>
+</body>
+</html>

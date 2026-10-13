@@ -1,100 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>The Wholesale Email Script Kit — A practical starting point for supplier outreach</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>The Wholesale Approval Scripts — 3 Copy-Paste Email Scripts</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#12181f;--muted:#5c6a72;--line:#e2e6e9;--paper:#faf7f2;
-  --primary:#16866B;--primary-dark:#0f5d4a;--success:#1f9d55;--destructive:#d9342b;--gold:#e0a83c;
-  --shadow-card:0 4px 16px rgba(0,0,0,.06);--shadow-cta:0 10px 24px rgba(22,134,107,.25);
-  --gradient-hero:linear-gradient(180deg,#fff 0%,#e9f4f0 100%);--gradient-cta:linear-gradient(180deg,var(--primary),var(--primary-dark));
+  --ink:#12181f;--muted:#5c6a72;--line:#e2e6e9;--paper:#f3f8f6;
+  --primary:#16866B;--primary-dark:#0f6652;--success:#16866B;--destructive:#d9342b;--gold:#e0a83c;
+  --shadow-card:0 4px 16px rgba(0,0,0,.06);--shadow-cta:0 10px 24px rgba(22,134,107,.35);
+  --gradient-hero:linear-gradient(180deg,#fff 0%,#eef7f4 100%);--gradient-cta:linear-gradient(180deg,var(--primary),var(--primary-dark));
 }
 *{box-sizing:border-box}body{margin:0;background:#fff;color:var(--ink);font-family:"DM Sans",Arial,sans-serif}
 .wrap{max-width:960px;margin:auto;padding:0 20px}
 .header{background:var(--ink)}.header .wrap{display:flex;justify-content:space-between;align-items:center;padding:14px 20px}
-.logo-slot{height:34px;padding:0 16px;display:flex;align-items:center;border:1px dashed #ffffff40;border-radius:4px;color:#ffffffb0;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.logo{display:flex;align-items:center;gap:10px;color:#fff;font-size:13px;font-weight:800;letter-spacing:.08em}
+.logo img{width:34px;height:34px;border-radius:50%;object-fit:cover}
 .header a{color:#fff;font-size:13px;font-weight:700;text-decoration:none}
 section{padding:56px 0}
 .hero{background:var(--gradient-hero)}
-.eyebrow-pill{display:block;width:fit-content;margin:0 auto 20px;padding:8px 20px;border-radius:6px;background:var(--primary);color:#fff;font-size:13px;font-weight:800;text-align:center}
-h1{max-width:760px;margin:0 auto 14px;text-align:center;font-size:clamp(24px,3.6vw,34px);line-height:1.2}
+.eyebrow-pill{display:block;width:fit-content;max-width:100%;margin:0 auto 20px;padding:8px 20px;border-radius:6px;background:var(--primary);color:#fff;font-size:13px;font-weight:800;text-align:center}
+h1{max-width:800px;margin:0 auto 14px;text-align:center;font-size:clamp(24px,3.6vw,34px);line-height:1.2}
 h1 .accent{color:var(--primary)}
 .proof-list{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 26px;margin:0 auto 30px;max-width:700px;list-style:none;padding:0}
 .proof-list li{display:flex;align-items:center;gap:6px;font-weight:700;font-size:14px}
-.video-block{max-width:760px;margin:0 auto;aspect-ratio:16/9;border-radius:12px;border:2px dashed var(--primary);background:#f0f8f5;display:grid;place-items:center;color:var(--primary);font-weight:800;text-transform:uppercase;font-size:13px;letter-spacing:.1em}
+.video-block{max-width:760px;margin:0 auto;aspect-ratio:16/9;border-radius:12px;background:linear-gradient(135deg,#0f2a24,#16866B);display:grid;place-items:center;position:relative;overflow:hidden;box-shadow:var(--shadow-card)}
+.video-block .play{width:78px;height:78px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--primary);font-size:30px;padding-left:5px}
+.video-block .vid-label{position:absolute;left:18px;bottom:14px;color:#ffffffcc;font-size:12px;font-weight:700;letter-spacing:.08em}
 .price-card{max-width:420px;margin:26px auto 0;padding:22px;border-radius:12px;border:2px solid var(--primary);background:#fff;text-align:center;box-shadow:var(--shadow-card)}
-.price-card .price{font-size:26px;font-weight:800;color:var(--destructive)}
-.price-card .price s{color:var(--muted);font-weight:600;margin-right:6px}
+.price-card .price{margin:0;font-size:26px;font-weight:800;color:var(--primary)}
 .cta-btn{display:block;width:100%;max-width:520px;margin:18px auto 0;padding:18px 20px;border:0;border-radius:999px;background:var(--gradient-cta);color:#fff;font-size:16px;font-weight:800;text-align:center;text-decoration:none;text-transform:uppercase;box-shadow:var(--shadow-cta)}
-.guarantee-line{text-align:center;margin-top:10px;font-size:12px;font-weight:700;color:var(--muted)}
-
+.guarantee-line{text-align:center;margin:10px 0 0;font-size:12px;font-weight:700;color:var(--muted)}
 h2.section-title{max-width:640px;margin:0 auto 36px;text-align:center;font-size:clamp(22px,3vw,30px)}
-.module{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;margin-bottom:28px;padding:20px;border:1px solid var(--line);border-radius:14px}
-.module .img-slot{aspect-ratio:16/9;border-radius:10px;border:2px dashed var(--line);display:grid;place-items:center;color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase}
+.module{display:grid;grid-template-columns:140px 1fr;gap:24px;align-items:center;margin-bottom:20px;padding:20px;border:1px solid var(--line);border-radius:14px}
+.tile{aspect-ratio:1/1;border-radius:12px;background:#e3f3ee;display:grid;place-items:center;color:var(--primary);font-size:44px;font-weight:800}
 .module h3{margin:0 0 10px;font-size:19px}
-.module ul{margin:0 0 14px;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.6}
-.bonus{display:grid;grid-template-columns:160px 1fr;gap:20px;padding:20px;border:1px solid var(--line);border-radius:14px;margin-bottom:16px}
-.bonus .img-slot{aspect-ratio:3/4;border-radius:10px;border:2px dashed var(--gold);display:grid;place-items:center;color:var(--gold);font-size:10px;font-weight:700;text-transform:uppercase}
-.bonus-kicker{color:var(--primary);font-size:11px;font-weight:800;text-transform:uppercase}
+.module ul{margin:0;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.6}
+.bonus{display:grid;grid-template-columns:90px 1fr;gap:20px;padding:20px;border:1px solid var(--line);border-radius:14px;margin-bottom:16px;background:#fff}
+.bonus .tile{background:#fbf1dc;color:var(--gold);font-size:28px}
+.bonus-kicker{margin:0;color:var(--primary);font-size:11px;font-weight:800;text-transform:uppercase}
 .bonus h3{margin:6px 0 8px;font-size:18px}
-
 .compare{max-width:700px;margin:0 auto;border:1px solid var(--line);border-radius:12px;overflow:hidden}
-.compare-row{display:grid;grid-template-columns:1fr 100px 100px}
+.compare-row{display:grid;grid-template-columns:1fr 110px 110px}
 .compare-row.head{background:var(--gradient-cta);color:#fff;font-weight:800;font-size:11px;text-transform:uppercase}
-.compare-row div{padding:12px;text-align:center;border-top:1px solid var(--line)}
-.compare-row.head div{border-top:0;text-align:left}
+.compare-row div{padding:12px;text-align:center;border-top:1px solid var(--line);font-size:14px}
+.compare-row.head div{border-top:0}
 .compare-row div:first-child{text-align:left}
-.compare-row.head div:first-child{text-align:left}
 .ok{color:var(--success);font-weight:800}.no{color:var(--destructive);font-weight:800}
-
-.guarantee-block{background:var(--paper);display:grid;grid-template-columns:180px 1fr;gap:24px;align-items:center;max-width:760px;margin:0 auto;padding:26px;border-radius:14px}
-.guarantee-block .img-slot{aspect-ratio:1/1;border-radius:50%;border:2px dashed var(--gold);display:grid;place-items:center;color:var(--gold);font-size:10px;font-weight:700;text-transform:uppercase}
-
-.authority{display:grid;grid-template-columns:1fr 220px;gap:30px;align-items:center;max-width:840px;margin:0 auto}
-.authority .img-slot{aspect-ratio:4/5;border-radius:12px;border:2px dashed var(--line);display:grid;place-items:center;color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase}
-
-.faq-item{max-width:700px;margin:0 auto 12px;border:1px solid var(--line);border-radius:10px;padding:14px 18px}
+.guarantee-block{background:var(--paper);display:grid;grid-template-columns:140px 1fr;gap:24px;align-items:center;max-width:760px;margin:0 auto;padding:26px;border-radius:14px}
+.seal{aspect-ratio:1/1;border-radius:50%;border:3px solid var(--primary);display:grid;place-items:center;text-align:center;color:var(--primary);font-weight:800;font-size:13px;line-height:1.2}
+.seal b{display:block;font-size:34px}
+.authority{display:grid;grid-template-columns:1fr 200px;gap:30px;align-items:center;max-width:840px;margin:0 auto}
+.authority img{width:200px;height:200px;border-radius:50%;object-fit:cover;box-shadow:var(--shadow-card)}
+.faq-item{max-width:700px;margin:0 auto 12px;border:1px solid var(--line);border-radius:10px;padding:14px 18px;background:#fff}
 .faq-item summary{font-weight:700;cursor:pointer}
 .faq-item p{color:var(--muted);font-size:14px;line-height:1.6;margin:10px 0 0}
-
 .final-cta{background:var(--ink);color:#fff;text-align:center}
-.final-cta h2{color:#fff}
+.final-cta h2{color:#fff;max-width:640px;margin:0 auto 10px}
 .countdown{display:flex;justify-content:center;gap:14px;margin:16px 0}
 .countdown div{background:#ffffff1a;border-radius:8px;padding:10px 16px;font-weight:800;font-size:20px}
 footer{padding:36px 20px;text-align:center;color:var(--muted);font-size:11px}
-@media(max-width:680px){.module,.bonus,.guarantee-block,.authority{grid-template-columns:1fr}}
+@media(max-width:680px){.module,.bonus,.guarantee-block,.authority{grid-template-columns:1fr}.tile{max-width:120px}.seal{max-width:130px}.authority img{margin:0 auto;order:-1}.compare-row{grid-template-columns:1fr 70px 70px}}
 </style>
 </head>
 <body>
 
-<header class="header"><div class="wrap"><div class="logo-slot">LOGO</div><a href="#contact">Need help? Contact us</a></div></header>
+<header class="header"><div class="wrap"><div class="logo"><img src="https://i.ibb.co/TqWFz39c/395198980-351973933945065-2934463836193746549-n.jpg" alt="Marvin FBA"><span>MARVIN FBA</span></div><a href="#contact">Need help? Contact us</a></div></header>
 
 <section class="hero">
   <div class="wrap">
-    <span class="eyebrow-pill">For aspiring Amazon wholesale sellers who want a clearer first step</span>
-    <h1><span class="accent">Stop Getting Ignored by U.S. Distributors.... Steal The 3 'Copy-Paste' Email Scripts That Force Wholesale Suppliers to Approve Your Account on the First Try</span></h1>
+    <span class="eyebrow-pill">For Amazon wholesale sellers who keep getting ignored by distributors</span>
+    <h1><span class="accent">Stop Getting Ignored by U.S. Distributors.</span> Steal The 3 “Copy-Paste” Email Scripts That Force Wholesale Suppliers to Approve Your Account on the First Try</h1>
     <ul class="proof-list">
-      <li>✓ Designed around supplier outreach</li><li>✓ Clear first-contact structure</li><li>✓ Follow-up guidance included</li><li>✓ Built for wholesale beginners</li>
+      <li>✓ 3 ready-to-send email scripts</li><li>✓ No e-commerce experience needed</li><li>✓ Built for U.S. wholesale suppliers</li><li>✓ Instant digital access</li>
     </ul>
-    <div class="video-block">VSL — paste video embed here</div>
+    <div class="video-block"><div class="play">▶</div><span class="vid-label">WATCH: HOW THE 3 SCRIPTS WORK</span></div>
     <div class="price-card">
-      <p class="price"><s>Price shown at checkout</s>See current offer Today</p>
+      <p class="price">$27 Today</p>
       <a class="cta-btn" href="#">Get Instant Access</a>
-      <p class="guarantee-line">Review the actual offer terms before purchase</p>
+      <p class="guarantee-line">30-Day Money-Back Guarantee</p>
     </div>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <h2 class="section-title">What the supplier outreach kit helps you prepare</h2>
-    <!-- Repeat this .module block once per curriculum module (source had 6) -->
+    <h2 class="section-title">The 3 scripts that get wholesale accounts approved</h2>
     <div class="module">
-      <div class="img-slot">Module image</div>
-      <div><h3>Module 1: Supplier Outreach Foundations</h3>
-        <ul><li>How to introduce your business clearly</li><li>How to ask about the supplier's actual requirements</li><li>How to follow up professionally without overpromising</li></ul>
-        <a class="cta-btn" style="max-width:260px;padding:10px 16px;font-size:12px" href="#">Get Access</a>
+      <div class="tile">1</div>
+      <div><h3>Script 1: The First-Contact Email</h3>
+        <ul><li>Introduces you like a serious buyer, not a random inquiry</li><li>Gets the right person at the distributor to keep reading</li><li>Copy, paste, swap in the brand name</li></ul>
+      </div>
+    </div>
+    <div class="module">
+      <div class="tile">2</div>
+      <div><h3>Script 2: The Follow-Up That Gets a Reply</h3>
+        <ul><li>Turns silence into a response without sounding desperate</li><li>Works on suppliers who “read” your email and never answered</li><li>Timing guide for when to send it</li></ul>
+      </div>
+    </div>
+    <div class="module">
+      <div class="tile">3</div>
+      <div><h3>Script 3: The Account-Approval Close</h3>
+        <ul><li>Handles the paperwork and verification questions suppliers ask</li><li>Moves the conversation from “maybe” to an approved account</li><li>Keeps you positioned for reorders</li></ul>
       </div>
     </div>
   </div>
@@ -102,13 +108,19 @@ footer{padding:36px 20px;text-align:center;color:var(--muted);font-size:11px}
 
 <section style="background:var(--paper)">
   <div class="wrap">
-    <h2 class="section-title">Extra resources to make the process easier to organize</h2>
-    <!-- Repeat this .bonus block once per bonus (source had 9) -->
+    <h2 class="section-title">Plus 2 bonuses to help you use the scripts faster</h2>
     <div class="bonus">
-      <div class="img-slot">Bonus cover</div>
-      <div><p class="bonus-kicker">FREE BONUS #1: Wholesale Application Checklist</p>
-        <h3>Know what to prepare before reaching out</h3>
-        <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.6"><li>Business information and documents to check</li><li>Questions to ask before placing an order</li></ul>
+      <div class="tile">★</div>
+      <div><p class="bonus-kicker">Bonus #1: Supplier Checklist</p>
+        <h3>Know who to email before you write a word</h3>
+        <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.6"><li>What to look for in a wholesale supplier</li><li>Red flags that waste your time</li></ul>
+      </div>
+    </div>
+    <div class="bonus">
+      <div class="tile">★</div>
+      <div><p class="bonus-kicker">Bonus #2: Reply Tracker</p>
+        <h3>Never lose track of a supplier conversation</h3>
+        <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.6"><li>Simple sheet to log every email and follow-up</li><li>See which scripts are getting replies</li></ul>
       </div>
     </div>
   </div>
@@ -116,53 +128,66 @@ footer{padding:36px 20px;text-align:center;color:var(--muted);font-size:11px}
 
 <section>
   <div class="wrap">
-    <h2 class="section-title">A more structured approach to supplier outreach</h2>
+    <h2 class="section-title">Why proven scripts beat writing every email from scratch</h2>
     <div class="compare">
-      <div class="compare-row head"><div>Feature</div><div>Ad hoc outreach</div><div>Structured process</div></div>
-      <div class="compare-row"><div>Clear first-contact message</div><div class="ok">✓</div><div class="no">✗</div></div>
-      <div class="compare-row"><div>Follow-up and requirements checklist</div><div class="ok">✓</div><div class="no">✗</div></div>
+      <div class="compare-row head"><div>What you get</div><div>Scripts</div><div>Winging it</div></div>
+      <div class="compare-row"><div>Sounds like a serious buyer</div><div class="ok">✓</div><div class="no">✗</div></div>
+      <div class="compare-row"><div>Follow-up already written</div><div class="ok">✓</div><div class="no">✗</div></div>
+      <div class="compare-row"><div>Ready to send in minutes</div><div class="ok">✓</div><div class="no">✗</div></div>
+      <div class="compare-row"><div>Clear next step for the supplier</div><div class="ok">✓</div><div class="no">✗</div></div>
     </div>
   </div>
 </section>
 
 <section>
   <div class="wrap guarantee-block">
-    <div class="img-slot">Guarantee badge</div>
-    <div><h2 style="margin:0 0 10px">Review the terms before purchasing</h2>
-      <p style="color:var(--muted);line-height:1.6">This concept preview does not state a refund policy. Check the actual offer terms before purchase.</p>
+    <div class="seal"><div><b>30</b>DAY<br>GUARANTEE</div></div>
+    <div><h2 style="margin:0 0 10px">Try the scripts risk-free</h2>
+      <p style="color:var(--muted);line-height:1.6;margin:0">Use the scripts on real supplier emails. If they don’t help you, ask for a refund within 30 days.</p>
     </div>
   </div>
 </section>
 
 <section>
   <div class="wrap authority">
-    <div><h2 style="text-align:left">Learn from Marvin FBA</h2>
-      <p style="color:var(--muted);line-height:1.7">A practical introduction to the Amazon wholesale model, supplier outreach, and the decisions to evaluate before buying inventory.</p>
+    <div><h2 style="text-align:left;margin-top:0">Meet Marvin</h2>
+      <p style="color:var(--muted);line-height:1.7">Marvin quit his job and built a full-time income selling brand-name products on Amazon. Through The Wholesale Underground, he mentors people on supplier verification, product research and ungating, with no technical skills or big budget required.</p>
       <a class="cta-btn" style="margin:16px 0 0" href="#">Get Instant Access</a>
     </div>
-    <div class="img-slot">Photo of Marvin FBA</div>
+    <img src="https://i.ibb.co/TqWFz39c/395198980-351973933945065-2934463836193746549-n.jpg" alt="Marvin FBA">
   </div>
 </section>
 
 <section style="background:var(--paper)">
   <div class="wrap">
     <h2 class="section-title">Frequently Asked Questions</h2>
-    <details class="faq-item" open><summary>Will these scripts guarantee supplier approval?</summary><p>No script can guarantee approval. Suppliers set their own requirements, and applications are evaluated individually.</p></details>
-    <details class="faq-item"><summary>Do I need my own product?</summary><p>Amazon wholesale typically focuses on reselling products from established brands through authorized supply relationships, rather than creating a product from scratch.</p></details>
-    <details class="faq-item"><summary>Should I buy inventory right away?</summary><p>No. Understand supplier requirements, product restrictions, and the full economics before committing capital.</p></details>
+    <details class="faq-item" open><summary>Do I need Amazon experience to use these scripts?</summary><p>No. The scripts are written so a complete beginner can copy, paste and send them.</p></details>
+    <details class="faq-item"><summary>What if a supplier still doesn’t reply?</summary><p>Script 2 is built for exactly that, along with a timing guide for when to follow up.</p></details>
+    <details class="faq-item"><summary>How do I get the scripts after purchase?</summary><p>You get instant digital access right after checkout.</p></details>
   </div>
 </section>
 
 <section class="final-cta">
   <div class="wrap">
-    <h2>Start with a clearer supplier outreach process</h2>
-    <p style="opacity:.8">Doors close: Check the current offer</p>
-    <div class="countdown"><div>00<br><small style="font-size:9px">HRS</small></div><div>00<br><small style="font-size:9px">MIN</small></div><div>00<br><small style="font-size:9px">SEC</small></div></div>
-    <a class="cta-btn" href="#">Get The Wholesale Email Script Kit For See current offer</a>
+    <h2>Send the emails suppliers actually answer</h2>
+    <p style="opacity:.8;margin:0">This price ends tonight</p>
+    <div class="countdown"><div><span id="h">00</span><br><small style="font-size:9px">HRS</small></div><div><span id="m">00</span><br><small style="font-size:9px">MIN</small></div><div><span id="s">00</span><br><small style="font-size:9px">SEC</small></div></div>
+    <a class="cta-btn" href="#">Get The Scripts For $27</a>
   </div>
 </section>
 
-<footer>© 2026 — The Wholesale Email Script Kit. <a href="#terms">Terms</a> · <a href="#privacy">Privacy</a> · <a href="#refunds">Refunds</a></footer>
+<footer>© 2026 Marvin FBA. <a href="#terms">Terms</a> · <a href="#privacy">Privacy</a> · <a href="#refunds">Refunds</a></footer>
 
+<script>
+(function(){
+  function p(n){return String(n).padStart(2,'0')}
+  function tick(){
+    var now=new Date(),end=new Date(now);end.setHours(23,59,59,999);
+    var d=Math.max(0,end-now),h=Math.floor(d/3600000),m=Math.floor(d%3600000/60000),s=Math.floor(d%60000/1000);
+    document.getElementById('h').textContent=p(h);document.getElementById('m').textContent=p(m);document.getElementById('s').textContent=p(s);
+  }
+  tick();setInterval(tick,1000);
+})();
+</script>
 </body>
 </html>
