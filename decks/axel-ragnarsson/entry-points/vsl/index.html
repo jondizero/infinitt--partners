@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#ffffff"><title>Axel Ragnarsson — VSL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Roboto+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050506;--blue:#00ABED;--blue-hover:#ffad55;--navy:#141519;--ink:#f2f4f3;--muted:#b9c1c3;--line:rgba(255,255,255,.12);--red:#00ABED;--green:#20a462;--soft:#0d0e10;--card-dark:#0d0e10;--card-border:rgba(0,171,237,.4)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-width:320px;background:var(--bg);color:var(--ink);font-family:"DM Sans",Arial,sans-serif}
+button,input,select{font:inherit}
+
+/* Logo — no colored strip, just the logo sitting on the page */
+.logo-bar{display:flex;justify-content:center;align-items:center;padding:22px 20px 0}
+.logo-placeholder{display:inline-flex;align-items:center;gap:8px;color:var(--ink);font:800 13px/1 "Roboto Condensed",Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;border:1px dashed var(--line);padding:10px 22px;border-radius:5px}
+
+.page{max-width:920px;margin:auto;padding:15px 21px 0;text-align:center}
+.eyebrow{margin:0 0 7px;color:var(--ink);font-size:10px;font-weight:800;letter-spacing:.08em}
+.headline{max-width:865px;margin:0 auto;color:var(--ink);font-family:"Roboto Condensed",Arial,sans-serif;font-size:clamp(33px,4.8vw,57px);font-weight:800;line-height:1.03;letter-spacing:-.03em}
+.headline .blue{color:var(--blue)}.headline .red{color:var(--red)}
+.subheadline{margin:6px auto 8px;font-family:"Roboto Condensed",Arial,sans-serif;font-size:clamp(21px,2.6vw,30px);font-weight:500;line-height:1.1}
+.credibility{margin:0 auto 13px;max-width:850px;color:var(--muted);font-size:10px;font-style:italic;font-weight:700;line-height:1.35}
+.credibility strong{color:var(--blue)}
+
+.step{max-width:870px;margin:0 auto 5px;text-align:left;color:var(--muted);font-size:10px;font-weight:700}
+.step span{display:inline-block;margin-right:4px;color:#fff;background:var(--blue);border-radius:2px;padding:1px 4px;font-size:9px}
+
+/* Video — solid blue button (fixed: no competing background rule) */
+.video{position:relative;max-width:870px;aspect-ratio:16/9;margin:auto;overflow:hidden;background:linear-gradient(135deg,#4b2f27 0%,#a85f3b 44%,#233640 100%);box-shadow:0 1px 4px #0003}
+.video-button{position:absolute;z-index:2;left:50%;top:50%;width:min(54%,370px);min-height:208px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;transform:translate(-50%,-50%);border:1px solid #ffffffa8;border-radius:3px;color:#fff;cursor:pointer;box-shadow:0 10px 25px #0003;transition:.15s ease;background:var(--blue)}
+.video-button:hover,.video-button.active{background:var(--blue-hover)}
+.speaker{font-size:40px;line-height:1}.video-button strong{font-size:20px;line-height:1.15}.video-button small{font-size:16px;font-weight:600}
+
+.divider{max-width:870px;margin:0 auto;border:0;border-top:1px solid var(--line)}
+
+/* Step 2 — big section title, no background strip, sits on the plain page */
+.apply-section{max-width:870px;margin:44px auto 0;padding:0 20px 60px;text-align:center}
+.apply-section .step-title{max-width:800px;margin:0 auto 30px;color:var(--ink);font-family:"Roboto Condensed",Arial,sans-serif;font-size:clamp(28px,4vw,42px);font-weight:800;line-height:1.1}
+.apply-section .step-title span{display:inline-flex;align-items:center;justify-content:center;margin-right:10px;width:34px;height:34px;border-radius:50%;background:var(--red);color:#fff;font-size:15px;vertical-align:middle}
+
+.apply-card{position:relative;overflow:hidden;max-width:820px;margin:0 auto;padding:56px 40px 100px;border-radius:16px;background:var(--card-dark);border-top:4px solid var(--red);box-shadow:0 30px 60px -14px #00000055,0 4px 10px #0000002e;text-align:center}
+.apply-card .logo-placeholder{position:relative;z-index:1;margin:0 0 90px;color:#fff;border-color:#ffffff40;font-size:11px;padding:8px 16px}
+.apply-card .apply-inner{position:relative;z-index:1}
+.apply-card h2{margin:0 auto 14px;max-width:520px;color:#fff;font:800 34px/1.25 "Roboto Condensed",Arial,sans-serif}
+.apply-card .apply-sub{margin:0 auto 30px;max-width:460px;color:var(--muted);font-size:16px;font-weight:600;line-height:1.5}
+.apply-btn{display:inline-block;padding:17px 38px;border:0;border-radius:9px;background:var(--red);color:#fff;font-size:16px;font-weight:800;letter-spacing:.02em;cursor:pointer;text-decoration:none;box-shadow:0 10px 24px #00ABED4d;transition:.15s ease}
+.apply-btn:hover{transform:translateY(-1px);box-shadow:0 14px 28px #00ABED66}
+.wave{position:absolute;left:0;right:0;bottom:0;height:110px;opacity:.7;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 120' preserveAspectRatio='none'%3E%3Cpath d='M0 65 Q100 20 200 65 T400 65 T600 65 T800 65 V120 H0 Z' fill='%23F59231' fill-opacity='0.12'/%3E%3Cpath d='M0 85 Q100 45 200 85 T400 85 T600 85 T800 85 V120 H0 Z' fill='%23F59231' fill-opacity='0.16'/%3E%3Cpath d='M0 104 Q100 72 200 104 T400 104 T600 104 T800 104 V120 H0 Z' fill='%23F59231' fill-opacity='0.2'/%3E%3C/svg%3E");background-repeat:repeat-x;background-size:800px 110px}
+
+.success{position:relative;z-index:1;padding:16px 0;text-align:center}
+.success-mark{width:42px;height:42px;display:grid;place-items:center;margin:0 auto 10px;border-radius:50%;background:rgba(0,171,237,.14);color:var(--blue);font-size:25px}
+.success h3{margin:0;font:700 24px "Roboto Condensed";color:#fff}
+.success p{margin:8px 0 0;color:var(--muted);font-size:13px;line-height:1.5}
+
+.footer{padding:20px;border-top:1px solid var(--line);color:var(--muted);text-align:center;font-size:10px}
+.footer strong{color:var(--ink)}
+
+@media(max-width:600px){
+  .page{padding:15px 14px 0}.eyebrow{font-size:9px}.headline{font-size:37px;line-height:1.02}.subheadline{font-size:22px}.credibility{font-size:9px}
+  .video{aspect-ratio:4/3}.video-button{width:65%;min-height:145px}.video-button strong{font-size:15px}.video-button small{font-size:12px}.speaker{font-size:30px}
+  .apply-section{padding:0 16px 46px}.apply-card{padding:40px 22px 80px}.apply-card h2{font-size:26px}
+}
+</style>
+</head>
+<body>
+
+<header class="logo-bar">
+  <div class="logo-placeholder">NICK FOWLER</div>
+</header>
+
+<main class="page">
+  <p class="eyebrow">For Full-Time Workers Who Want A Second Income Stream</p>
+  <h1 class="headline">What Busy Professionals Are Doing For 30 Minutes A Day To <span class="blue">Build An Extra $1,000–$5,000/Month Online</span></h1>
+  <p class="subheadline">(Without Taking On Another Job, Becoming An Influencer, Or Starting From Scratch)</p>
+  <p class="credibility">A practical walkthrough for full-time workers who want to test a multifamily investing journey without quitting their jobs.</p>
+  <div class="step"><span>▶</span>Step 1: Watch The VSL To See How The Model Works</div>
+  <div class="video" id="video"><button class="video-button" type="button" aria-label="Play video"><span class="speaker">▶</span><strong>Watch The VSL</strong><small>See how the model works</small></button></div>
+  <hr class="divider">
+</main>
+
+<section class="apply-section" id="apply">
+  <h2 class="step-title"><span>▶</span>Step 2: Map Out Your Next Step</h2>
+  <div class="apply-card" id="applyCard">
+    <div class="logo-placeholder">NICK FOWLER</div>
+    <div class="apply-inner">
+      <h2>Axel Ragnarsson — Your Next Step</h2>
+      <p class="apply-sub">See how this model could fit your schedule, goals, and starting point.</p>
+      <a class="apply-btn" href="#" id="applyBtn">Yes! Let's Map Out My Next Step →</a>
+    </div>
+    <div class="wave"></div>
+  </div>
+</section>
+
+<footer class="footer"><strong>Axel Ragnarsson</strong> · multifamily real estate investing investor education for aspiring multifamily investors.</footer>
+<script>
+document.querySelector('.video-button').addEventListener('click',function(){
+  this.classList.add('active');
+  this.innerHTML='<span class="speaker">❚❚</span><strong>VSL Preview</strong><small>Replace this block with the video embed</small>';
+});
+document.getElementById('applyBtn').addEventListener('click',function(e){
+  e.preventDefault();
+  document.getElementById('applyCard').innerHTML='<div class="success"><div class="success-mark">✓</div><h3>Let’s Map It Out.</h3><p>On the call, we’ll work through what this could look like around your job, schedule, and goals.</p></div><div class="wave"></div>';
+});
+</script>
+</body>
+</html>
