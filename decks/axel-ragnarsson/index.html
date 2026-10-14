@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<base href="/decks/axel-ragnarsson/">
+<title>Axel Ragnarsson — Audience Growth Audit</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root, [data-theme="dark"]{
+    --bg:#050506;--surface:#0d0e10;--surface-2:#141519;
+    --ink:#f2f4f3;--ink-soft:#b9c1c3;--ink-muted:#767f82;--line:rgba(255,255,255,0.09);
+    --accent-fill:#00ABED;--accent-text:#00ABED;--accent-soft:rgba(0,171,237,0.1);
+    --danger-fill:#ff5266;--danger-text:#ff5266;--danger-soft:rgba(255,82,102,0.1);
+    --shadow-soft:rgba(0,0,0,0.6);--dot-color:#333;--on-accent:#141400;
+    --display:'Space Grotesk',sans-serif;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  [data-theme="light"]{
+    --bg:#e6e6e6;--surface:#ffffff;--surface-2:#f1f1f1;
+    --ink:#14151a;--ink-soft:#4a4d54;--ink-muted:#82858c;--line:rgba(0,0,0,0.1);
+    --accent-fill:#00ABED;--accent-text:#00ABED;--accent-soft:rgba(0,171,237,0.1);
+    --danger-fill:#ff5266;--danger-text:#c81f3f;--danger-soft:rgba(200,31,63,0.1);
+    --shadow-soft:rgba(0,0,0,0.14);--dot-color:#cfcfcf;--on-accent:#141400;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  ::selection{background:var(--accent-fill);color:#000}
+
+  .slide{min-height:100vh;padding:clamp(32px,6vw,88px);scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;position:relative;border-bottom:1px solid var(--line)}
+  .slide-inner{max-width:1180px;margin:0 auto;width:100%;position:relative;z-index:1}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  .slide.visible .reveal{opacity:1;transform:translateY(0)}
+  .slide.visible .reveal:nth-child(1){transition-delay:.05s}
+  .slide.visible .reveal:nth-child(2){transition-delay:.13s}
+  .slide.visible .reveal:nth-child(3){transition-delay:.21s}
+  .slide.visible .reveal:nth-child(4){transition-delay:.29s}
+
+  .kicker{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:22px}
+  .kicker::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent-fill);box-shadow:0 0 8px var(--accent-fill)}
+  .kicker.is-problem::before{background:var(--danger-fill);box-shadow:0 0 8px var(--danger-fill)}
+  .kicker.is-problem{color:var(--danger-text)}
+  .kicker.is-solution{color:var(--accent-text)}
+
+  h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-0.02em;line-height:1.08;color:var(--ink)}
+  h2{font-size:clamp(30px,4vw,50px);max-width:20ch;margin-bottom:16px}
+  p{color:var(--ink-soft);font-size:clamp(16px,1.35vw,18.5px);line-height:1.6;max-width:56ch;margin-top:16px}
+  p:first-child{margin-top:0}
+
+  .slide-meta{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:11px;color:var(--ink-muted);letter-spacing:.1em}
+  .slide-meta .dot{width:3px;height:3px;border-radius:50%;background:var(--ink-muted)}
+
+  /* cover */
+  .slide-cover{align-items:center;text-align:center}
+  .slide-cover .slide-inner{display:flex;flex-direction:column;align-items:center}
+  .cover-logo{height:56px;margin-bottom:40px}
+  .slide-cover h1{font-size:clamp(38px,6.5vw,76px);margin-bottom:22px}
+  .slide-cover h1 em{color:var(--accent-text);font-style:normal}
+  .cover-tag{font-family:var(--mono);font-size:12px;color:var(--ink-muted);letter-spacing:.1em}
+
+  /* intro / section */
+  .slide-section{align-items:center;text-align:center}
+  .slide-section .slide-inner{display:flex;flex-direction:column;align-items:center}
+  .stat-row{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;justify-content:center}
+  .stat-chip{font-family:var(--mono);font-size:13px;color:var(--ink-soft);border:1px solid var(--line);border-radius:100px;padding:9px 18px;background:var(--surface)}
+  .stat-chip b{color:var(--accent-text)}
+
+  /* split (fact/fix) */
+  .slide-split .slide-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .split-media{order:1}.split-text{order:2}
+  .slide-split.flip .split-media{order:2}.slide-split.flip .split-text{order:1}
+
+  .shot{border-radius:14px;overflow:hidden;background:var(--surface);border:1px solid var(--line);box-shadow:0 30px 60px -20px var(--shadow-soft)}
+  .shot-bar{display:flex;gap:6px;padding:10px 12px;background:var(--surface-2);border-bottom:1px solid var(--line)}
+  .shot-bar span{width:8px;height:8px;border-radius:50%;background:var(--dot-color)}
+  .shot-frame{height:420px;display:flex;align-items:center;justify-content:center;background:var(--surface-2);overflow:hidden}
+  .shot-frame img{width:100%;height:100%;object-fit:contain;display:block}
+  .shot.duo{display:flex;flex-direction:column;gap:1px;background:var(--line)}
+  .shot.duo .shot-frame{background:var(--surface)}
+  .shot-wrap{position:relative}
+  .badge{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:var(--accent-fill);color:var(--on-accent);padding:6px 12px;border-radius:100px;font-weight:600}
+
+  .list-terminal{list-style:none;margin-top:20px}
+  .list-terminal li{font-family:var(--mono);font-size:14.5px;color:var(--ink-soft);padding:9px 0;border-bottom:1px solid var(--line);display:flex;gap:10px}
+  .list-terminal li:first-child{border-top:1px solid var(--line)}
+  .list-terminal.is-problem li::before{content:"›";color:var(--danger-text);font-weight:700}
+  .list-terminal.is-solution li::before{content:"✓";color:var(--accent-text);font-weight:700}
+
+  .flow{display:flex;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap;justify-content:center}
+  .flow-step{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;font-family:var(--mono);font-size:13px;color:var(--ink-soft);text-align:center;flex:1;min-width:140px}
+  .flow-step b{display:block;font-family:var(--display);font-size:16px;color:var(--ink);margin-bottom:4px;font-weight:600}
+  .flow-step .flow-lines b{margin-bottom:2px}
+  .flow-step img{width:26px;height:26px;object-fit:contain;margin:0 auto 8px;display:block}
+  .flow-arrow{color:var(--accent-text);font-size:20px}
+
+  /* icon grid */
+  .icon-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:16px;margin-top:40px;max-width:640px}
+  .icon-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 12px;display:flex;flex-direction:column;align-items:center;gap:12px}
+  .icon-card img{width:34px;height:34px;object-fit:contain;border-radius:6px}
+  .icon-card span{font-family:var(--mono);font-size:11px;color:var(--ink-muted);text-align:center}
+
+  /* closing */
+  .slide-closing{align-items:center;text-align:center}
+  .slide-closing .slide-inner{display:flex;flex-direction:column;align-items:center}
+  .cta-btn{margin-top:32px;display:inline-flex;align-items:center;gap:12px;border:none;border-radius:10px;padding:22px 48px;font-family:var(--mono);font-size:15px;color:var(--on-accent);letter-spacing:.06em;background:var(--accent-fill);text-decoration:none;font-weight:700;transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s var(--ease);box-shadow:0 14px 34px -12px var(--accent-soft);animation:cta-pulse 2.4s ease-in-out infinite}
+  .cta-btn:hover{transform:translateY(-3px) scale(1.02) !important;box-shadow:0 20px 45px -12px var(--accent-soft) !important;animation-play-state:paused}
+  .cta-btn:active{transform:translateY(-1px) scale(.99) !important}
+  @keyframes cta-pulse{0%,100%{box-shadow:0 14px 34px -12px var(--accent-soft)}50%{box-shadow:0 20px 42px -10px var(--accent-soft)}}
+  @media (prefers-reduced-motion:reduce){.cta-btn{animation:none}}
+
+  .progress{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(255,255,255,.06);z-index:100}
+  .progress-bar{height:100%;background:var(--accent-fill);transition:width .15s linear;box-shadow:0 0 10px var(--accent-fill)}
+  .kbd-hint{position:fixed;bottom:18px;right:22px;font-family:var(--mono);font-size:10.5px;color:var(--ink-muted);letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:8px;background:rgba(13,14,16,.85);backdrop-filter:blur(8px);padding:7px 14px;border-radius:100px;border:1px solid var(--line);z-index:50}
+  .kbd-hint kbd{font-family:var(--mono);background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:2px 6px;font-size:10px;color:var(--ink-soft)}
+
+  @media (max-width:860px){
+    .slide-split .slide-inner{grid-template-columns:1fr;gap:24px}
+    .slide-split .split-text{order:0}
+    .slide-split .split-media{order:1}
+    .slide-split .split-text .kicker{margin-top:0}
+    .slide-split .split-text h2{margin-top:8px}
+    .slide-split .split-media{width:100%;min-width:0}
+    .slide-split .split-media img{max-width:100%;height:auto;object-fit:contain}
+    .kbd-hint{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){.reveal{transition:none;opacity:1;transform:none}}
+</style>
+<style>
+/* Axel deck: clear, didactic recommendation diagrams */
+.recommendation-diagram{width:100%;padding:24px 18px;background:linear-gradient(145deg,#101318,#080a0d);border:1px solid rgba(0,171,237,.28);border-radius:14px;color:#f5f6f7}
+.diagram-kicker{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:#00ABED;font-weight:800;margin-bottom:16px}
+.positioning-flow{display:grid;grid-template-columns:1fr 28px 1fr;align-items:center;gap:8px}
+.diagram-panel{padding:16px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.13);background:#151920;min-height:180px}
+.diagram-panel.improved{border-color:#00ABED;background:linear-gradient(160deg,#21180f,#111318)}
+.diagram-label{font-size:10px;letter-spacing:.1em;color:#9aa4b2;text-transform:uppercase;margin-bottom:12px}
+.diagram-headline{font-size:17px;line-height:1.18;font-weight:800;margin-bottom:10px}
+.diagram-headline em{font-style:normal;color:#00ABED}
+.diagram-copy{font-size:11px;line-height:1.5;color:#c0c6cf}
+.diagram-cta{margin-top:14px;background:#00ABED;color:#17110a;padding:9px 10px;border-radius:6px;font-size:10px;text-align:center;font-weight:800}
+.diagram-arrow{color:#00ABED;font-size:23px;text-align:center}
+.diagram-bullets{display:grid;gap:8px;margin-top:13px;font-size:11px;color:#d8dde4}
+.diagram-bullets span:before{content:"✓";color:#00ABED;font-weight:900;margin-right:7px}
+.confirmation-flow{display:grid;grid-template-columns:1fr 22px 1.2fr;align-items:stretch;gap:7px}
+.confirm-card{border:1px solid rgba(255,255,255,.13);border-radius:10px;padding:16px 12px;background:#151920;text-align:center}
+.confirm-card.after{border-color:#00ABED;background:#21180f}
+.confirm-icon{font-size:25px;color:#00ABED;margin-bottom:9px}
+.confirm-title{font-size:15px;font-weight:800;line-height:1.2;margin-bottom:8px}
+.confirm-copy{font-size:10px;line-height:1.5;color:#bfc5ce}
+.confirm-list{margin-top:12px;text-align:left;font-size:10px;line-height:1.9;color:#e1e5e9}
+.email-journey{width:100%;padding:22px 18px;border:1px solid rgba(0,171,237,.3);border-radius:14px;background:#0d1014;color:#fff}
+.journey-label{font-size:10px;letter-spacing:.13em;color:#00ABED;font-weight:800;margin-bottom:20px}
+.journey-steps{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap}
+.journey-steps span{border:1px solid rgba(255,255,255,.17);border-radius:8px;padding:12px 10px;font-size:10px;font-weight:800;background:#151920}
+.journey-steps b{color:#00ABED}.email-journey p{color:#aeb6c0;font-size:11px;margin:15px 0 0}
+@media(max-width:650px){.positioning-flow,.confirmation-flow{grid-template-columns:1fr}.diagram-arrow{transform:rotate(90deg)}}
+</style><style>
+.inline-emails{width:100%;display:grid;gap:10px}
+.inline-emails-kicker{font-size:10px;font-weight:800;letter-spacing:.14em;color:#00ABED;margin-bottom:2px}
+.inline-email{padding:14px 16px;border:1px solid rgba(0,171,237,.28);border-radius:10px;background:linear-gradient(145deg,#11151a,#090b0e);color:#f2f4f7}
+.inline-email-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+.inline-email-top b{font-size:10px;color:#00ABED;letter-spacing:.08em}
+.inline-email-top span{font-size:8px;letter-spacing:.1em;color:#9da6b2}
+.inline-email h3{font-size:13px;line-height:1.35;margin:0 0 7px;font-weight:800;color:#fff}
+.inline-email p{font-size:10px;line-height:1.55;margin:0;color:#b9c1cb}
+@media(max-width:700px){.inline-email{padding:12px}.inline-email h3{font-size:12px}}
+</style></head>
+<body>
+
+<div class="progress"><div class="progress-bar" id="progressBar"></div></div><div class="kbd-hint"><kbd id="navDown" style="cursor:pointer">↓</kbd><kbd id="navUp" style="cursor:pointer">↑</kbd> navigate</div><section class="slide slide-cover visible"><div class="slide-inner"><img src="/decks/axel-ragnarsson/assets/axel-avatar-placeholder.jpg" alt="Axel Ragnarsson" class="cover-logo reveal" style="height:96px;width:96px;object-fit:cover;border-radius:50%;"><h1 class="reveal">Axel Ragnarsson<br><em>Info Operation</em></h1><div class="cover-tag reveal">· OCTOBER 2026 ·</div></div><div class="slide-meta"><span>01</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-split"><div class="slide-inner"><div class="split-media reveal"><div class="shot"><div class="shot-frame"><img src="/assets/market-context/market-growth.png" alt="Global online education market growth statistics"></div></div></div><div class="split-text reveal"><div class="kicker is-solution">MULTIFAMILY INVESTING IS BUILT ON TRUST</div><h2>Expertise matters when it moves people to the next step</h2><p>Investors want to learn how experienced operators started, built, and scaled their businesses. Axel already creates that familiarity through his content and the Multifamily Hour podcast. The opportunity is to connect that attention to a clear next step for readers who want to go deeper.</p></div></div><div class="slide-meta"><span>02</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-split flip"><div class="slide-inner"><div class="split-media reveal"><div class="shot"><div class="shot-frame"><img src="/assets/market-context/growth-leaks.png" alt="Where growth actually leaks"></div></div></div><div class="split-text reveal"><div class="kicker is-problem">WHERE AUDIENCE MOMENTUM GETS LOST</div><h2>Attention can disappear between content and conversion</h2><p>A subscriber can hit a broken link. A curious visitor can be blocked from exploring the podcast. A reader can enjoy an idea without ever seeing a relevant offer. Each gap feels small, but together they make it harder to turn existing attention into deeper engagement and measurable demand.</p></div></div><div class="slide-meta"><span>03</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-section"><div class="slide-inner"><div class="kicker is-solution reveal">A QUICK LOOK AT THE CUSTOMER JOURNEY</div><h2 class="reveal">Axel, I went through your content journey and a few things stood out.</h2><p class="reveal" style="margin:20px auto 0">These are practical gaps in the experience around content you already publish — plus opportunities to connect your audience with the next step.</p><div class="stat-row reveal"><div class="stat-chip"><b>4</b> observations found</div><div class="stat-chip"><b>4</b> recommendations</div><div class="stat-chip"><b>2</b> growth opportunities ahead</div></div></div><div class="slide-meta"><span>04</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-split"><div class="slide-inner"><div class="split-media reveal"><div class=""><div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><img src="https://i.imgur.com/LNRjVMM.png" alt="Current offer presentation"></div></div></div></div><div class="split-text reveal"><div class="kicker is-problem">OBSERVATION 01</div><h2>The offer isn't communicating its full value.</h2><p>A strong offer is already there, but the current presentation makes prospects work to understand why it matters. The transformation, audience, and mechanism aren't doing enough work in the first impression.</p><ul class="list-terminal is-problem"><li>Value isn't immediately apparent</li><li>Transformation lacks clarity</li><li>Stronger positioning would increase perceived value</li></ul></div></div><div class="slide-meta"><span>05</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-split flip"><div class="slide-inner"><div class="split-media reveal"><div class="shot-wrap"><div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><div class="recommendation-diagram"><div class="diagram-kicker">Above-the-fold positioning</div><div class="positioning-flow"><div class="diagram-panel"><div class="diagram-label">Current approach</div><div class="diagram-headline">Build an extra income with multifamily investing</div><div class="diagram-copy">Broad promise. The visitor has to work out whether this is for them and why it is different.</div><div class="diagram-bullets"><span>Vague outcome</span><span>Little context</span></div></div><div class="diagram-arrow">→</div><div class="diagram-panel improved"><div class="diagram-label">Stronger positioning</div><div class="diagram-headline">Build <em>$1K–$5K/month</em> in 30 minutes a day</div><div class="diagram-copy">For busy professionals — without quitting a job or building a following first.</div><div class="diagram-cta">Watch the free training</div><div class="diagram-bullets"><span>Clear audience + outcome</span><span>Mechanism + lower friction</span></div></div></div></div></div></div><div class="badge">after</div></div></div><div class="split-text reveal"><div class="kicker is-solution">RECOMMENDATION 01</div><h2>Let the presentation match the quality of the offer.</h2><p>Make the first screen outcome-first: identify the person, the desired result, and the mechanism that makes the result believable before asking the prospect to dig deeper.</p><ul class="list-terminal is-solution"><li>Stronger positioning</li><li>Better first impression</li><li>Increased perceived value</li></ul></div></div><div class="slide-meta"><span>06</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-split"><div class="slide-inner"><div class="split-media reveal"><div class=""><div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><img src="https://i.imgur.com/V0VSACF.png" alt="Current thank-you page"></div></div></div></div><div class="split-text reveal"><div class="kicker is-problem">OBSERVATION 02</div><h2>The booking confirmation isn't building momentum.</h2><p>Immediately after booking is one of the highest-attention moments in the customer journey. Right now, the confirmation mainly ends the transaction instead of using that attention to reinforce the decision and prepare the prospect.</p><ul class="list-terminal is-problem"><li>Missed opportunity to increase show rates</li><li>Lower buyer commitment</li><li>Underutilized customer journey</li></ul></div></div><div class="slide-meta"><span>07</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-split flip"><div class="slide-inner"><div class="split-media reveal"><div class="shot-wrap"><div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><div class="recommendation-diagram"><div class="diagram-kicker">The confirmation page is step two, not the finish line</div><div class="confirmation-flow"><div class="confirm-card"><div class="confirm-icon">✓</div><div class="confirm-title">You're booked.</div><div class="confirm-copy">Appointment confirmed. That's where the current experience stops.</div><div class="confirm-list">× No expectation setting<br>× No preparation<br>× No momentum</div></div><div class="diagram-arrow">→</div><div class="confirm-card after"><div class="confirm-icon">✓</div><div class="confirm-title">You're all set, Sarah.</div><div class="confirm-copy">Confirm the call, then make the next steps obvious.</div><div class="confirm-list">01 · What we'll cover<br>02 · Watch the short VSL<br>03 · Bring your questions</div><div class="diagram-cta">View your pre-call guide</div></div></div></div></div></div><div class="badge">after</div></div></div><div class="split-text reveal"><div class="kicker is-solution">RECOMMENDATION 02</div><h2>Turn the confirmation page into a strategic asset.</h2><p>Use the thank-you page to reinforce the decision, set expectations, introduce what happens next, and give the prospect a reason to stay engaged between booking and the call.</p><ul class="list-terminal is-solution"><li>Higher show rates</li><li>Better-prepared prospects</li><li>Stronger buying intent</li></ul></div></div><div class="slide-meta"><span>08</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-split"><div class="slide-inner"><div class="split-media reveal"><div class=""><div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><img src="https://i.imgur.com/f90kfXc.png" alt="Current post-booking email sequence"></div></div></div></div><div class="split-text reveal"><div class="kicker is-problem">OBSERVATION 03</div><h2>The conversation goes quiet after booking.</h2><p>Once someone schedules a call, there is a valuable window to reinforce the decision, answer common questions, and build excitement before the conversation. Right now, the sequence is mostly reminders rather than deliberate indoctrination.</p><ul class="list-terminal is-problem"><li>Lower show-rate potential</li><li>Missed trust-building opportunities</li><li>Less prepared prospects</li></ul></div></div><div class="slide-meta"><span>09</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-split flip"><div class="slide-inner"><div class="split-media reveal"><div class="inline-emails"><div class="inline-emails-kicker">EXAMPLE PRE-CALL SEQUENCE</div><article class="inline-email"><div class="inline-email-top"><b>EMAIL 01</b><span>BOOKING CONFIRMATION</span></div><h3>Your call is booked, Axel — here's what happens next</h3><p>Sarah, your call is confirmed. Here's what we'll cover together and how to make the most of our time.</p></article><article class="inline-email"><div class="inline-email-top"><b>EMAIL 02</b><span>BELIEF SHIFT</span></div><h3>You don't need to become a multifamily investing creator</h3><p>Sarah, this isn't about becoming an influencer or spending hours making content. It's about having a clear process that fits around your job.</p></article><article class="inline-email"><div class="inline-email-top"><b>EMAIL 03</b><span>CUSTOMER STORY</span></div><h3>Mark, 41, operations manager, first commission in 5 weeks</h3><p>Sarah, Mark had a full-time job, two kids, and about 30 minutes a day. Here's how he got started.</p></article></div></div><div class="split-text reveal"><div class="kicker is-solution">RECOMMENDATION 03</div><h2>Stay present between booking and the call.</h2><p>Replace reminder-only follow-up with a short pre-call indoctrination sequence: reinforce the decision, shift the core belief, surface proof, answer the obvious objections, and make the call feel like the next logical step.</p><ul class="list-terminal is-solution"><li>Higher show rates</li><li>Better-prepared prospects</li><li>More productive sales calls</li></ul></div></div><div class="slide-meta"><span>10</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-section"><div class="slide-inner"><h2 class="reveal">The Next Stage of Growth</h2><p class="reveal" style="margin:20px auto 0">The recommendations above improve the journey that already exists. The opportunities below are about creating more ways for the right person to enter that journey and letting Axel's expertise compound beyond a single platform.</p></div><div class="slide-meta"><span>11</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-section"><div class="slide-inner"><div class="kicker is-solution reveal">NEXT-LEVEL OPPORTUNITY 01</div><h2 class="reveal">Create a clearer path from learning to investing.</h2><p class="reveal" style="margin:20px auto 0">People exploring multifamily investing have different levels of experience and intent. A focused webinar, VSL, and introductory resource can meet them where they are, explain the value of your approach, and guide the right people toward the next step.</p><div class="reveal" style="margin-top:28px"><button class="cta-btn preview-trigger" data-modal="entryModal">Preview 3 Examples →</button></div></div><div class="slide-meta"><span>12</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-section"><div class="slide-inner"><div class="kicker is-solution reveal">NEXT-LEVEL OPPORTUNITY 02</div><h2 class="reveal">Turn your content into a repeatable discovery channel.</h2><p class="reveal" style="margin:20px auto 0">Your podcast conversations and investing insights can be repurposed into short-form posts and YouTube content. A consistent distribution system gives more people a way to discover your work, build familiarity, and move toward the newsletter or a relevant offer.</p><div class="reveal" style="margin-top:28px"><button class="cta-btn preview-trigger" data-modal="xPostModal">See X Post Example</button></div></div><div class="slide-meta"><span>13</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-section"><div class="slide-inner"><div class="kicker is-solution reveal">THE BIG PICTURE</div><h2 class="reveal">What I See Is Leverage.</h2><p class="reveal" style="margin:22px auto 0">The biggest opportunity isn't simply getting more people to your content. It's building a system where each useful idea can create discovery, capture interest, and guide the right people toward a deeper relationship with your work.</p><ul class="list-terminal is-solution reveal" style="text-align:left;max-width:44ch"><li>More paths from content to an owned audience</li><li>More consistency between publishing and follow-up</li><li>More value created from the expertise you already share</li></ul><p class="reveal" style="margin:22px auto 0">That's the operating system I believe is sitting in front of you.</p></div><div class="slide-meta"><span>14</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-closing"><div class="slide-inner"><div class="kicker is-solution reveal">NEXT STEPS</div><h2 class="reveal">If this resonates, let's talk.</h2><p class="reveal" style="margin:20px auto 0">I already have a few ideas on how I would connect these pieces. If you want to explore them, reach out and we can take it from there.</p><a href="https://www.instagram.com/axel.ragnarsson/" target="_blank" rel="noopener" class="cta-btn reveal">Message me on Instagram →</a></div><div class="slide-meta"><span>15</span><span class="dot"></span><span>15</span></div></section><div class="modal" id="entryModal"><div class="modal-card"><button class="modal-close" data-close>×</button><div class="modal-tabs"><button class="active" data-frame="webinarFrame">WEBINAR</button><button data-frame="vslFrame">VSL</button><button data-frame="lowFrame">LOW TICKET</button></div><iframe class="modal-frame" id="webinarFrame" src="entry-points/webinar/index.html"></iframe><iframe class="modal-frame" id="vslFrame" src="entry-points/vsl/index.html" style="display:none"></iframe><iframe class="modal-frame" id="lowFrame" src="entry-points/low-ticket/index.html" style="display:none"></iframe></div></div><div class="modal" id="xPostModal"><div class="modal-card" style="width:min(760px,96vw);height:min(88vh,1000px);overflow:auto;background:#f7f9f9"><button class="modal-close" data-close>×</button><div style="max-width:600px;margin:0 auto;padding:28px 14px 34px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:#0f1419">
+  <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#00ABED;font-weight:800;margin:0 0 14px">X POST EXAMPLE · DRAFT</div>
+  <article style="background:#fff;border:1px solid #eff3f4;border-radius:16px;padding:20px 20px 14px">
+    <div style="display:flex;gap:12px;align-items:flex-start">
+      <img src="/decks/axel-ragnarsson/assets/axel-avatar-placeholder.jpg" alt="Axel Ragnarsson" style="width:48px;height:48px;object-fit:cover;border-radius:50%;flex:none">
+      <div style="min-width:0;flex:1">
+        <div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;font-size:15px;font-weight:800;color:#0f1419">Axel Ragnarsson <svg aria-label="Verified account" viewBox="0 0 22 22" style="width:17px;height:17px;flex:none" role="img"><path fill="#1D9BF0" d="M20.396 11a3.2 3.2 0 0 0-.9-2.22 3.2 3.2 0 0 0-.7-3.1 3.2 3.2 0 0 0-3.1-.7 3.2 3.2 0 0 0-2.22-.9 3.2 3.2 0 0 0-2.22.9 3.2 3.2 0 0 0-3.1.7 3.2 3.2 0 0 0-.7 3.1 3.2 3.2 0 0 0 .9 3.1 3.2 3.2 0 0 0 .7 3.1 3.2 3.2 0 0 0 3.1.7 3.2 3.2 0 0 0 2.22.9 3.2 3.2 0 0 0 2.22-.9 3.2 3.2 0 0 0 3.1-.7 3.2 3.2 0 0 0 .7-3.1 3.2 3.2 0 0 0 .9-2.22Z"/><path fill="#fff" d="m9.35 14.55-3.1-3.1 1.4-1.4 1.7 1.7 4.8-4.8 1.4 1.4z"/></svg><span style="font-size:14px;font-weight:400;color:#536471">@axel.ragnarsson · 2h</span><span style="margin-left:auto;font-size:19px;line-height:1;color:#536471">𝕏</span></div>
+        <div style="font-size:15px;line-height:1.55;margin-top:12px;white-space:pre-line">If I was stuck at a 9–5 and wanted to add $3,700 a month to support my income, here's exactly what I'd do.
+
+For some reason a lot of people like to overcomplicate online money.
+
+I wouldn't quit my job. I wouldn't go "all in". I wouldn't become an influencer lol
+
+I'd treat it like a second shift with a clear target.
+
+First, the math, because most people skip it:
+
+$3,700/month is roughly $123 a day.
+
+On multifamily investing Affiliate, that's about 8 sales a day on a product that pays you $15 a sale.
+
+Not a viral video. Not 100K followers. Eight sales.
+
+That number changes everything, because eight sales a day is a volume problem, not a talent problem.
+
+So here's the exact plan.
+
+1. Pick 3 products, not 30.
+Products already selling, with a commission of $10+ per sale and reviews that show real demand. I'm not picking what I like. I'm picking what already moves.
+
+2. Block 90 minutes a day. Same time, every day.
+Before work, or right after dinner. Not "when I feel like it." The calendar decides, not my mood.
+
+3. Film once, test five hooks.
+Same product, same demo, five different first 3 seconds. The hook is the only thing I'm really testing. The rest of the video stays the same.
+
+4. Check the numbers every 48 hours.
+If a hook gets traction, I make 5 more videos around that angle. If it doesn't, I drop it with no emotion and move on.
+
+5. Never start from zero twice.
+Every winner becomes a template. Next product, same structure, new product. This is where the 90 minutes starts producing more than 90 minutes of work.
+
+Month one is slow. I'd expect a few hundred dollars and a lot of learning.
+Month two is when the winners start to repeat.
+Month three is when the system, not the effort, starts doing the lifting.
+
+Most people quit in week three, right before the data starts to mean something.
+
+Nobody needs to quit their job to start.
+They just need a number, a block of time, and the discipline to test instead of guess.
+
+$123 a day.
+90 minutes.
+Test, cut, repeat.
+
+That's the whole game.</div>
+        <div style="display:flex;justify-content:space-between;gap:8px;max-width:440px;margin-top:20px;color:#536471;font-size:12px">
+          <span style="display:flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5 8 8 0 0 1-3.5-.8L4 20l1.3-4A7.5 7.5 0 1 1 20 11.5Z"/></svg></span>
+          <span style="display:flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></svg></span>
+          <span style="display:flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg></span>
+          <span style="display:flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6"><path d="M4 4v16M4 5h13l-2 4 2 4H4"/></svg></span>
+        </div>
+      </div>
+    </div>
+  </article>
+</div></div></div><div class="modal" id="emailModal"><div class="modal-card"><button class="modal-close" data-close>×</button><div class="modal-tabs email-tabs"><button class="active" data-email="0">EMAIL 01</button><button data-email="1">EMAIL 02</button><button data-email="2">EMAIL 03</button></div><div class="email-wrap"><div class="email-card" data-email-card="0"><div class="eyebrow">EMAIL 01</div><h3>Subject: Your call is booked, Axel — here's what happens next</h3><p>Sarah,</p><p>You booked your call. Good.</p><p>But before we speak, I want to make one thing clear: this isn't going to be a pitch where we spend an hour trying to convince you that multifamily investing exists.</p><p>The real question is much simpler: <strong>is this the right vehicle for you to build a second income stream around your existing life?</strong></p><p>Between now and the call, I'll send you a few short emails. These aren't reminders. They're designed to answer the questions that usually stop busy professionals from taking this seriously: whether you need an audience, whether you need to become an influencer, and whether this can actually fit around a 9–5.</p><p>If you only watch one thing before we talk, watch the VSL here:</p><p><strong>[VSL LINK]</strong></p><p>It'll give you the model, the economics, and the basic workflow so we can spend our conversation on your situation rather than explaining the category.</p><p>And please show up somewhere quiet with enough time to actually talk. This works a lot better than joining from the car.</p><p>Talk soon,<br>Axel</p></div>
+<div class="email-card" data-email-card="1" style="display:none"><div class="eyebrow">EMAIL 02</div><h3>Subject: You don't need to become a multifamily investing creator</h3><p>Sarah,</p><p>There's a version of multifamily investing that I wouldn't recommend to you.</p><p>Trying to become an influencer. Posting all day. Building a huge following before you can make money. Turning your evenings into another full-time job.</p><p>That's the version most people picture when they hear “multifamily investing.” And it's exactly why a lot of busy professionals write it off.</p><p>But that's not the model we're talking about.</p><p>The opportunity is <strong>affiliate content built around products people already want</strong>. Your job is to create useful short-form content, learn what gets attention, and repeat what works. The audience can come from the platform — you don't need to spend years building one first.</p><p>That's also why the 30-minute-a-day angle matters. You don't need to quit your job to test the model. You need a simple workflow you can execute consistently.</p><p>And if your objection is “isn't this already saturated?”, that's the wrong question. The better question is whether there is still demand for products and content that helps people decide what to buy. There is. The game is getting better at the content and the selection — not pretending the platform is a lottery ticket.</p><p>So before our call, watch the VSL with that distinction in mind. Don't ask whether multifamily investing is “easy.” Ask whether this particular model fits your available time, risk tolerance, and goals.</p><p><strong>[VSL / ROADMAP LINK]</strong></p><p>We'll get into your specific situation on the call.</p><p>— Axel</p></div>
+<div class="email-card" data-email-card="2" style="display:none"><div class="eyebrow">EMAIL 03</div><h3>Subject: Mark, 41, operations manager, first commission in 5 weeks</h3><p>Sarah,</p><p>I want to tell you about Mark.</p><p>If there's one story I'd want you to read before our call, it's his.</p><p>Mark is 41, from Columbus, Ohio, married with two kids. He's an operations manager, works about 45 hours a week, and was looking for a way to add income without adding a second job.</p><p>Before he found us, he'd tried free YouTube videos and a low-cost course. Nothing stuck. His account never got approved, and he never knew what to post.</p><p>He joined in March and started with about 30 minutes a day, before the kids woke up. By week two his account was approved and his first videos were live. By week five he had his first commission. By month three he was earning commissions every week and reinvesting in more content.</p><p>Mark didn't have a following, a marketing background or free time. He had a full-time job and 30 minutes.</p><p>A few weeks in, he told me something I think about a lot: "Before, I was guessing every night. Now I open the app, see what my coach flagged, and do the next thing."</p><p>I picked Mark instead of our biggest results because he's the closest thing we have to the typical person on these calls. Busy. Skeptical. Tired of trying things alone.</p><p>If you see yourself in that, his path is the realistic version of what's possible. Not an overnight story. Steady work, the right system, and a team that tells you the next move.</p><p>We'll map out what your version looks like on our call.</p><p>— Axel</p></div></div></div></div></div></div><style>.preview-trigger{cursor:pointer}.modal{position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);z-index:200;display:none;align-items:center;justify-content:center;padding:24px}.modal.open{display:flex}.modal-card{width:min(1200px,96vw);height:min(88vh,900px);background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;position:relative}.modal-close{position:absolute;top:12px;right:14px;z-index:3;background:var(--surface-2);color:var(--ink);border:1px solid var(--line);border-radius:8px;width:36px;height:36px;cursor:pointer;font:700 18px var(--mono)}.modal-tabs{height:54px;display:flex;gap:8px;align-items:center;padding:8px 56px 8px 14px;border-bottom:1px solid var(--line)}.modal-tabs button{background:var(--surface-2);border:1px solid var(--line);color:var(--ink-soft);padding:9px 12px;border-radius:8px;cursor:pointer;font:600 11px var(--mono)}.modal-tabs button.active{background:var(--accent-fill);color:var(--on-accent)}.email-tabs{height:58px;gap:10px}.email-tabs button{border-radius:999px;min-width:100px;padding:10px 18px}.email-wrap{padding:24px 30px;overflow:auto;height:calc(100% - 58px)}.email-card{max-width:900px;margin:0 auto 16px}.email-card h3{margin:8px 0 18px;font-size:22px}.email-card .eyebrow{margin-bottom:8px}.modal-frame{width:100%;height:calc(100% - 54px);border:0;background:#fff}.email-wrap{padding:34px;overflow:auto;height:100%}.email-card{background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:16px}.email-card .eyebrow{font:700 11px var(--mono);color:var(--accent-text);letter-spacing:.1em}.email-card h3{margin:8px 0 14px;font-size:22px}.email-card p{font-size:14px;line-height:1.65;margin:10px 0}.email-card .subject{font:600 12px var(--mono);color:var(--ink-muted);margin-bottom:16px}.email-card ul{padding-left:20px;color:var(--ink-soft);line-height:1.7;font-size:14px}</style><script>const slides=document.querySelectorAll('.slide'),progressBar=document.getElementById('progressBar');const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.3});slides.forEach(s=>io.observe(s));function updateProgress(){const d=document.documentElement.scrollHeight-window.innerHeight;progressBar.style.width=(d>0?(window.scrollY/d)*100:0)+'%'}window.addEventListener('scroll',updateProgress,{passive:true});updateProgress();function currentIndex(){let i=0,m=Infinity;slides.forEach((s,n)=>{const d=Math.abs(s.getBoundingClientRect().top);if(d<m){m=d;i=n}});return i}function goNext(){slides[Math.min(currentIndex()+1,slides.length-1)].scrollIntoView({behavior:'smooth'})}function goPrev(){slides[Math.max(currentIndex()-1,0)].scrollIntoView({behavior:'smooth'})}document.addEventListener('keydown',e=>{if(e.key==='ArrowDown'||e.key==='PageDown'){e.preventDefault();goNext()}if(e.key==='ArrowUp'||e.key==='PageUp'){e.preventDefault();goPrev()}});document.getElementById('navDown')?.addEventListener('click',goNext);document.getElementById('navUp')?.addEventListener('click',goPrev);document.querySelectorAll('.preview-trigger').forEach(b=>b.addEventListener('click',()=>document.getElementById(b.dataset.modal).classList.add('open')));document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>b.closest('.modal').classList.remove('open')));document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')}));document.querySelectorAll('.modal-tabs button').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.modal-tabs button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('#entryModal .modal-frame').forEach(f=>f.style.display='none');document.getElementById(btn.dataset.frame).style.display='block'}));document.querySelectorAll('.email-tabs button').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.email-tabs button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('#emailModal [data-email-card]').forEach(card=>card.style.display=card.dataset.emailCard===btn.dataset.email?'block':'none')}));document.addEventListener('click',e=>{const trigger=e.target.closest('.preview-trigger');if(!trigger)return;const modal=document.getElementById(trigger.dataset.modal);if(modal)modal.classList.add('open')});const s3=[...slides].find(s=>s.querySelector('.kicker')?.textContent.includes('RECOMMENDATION 03'));if(s3){const b=document.createElement('button');b.className='cta-btn preview-trigger';b.dataset.modal='emailModal';b.textContent='Preview the 3-email sequence →';b.style.marginTop='28px';s3.querySelector('.split-text').appendChild(b)}</script></body></html>
