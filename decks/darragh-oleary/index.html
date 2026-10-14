@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<base href="/decks/darragh-oleary/">
+<title>Darragh Oleary — Info Operation</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root, [data-theme="dark"]{
+    --bg:#050506;--surface:#0d0e10;--surface-2:#141519;
+    --ink:#f2f4f3;--ink-soft:#b9c1c3;--ink-muted:#767f82;--line:rgba(255,255,255,0.09);
+    --accent-fill:#0083E5;--accent-text:#0083E5;--accent-soft:rgba(0,131,229,0.1);
+    --danger-fill:#ff5266;--danger-text:#ff5266;--danger-soft:rgba(255,82,102,0.1);
+    --shadow-soft:rgba(0,0,0,0.6);--dot-color:#333;--on-accent:#00101d;
+    --display:'Space Grotesk',sans-serif;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  [data-theme="light"]{
+    --bg:#e6e6e6;--surface:#ffffff;--surface-2:#f1f1f1;
+    --ink:#14151a;--ink-soft:#4a4d54;--ink-muted:#82858c;--line:rgba(0,0,0,0.1);
+    --accent-fill:#0083E5;--accent-text:#0068b8;--accent-soft:rgba(0,131,229,0.1);
+    --danger-fill:#ff5266;--danger-text:#c81f3f;--danger-soft:rgba(200,31,63,0.1);
+    --shadow-soft:rgba(0,0,0,0.14);--dot-color:#cfcfcf;--on-accent:#00101d;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  ::selection{background:var(--accent-fill);color:#000}
+
+  .slide{min-height:100vh;padding:clamp(32px,6vw,88px);scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;position:relative;border-bottom:1px solid var(--line)}
+  .slide-inner{max-width:1180px;margin:0 auto;width:100%;position:relative;z-index:1}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  .slide.visible .reveal{opacity:1;transform:translateY(0)}
+  .slide.visible .reveal:nth-child(1){transition-delay:.05s}
+  .slide.visible .reveal:nth-child(2){transition-delay:.13s}
+  .slide.visible .reveal:nth-child(3){transition-delay:.21s}
+  .slide.visible .reveal:nth-child(4){transition-delay:.29s}
+
+  .kicker{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:22px}
+  .kicker::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent-fill);box-shadow:0 0 8px var(--accent-fill)}
+  .kicker.is-problem::before{background:var(--danger-fill);box-shadow:0 0 8px var(--danger-fill)}
+  .kicker.is-problem{color:var(--danger-text)}
+  .kicker.is-solution{color:var(--accent-text)}
+
+  h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-0.02em;line-height:1.08;color:var(--ink)}
+  h2{font-size:clamp(30px,4vw,50px);max-width:20ch;margin-bottom:16px}
+  p{color:var(--ink-soft);font-size:clamp(16px,1.35vw,18.5px);line-height:1.6;max-width:56ch;margin-top:16px}
+  p:first-child{margin-top:0}
+
+  .slide-meta{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:11px;color:var(--ink-muted);letter-spacing:.1em}
+  .slide-meta .dot{width:3px;height:3px;border-radius:50%;background:var(--ink-muted)}
+
+  /* cover */
+  .slide-cover{align-items:center;text-align:center}
+  .slide-cover .slide-inner{display:flex;flex-direction:column;align-items:center}
+  .cover-logo{height:56px;margin-bottom:40px}
+  .slide-cover h1{font-size:clamp(38px,6.5vw,76px);margin-bottom:22px}
+  .slide-cover h1 em{color:var(--accent-text);font-style:normal}
+  .cover-tag{font-family:var(--mono);font-size:12px;color:var(--ink-muted);letter-spacing:.1em}
+
+  /* intro / section */
+  .slide-section{align-items:center;text-align:center}
+  .slide-section .slide-inner{display:flex;flex-direction:column;align-items:center}
+  .stat-row{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;justify-content:center}
+  .stat-chip{font-family:var(--mono);font-size:13px;color:var(--ink-soft);border:1px solid var(--line);border-radius:100px;padding:9px 18px;background:var(--surface)}
+  .stat-chip b{color:var(--accent-text)}
+
+  /* split (fact/fix) */
+  .slide-split .slide-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .split-media{order:1}.split-text{order:2}
+  .slide-split.flip .split-media{order:2}.slide-split.flip .split-text{order:1}
+
+  .shot{border-radius:14px;overflow:hidden;background:var(--surface);border:1px solid var(--line);box-shadow:0 30px 60px -20px var(--shadow-soft)}
+  .shot-bar{display:flex;gap:6px;padding:10px 12px;background:var(--surface-2);border-bottom:1px solid var(--line)}
+  .shot-bar span{width:8px;height:8px;border-radius:50%;background:var(--dot-color)}
+  .shot-frame{height:420px;display:flex;align-items:center;justify-content:center;background:var(--surface-2);overflow:hidden}
+  .shot-frame img{width:100%;height:100%;object-fit:contain;display:block}
+  .shot.duo{display:flex;flex-direction:column;gap:1px;background:var(--line)}
+  .shot.duo .shot-frame{background:var(--surface)}
+  .shot-wrap{position:relative}
+  .badge{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:var(--accent-fill);color:var(--on-accent);padding:6px 12px;border-radius:100px;font-weight:600}
+
+  .list-terminal{list-style:none;margin-top:20px}
+  .list-terminal li{font-family:var(--mono);font-size:14.5px;color:var(--ink-soft);padding:9px 0;border-bottom:1px solid var(--line);display:flex;gap:10px}
+  .list-terminal li:first-child{border-top:1px solid var(--line)}
+  .list-terminal.is-problem li::before{content:"›";color:var(--danger-text);font-weight:700}
+  .list-terminal.is-solution li::before{content:"✓";color:var(--accent-text);font-weight:700}
+
+  .flow{display:flex;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap;justify-content:center}
+  .flow-step{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;font-family:var(--mono);font-size:13px;color:var(--ink-soft);text-align:center;flex:1;min-width:140px}
+  .flow-step b{display:block;font-family:var(--display);font-size:16px;color:var(--ink);margin-bottom:4px;font-weight:600}
+  .flow-step .flow-lines b{margin-bottom:2px}
+  .flow-step img{width:26px;height:26px;object-fit:contain;margin:0 auto 8px;display:block}
+  .flow-arrow{color:var(--accent-text);font-size:20px}
+
+  /* icon grid */
+  .icon-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:16px;margin-top:40px;max-width:640px}
+  .icon-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 12px;display:flex;flex-direction:column;align-items:center;gap:12px}
+  .icon-card img{width:34px;height:34px;object-fit:contain;border-radius:6px}
+  .icon-card span{font-family:var(--mono);font-size:11px;color:var(--ink-muted);text-align:center}
+
+  /* closing */
+  .slide-closing{align-items:center;text-align:center}
+  .slide-closing .slide-inner{display:flex;flex-direction:column;align-items:center}
+  .cta-btn{margin-top:32px;display:inline-flex;align-items:center;gap:12px;border:none;border-radius:10px;padding:22px 48px;font-family:var(--mono);font-size:15px;color:var(--on-accent);letter-spacing:.06em;background:var(--accent-fill);text-decoration:none;font-weight:700;transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s var(--ease);box-shadow:0 14px 34px -12px var(--accent-soft);animation:cta-pulse 2.4s ease-in-out infinite}
+  .cta-btn:hover{transform:translateY(-3px) scale(1.02) !important;box-shadow:0 20px 45px -12px var(--accent-soft) !important;animation-play-state:paused}
+  .cta-btn:active{transform:translateY(-1px) scale(.99) !important}
+  @keyframes cta-pulse{0%,100%{box-shadow:0 14px 34px -12px var(--accent-soft)}50%{box-shadow:0 20px 42px -10px var(--accent-soft)}}
+  @media (prefers-reduced-motion:reduce){.cta-btn{animation:none}}
+
+  .progress{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(255,255,255,.06);z-index:100}
+  .progress-bar{height:100%;background:var(--accent-fill);transition:width .15s linear;box-shadow:0 0 10px var(--accent-fill)}
+  .kbd-hint{position:fixed;bottom:18px;right:22px;font-family:var(--mono);font-size:10.5px;color:var(--ink-muted);letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:8px;background:rgba(13,14,16,.85);backdrop-filter:blur(8px);padding:7px 14px;border-radius:100px;border:1px solid var(--line);z-index:50}
+  .kbd-hint kbd{font-family:var(--mono);background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:2px 6px;font-size:10px;color:var(--ink-soft)}
+
+  @media (max-width:860px){
+    .slide-split .slide-inner{grid-template-columns:1fr;gap:24px}
+    .slide-split .split-text{order:0}
+    .slide-split .split-media{order:1}
+    .slide-split .split-text .kicker{margin-top:0}
+    .slide-split .split-text h2{margin-top:8px}
+    .slide-split .split-media{width:100%;min-width:0}
+    .slide-split .split-media img{max-width:100%;height:auto;object-fit:contain}
+    .kbd-hint{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){.reveal{transition:none;opacity:1;transform:none}}
+</style>
+<style>
+/* Darragh deck: clear, didactic recommendation diagrams */
+.recommendation-diagram{width:100%;padding:24px 18px;background:linear-gradient(145deg,#101318,#080a0d);border:1px solid rgba(0,131,229,.28);border-radius:14px;color:#f5f6f7}
+.diagram-kicker{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:#0083E5;font-weight:800;margin-bottom:16px}
+.positioning-flow{display:grid;grid-template-columns:1fr 28px 1fr;align-items:center;gap:8px}
+.diagram-panel{padding:16px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.13);background:#151920;min-height:180px}
+.diagram-panel.improved{border-color:#0083E5;background:linear-gradient(160deg,#0a1b2e,#111318)}
+.diagram-label{font-size:10px;letter-spacing:.1em;color:#9aa4b2;text-transform:uppercase;margin-bottom:12px}
+.diagram-headline{font-size:17px;line-height:1.18;font-weight:800;margin-bottom:10px}
+.diagram-headline em{font-style:normal;color:#0083E5}
+.diagram-copy{font-size:11px;line-height:1.5;color:#c0c6cf}
+.diagram-cta{margin-top:14px;background:#0083E5;color:#00101d;padding:9px 10px;border-radius:6px;font-size:10px;text-align:center;font-weight:800}
+.diagram-arrow{color:#0083E5;font-size:23px;text-align:center}
+.diagram-bullets{display:grid;gap:8px;margin-top:13px;font-size:11px;color:#d8dde4}
+.diagram-bullets span:before{content:"✓";color:#0083E5;font-weight:900;margin-right:7px}
+.confirmation-flow{display:grid;grid-template-columns:1fr 22px 1.2fr;align-items:stretch;gap:7px}
+.confirm-card{border:1px solid rgba(255,255,255,.13);border-radius:10px;padding:16px 12px;background:#151920;text-align:center}
+.confirm-card.after{border-color:#0083E5;background:#0a1b2e}
+.confirm-icon{font-size:25px;color:#0083E5;margin-bottom:9px}
+.confirm-title{font-size:15px;font-weight:800;line-height:1.2;margin-bottom:8px}
+.confirm-copy{font-size:10px;line-height:1.5;color:#bfc5ce}
+.confirm-list{margin-top:12px;text-align:left;font-size:10px;line-height:1.9;color:#e1e5e9}
+.email-journey{width:100%;padding:22px 18px;border:1px solid rgba(0,131,229,.3);border-radius:14px;background:#0d1014;color:#fff}
+.journey-label{font-size:10px;letter-spacing:.13em;color:#0083E5;font-weight:800;margin-bottom:20px}
+.journey-steps{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap}
+.journey-steps span{border:1px solid rgba(255,255,255,.17);border-radius:8px;padding:12px 10px;font-size:10px;font-weight:800;background:#151920}
+.journey-steps b{color:#0083E5}.email-journey p{color:#aeb6c0;font-size:11px;margin:15px 0 0}
+.img-placeholder{width:calc(100% - 40px);height:calc(100% - 40px);min-height:260px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:2px dashed rgba(0,131,229,.5);border-radius:12px;background:repeating-linear-gradient(135deg,rgba(0,131,229,.07) 0 14px,transparent 14px 28px);color:var(--ink-muted);font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-align:center;padding:24px}
+.img-placeholder b{color:var(--accent-text);font-size:13px;letter-spacing:.12em}
+@media(max-width:650px){.positioning-flow,.confirmation-flow{grid-template-columns:1fr}.diagram-arrow{transform:rotate(90deg)}}
+</style><style>
+.inline-emails{width:100%;display:grid;gap:10px}
+.inline-emails-kicker{font-size:10px;font-weight:800;letter-spacing:.14em;color:#0083E5;margin-bottom:2px}
+.inline-email{padding:14px 16px;border:1px solid rgba(0,131,229,.28);border-radius:10px;background:linear-gradient(145deg,#11151a,#090b0e);color:#f2f4f7}
+.inline-email-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+.inline-email-top b{font-size:10px;color:#0083E5;letter-spacing:.08em}
+.inline-email-top span{font-size:8px;letter-spacing:.1em;color:#9da6b2}
+.inline-email h3{font-size:13px;line-height:1.35;margin:0 0 7px;font-weight:800;color:#fff}
+.inline-email p{font-size:10px;line-height:1.55;margin:0;color:#b9c1cb}
+@media(max-width:700px){.inline-email{padding:12px}.inline-email h3{font-size:12px}}
+</style></head>
+<body>
+
+<div class="progress"><div class="progress-bar" id="progressBar"></div></div><div class="kbd-hint"><kbd id="navDown" style="cursor:pointer">↓</kbd><kbd id="navUp" style="cursor:pointer">↑</kbd> navigate</div><section class="slide slide-cover visible"><div class="slide-inner"><img src="https://i.imgur.com/baA89uu.jpeg" alt="Darragh Oleary" class="cover-logo reveal" style="height:96px;width:96px;object-fit:cover;border-radius:50%;"><h1 class="reveal">Darragh Oleary<br><em>Info Operation</em></h1><div class="cover-tag reveal">· OCTOBER 2026 ·</div></div><div class="slide-meta"><span>01</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-split"><div class="slide-inner"><div class="split-media reveal"><div class="shot"><div class="shot-frame"><img src="/assets/market-context/market-growth.png" alt="Global online education market growth statistics"></div></div></div><div class="split-text reveal"><div class="kicker is-solution">THE ONLINE EDUCATION MARKET KEEPS EXPANDING</div><h2>Expertise is no longer what separates the winners</h2><p>More creators launch courses. More coaches enter the market. More money flows into education every year. But as the market matures, the winners aren't simply the ones with the best offer. They're the businesses with the systems that convert more visitors, recover more buyers, and increase customer value over time.</p></div></div><div class="slide-meta"><span>02</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-split flip"><div class="slide-inner"><div class="split-media reveal"><div class="shot"><div class="shot-frame"><img src="/assets/market-context/growth-leaks.png" alt="Where growth actually leaks"></div></div></div><div class="split-text reveal"><div class="kicker is-problem">WHERE GROWTH ACTUALLY LEAKS</div><h2>Growth isn't usually lost at the top of the funnel</h2><p>It's everything that happens after someone clicks. The slow funnels. Poor follow-up. Weak onboarding. Disconnected automations. Prospects who lose momentum before booking. Each one feels small. Together, they quietly become one of the largest costs in the business.</p></div></div><div class="slide-meta"><span>03</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-section"><div class="slide-inner"><div class="kicker is-solution reveal">IT ONLY TAKES 45 SECONDS</div><h2 class="reveal">Darragh, I went through your info setup (funnel) and a few things stood out.</h2><p class="reveal" style="margin:20px auto 0">Some are quietly costing you revenue. Others are opportunities that could increase your return without increasing your work.</p><div class="stat-row reveal"><div class="stat-chip"><b>3</b> facts found</div><div class="stat-chip"><b>3</b> fixes proposed</div><div class="stat-chip"><b>2</b> new opportunities ahead</div></div></div><div class="slide-meta"><span>04</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-split"><div class="slide-inner"><div class="split-media reveal"><div class=""><div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><img src="https://i.imgur.com/ptOqQw5.png" alt="Current thank-you page after scheduling a call"></div></div></div></div><div class="split-text reveal"><div class="kicker is-problem">OBSERVATION 01</div><h2>Thank You Page Broken After Scheduling Call</h2><p>After a prospect schedules a call, the page redirects them to a GoDaddy domain-for-sale page instead of a proper confirmation experience. Right after someone commits time to speak with you, the journey suddenly feels broken and unprofessional.</p><ul class="list-terminal is-problem"><li>The prospect gets no clear confirmation that the booking was successful.</li><li>The broken redirect can create doubt about whether the call is actually scheduled.</li><li>The business loses a valuable opportunity to reinforce the decision and set expectations.</li></ul></div></div><div class="slide-meta"><span>05</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-split flip"><div class="slide-inner"><div class="split-media reveal"><div class="shot-wrap"><div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><!-- PLACEHOLDER: swap the div below for <img src="..." alt="Recommendation 01"> when the image is ready --><div class="img-placeholder" data-slot="recommendation-01"><b>Recommendation 01</b><span>Image coming soon</span></div></div></div><div class="badge">after</div></div></div><div class="split-text reveal"><div class="kicker is-solution">RECOMMENDATION 01</div><h2>Turn the booking confirmation into the next step toward the sale</h2><p>Create a dedicated post-booking experience that not only confirms the call but also gets prospects looking forward for the conversation.</p><ul class="list-terminal is-solution"><li>Confirm the booking and clearly communicate what happens next.</li><li>Set expectations for the call and what the prospect should prepare.</li><li>Reinforce the value of showing up and having the conversation.</li></ul></div></div><div class="slide-meta"><span>06</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-split"><div class="slide-inner"><div class="split-media reveal"><div class=""><div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><img src="https://i.imgur.com/SezL2fQ.png" alt="Current sales process for every lead"></div></div></div></div><div class="split-text reveal"><div class="kicker is-problem">OBSERVATION 02</div><h2>Every lead enters the same sales process, regardless of fit.</h2><p>The current process doesn't gather enough information to distinguish between prospects who are ready to scale and those who lack the client base, capacity, or marketing foundation to benefit from the offer. As a result, the business has limited insight into lead quality before investing time in a call.</p><ul class="list-terminal is-problem"><li>Sales time can be spent on prospects who aren't a strong fit.</li><li>Calls begin without a clear picture of the prospect's needs or constraints.</li><li>The business has less information to prioritize the strongest opportunities.</li></ul></div></div><div class="slide-meta"><span>07</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-split flip"><div class="slide-inner"><div class="split-media reveal"><div class="shot-wrap"><div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><!-- PLACEHOLDER: swap the div below for <img src="..." alt="Recommendation 02"> when the image is ready --><div class="img-placeholder" data-slot="recommendation-02"><b>Recommendation 02</b><span>Image coming soon</span></div></div></div><div class="badge">after</div></div></div><div class="split-text reveal"><div class="kicker is-solution">RECOMMENDATION 02</div><h2>Build a qualification system around business readiness</h2><p>Introduce a short, focused application that helps identify fit and gives the sales process better information before each call.</p><ul class="list-terminal is-solution"><li>Qualify prospects based on their current business stage and goals.</li><li>Assess their ability to fulfill more client work and implement a growth strategy.</li><li>Use the responses to prioritize calls and prepare a more relevant sales conversation.</li></ul></div></div><div class="slide-meta"><span>08</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-split"><div class="slide-inner"><div class="split-media reveal"><div class=""><div class="shot"><div class="shot-bar"><span></span><span></span><span></span></div><div class="shot-frame"><img src="https://i.imgur.com/IK0x46C.png" alt="Current pre-call email sequence"></div></div></div></div><div class="split-text reveal"><div class="kicker is-problem">OBSERVATION 03</div><h2>The emails remind prospects to attend, but don't build commitment.</h2><p>The email sequence focuses on reminding prospects about their scheduled call, rather than preparing them for it or strengthening their desire to attend. The communication handles the logistics, but misses the opportunity to build confidence in the decision they already made.</p><ul class="list-terminal is-problem"><li>Prospects receive reminders without much additional reason to value the call.</li><li>The perceived importance of the conversation isn't actively reinforced.</li><li>The sequence relies on the original booking intent to carry the prospect through to attendance.</li></ul></div></div><div class="slide-meta"><span>09</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-split flip"><div class="slide-inner"><div class="split-media reveal"><div class="inline-emails"><div class="inline-emails-kicker">EXAMPLE PRE-CALL SEQUENCE</div><article class="inline-email"><div class="inline-email-top"><b>EMAIL 01</b><span>BOOKING CONFIRMATION</span></div><h3>Your call is booked, Sarah — here's what happens next</h3><p>Sarah, your call is confirmed. Here's what we'll cover, what to have ready, and how to make the most of our time.</p></article><article class="inline-email"><div class="inline-email-top"><b>EMAIL 02</b><span>BELIEF SHIFT</span></div><h3>You don't need more followers to add $10K a month</h3><p>Sarah, this isn't about posting more or chasing reach. It's about turning the interest you already have into booked, qualified calls.</p></article><article class="inline-email"><div class="inline-email-top"><b>EMAIL 03</b><span>CUSTOMER STORY</span></div><h3>Jake, 34, online trainer, added $10K/month in 90 days</h3><p>Sarah, Jake had 14 clients, a full schedule and no system for finding more. Here's how he changed that.</p></article></div></div><div class="split-text reveal"><div class="kicker is-solution">RECOMMENDATION 03</div><h2>Pre-sell the value of the conversation</h2><p>Create a pre-call sequence that helps prospects understand their situation and see the value of taking the next step.</p><ul class="list-terminal is-solution"><li>Share useful ideas and insights relevant to their business.</li><li>Address common misconceptions and reasons prospects hesitate.</li><li>Set expectations for the call so prospects arrive informed and engaged.</li></ul></div></div><div class="slide-meta"><span>10</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-section"><div class="slide-inner"><h2 class="reveal">The Next Stage of Growth</h2><p class="reveal" style="margin:20px auto 0">The recommendations above improve the journey that already exists. The opportunities below are about creating more ways for the right person to enter that journey and letting Darragh's expertise compound beyond a single platform.</p></div><div class="slide-meta"><span>11</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-section"><div class="slide-inner"><div class="kicker is-solution reveal">NEXT-LEVEL OPPORTUNITY 01</div><h2 class="reveal">Create more ways to work with you.</h2><p class="reveal" style="margin:20px auto 0">Not every prospect is ready for the same level of commitment. Adding a webinar, VSL, and low-ticket entry point gives different levels of awareness a place to enter — while naturally progressing toward the 1-on-1 mentorship.</p><div class="reveal" style="margin-top:28px"><button class="cta-btn preview-trigger" data-modal="entryModal">Preview 3 Examples →</button></div></div><div class="slide-meta"><span>12</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-section"><div class="slide-inner"><div class="kicker is-solution reveal">NEXT-LEVEL OPPORTUNITY 02</div><h2 class="reveal">Expand the reach of your expertise.</h2><p class="reveal" style="margin:20px auto 0">The expertise is already there. The opportunity is to distribute it consistently across multiple channels — especially X — so the same ideas can create discovery, trust, and inbound demand long before someone sees the offer.</p><div class="reveal" style="margin-top:28px"><button class="cta-btn preview-trigger" data-modal="xPostModal">See Post Example</button></div></div><div class="slide-meta"><span>13</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-section"><div class="slide-inner"><div class="kicker is-solution reveal">THE BIG PICTURE</div><h2 class="reveal">What I See Is Leverage.</h2><p class="reveal" style="margin:22px auto 0">The biggest opportunity isn't simply getting more people into the current funnel. It's building a system where the same expertise creates demand, captures different levels of intent, and prepares prospects before they ever reach a sales conversation.</p><ul class="list-terminal is-solution reveal" style="text-align:left;max-width:44ch"><li>More ways to capture demand</li><li>More momentum between touchpoints</li><li>More value created from the expertise you already have</li></ul><p class="reveal" style="margin:22px auto 0">That's the operating system I believe is sitting in front of you.</p></div><div class="slide-meta"><span>14</span><span class="dot"></span><span>15</span></div></section>
+<section class="slide slide-closing"><div class="slide-inner"><div class="kicker is-solution reveal">NEXT STEPS</div><h2 class="reveal">If this resonates, let's talk.</h2><p class="reveal" style="margin:20px auto 0">I already have a few ideas on how I'd approach this. If you'd like to explore them together, click the button below and we'll take it from there.</p><a href="https://www.instagram.com/direct/t/115335963192552/" target="_blank" rel="noopener" class="cta-btn reveal">Message me on Instagram →</a></div><div class="slide-meta"><span>15</span><span class="dot"></span><span>15</span></div></section><div class="modal" id="entryModal"><div class="modal-card"><button class="modal-close" data-close>×</button><div class="modal-tabs"><button class="active" data-frame="webinarFrame">WEBINAR</button><button data-frame="vslFrame">VSL</button><button data-frame="lowFrame">LOW TICKET</button></div><iframe class="modal-frame" id="webinarFrame" src="entry-points/webinar/index.html"></iframe><iframe class="modal-frame" id="vslFrame" src="entry-points/vsl/index.html" style="display:none"></iframe><iframe class="modal-frame" id="lowFrame" src="entry-points/low-ticket/index.html" style="display:none"></iframe></div></div><div class="modal" id="xPostModal"><div class="modal-card" style="width:min(760px,96vw);height:min(88vh,1000px);overflow:auto;background:#f7f9f9"><button class="modal-close" data-close>×</button><div style="max-width:600px;margin:0 auto;padding:28px 14px 34px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:#0f1419">
+  <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#0068b8;font-weight:800;margin:0 0 14px">X POST EXAMPLE · DRAFT</div>
+  <article style="background:#fff;border:1px solid #eff3f4;border-radius:16px;padding:20px 20px 14px">
+    <div style="display:flex;gap:12px;align-items:flex-start">
+      <img src="https://i.imgur.com/baA89uu.jpeg" alt="Darragh Oleary" style="width:48px;height:48px;object-fit:cover;border-radius:50%;flex:none">
+      <div style="min-width:0;flex:1">
+        <div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;font-size:15px;font-weight:800;color:#0f1419">Darragh Oleary<span style="font-size:14px;font-weight:400;color:#536471">@darragholeary · 2h</span><span style="margin-left:auto;font-size:19px;line-height:1;color:#536471">𝕏</span></div>
+        <div style="font-size:15px;line-height:1.55;margin-top:12px;white-space:pre-line">If I was an online coach stuck at $4,000 a month and wanted to add another $10,000 in 90 days, here's exactly what I'd do.
+
+For some reason a lot of coaches like to overcomplicate growth.
+
+I wouldn't post more. I wouldn't chase a viral reel. I wouldn't discount my way into more clients lol
+
+I'd treat it like a math problem with a clear target.
+
+First, the math, because most people skip it:
+
+$10,000/month is 20 clients at $500/month.
+
+Over 90 days, that's about 7 new clients a month.
+
+If you close 1 in 3 calls, that's about 21 calls a month. Roughly 5 a week.
+
+Not 100K followers. Five calls a week.
+
+That number changes everything, because five calls a week is a pipeline problem, not a content problem.
+
+So here's the exact plan.
+
+1. Fix the leak after the booking.
+If your thank-you page is broken or empty, you're losing people at the exact moment they said yes. Confirm the call, set expectations, tell them what to prepare.
+
+2. Qualify before you sell.
+A short application tells you their stage, their goals and whether you can actually help. Spend your calls on the people who can say yes.
+
+3. Pre-sell the call.
+Reminders are not enough. Send 3 emails that shift one belief, show one story and make the call feel like the next logical step.
+
+4. Track three numbers every week.
+Booked calls. Shown calls. Closed clients. If a number drops, you know exactly where to look.
+
+5. Never fix the same leak twice.
+Every fix becomes part of the system. The next 20 clients cost you less effort than the first 20.
+
+Month one is cleanup. Not much revenue yet, but a lot of clarity.
+Month two is when the numbers start to repeat.
+Month three is when the system, not your hustle, starts doing the lifting.
+
+Most coaches quit right before the data starts to mean something.
+
+Nobody needs 100K followers to add $10K a month.
+They need a number, a system and the discipline to track it.
+
+$10,000 a month.
+5 calls a week.
+Fix, track, repeat.
+
+That's the whole game.</div>
+        <div style="display:flex;justify-content:space-between;gap:8px;max-width:440px;margin-top:20px;color:#536471;font-size:12px">
+          <span style="display:flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5 8 8 0 0 1-3.5-.8L4 20l1.3-4A7.5 7.5 0 1 1 20 11.5Z"/></svg></span>
+          <span style="display:flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></svg></span>
+          <span style="display:flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg></span>
+          <span style="display:flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6"><path d="M4 4v16M4 5h13l-2 4 2 4H4"/></svg></span>
+        </div>
+      </div>
+    </div>
+  </article>
+</div></div></div><div class="modal" id="emailModal"><div class="modal-card"><button class="modal-close" data-close>×</button><div class="modal-tabs email-tabs"><button class="active" data-email="0">EMAIL 01</button><button data-email="1">EMAIL 02</button><button data-email="2">EMAIL 03</button></div><div class="email-wrap"><div class="email-card" data-email-card="0"><div class="eyebrow">EMAIL 01</div><h3>Subject: Your call is booked, Sarah — here's what happens next</h3><p>Sarah,</p><p>You booked your call. Good.</p><p>Before we speak, I want to make one thing clear: this isn't going to be a pitch where I spend the hour trying to convince you that growing an online fitness business is possible.</p><p>The real question is much simpler: <strong>can we realistically add $10K–$26K a month to your business over the next 90 days, and are you the right fit to do it?</strong></p><p>Between now and the call, I'll send you a couple of short emails. These aren't reminders. They're designed to answer the questions that usually hold good coaches back: whether more content is really the answer, whether you have the capacity to take on more clients, and whether a system can work for your business.</p><p>To get the most out of our time, have these ready:</p><ul><li>Your current monthly revenue and how many clients you're working with</li><li>How many more clients you could realistically take on right now</li><li>How you're getting clients today, and where it stalls</li><li>What you want the business to look like in 90 days</li></ul><p>If you only watch one thing before we talk, watch this short video:</p><p><strong>[PRE-CALL VIDEO LINK]</strong></p><p>And please join from somewhere quiet, with enough time to actually talk. This works a lot better than squeezing it in between clients.</p><p>Talk soon,<br>Darragh</p></div>
+<div class="email-card" data-email-card="1" style="display:none"><div class="eyebrow">EMAIL 02</div><h3>Subject: You don't need more followers to add $10K a month</h3><p>Sarah,</p><p>Most online coaches I speak to believe they have a traffic problem.</p><p>More followers. More reels. More content. Posting every day and hoping the next one lands.</p><p>But when we look at the business properly, reach is rarely the issue.</p><p>It's what happens <strong>after</strong> someone shows interest. Slow follow-up. A confusing booking flow. No way to tell who's actually a fit. Calls with people who were never going to buy. Prospects who book and then don't show up.</p><p>Each one feels small. Together, they're usually the difference between a business stuck at the same number and one that's adding $10K a month.</p><p>That's why I'd rather fix the path between “interested” and “signed” than add more to the top. Content creates attention. A system turns attention into booked, qualified, committed calls.</p><p>And if your objection is “I'm already busy, I can't take on more clients,” that's a fair question — it's just not a reason to stop. Capacity is part of the plan. We'll look at how many more clients you can serve well, so growth doesn't turn into burnout.</p><p>So before our call, ask yourself one thing: <strong>where do I actually lose people today?</strong> Bring that answer with you.</p><p>Here's the short video again if you haven't watched it yet:</p><p><strong>[PRE-CALL VIDEO LINK]</strong></p><p>We'll get into your specific numbers on the call.</p><p>— Darragh</p></div>
+<div class="email-card" data-email-card="2" style="display:none"><div class="eyebrow">EMAIL 03 · EXAMPLE CUSTOMER STORY</div><h3>Subject: Jake, 34, online trainer, added $10K/month in 90 days</h3><p>Sarah,</p><p>I want to tell you about Jake.</p><p>If there's one story I'd want you to read before our call, it's his.</p><p>Jake is 34, an online personal trainer in Dallas, Texas. He was working with 14 clients, posting almost every day, and had been stuck at roughly the same monthly revenue for over a year.</p><p>He wasn't short on attention. He was getting DMs every week. What he didn't have was a process: no real confirmation after booking, no way to tell who was a fit, nothing between “I'll book a call” and the call itself — and many of his booked calls never showed.</p><p>So we didn't add more content. We tightened the path. A proper confirmation experience. A short application. A pre-call sequence that got people ready. Within 90 days he'd added over $10K a month in new recurring revenue.</p><p>Jake didn't have a bigger audience than you. He had a busy schedule, a decent offer and a system that finally worked as hard as he did.</p><p>A few weeks in, he told me something I think about a lot: “Before, I was hoping people would show up. Now I know who's coming, why they're coming, and what they need from me.”</p><p>I picked Jake instead of our biggest result because he's the closest thing we have to the typical coach on these calls. Already working. Already has clients. Tired of figuring it out alone.</p><p>If you see yourself in that, his path is the realistic version of what's possible. Not an overnight story. Steady work, the right system, and someone holding your hand through the next move.</p><p>We'll map out what your version looks like on our call.</p><p>— Darragh</p></div></div></div></div><style>.preview-trigger{cursor:pointer}.modal{position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);z-index:200;display:none;align-items:center;justify-content:center;padding:24px}.modal.open{display:flex}.modal-card{width:min(1200px,96vw);height:min(88vh,900px);background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;position:relative}.modal-close{position:absolute;top:12px;right:14px;z-index:3;background:var(--surface-2);color:var(--ink);border:1px solid var(--line);border-radius:8px;width:36px;height:36px;cursor:pointer;font:700 18px var(--mono)}.modal-tabs{height:54px;display:flex;gap:8px;align-items:center;padding:8px 56px 8px 14px;border-bottom:1px solid var(--line)}.modal-tabs button{background:var(--surface-2);border:1px solid var(--line);color:var(--ink-soft);padding:9px 12px;border-radius:8px;cursor:pointer;font:600 11px var(--mono)}.modal-tabs button.active{background:var(--accent-fill);color:var(--on-accent)}.email-tabs{height:58px;gap:10px}.email-tabs button{border-radius:999px;min-width:100px;padding:10px 18px}.email-wrap{padding:24px 30px;overflow:auto;height:calc(100% - 58px)}.email-card{max-width:900px;margin:0 auto 16px}.email-card h3{margin:8px 0 18px;font-size:22px}.email-card .eyebrow{margin-bottom:8px}.modal-frame{width:100%;height:calc(100% - 54px);border:0;background:#fff}.email-wrap{padding:34px;overflow:auto;height:100%}.email-card{background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:16px}.email-card .eyebrow{font:700 11px var(--mono);color:var(--accent-text);letter-spacing:.1em}.email-card h3{margin:8px 0 14px;font-size:22px}.email-card p{font-size:14px;line-height:1.65;margin:10px 0}.email-card .subject{font:600 12px var(--mono);color:var(--ink-muted);margin-bottom:16px}.email-card ul{padding-left:20px;color:var(--ink-soft);line-height:1.7;font-size:14px}</style><script>const slides=document.querySelectorAll('.slide'),progressBar=document.getElementById('progressBar');const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.3});slides.forEach(s=>io.observe(s));function updateProgress(){const d=document.documentElement.scrollHeight-window.innerHeight;progressBar.style.width=(d>0?(window.scrollY/d)*100:0)+'%'}window.addEventListener('scroll',updateProgress,{passive:true});updateProgress();function currentIndex(){let i=0,m=Infinity;slides.forEach((s,n)=>{const d=Math.abs(s.getBoundingClientRect().top);if(d<m){m=d;i=n}});return i}function goNext(){slides[Math.min(currentIndex()+1,slides.length-1)].scrollIntoView({behavior:'smooth'})}function goPrev(){slides[Math.max(currentIndex()-1,0)].scrollIntoView({behavior:'smooth'})}document.addEventListener('keydown',e=>{if(e.key==='ArrowDown'||e.key==='PageDown'){e.preventDefault();goNext()}if(e.key==='ArrowUp'||e.key==='PageUp'){e.preventDefault();goPrev()}});document.getElementById('navDown')?.addEventListener('click',goNext);document.getElementById('navUp')?.addEventListener('click',goPrev);document.querySelectorAll('.preview-trigger').forEach(b=>b.addEventListener('click',()=>document.getElementById(b.dataset.modal).classList.add('open')));document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>b.closest('.modal').classList.remove('open')));document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')}));document.querySelectorAll('#entryModal .modal-tabs button').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('#entryModal .modal-tabs button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('#entryModal .modal-frame').forEach(f=>f.style.display='none');document.getElementById(btn.dataset.frame).style.display='block'}));document.querySelectorAll('.email-tabs button').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.email-tabs button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('#emailModal [data-email-card]').forEach(card=>card.style.display=card.dataset.emailCard===btn.dataset.email?'block':'none')}));document.addEventListener('click',e=>{const trigger=e.target.closest('.preview-trigger');if(!trigger)return;const modal=document.getElementById(trigger.dataset.modal);if(modal)modal.classList.add('open')});const s3=[...slides].find(s=>s.querySelector('.kicker')?.textContent.includes('RECOMMENDATION 03'));if(s3){const b=document.createElement('button');b.className='cta-btn preview-trigger';b.dataset.modal='emailModal';b.textContent='Preview the 3-email sequence →';b.style.marginTop='28px';s3.querySelector('.split-text').appendChild(b)}</script></body></html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>90-Day Client Acquisition Kit — plug-and-play scripts and systems for online coaches</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#12181f;--muted:#5c6a72;--line:#e2e6e9;--paper:#f3f8fd;
+  --primary:#0083E5;--primary-dark:#0068b8;--success:#1f9d55;--destructive:#d9342b;--gold:#e0a83c;
+  --shadow-card:0 4px 16px rgba(0,0,0,.06);--shadow-cta:0 10px 24px rgba(0,131,229,.35);
+  --gradient-hero:linear-gradient(180deg,#fff 0%,#eaf4fc 100%);--gradient-cta:linear-gradient(180deg,var(--primary),var(--primary-dark));
+}
+*{box-sizing:border-box}body{margin:0;background:#fff;color:var(--ink);font-family:"DM Sans",Arial,sans-serif}
+.wrap{max-width:960px;margin:auto;padding:0 20px}
+.header{background:var(--ink)}.header .wrap{display:flex;justify-content:space-between;align-items:center;padding:14px 20px}
+.logo-slot{height:34px;padding:0 16px;display:flex;align-items:center;border:1px dashed #ffffff40;border-radius:4px;color:#ffffffb0;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.header a{color:#fff;font-size:13px;font-weight:700;text-decoration:none}
+section{padding:56px 0}
+.hero{background:var(--gradient-hero)}
+.eyebrow-pill{display:block;width:fit-content;margin:0 auto 20px;padding:8px 20px;border-radius:6px;background:var(--primary-dark);color:#fff;font-size:13px;font-weight:800;text-align:center}
+h1{max-width:760px;margin:0 auto 14px;text-align:center;font-size:clamp(24px,3.6vw,34px);line-height:1.2}
+h1 .accent{color:var(--primary-dark)}
+.proof-list{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 26px;margin:0 auto 30px;max-width:700px;list-style:none;padding:0}
+.proof-list li{display:flex;align-items:center;gap:6px;font-weight:700;font-size:14px}
+.video-block{position:relative;display:flex;width:100%;max-width:760px;min-height:0;height:auto;aspect-ratio:16/9;margin:0 auto;padding:0;border:1px solid rgba(0,131,229,.55);border-radius:12px;background:linear-gradient(135deg,#171b22 0%,#1d3a57 48%,#0c1118 100%);align-items:center;justify-content:center;flex-direction:column;gap:12px;box-sizing:border-box;color:#fff;font:800 13px/1.4 Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 18px 42px #0004;overflow:hidden;cursor:pointer;appearance:none;-webkit-appearance:none}.video-block:before{content:"▶";display:grid;place-items:center;flex:0 0 64px;width:64px;height:64px;border-radius:50%;background:#0083E5;color:#00101d;font-size:24px;box-shadow:0 8px 28px #0083E555}.video-block:after{content:"CLICK TO PLAY";font-size:10px;letter-spacing:.16em;color:#9fd0f7}
+.price-card{max-width:420px;margin:26px auto 0;padding:22px;border-radius:12px;border:2px solid var(--primary);background:#fff;text-align:center;box-shadow:var(--shadow-card)}
+.price-card .price{font-size:26px;font-weight:800;color:var(--destructive)}
+.price-card .price s{color:var(--muted);font-weight:600;margin-right:6px}
+.cta-btn{display:block;width:100%;max-width:520px;margin:18px auto 0;padding:18px 20px;border:0;border-radius:999px;background:var(--gradient-cta);color:#fff;font-size:16px;font-weight:800;text-align:center;text-decoration:none;text-transform:uppercase;box-shadow:var(--shadow-cta)}
+.guarantee-line{text-align:center;margin-top:10px;font-size:12px;font-weight:700;color:var(--muted)}
+
+h2.section-title{max-width:640px;margin:0 auto 36px;text-align:center;font-size:clamp(22px,3vw,30px)}
+.module{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;margin-bottom:28px;padding:20px;border:1px solid var(--line);border-radius:14px}
+.module .img-slot{aspect-ratio:16/9;border-radius:10px;border:2px dashed var(--line);display:grid;place-items:center;color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase}
+.module h3{margin:0 0 10px;font-size:19px}
+.module ul{margin:0 0 14px;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.6}
+.bonus{display:grid;grid-template-columns:160px 1fr;gap:20px;padding:20px;border:1px solid var(--line);border-radius:14px;margin-bottom:16px}
+.bonus .img-slot{aspect-ratio:3/4;border-radius:10px;border:2px dashed var(--gold);display:grid;place-items:center;color:var(--gold);font-size:10px;font-weight:700;text-transform:uppercase}
+.bonus-kicker{color:var(--primary-dark);font-size:11px;font-weight:800;text-transform:uppercase}
+.bonus h3{margin:6px 0 8px;font-size:18px}
+
+.compare{max-width:700px;margin:0 auto;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.compare-row{display:grid;grid-template-columns:1fr 100px 100px}
+.compare-row.head{background:var(--gradient-cta);color:#fff;font-weight:800;font-size:11px;text-transform:uppercase}
+.compare-row div{padding:12px;text-align:center;border-top:1px solid var(--line)}
+.compare-row.head div{border-top:0;text-align:left}
+.compare-row div:first-child{text-align:left}
+.compare-row.head div:first-child{text-align:left}
+.ok{color:var(--success);font-weight:800}.no{color:var(--destructive);font-weight:800}
+
+.guarantee-block{background:var(--paper);display:grid;grid-template-columns:180px 1fr;gap:24px;align-items:center;max-width:760px;margin:0 auto;padding:26px;border-radius:14px}
+.guarantee-block .img-slot{aspect-ratio:1/1;border-radius:50%;border:2px dashed var(--gold);display:grid;place-items:center;color:var(--gold);font-size:10px;font-weight:700;text-transform:uppercase}
+
+.authority{display:grid;grid-template-columns:1fr 220px;gap:30px;align-items:center;max-width:840px;margin:0 auto}
+.authority .img-slot{aspect-ratio:4/5;border-radius:12px;border:2px dashed var(--line);display:grid;place-items:center;color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase}
+
+.faq-item{max-width:700px;margin:0 auto 12px;border:1px solid var(--line);border-radius:10px;padding:14px 18px}
+.faq-item summary{font-weight:700;cursor:pointer}
+.faq-item p{color:var(--muted);font-size:14px;line-height:1.6;margin:10px 0 0}
+
+.final-cta{background:var(--ink);color:#fff;text-align:center}
+.final-cta h2{color:#fff}
+.countdown{display:flex;justify-content:center;gap:14px;margin:16px 0}
+.countdown div{background:#ffffff1a;border-radius:8px;padding:10px 16px;font-weight:800;font-size:20px}
+footer{padding:36px 20px;text-align:center;color:var(--muted);font-size:11px}
+@media(max-width:680px){.module,.bonus,.guarantee-block,.authority{grid-template-columns:1fr}}
+</style>
+</head>
+<body id="get-access">
+
+<header class="header"><div class="wrap"><div class="logo-slot">DARRAGH OLEARY</div><a href="#contact">Need help? Contact us</a></div></header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow-pill">For online coaches &amp; personal trainers who want more clients without posting more content</span>
+    <h1><span class="accent">Download The Plug-and-Play Client Acquisition Kit</span> That Turns Interested Followers Into Booked, Qualified Calls — Built For Coaches Aiming To Add $10K+/Month In 90 Days</h1>
+    <ul class="proof-list">
+      <li>✓ Built around a simple lead-to-client path</li><li>✓ Designed for coaches with limited time</li><li>✓ No new audience required to start</li><li>✓ Plug-and-play scripts + templates</li>
+    </ul>
+    <button class="video-block" type="button" aria-label="Play VSL preview">VSL PREVIEW</button>
+    <div class="price-card">
+      <p class="price"><s>$97 </s>$27  Today</p>
+      <a class="cta-btn" href="#get-access">Get Instant Access</a>
+      <p class="guarantee-line">30-Day Money-Back Guarantee</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 class="section-title">Everything You Need To Fix Your Client Path</h2>
+    <div class="module">
+      <div class="img-slot">Module image</div>
+      <div><h3>Module 1: The Booking Confirmation Flow</h3>
+        <ul><li>Confirmation page + message templates</li><li>Set expectations and tell prospects what to prepare</li><li>Turn the moment after booking into momentum</li></ul>
+        <a class="cta-btn" style="max-width:260px;padding:10px 16px;font-size:12px" href="#get-access">Get Access</a>
+      </div>
+    </div>
+    <div class="module">
+      <div class="img-slot">Module image</div>
+      <div><h3>Module 2: The Qualification Application</h3>
+        <ul><li>Short application question bank</li><li>Score fit by stage, goals and capacity</li><li>Prioritize the calls worth taking</li></ul>
+        <a class="cta-btn" style="max-width:260px;padding:10px 16px;font-size:12px" href="#get-access">Get Access</a>
+      </div>
+    </div>
+    <div class="module">
+      <div class="img-slot">Module image</div>
+      <div><h3>Module 3: The Pre-Call Sequence</h3>
+        <ul><li>3 plug-and-play emails: expectations, belief shift, customer story</li><li>Reminder copy that builds commitment</li><li>Show-up scripts for call day</li></ul>
+        <a class="cta-btn" style="max-width:260px;padding:10px 16px;font-size:12px" href="#get-access">Get Access</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--paper)">
+  <div class="wrap">
+    <h2 class="section-title">Get 3 Plug-And-Play Bonuses Included</h2>
+    <div class="bonus">
+      <div class="img-slot">Bonus cover</div>
+      <div><p class="bonus-kicker">FREE BONUS #1: DM-To-Call Scripts</p>
+        <h3>25 Messages That Turn Followers Into Booked Calls</h3>
+        <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.6"><li>Opening, follow-up and objection-handling messages</li><li>Built for fast copy-and-paste</li></ul>
+      </div>
+    </div>
+    <div class="bonus">
+      <div class="img-slot">Bonus cover</div>
+      <div><p class="bonus-kicker">FREE BONUS #2: Sales Call Outline</p>
+        <h3>The 1-Page Call Framework</h3>
+        <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.6"><li>Questions that surface the real situation fast</li><li>Built around coaches who are ready to commit</li></ul>
+      </div>
+    </div>
+    <div class="bonus">
+      <div class="img-slot">Bonus cover</div>
+      <div><p class="bonus-kicker">FREE BONUS #3: Weekly Numbers Tracker</p>
+        <h3>Booked, Shown, Closed</h3>
+        <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.6"><li>Track the 3 numbers that matter</li><li>Know exactly which leak to fix next</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 class="section-title">Why Use A Template System?</h2>
+    <div class="compare">
+      <div class="compare-row head"><div>Feature</div><div>TEMPLATE SYSTEM</div><div>START FROM ZERO</div></div>
+      <div class="compare-row"><div>Know what to say to every lead</div><div class="ok">✓</div><div class="no">✗</div></div>
+      <div class="compare-row"><div>Fix the biggest leaks first</div><div class="ok">✓</div><div class="no">✗</div></div>
+      <div class="compare-row"><div>Launch your first flow faster</div><div class="ok">✓</div><div class="no">✗</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap guarantee-block">
+    <div class="img-slot">Guarantee badge</div>
+    <div><h2 style="margin:0 0 10px">Try It Without The Guesswork</h2>
+      <p style="color:var(--muted);line-height:1.6">Use the scripts, put your first flow in place, and decide whether the system is useful for your business. If not, use the 30-day guarantee.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap authority">
+    <div><h2 style="text-align:left">Meet Darragh Oleary</h2>
+      <p style="color:var(--muted);line-height:1.7">Darragh Oleary is a fitness business mentor who works 1-on-1 with online coaches and personal trainers who are committed to growing their online fitness business and adding $10K–$26K a month over the next 90 days.</p>
+      <a class="cta-btn" style="margin:16px 0 0" href="#get-access">Get Instant Access</a>
+    </div>
+    <div class="img-slot">Darragh photo</div>
+  </div>
+</section>
+
+<section style="background:var(--paper)">
+  <div class="wrap">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <details class="faq-item" open><summary>Do I need a big following?</summary><p>No. The kit is built around turning the interest you already have into booked, qualified calls — not around growing your audience first.</p></details>
+    <details class="faq-item"><summary>Is this for brand-new coaches?</summary><p>It's designed for online coaches and personal trainers who already work with clients and want to add more.</p></details>
+    <details class="faq-item"><summary>How long does it take to put in place?</summary><p>The scripts and templates are plug-and-play. How quickly you roll them out depends on your current setup and how much time you can give it.</p></details>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="wrap">
+    <h2>Start With One Fix</h2>
+    <p style="opacity:.8">Doors close: Registration open now</p>
+    <div class="countdown"><div>00<br><small style="font-size:9px">HRS</small></div><div>00<br><small style="font-size:9px">MIN</small></div><div>00<br><small style="font-size:9px">SEC</small></div></div>
+    <a class="cta-btn" href="#get-access">Get The 90-Day Client Acquisition Kit For $27 </a>
+  </div>
+</section>
+
+<footer>© 2026 — 90-Day Client Acquisition Kit. <a href="#terms">Terms</a> · <a href="#privacy">Privacy</a> · <a href="#refunds">Refunds</a></footer>
+
+</body>
+</html>
