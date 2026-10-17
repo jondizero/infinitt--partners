@@ -1,7 +1,656 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Low Ticket — Neel Parekh</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f3f9fc;color:#0b2a38;font-family:"DM Sans",Arial,sans-serif;text-align:center;padding:24px}
-.box{max-width:520px;border:2px dashed #0083B3;border-radius:16px;padding:48px 32px;background:#fff}
-b{display:block;font-size:12px;letter-spacing:.18em;color:#0083B3;margin-bottom:14px}h1{margin:0 0 10px;font-size:28px}p{margin:0;color:#4f6877;line-height:1.55;font-size:15px}</style></head>
-<body><div class="box"><b>PLACEHOLDER</b><h1>Low-ticket page goes here</h1><p>Replace this file (entry-points/low-ticket/index.html) with the finished low-ticket page.</p></div></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Cleaning Team Blueprint — Find, Vet &amp; Retain Cleaning Professionals For $27</title>
+<meta name="description" content="Build a repeatable system for finding, vetting, onboarding, and retaining cleaning professionals. Six modules, templates, and four bonuses for $27.">
+<meta property="og:title" content="The Cleaning Team Blueprint — Just $27 Today">
+<meta property="og:description" content="Build a cleaning business designed to run without you personally completing every job.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --radius:.5rem;
+  --background:oklch(97.5% .002 250);--foreground:oklch(17% .01 264);
+  --card:oklch(100% 0 0);--primary:oklch(52% .22 265);--primary-fg:oklch(100% 0 0);--primary-deep:oklch(45% .22 266);
+  --secondary:oklch(95.5% .004 250);--muted:oklch(95.5% .004 250);--muted-fg:oklch(42% .015 258);
+  --destructive:oklch(56% .21 27);--border:oklch(88% .008 258);
+  --paper:oklch(100% 0 0);--paper-muted:oklch(44% .015 258);--paper-border:oklch(90% .01 258);
+  --cream:oklch(96.5% .038 92);--gold:oklch(72% .15 78);--success:oklch(58% .17 150);
+  --ink:oklch(16% .008 264);--ink-fg:oklch(99% .002 250);
+  --gradient-cta:linear-gradient(180deg,var(--primary),var(--primary-deep));
+  --gradient-hero:linear-gradient(180deg,oklch(98.5% .002 250),var(--background));
+  --shadow-cta:0 10px 24px -12px oklch(52% .22 265/.45);
+  --shadow-card:0 10px 30px -18px oklch(20% .02 264/.25);
+}
+*{box-sizing:border-box;margin:0;padding:0;border:0 solid var(--border)}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--background);color:var(--foreground);font-family:"Lato",ui-sans-serif,system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-weight:900;line-height:1.12;letter-spacing:-.015em}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+img{max-width:100%;display:block}
+.wrap{max-width:72rem;margin:0 auto;padding:0 1rem}
+.w5{max-width:64rem}.w4{max-width:56rem}.w3{max-width:48rem}
+section{padding:4rem 1rem}
+.center{text-align:center}
+.primary{color:var(--primary)}
+.success{color:var(--success)}
+
+/* header */
+.top{background:var(--ink)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.75rem 1rem}
+.logo{width:210px;height:36px;display:flex;align-items:center;justify-content:center;border:1px dashed color-mix(in oklab,var(--ink-fg) 30%,transparent);border-radius:.25rem;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:color-mix(in oklab,var(--ink-fg) 70%,transparent)}
+.help{color:var(--ink-fg);font-weight:700;font-size:.875rem;display:flex;align-items:center;gap:.5rem}
+.help:hover{text-decoration:underline}
+
+/* headings */
+.sec-h{font-size:1.5rem;text-wrap:balance;text-align:center}
+.sec-h .block{display:block;color:var(--primary)}
+.eyebrow{text-align:center;font-size:.75rem;font-weight:900;letter-spacing:.2em;text-transform:uppercase;color:var(--primary)}
+.subline{margin-top:.75rem;text-align:center;font-size:.875rem;font-weight:700;color:var(--muted-fg)}
+@media(min-width:640px){.sec-h{font-size:1.875rem}}
+@media(min-width:768px){.sec-h{font-size:2.25rem}}
+
+/* hero */
+.hero{background:var(--gradient-hero);padding:1.75rem 1rem 3rem}
+.banner{display:block;width:fit-content;max-width:48rem;margin:0 auto;background:var(--primary);color:var(--primary-fg);border-radius:.375rem;padding:.5rem 1.5rem;text-align:center;font-weight:900;font-size:.875rem}
+.hero h1{max-width:56rem;margin:1.25rem auto 0;text-align:center;font-size:1.5rem;line-height:1.15}
+.hero h1 .foreground{color:var(--foreground)}
+.checks{max-width:56rem;margin:1rem auto 0;display:flex;flex-wrap:wrap;justify-content:center;gap:.25rem 1.25rem}
+.checks li{display:flex;align-items:center;gap:.375rem;font-size:.875rem;font-weight:700}
+.checks svg{width:1rem;height:1rem;color:var(--success)}
+.hero-grid{margin-top:1.5rem;display:grid;gap:1.25rem}
+.video{position:relative;aspect-ratio:16/9;width:100%;overflow:hidden;border-radius:.75rem;border:1px solid var(--border);background:color-mix(in oklab,var(--secondary) 60%,transparent);box-shadow:var(--shadow-card)}
+.video{cursor:pointer}
+.video img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%}
+.video .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.3))}
+.play{width:5rem;height:5rem;border-radius:50%;background:var(--primary);border:3px solid #fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px -8px rgba(0,0,0,.5);transition:transform .2s}
+.video:hover .play{transform:scale(1.08)}
+.play svg{width:2rem;height:2rem;margin-left:.2rem;fill:var(--primary-fg);color:var(--primary-fg)}
+.chips{margin-top:.75rem;display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem}
+.chips a{display:flex;align-items:center;gap:.5rem;background:var(--ink);color:var(--ink-fg);border-radius:999px;padding:.25rem .75rem;font-size:.75rem;font-weight:700}
+.chips a:hover{filter:brightness(1.3)}
+.hero-offer{margin-top:1.25rem;display:flex;flex-direction:column;align-items:center;gap:1rem;border:2px dashed color-mix(in oklab,var(--foreground) 25%,transparent);border-radius:.5rem;padding:1rem}
+.hero-offer img{width:100%;aspect-ratio:4/3;object-fit:contain}
+.hero-offer .t{text-align:center}
+.tag-gold{display:inline-block;background:var(--gold);padding:.125rem .5rem;font-size:.75rem;font-weight:900;text-transform:uppercase;letter-spacing:.025em}
+.hero-offer p{margin-top:.5rem;font-size:1.25rem;font-weight:900;text-transform:uppercase;line-height:1.25}
+@media(min-width:640px){.hero-offer{flex-direction:row}.hero-offer img{width:46%}.hero-offer .t{text-align:left}.hero-offer p{font-size:1.5rem}}
+
+aside.buy{align-self:start;border:2px solid var(--primary);background:var(--card);border-radius:.5rem;padding:.75rem;text-align:center;box-shadow:var(--shadow-card)}
+.trust{display:flex;align-items:center;justify-content:center;gap:.5rem}
+.avatars{display:flex}
+.avatars span{width:2.25rem;height:2.25rem;margin-left:-.5rem;border-radius:50%;border:2px solid var(--card);background:var(--muted)}
+.avatars span:first-child{margin-left:0}
+.trust .tx{text-align:left}
+.stars{display:flex;color:var(--gold)}
+.stars svg{width:.75rem;height:.75rem;fill:currentColor}
+.trust p{font-size:10px;font-weight:900;text-transform:uppercase;line-height:1.25;color:var(--foreground)}
+.doors{margin-top:.75rem;background:var(--destructive);color:#fff;border-radius:.375rem;padding:.5rem .75rem;font-size:.875rem;font-weight:900;line-height:1.35}
+.card-img{margin-top:.75rem}
+.card-img img{width:100%;aspect-ratio:16/10;object-fit:contain}
+.rated{margin-top:.75rem;display:flex;align-items:center;justify-content:center;gap:.375rem;font-size:.75rem;font-weight:700}
+.rated .s{display:flex}
+.rated svg{width:1rem;height:1rem;fill:var(--success);color:var(--success)}
+.buy .price{margin-top:.75rem;font-size:1.25rem;font-weight:900;color:var(--destructive)}
+.buy .price s{text-decoration:line-through}
+.buy .save{font-size:.875rem;font-weight:700}
+.buy .txt{margin-top:.25rem;font-size:.875rem;font-weight:700}
+.trust-badges{margin-top:.75rem;display:flex;gap:.5rem}
+.trust-badges span{flex:1;height:2rem;display:flex;align-items:center;justify-content:center;border:1px dashed var(--border);border-radius:.25rem;font-size:9px;font-weight:700;text-transform:uppercase;color:var(--muted-fg)}
+.buy .avail{margin-top:.5rem;font-size:.875rem;font-weight:900;color:var(--success)}
+.btn-side{margin-top:.75rem;display:block;background:var(--gradient-cta);color:var(--primary-fg);border-radius:.375rem;padding:.75rem 1rem;box-shadow:var(--shadow-cta);transition:transform .15s}
+.btn-side:hover{transform:translateY(-2px)}
+.btn-side b{display:block;font-size:1rem;font-weight:900}
+.btn-side small{display:block;font-size:.75rem;font-weight:700}
+.secure{margin-top:.5rem;display:flex;align-items:center;justify-content:center;gap:.375rem;font-size:11px;font-weight:700}
+.secure svg{width:.875rem;height:.875rem;color:var(--success)}
+.guar{margin-top:.75rem;display:flex;align-items:center;gap:.75rem;text-align:left;background:var(--cream);border:1px solid color-mix(in oklab,var(--gold) 40%,transparent);border-radius:.375rem;padding:.75rem}
+.guar .seal{flex:none;width:3rem;height:3rem;border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;text-align:center;font-size:9px;font-weight:900;line-height:1.05;text-transform:uppercase}
+.guar p{font-size:.75rem;font-weight:700;line-height:1.35}
+@media(min-width:640px){.hero h1{font-size:1.875rem}}
+@media(min-width:768px){.hero h1{font-size:34px}.hero-grid{grid-template-columns:1fr 300px}}
+
+/* CTA */
+.cta-wrap{margin-top:2.5rem;display:flex;flex-direction:column;align-items:center;gap:.75rem}
+.cta{display:inline-flex;width:100%;max-width:42rem;align-items:center;justify-content:center;background:var(--gradient-cta);color:var(--primary-fg);border-radius:999px;padding:1rem 1.5rem;text-align:center;font-weight:900;text-transform:uppercase;letter-spacing:.025em;font-size:.875rem;box-shadow:var(--shadow-cta);transition:transform .2s,filter .2s}
+.cta:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.cta:active{transform:translateY(0)}
+.cta.big{padding:1.25rem 2rem;font-size:1.125rem}
+.cta.sm{width:auto;padding:.75rem 1.25rem;font-size:.75rem;margin-top:1.25rem}
+.guar-line{display:flex;align-items:center;justify-content:center;gap:.5rem;font-size:.75rem;font-weight:700;color:var(--muted-fg)}
+.guar-line svg{width:1rem;height:1rem;color:var(--success)}
+@media(min-width:640px){.cta{font-size:1.125rem}.cta.sm{font-size:.875rem}.cta.big{font-size:1.5rem}.guar-line{font-size:.875rem}}
+
+/* pain */
+.s-pain{border-block:1px solid var(--border);background:color-mix(in oklab,var(--card) 40%,transparent)}
+.pain-box{margin-top:2.5rem;border:1px solid var(--border);background:var(--card);border-radius:1rem;padding:1.5rem}
+.tick-list{display:grid;gap:.75rem}
+.tick-list li{display:flex;gap:.75rem}
+.tick-list .ic{flex:none;margin-top:.125rem;width:1.25rem;height:1.25rem;border-radius:50%;background:color-mix(in oklab,var(--primary) 15%,transparent);display:flex;align-items:center;justify-content:center}
+.tick-list .ic svg{width:.875rem;height:.875rem;color:var(--primary)}
+.tick-list span.t{font-size:.875rem;line-height:1.625;color:var(--muted-fg)}
+.tick-list b{color:var(--foreground)}
+.on-paper .tick-list span.t{color:var(--paper-muted)}
+.on-paper .tick-list b{color:var(--foreground)}
+@media(min-width:640px){.tick-list span.t{font-size:1rem}}
+.punch{margin-top:1.5rem;text-align:center;font-weight:900;font-size:1.05rem}
+
+/* system steps */
+.steps{margin-top:2.5rem;display:grid;gap:1rem}
+.step{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1.5rem;box-shadow:var(--shadow-card)}
+.step b{display:block;font-size:.75rem;font-weight:900;letter-spacing:.18em;color:var(--primary);margin-bottom:.5rem}
+.step .n{font-size:1.25rem;font-weight:900;display:block;margin-bottom:.5rem}
+.step p{font-size:.9rem;color:var(--muted-fg)}
+@media(min-width:640px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.steps{grid-template-columns:repeat(4,1fr)}}
+
+/* modules */
+.s-mod{background:var(--paper);color:var(--foreground)}
+.mods{margin-top:2.5rem;display:grid;gap:1.5rem}
+.mod{display:grid;gap:1.5rem;align-items:center;border:1px solid var(--paper-border);background:color-mix(in oklab,var(--background) 2%,transparent);border-radius:1rem;padding:1.5rem}
+.mod img{width:100%;aspect-ratio:16/9;object-fit:contain}
+.mod .lbl{font-size:.75rem;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:var(--primary)}
+.mod h3{margin-top:.5rem;font-size:1.25rem}
+.mod .desc{margin-top:.75rem;font-size:.9rem;line-height:1.625;color:var(--paper-muted)}
+.mod .tick-list{margin-top:1rem}
+@media(min-width:640px){.mod h3{font-size:1.5rem}}
+@media(min-width:768px){.mod{grid-template-columns:1fr 1fr}.mod:nth-child(even) .img{order:2}.mod:nth-child(even) .body{order:1}}
+
+/* bonuses */
+.s-bon{border-block:1px solid var(--border);background:color-mix(in oklab,var(--card) 30%,transparent)}
+.bons{margin-top:2.5rem;display:grid;gap:1.5rem}
+.bon{display:grid;gap:1.5rem;border:1px solid var(--border);background:var(--card);border-radius:1rem;padding:1.5rem;box-shadow:var(--shadow-card)}
+.bon .cover{aspect-ratio:3/4;width:100%;border-radius:.75rem;background:var(--gradient-cta);color:var(--primary-fg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;text-align:center;padding:1rem}
+.bon .cover .ico{font-size:3rem;line-height:1}
+.bon .cover b{font-size:.75rem;letter-spacing:.18em;text-transform:uppercase}
+.bon .cover span{font-size:1rem;font-weight:900;line-height:1.2}
+.bon .lbl{font-size:.75rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--primary)}
+.bon h3{margin-top:.5rem;font-size:1.25rem}
+.bon .desc{margin-top:.75rem;font-size:.95rem;color:var(--muted-fg)}
+@media(min-width:640px){.bon h3{font-size:1.5rem}}
+@media(min-width:768px){.bon{grid-template-columns:220px 1fr}}
+
+/* compare */
+.tbl{margin-top:2.5rem;overflow:hidden;border:1px solid var(--border);background:var(--card);border-radius:1rem}
+.tr{display:grid;grid-template-columns:1fr 110px 110px;align-items:center;border-top:1px solid var(--border)}
+.tr.head{background:var(--gradient-cta);color:var(--primary-fg);border-top:0}
+.tr div{padding:1rem}
+.tr .c{display:flex;justify-content:center}
+.tr .f{font-size:.875rem;font-weight:700}
+.tr.head div{font-size:.75rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;text-align:center}
+.tr.head div:first-child{text-align:left}
+.tr svg{width:1.25rem;height:1.25rem}
+.tr .yes{color:var(--success)}.tr .no{color:var(--destructive)}.tr .mid{color:var(--muted-fg)}
+@media(min-width:640px){.tr{grid-template-columns:1fr 150px 150px}}
+
+/* guarantee */
+.s-guar{background:var(--cream);color:var(--foreground)}
+.guar-grid{max-width:64rem;margin:0 auto;display:grid;gap:2rem;align-items:center}
+.guar-badge{aspect-ratio:1/1;width:100%;max-width:220px;margin:0 auto;border:2px dashed color-mix(in oklab,var(--gold) 60%,transparent);background:color-mix(in oklab,var(--gold) 10%,transparent);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1rem}
+.guar-badge .big{font-size:3.25rem;font-weight:900;line-height:1;color:var(--primary)}
+.guar-badge span{font-size:.8rem;font-weight:900;text-transform:uppercase;letter-spacing:.1em}
+.guar-grid h2{font-size:1.5rem}
+.guar-grid .body{margin-top:1rem;display:grid;gap:.75rem;font-size:.9rem;line-height:1.625;color:var(--paper-muted)}
+.guar-grid .body .strong{font-weight:900;color:var(--foreground)}
+@media(min-width:640px){.guar-grid h2{font-size:1.875rem}.guar-grid .body{font-size:1rem}}
+@media(min-width:768px){.guar-grid{grid-template-columns:220px 1fr}}
+
+/* about */
+.about{max-width:72rem;margin:0 auto;display:grid;gap:2.5rem;align-items:center}
+.about h2{text-align:left}
+.about .body{margin-top:1.25rem;display:grid;gap:1rem;font-size:.9rem;line-height:1.625;color:var(--muted-fg)}
+.about .photo{aspect-ratio:4/5;width:100%;border-radius:.75rem;overflow:hidden;border:1px solid var(--border);background:color-mix(in oklab,var(--muted) 40%,transparent)}
+.about .photo img{width:100%;height:100%;object-fit:cover}
+.about .chips{justify-content:flex-start;margin-top:1.25rem}
+.about .cta-wrap{align-items:flex-start;margin-top:2rem}
+@media(min-width:640px){.about .body{font-size:1rem}}
+@media(min-width:1024px){.about{grid-template-columns:1fr 1fr}}
+
+/* faq */
+.s-faq{background:var(--paper);color:var(--foreground)}
+.faq{margin-top:2.5rem;display:grid;gap:1rem}
+.faq details{overflow:hidden;border:1px solid var(--paper-border);background:color-mix(in oklab,var(--background) 2%,transparent);border-radius:1rem;padding:0 1.25rem}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 0;font-weight:900;font-size:1rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary svg{width:1rem;height:1rem;flex:none;color:var(--muted-fg);transition:transform .2s}
+.faq details[open] summary svg{transform:rotate(180deg)}
+.faq details p{padding-bottom:1rem;font-size:.9rem;line-height:1.625;color:var(--paper-muted)}
+@media(min-width:640px){.faq summary{font-size:1.125rem}.faq details p{font-size:1rem}}
+.faq-cta{margin-top:2.5rem;display:flex;flex-direction:column;align-items:center;gap:.75rem}
+
+/* final */
+.s-final{border-top:1px solid var(--border);background:color-mix(in oklab,var(--card) 40%,transparent)}
+.s-final .fine{margin-top:1rem;font-size:.75rem;font-weight:700;color:var(--muted-fg)}
+.s-final .stat{margin-top:1rem;font-size:.75rem;font-weight:900;letter-spacing:.2em;text-transform:uppercase;color:var(--primary)}
+.s-final .pr{margin-top:1rem;font-size:3rem;font-weight:900;letter-spacing:-.04em}
+.s-final .pr small{font-size:1rem;color:var(--muted-fg)}
+.lock{display:flex;align-items:center;justify-content:center;gap:.5rem;font-size:.75rem;font-weight:700;color:var(--muted-fg)}
+.lock svg{width:.875rem;height:.875rem}
+
+footer{padding:3rem 1rem}
+footer .in{max-width:56rem;margin:0 auto;text-align:center}
+footer p{font-size:.75rem;line-height:1.625;color:var(--muted-fg)}
+footer nav{margin-top:1.25rem;display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem 1.25rem;font-size:.75rem;font-weight:700;color:var(--muted-fg)}
+footer nav a:hover{color:var(--primary)}
+footer .copy{margin-top:1.25rem}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="top">
+  <div class="wrap">
+    <div class="logo">Logo</div>
+    <a class="help" href="mailto:REPLACE_WITH_SUPPORT_EMAIL" id="contact">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+      Need Help? Contact Us
+    </a>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <p class="banner">For Cleaning Business Owners Who Want To Build A Team</p>
+    <h1>
+      <span class="primary">How Cleaning Business Owners Find, Vet, and Retain Top-Tier Cleaning Professionals</span>
+      <span class="foreground">(So They Never Have to Clean a House Themselves)</span>
+    </h1>
+    <ul class="checks">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Find Better-Fit Candidates</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Use A Repeatable Hiring Process</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Build Toward Owner Independence</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Instant Digital Access</li>
+    </ul>
+
+    <div class="hero-grid">
+      <div>
+        <div class="video">
+          <img src="neel-parekh.jpg" alt="Neel Parekh">
+          <div class="ph">
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></span>
+          </div>
+        </div>
+        <div class="chips">
+          <a href="https://www.youtube.com/@NeelBParekh" target="_blank" rel="noopener">▶ YouTube</a>
+          <a href="https://www.instagram.com/neelbparekh/reels/" target="_blank" rel="noopener">◎ Instagram</a>
+          <a href="https://www.linkedin.com/in/neelbparekh" target="_blank" rel="noopener">in LinkedIn</a>
+          <a href="https://x.com/NeelBParekh" target="_blank" rel="noopener">𝕏 X</a>
+        </div>
+        <div class="hero-offer">
+          <img src="blueprint-bundle.png" alt="The Cleaning Team Blueprint bundle">
+          <div class="t">
+            <span class="tag-gold">Instant Digital Access</span>
+            <p>Get The Cleaning Team Blueprint<br><span class="primary">Plus!</span> 4 Free Bonuses Included</p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="buy">
+        <div class="trust">
+          <div class="avatars"><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="tx">
+            <div class="stars">
+              <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+            </div>
+            <p>Trusted by<br>128+ Professionals</p>
+          </div>
+        </div>
+
+        <div class="doors">Doors Closing Soon:<br>Oct 30, 2026</div>
+
+        <div class="card-img"><img src="blueprint-bundle.png" alt="The Cleaning Team Blueprint bundle"></div>
+
+        <p class="rated">
+          <span class="s">
+            <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+          </span>
+          Rated 4.6 Stars
+        </p>
+
+        <p class="price">Only (<s>$97</s>) $27 Today</p>
+        <p class="save">(Save $70.00 today)</p>
+        <p class="txt">Get Instant Access To The Cleaning Team Blueprint + 4 Bonuses For Just $27</p>
+        <p class="avail">Now Available For Instant Access</p>
+
+        <a class="btn-side" href="REPLACE_WITH_CHECKOUT_URL">
+          <b>Yes! Get Instant Access →</b>
+          <small>Go To Step #2...</small>
+        </a>
+
+        <p class="secure">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+          100% Secure 256-Bit Encrypted Checkout
+        </p>
+
+        <div class="guar">
+          <div class="seal">Badge</div>
+          <p>Backed by our 30-day money back guarantee. You'll love the system or you'll get your entire investment refunded.</p>
+        </div>
+
+        <div class="trust-badges"><span>Secure</span><span>SSL</span><span>Verified</span><span>Accredited</span></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- THE REAL BOTTLENECK -->
+<section class="s-pain">
+  <div class="wrap w4">
+    <p class="eyebrow">The real bottleneck</p>
+    <h2 class="sec-h" style="margin-top:.75rem">You Started a Cleaning Business.<span class="block">You Didn't Mean to Become the Entire Workforce.</span></h2>
+    <p class="subline">At first, doing the cleaning yourself can feel like the simplest way to get started. But as customers increase, your time becomes the limit.</p>
+    <div class="pain-box">
+      <ul class="tick-list">
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t"><b>Every new customer can mean another job on your own schedule.</b> Growth starts to feel like more hours, not more freedom.</span></li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t"><b>One cancellation can throw off the whole day.</b> Without dependable coverage, you may be the only backup plan.</span></li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t"><b>Hiring feels like a gamble.</b> Applicants, interviews, no-shows, and inconsistent quality can consume hours without a clear process.</span></li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t"><b>Taking time off feels risky.</b> When all the know-how lives in your head, the business struggles to operate without you.</span></li>
+      </ul>
+    </div>
+    <p class="punch">The answer isn't simply “hire someone.” It's to build a process your business can repeat.</p>
+    <div class="cta-wrap">
+      <a class="cta" href="REPLACE_WITH_CHECKOUT_URL">Show Me The Cleaning Team Blueprint</a>
+      <p class="guar-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>30-Day Refund Policy Proposed</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOUR-PART SYSTEM -->
+<section>
+  <div class="wrap w5">
+    <p class="eyebrow">A practical framework</p>
+    <h2 class="sec-h" style="margin-top:.75rem">The Four-Part<span class="block">Cleaning Team System</span></h2>
+    <p class="subline" style="max-width:46rem;margin-inline:auto">A repeatable workflow for attracting candidates, making more consistent hiring decisions, setting expectations, and improving the odds that good people stay.</p>
+    <div class="steps">
+      <div class="step"><b>01 / FIND</b><span class="n">Build a pipeline</span><p>Job posts, sourcing channels, outreach, and follow-up.</p></div>
+      <div class="step"><b>02 / VET</b><span class="n">Choose carefully</span><p>Screening calls, interviews, references, and scorecards.</p></div>
+      <div class="step"><b>03 / ONBOARD</b><span class="n">Set the standard</span><p>Training plans, SOPs, checklists, and quality checks.</p></div>
+      <div class="step"><b>04 / RETAIN</b><span class="n">Support your team</span><p>Communication, feedback, scheduling, and backup coverage.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULES -->
+<section class="s-mod" id="offer">
+  <div class="wrap">
+    <h2 class="sec-h">Everything You Get Inside<span class="block" style="color:var(--foreground)">The Cleaning Team Blueprint</span></h2>
+    <p class="subline">Six short modules. Practical tools you can put to work.</p>
+
+    <div class="mods on-paper">
+      <article class="mod">
+        <div class="img"><img src="blueprint-bundle.png" alt="Module 1 — Make the transition"></div>
+        <div class="body">
+          <p class="lbl">Module 1: Make The Transition</p>
+          <h3>Start Thinking Like the Owner of the Business</h3>
+          <p class="desc">Understand the shift from self-employed cleaner to business owner, identify what to delegate first, and weigh the cost of hiring against doing every job yourself.</p>
+          <ul class="tick-list">
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Owner-operator transition worksheet</span></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Delegation readiness checklist</span></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">A simple way to think through hiring costs</span></li>
+          </ul>
+          <a class="cta sm" href="REPLACE_WITH_CHECKOUT_URL">Get The Complete System For Just $27</a>
+        </div>
+      </article>
+
+      <article class="mod">
+        <div class="img"><img src="blueprint-bundle.png" alt="Module 2 — Build your pipeline"></div>
+        <div class="body">
+          <p class="lbl">Module 2: Build Your Pipeline</p>
+          <h3>Attract Candidates Without Wasting Hours</h3>
+          <p class="desc">Create a repeatable way to source candidates, communicate the role clearly, and follow up with applicants.</p>
+          <ul class="tick-list">
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Customizable job post templates</span></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Candidate sourcing checklist</span></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Outreach and follow-up scripts</span></li>
+          </ul>
+          <a class="cta sm" href="REPLACE_WITH_CHECKOUT_URL">Get The Complete System For Just $27</a>
+        </div>
+      </article>
+
+      <article class="mod">
+        <div class="img"><img src="blueprint-bundle.png" alt="Module 3 — Make better decisions"></div>
+        <div class="body">
+          <p class="lbl">Module 3: Make Better Decisions</p>
+          <h3>Use a Consistent Screening and Selection Process</h3>
+          <p class="desc">Move beyond a good first impression with role-relevant questions and a repeatable candidate evaluation process.</p>
+          <ul class="tick-list">
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Screening and interview script</span></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Candidate scorecard</span></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Reference-check template and lawful screening reminders</span></li>
+          </ul>
+          <a class="cta sm" href="REPLACE_WITH_CHECKOUT_URL">Get The Complete System For Just $27</a>
+        </div>
+      </article>
+
+      <article class="mod">
+        <div class="img"><img src="blueprint-bundle.png" alt="Module 4 — Set expectations"></div>
+        <div class="body">
+          <p class="lbl">Module 4: Set Expectations</p>
+          <h3>Help New Team Members Understand How You Work</h3>
+          <p class="desc">Document service standards and establish clear communication before the first job, so expectations don't depend on memory or constant supervision.</p>
+          <ul class="tick-list">
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">First-week onboarding plan</span></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Cleaning SOP template</span></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Quality-control checklist</span></li>
+          </ul>
+          <a class="cta sm" href="REPLACE_WITH_CHECKOUT_URL">Get The Complete System For Just $27</a>
+        </div>
+      </article>
+
+      <article class="mod">
+        <div class="img"><img src="blueprint-bundle.png" alt="Module 5 — Keep your best cleaners"></div>
+        <div class="body">
+          <p class="lbl">Module 5: Keep Your Best Cleaners</p>
+          <h3>Create Conditions That Help Good People Stay</h3>
+          <p class="desc">Use clear communication, fair and transparent practices, feedback, and a plan for dealing with attendance and quality issues.</p>
+          <ul class="tick-list">
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Retention checklist</span></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Performance review template</span></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Backup coverage plan</span></li>
+          </ul>
+          <a class="cta sm" href="REPLACE_WITH_CHECKOUT_URL">Get The Complete System For Just $27</a>
+        </div>
+      </article>
+
+      <article class="mod">
+        <div class="img"><img src="blueprint-bundle.png" alt="Module 6 — Connect the operation"></div>
+        <div class="body">
+          <p class="lbl">Module 6: Connect The Operation</p>
+          <h3>Make Hiring Part of a Business That Can Run Without You on Every Job</h3>
+          <p class="desc">Connect your hiring process to scheduling, attendance, customer feedback, and documented procedures.</p>
+          <ul class="tick-list">
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Weekly operations dashboard</span></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Delegation checklist</span></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">30-day implementation plan</span></li>
+          </ul>
+          <a class="cta sm" href="REPLACE_WITH_CHECKOUT_URL">Get The Complete System For Just $27</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- BONUSES -->
+<section class="s-bon">
+  <div class="wrap w5">
+    <h2 class="sec-h">Get 4 Practical Bonuses<span class="block" style="color:var(--success)">Included With Your Purchase</span></h2>
+    <p class="subline">Designed as usable tools — not hours of extra content to watch.</p>
+
+    <div class="bons">
+      <article class="bon">
+        <div class="cover"><span class="ico">✎</span><b>Bonus #1</b><span>Cleaning Hiring Swipe File</span></div>
+        <div>
+          <p class="lbl">Bonus #1: The Cleaning Hiring Swipe File</p>
+          <h3>Ready-To-Use Messages For Every Stage Of Hiring</h3>
+          <p class="desc">Customizable job ads, candidate outreach messages, follow-up texts, and interview invitations.</p>
+          <a class="cta sm" href="REPLACE_WITH_CHECKOUT_URL">Get The Complete System For Just $27</a>
+        </div>
+      </article>
+      <article class="bon">
+        <div class="cover"><span class="ico">✓</span><b>Bonus #2</b><span>Reliable Cleaner Scorecard</span></div>
+        <div>
+          <p class="lbl">Bonus #2: The Reliable Cleaner Scorecard</p>
+          <h3>Compare Applicants On Consistent, Job-Relevant Criteria</h3>
+          <p class="desc">A worksheet for comparing applicants against consistent, job-relevant criteria rather than relying on instinct alone.</p>
+          <a class="cta sm" href="REPLACE_WITH_CHECKOUT_URL">Get The Complete System For Just $27</a>
+        </div>
+      </article>
+      <article class="bon">
+        <div class="cover"><span class="ico">▤</span><b>Bonus #3</b><span>First 7 Days Onboarding Kit</span></div>
+        <div>
+          <p class="lbl">Bonus #3: The First 7 Days Onboarding Kit</p>
+          <h3>Give New Team Members A Clearer Start</h3>
+          <p class="desc">A day-by-day checklist, service standards document, and first-job quality checklist for a clearer start.</p>
+          <a class="cta sm" href="REPLACE_WITH_CHECKOUT_URL">Get The Complete System For Just $27</a>
+        </div>
+      </article>
+      <article class="bon">
+        <div class="cover"><span class="ico">↗</span><b>Bonus #4</b><span>Hiring Cost &amp; Capacity Calculator</span></div>
+        <div>
+          <p class="lbl">Bonus #4: The Hiring Cost &amp; Capacity Calculator</p>
+          <h3>Check Whether Adding Team Capacity Makes Financial Sense</h3>
+          <p class="desc">Estimate labor costs, think through job capacity, and assess whether adding team capacity makes financial sense.</p>
+          <a class="cta sm" href="REPLACE_WITH_CHECKOUT_URL">Get The Complete System For Just $27</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section>
+  <div class="wrap w3">
+    <p class="eyebrow">The goal isn't a magic shortcut</p>
+    <h2 class="sec-h" style="margin-top:.75rem">Build a Business Designed to<span class="block">Depend Less on You</span></h2>
+    <p class="subline">There is no hiring script that guarantees every candidate will be reliable. But a documented process gives you a more consistent way to attract people, evaluate fit, set expectations, and respond when things go wrong.</p>
+
+    <div class="tbl">
+      <div class="tr head"><div>Feature</div><div>With Process</div><div>Without</div></div>
+      <div class="tr"><div class="f">A candidate pipeline you can repeat</div><div class="c"><svg class="yes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="c"><svg class="no" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></div></div>
+      <div class="tr"><div class="f">Consistent screening questions</div><div class="c"><svg class="yes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="c"><svg class="no" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></div></div>
+      <div class="tr"><div class="f">Expectations documented before day one</div><div class="c"><svg class="yes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="c"><svg class="no" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></div></div>
+      <div class="tr"><div class="f">Quality standards and checklists</div><div class="c"><svg class="yes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="c"><svg class="no" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></div></div>
+      <div class="tr"><div class="f">A plan for backup coverage</div><div class="c"><svg class="yes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="c"><svg class="no" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></div></div>
+      <div class="tr"><div class="f">Owner is the default backup</div><div class="c"><svg class="mid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></div><div class="c"><svg class="yes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div></div>
+      <div class="tr"><div class="f">Last-minute hiring decisions</div><div class="c"><svg class="mid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></div><div class="c"><svg class="yes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div></div>
+    </div>
+    <p class="subline">The aim is progress toward a manager-led operation — not a promise that you'll never need to step in.</p>
+
+    <div class="cta-wrap">
+      <a class="cta" href="REPLACE_WITH_CHECKOUT_URL">Start Building The System For Just $27</a>
+      <p class="guar-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>30-Day Refund Policy Proposed</p>
+    </div>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<section class="s-guar">
+  <div class="guar-grid">
+    <div class="guar-badge"><div class="big">30</div><span>Day Refund<br>Policy</span></div>
+    <div>
+      <h2>The Cleaning Team Blueprint Refund Policy: <span class="primary">Confirm Final Terms Before Launch</span></h2>
+      <div class="body">
+        <p>A 30-day money-back guarantee is proposed for this offer. Confirm the final policy wording, process, and applicable terms before accepting purchases.</p>
+        <p>Publish the full refund policy on your site and link it in the footer so buyers know exactly what to expect.</p>
+        <p class="strong">This is educational content only. No hiring, income, business-growth, or owner-independence outcomes are guaranteed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section>
+  <div class="about">
+    <div>
+      <h2 class="sec-h" style="text-align:left">Meet Neel Parekh:<span class="block">Learn From Someone Who Has Built in the Cleaning Industry</span></h2>
+      <div class="body">
+        <p><b>Neel Parekh founded MaidThis and has shared lessons from building a cleaning business designed to operate with systems and a team.</b></p>
+        <p>This blueprint focuses on one of the key challenges owners face as they grow: finding people they can trust, establishing clear standards, and creating a process that doesn't rely on the owner personally doing every job.</p>
+        <p>Rather than promising overnight freedom, the goal is to help you put the foundations in place — one repeatable hiring and operating step at a time.</p>
+      </div>
+      <div class="chips">
+        <a href="https://www.youtube.com/@NeelBParekh" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://www.instagram.com/neelbparekh/reels/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.linkedin.com/in/neelbparekh" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://x.com/NeelBParekh" target="_blank" rel="noopener">X</a>
+      </div>
+      <div class="cta-wrap">
+        <a class="cta" href="REPLACE_WITH_CHECKOUT_URL">Get The Complete System For Just $27</a>
+        <p class="guar-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>30-Day Refund Policy Proposed</p>
+      </div>
+    </div>
+    <div class="photo"><img src="neel-parekh.jpg" alt="Neel Parekh"></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="s-faq">
+  <div class="wrap w3">
+    <h2 class="sec-h">Frequently Asked Questions</h2>
+    <div class="faq">
+      <details open><summary>Do I need to own a cleaning business already?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>No. The framework is intended for aspiring owners, solo cleaners preparing to build a team, and existing cleaning business owners who need a more repeatable hiring process.</p></details>
+      <details><summary>Do I need previous hiring experience?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>No previous hiring experience is required. The program gives you a structured starting point and templates you can adapt to your business.</p></details>
+      <details><summary>Will this guarantee that I find great cleaners?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>No. Hiring outcomes depend on your market, role, compensation, screening practices, management, and many other factors. The blueprint provides a repeatable process, not a guarantee of a particular result.</p></details>
+      <details><summary>Will I never have to clean a house again?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>That depends on your circumstances, finances, team, and execution. The goal is to help you build toward a business that relies less on your personal cleaning labor — not to promise you can eliminate it immediately.</p></details>
+      <details><summary>Is this a franchise opportunity?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>No. This is an educational digital product focused on hiring and team systems. It does not include a franchise or guarantee franchise eligibility.</p></details>
+      <details><summary>How long is the training?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>The proposed format is six concise video modules, approximately 60–90 minutes in total, plus templates and worksheets.</p></details>
+      <details><summary>How do I access the materials?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>The intended delivery is instant digital access after purchase. Add the final platform and access instructions before publishing.</p></details>
+      <details><summary>What is the refund policy?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>A 30-day money-back guarantee is proposed. Confirm the final policy wording, process, and applicable terms before accepting purchases.</p></details>
+      <details><summary>Does this provide legal advice about hiring or worker classification?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>No. Screening, worker classification, background checks, and employment rules vary by location. Use qualified local professionals for advice on legal obligations.</p></details>
+    </div>
+    <div class="faq-cta">
+      <a class="cta" href="REPLACE_WITH_CHECKOUT_URL">Get The Complete System For Just $27</a>
+      <p class="guar-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>30-Day Refund Policy Proposed</p>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="s-final" id="checkout">
+  <div class="wrap w3 center">
+    <h2 class="sec-h">Stop Trying To Solve Every Hiring Problem From Scratch</h2>
+    <p class="subline" style="font-size:1rem">Start building a repeatable way to find, vet, onboard, and retain cleaning professionals — so your business can grow beyond the jobs you personally complete.</p>
+    <p class="pr">$27 <small>one-time</small></p>
+    <div class="cta-wrap" style="margin-top:1.5rem">
+      <a class="cta big" href="REPLACE_WITH_CHECKOUT_URL">Get The Cleaning Team Blueprint</a>
+      <p class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Instant digital access after purchase</p>
+      <p class="guar-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>30-Day Refund Policy Proposed</p>
+    </div>
+    <p class="fine">Six modules · Four bonuses · Self-paced · No live coaching included</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="in">
+    <p>Educational content only. No hiring, income, business-growth, or owner-independence outcomes are guaranteed. Results depend on your circumstances and implementation. Employment, screening, and worker-classification rules vary by location; consult a qualified professional where appropriate.</p>
+    <nav>
+      <a href="REPLACE_WITH_TERMS_URL">Terms</a>
+      <a href="REPLACE_WITH_PRIVACY_URL">Privacy Policy</a>
+      <a href="REPLACE_WITH_REFUND_URL">Refund Policy</a>
+      <a href="mailto:REPLACE_WITH_SUPPORT_EMAIL">Contact Us</a>
+    </nav>
+    <p class="copy">© 2026 The Cleaning Team Blueprint · Neel Parekh</p>
+  </div>
+</footer>
+
+</body>
+</html>
