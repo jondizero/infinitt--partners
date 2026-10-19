@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Tech Portfolio System — Brian Decker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07090b;--surface:#0f1417;--surface-2:#151b1f;--ink:#eef6f6;--muted:#9fb0b3;--line:rgba(255,255,255,.1);
+  --accent:#8AF8FA;--accent-soft:rgba(138,248,250,.1);--on-accent:#031a1c;--warn:#ff6b7d;
+  --shadow-cta:0 10px 28px rgba(138,248,250,.28);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:960px;margin:auto;padding:0 20px}
+.header{border-bottom:1px solid var(--line)}
+.header .wrap{display:flex;justify-content:space-between;align-items:center;padding:14px 20px}
+.logo-slot{height:34px;padding:0 16px;display:flex;align-items:center;border:1px dashed rgba(255,255,255,.3);border-radius:4px;color:var(--muted);font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.header a{color:var(--ink);font-size:13px;font-weight:700;text-decoration:none}
+section{padding:60px 0}
+.hero{background:radial-gradient(900px 420px at 50% -80px,rgba(138,248,250,.14),transparent 70%)}
+.eyebrow-pill{display:block;width:fit-content;margin:0 auto 22px;padding:8px 20px;border-radius:6px;background:var(--accent);color:var(--on-accent);font-size:13px;font-weight:800;text-align:center}
+h1{max-width:800px;margin:0 auto 14px;text-align:center;font-size:clamp(24px,3.6vw,36px);line-height:1.22}
+h1 .accent{color:var(--accent)}
+.sub{max-width:700px;margin:0 auto 24px;text-align:center;color:var(--muted);font-size:15px;line-height:1.55}
+.proof-list{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 26px;margin:0 auto 30px;max-width:720px;list-style:none;padding:0}
+.proof-list li{font-weight:700;font-size:14px}
+.proof-list li:before{content:"✓";color:var(--accent);margin-right:6px}
+.video-block{position:relative;display:flex;width:100%;max-width:760px;aspect-ratio:16/9;margin:0 auto;border:1px solid rgba(138,248,250,.45);border-radius:12px;background:linear-gradient(135deg,#0d1316 0%,#122a2e 50%,#080b0d 100%);align-items:center;justify-content:center;flex-direction:column;gap:12px;color:var(--ink);font:800 13px/1.4 Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 18px 42px rgba(0,0,0,.5);cursor:pointer;appearance:none;-webkit-appearance:none}
+.video-block:before{content:"▶";display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:var(--accent);color:var(--on-accent);font-size:24px;box-shadow:0 8px 28px rgba(138,248,250,.35)}
+.video-block:after{content:"CLICK TO PLAY";font-size:10px;letter-spacing:.16em;color:var(--accent)}
+.price-card{max-width:420px;margin:28px auto 0;padding:22px;border-radius:12px;border:2px solid var(--accent);background:var(--surface);text-align:center}
+.price-card .price{margin:0;font-size:26px;font-weight:800;color:var(--accent)}
+.cta-btn{display:block;width:100%;max-width:520px;margin:18px auto 0;padding:18px 20px;border:0;border-radius:999px;background:var(--accent);color:var(--on-accent);font-size:16px;font-weight:800;text-align:center;text-decoration:none;text-transform:uppercase;box-shadow:var(--shadow-cta)}
+.cta-btn.small{max-width:260px;padding:10px 16px;font-size:12px;margin:14px 0 0}
+.fine{text-align:center;margin-top:12px;font-size:12px;font-weight:600;color:var(--muted)}
+h2.section-title{max-width:680px;margin:0 auto 12px;text-align:center;font-size:clamp(22px,3vw,31px);line-height:1.2}
+.section-sub{max-width:620px;margin:0 auto 34px;text-align:center;color:var(--muted);font-size:15px;line-height:1.6}
+.alt{background:var(--surface)}
+.problem{max-width:680px;margin:0 auto;padding:22px 24px;border:1px solid var(--line);border-radius:14px;background:var(--surface-2);list-style:none}
+.problem li{padding:10px 0;border-top:1px solid var(--line);color:var(--muted);line-height:1.55;font-size:15px}
+.problem li:first-child{border-top:0}
+.problem li b{color:var(--ink)}
+.buckets{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.bucket{padding:22px 18px;border:1px solid var(--line);border-top:2px solid var(--accent);border-radius:12px;background:var(--surface)}
+.bucket small{color:var(--accent);font-size:11px;font-weight:800;letter-spacing:.14em}
+.bucket h3{margin:18px 0 8px;font-size:19px}
+.bucket p{margin:0;color:var(--muted);font-size:14px;line-height:1.55}
+.module{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;margin-bottom:22px;padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--surface-2)}
+.img-slot{aspect-ratio:16/9;border-radius:10px;border:2px dashed rgba(255,255,255,.22);display:grid;place-items:center;color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;text-align:center;padding:10px}
+.module h3{margin:0 0 10px;font-size:19px;line-height:1.3}
+.module ul{margin:0;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.7}
+.authority{display:grid;grid-template-columns:1fr 220px;gap:30px;align-items:center;max-width:840px;margin:0 auto}
+.authority .img-slot{aspect-ratio:4/5}
+.authority p{color:var(--muted);line-height:1.7}
+.faq-item{max-width:700px;margin:0 auto 12px;border:1px solid var(--line);border-radius:10px;padding:14px 18px;background:var(--surface-2)}
+.faq-item summary{font-weight:700;cursor:pointer}
+.faq-item p{color:var(--muted);font-size:14px;line-height:1.6;margin:10px 0 0}
+.final-cta{text-align:center;background:radial-gradient(700px 320px at 50% 100%,rgba(138,248,250,.14),transparent 70%)}
+.risk{max-width:760px;margin:0 auto;padding:18px 20px;border:1px solid rgba(255,107,125,.35);border-radius:10px;background:rgba(255,107,125,.06);color:var(--muted);font-size:12.5px;line-height:1.6}
+.risk b{color:var(--warn)}
+footer{padding:34px 20px;text-align:center;color:var(--muted);font-size:11px;border-top:1px solid var(--line)}
+@media(max-width:680px){.module,.authority,.buckets{grid-template-columns:1fr}}
+</style>
+</head>
+<body id="get-access">
+
+<header class="header"><div class="wrap"><div class="logo-slot">BRIAN DECKER</div><a href="#contact">Need help? Contact us</a></div></header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow-pill">For high-income professionals who want a clearer way into the AI and robotics cycle</span>
+    <h1><span class="accent">How High-Income Professionals Are Finally Building 40%+ Portfolio Returns Through Tech Portfolios</span> (Using The Same System Top Wealth Managers Charge $10,000+ To Access)</h1>
+    <p class="sub">A step-by-step framework for evaluating AI, robotics and the new financial rails — built for people with one or two hours a week, not day traders.</p>
+    <ul class="proof-list">
+      <li>A repeatable framework, not hot tips</li><li>Built for 1–2 hours a week</li><li>No day trading required</li><li>Covers all three layers of the AI cycle</li>
+    </ul>
+    <button class="video-block" type="button" aria-label="Play VSL preview">VSL PREVIEW</button>
+    <div class="price-card">
+      <p class="price">[ PRICE ] Today</p>
+      <a class="cta-btn" href="#get-access">Get Instant Access</a>
+      <p class="fine">Educational content only. Not financial advice.</p>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <h2 class="section-title">Is Your Portfolio Still Stuck In “Phase One”?</h2>
+    <p class="section-sub">Most portfolios own a handful of traditional holdings plus a few chip stocks. That's the part of the AI story everyone can already see.</p>
+    <ul class="problem">
+      <li><b>You hear “AI investing” and buy what's already popular.</b> It feels like participation, but it covers only one layer of the cycle.</li>
+      <li><b>Headlines make every move look urgent.</b> Without a framework, it's hard to tell signal from noise.</li>
+      <li><b>“Good” has been defined for you.</b> If your advisor calls 8–10% a year a strong result, it's worth asking what you're measuring against.</li>
+      <li><b>You don't have hours a day to research.</b> You need a process that fits around a demanding career.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 class="section-title">The Three-Layer Tech Portfolio Framework</h2>
+    <p class="section-sub">A simple way to see where a company sits in the AI cycle — and whether your portfolio touches more than one layer.</p>
+    <div class="buckets">
+      <article class="bucket"><small>LAYER 01</small><h3>AI Factories</h3><p>The data centers, power and chips that AI runs on. The infrastructure layer everything else depends on.</p></article>
+      <article class="bucket"><small>LAYER 02</small><h3>The AI Workforce</h3><p>Robotics and autonomous systems doing real physical and digital work as they reach real businesses.</p></article>
+      <article class="bucket"><small>LAYER 03</small><h3>The Financial Rails</h3><p>Stablecoins, tokenization and payment systems that AI agents would need in order to transact.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <h2 class="section-title">What You Get Inside</h2>
+    <p class="section-sub">Short, practical modules you can work through in the time you actually have.</p>
+    <!-- Draft modules — replace with the real curriculum -->
+    <div class="module">
+      <div class="img-slot">Module image</div>
+      <div><h3>Module 1: Audit Your Current Portfolio</h3>
+        <ul><li>Tag every holding by layer: factory, workforce, rails or none</li><li>See how much of your portfolio is exposed to the shift</li><li>Spot the gaps worth researching further</li></ul>
+        <a class="cta-btn small" href="#get-access">Get Access</a></div>
+    </div>
+    <div class="module">
+      <div class="img-slot">Module image</div>
+      <div><h3>Module 2: Evaluate Opportunities With A Repeatable Checklist</h3>
+        <ul><li>A consistent way to compare companies in each layer</li><li>Questions to ask before you ever place a trade</li><li>How to separate real positioning from headlines</li></ul>
+        <a class="cta-btn small" href="#get-access">Get Access</a></div>
+    </div>
+    <div class="module">
+      <div class="img-slot">Module image</div>
+      <div><h3>Module 3: Build A One-To-Two-Hour Weekly Routine</h3>
+        <ul><li>A simple review cadence that fits around a full-time career</li><li>What to track, and what to ignore</li><li>How to manage risk and position size sensibly</li></ul>
+        <a class="cta-btn small" href="#get-access">Get Access</a></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap authority">
+    <div><h2 style="text-align:left;margin:0 0 14px">Meet Brian Decker</h2>
+      <p>Brian Decker is the founder and CEO of The Wealth Society, a community for investors focused on AI infrastructure, robotics and the new financial system.</p>
+      <p>His approach is built around giving busy professionals a framework they can run in an hour or two a week, instead of chasing tips.</p>
+      <a class="cta-btn small" href="#get-access">Get Instant Access</a>
+    </div>
+    <div class="img-slot">Brian's photo</div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <details class="faq-item" open><summary>Do I need to day-trade?</summary><p>No. The framework is designed for people with one or two hours a week, not for constant trading.</p></details>
+    <details class="faq-item"><summary>Is this financial advice?</summary><p>No. This is educational content. It doesn't take your personal situation into account, so do your own research and consider speaking with a licensed financial advisor.</p></details>
+    <details class="faq-item"><summary>Are returns guaranteed?</summary><p>No. All investing involves risk, including the loss of principal. Results vary and nothing here promises a specific outcome.</p></details>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="wrap">
+    <h2 class="section-title">Start With A Clear Look At Your Portfolio</h2>
+    <p class="section-sub" style="margin-bottom:0">See which layers of the AI cycle you're actually exposed to — and which you're missing.</p>
+    <a class="cta-btn" href="#get-access">Get Instant Access</a>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap"><div class="risk"><b>Important:</b> This page is for educational purposes only and is not financial, investment, tax or legal advice. All investing involves risk, including possible loss of principal. Past performance does not guarantee future results. Returns referenced on this page are not typical, are not guaranteed, and individual results will vary.</div></div>
+</section>
+
+<footer>© 2026 — The Tech Portfolio System. <a href="#terms" style="color:inherit">Terms</a> · <a href="#privacy" style="color:inherit">Privacy</a> · <a href="#refunds" style="color:inherit">Refunds</a></footer>
+
+</body>
+</html>
