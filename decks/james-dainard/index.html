@@ -114,8 +114,8 @@
 
   .progress{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(0,0,0,.08);z-index:100}
   .progress-bar{height:100%;background:var(--accent-fill);transition:width .15s linear;box-shadow:0 0 10px var(--accent-fill)}
-  .kbd-hint{position:fixed;bottom:18px;right:22px;font-family:var(--mono);font-size:10.5px;color:var(--ink-muted);letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:8px;background:var(--surface);backdrop-filter:blur(8px);padding:7px 14px;border-radius:100px;border:1px solid var(--line);z-index:50}
-  .kbd-hint kbd{font-family:var(--mono);background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:2px 6px;font-size:10px;color:var(--ink-soft)}
+  .kbd-hint{position:fixed;bottom:18px;right:22px;font-family:var(--mono);font-size:10.5px;color:var(--ink-muted);letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:8px;background:var(--surface);backdrop-filter:blur(8px);padding:7px 14px;border-radius:100px;border:1px solid var(--accent-fill);z-index:50}
+  .kbd-hint kbd{font-family:var(--mono);background:var(--surface-2);border:1px solid var(--accent-fill);border-radius:4px;padding:2px 6px;font-size:10px;color:var(--ink-soft)}
 
   @media (max-width:860px){
     .slide-split .slide-inner{grid-template-columns:1fr;gap:24px}
