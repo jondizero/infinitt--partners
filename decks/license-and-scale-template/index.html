@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>[Workshop Name] — Free Live Workshop</title>
+  <meta name="description" content="[One-sentence description of the workshop and its audience.]">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--accent:#b20de2;--accent-dark:#980bc5;--ink:#08080a;--muted:#4a4a55;--line:#e9e9ed;--green:#00b67a;--font:Inter,Arial,sans-serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#fff;color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased}
+    a{color:inherit}.announcement{min-height:44px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;gap:12px;padding:8px 16px;font-size:14px;font-weight:700;flex-wrap:wrap}
+    .announcement-tag{background:var(--accent);color:#fff;border-radius:7px;padding:4px 10px;font-size:12px;letter-spacing:.01em}
+    main{width:min(100% - 40px,640px);margin:0 auto}.hero{text-align:center;padding:24px 0 0}.brand{font-size:13px;letter-spacing:.035em;font-weight:800;color:#25233c;margin:0 0 20px}.brand-mark{font-size:11px;vertical-align:top}
+    h1{font-size:clamp(34px,5.3vw,43px);line-height:1.1;letter-spacing:-.045em;margin:0 auto 12px;font-weight:800;max-width:900px}
+    .accent{color:var(--accent)}.subhead{font-size:clamp(17px,2.6vw,21px);line-height:1.35;color:#16161b;margin:0 auto;max-width:630px}
+    .countdown-wrap{margin:25px 0 18px}.countdown-label{font-size:12px;font-weight:800;letter-spacing:.15em;color:#55515c;margin-bottom:6px}.countdown{display:flex;align-items:flex-start;justify-content:center;gap:7px;font-variant-numeric:tabular-nums}.time-unit{min-width:42px}.time-number{font-size:31px;line-height:1;font-weight:800;letter-spacing:-.04em}.time-name{font-size:11px;letter-spacing:.06em;margin-top:6px;color:#45414c}.colon{font-size:26px;font-weight:700;color:#c8c1cf;line-height:1.1}
+    .cta{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-decoration:none;background:var(--accent);color:#fff;border-radius:11px;padding:16px 18px;min-height:80px;width:min(100%,520px);margin:0 auto;font-weight:800;transition:background .18s,transform .18s}.cta:hover{background:var(--accent-dark);transform:translateY(-1px)}.cta-title{font-size:clamp(19px,3.2vw,24px);letter-spacing:-.025em}.cta-sub{font-size:13px;font-weight:500}.microcopy{margin:12px 0 20px;font-size:13px;color:#55515c;display:flex;justify-content:center;align-items:center;gap:6px}.lock{color:var(--accent);font-size:16px}
+    .trust{display:flex;align-items:center;justify-content:center;gap:18px;border:1px solid #ececf0;border-radius:999px;padding:11px 16px;margin:0 auto;max-width:590px;box-shadow:0 8px 26px rgba(15,15,25,.06)}.faces{display:flex;align-items:center;padding-left:4px}.face{width:39px;height:39px;border-radius:50%;border:2px solid #fff;margin-left:-7px;object-fit:cover;background:#e9e9e9}.trust-copy{text-align:left;white-space:nowrap}.trust-brand{display:flex;align-items:center;gap:6px;font-size:16px;margin-bottom:3px}.trust-star{font-size:26px;line-height:1;color:var(--green)}.stars{display:inline-flex;gap:2px}.stars span{display:grid;place-items:center;background:var(--green);color:#fff;width:21px;height:21px;font-size:17px;line-height:1}.rating{font-size:14px;line-height:1.4}.rating strong{font-weight:800}
+    .content{border-top:1px solid var(--line);margin-top:44px;padding:35px 0 24px}.content h2{font-size:clamp(24px,3.5vw,28px);line-height:1.2;letter-spacing:-.04em;text-align:center;margin:0 0 20px;font-weight:800}.bullets{list-style:none;margin:0;padding:0;display:grid;gap:14px}.bullets li{display:grid;grid-template-columns:22px 1fr;gap:12px;font-size:16px;line-height:1.48;color:#17171d}.check{width:22px;height:22px;border-radius:7px;background:var(--accent);color:white;display:grid;place-items:center;font-size:14px;font-weight:800;margin-top:1px}.bullets strong{font-weight:800}.content .cta{margin-top:30px}.content .trust{margin-top:18px}.footer{padding:30px 0 38px;text-align:center;color:#777;font-size:11px;line-height:1.6}.footer a{color:inherit}
+    .modal{position:fixed;inset:0;background:rgba(12,8,16,.58);display:none;align-items:center;justify-content:center;padding:20px;z-index:10}.modal.open{display:flex}.modal-card{background:#fff;width:min(100%,460px);padding:28px;border-radius:18px;box-shadow:0 24px 80px #0003;position:relative}.modal-card h2{font-size:25px;margin:0 30px 8px 0;letter-spacing:-.04em}.modal-card p{font-size:14px;color:#555;line-height:1.5;margin:0 0 20px}.close{position:absolute;right:16px;top:14px;border:0;background:#f2f2f5;border-radius:50%;width:32px;height:32px;font-size:20px;cursor:pointer}.field{display:block;font-size:12px;font-weight:700;margin:12px 0 6px}.modal input{width:100%;border:1px solid #dddde5;border-radius:8px;padding:12px;font:inherit}.submit{margin-top:18px;width:100%;border:0;cursor:pointer;font:inherit;font-weight:800;background:var(--accent);color:#fff;padding:15px;border-radius:9px}.form-note{font-size:11px!important;margin:10px 0 0!important}
+    @media(max-width:560px){.announcement{font-size:12px;gap:8px}.announcement-tag{font-size:10px}.hero{padding-top:22px}.trust{gap:10px;padding:9px 10px}.face{width:30px;height:30px}.trust-copy{white-space:normal}.trust-brand{font-size:13px}.stars span{width:17px;height:17px;font-size:14px}.rating{font-size:11px}.content{margin-top:32px;padding-top:28px}.bullets li{font-size:15px}.time-number{font-size:28px}.time-unit{min-width:36px}.colon{font-size:23px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <div class="announcement"><span class="announcement-tag" id="topTag">100% FREE LIVE WORKSHOP</span><span id="topDate">Sun, Oct 25 @ 5:00 PM GMT-3</span></div>
+  <main>
+    <section class="hero">
+      <p class="brand" id="brand">LICENSE &amp; SCALE <span class="brand-mark">♙</span></p>
+      <h1 id="headline">Seven Figure Agency Owner Reveals How To Scale Your Agency To <span class="accent">$100K+/Month</span></h1>
+      <p class="subhead" id="subhead">Without Turning It Into An Operational Hell-Hole On 20% Margins By Simply <em>“Signing More Clients”</em>, Or Working 12-Hour Days To Keep It Alive</p>
+      <div class="countdown-wrap"><div class="countdown-label">TRAINING STARTS IN</div><div class="countdown" aria-live="off">
+        <div class="time-unit"><div class="time-number" id="days">01</div><div class="time-name">DAYS</div></div><div class="colon">:</div>
+        <div class="time-unit"><div class="time-number" id="hours">02</div><div class="time-name">HOURS</div></div><div class="colon">:</div>
+        <div class="time-unit"><div class="time-number" id="minutes">46</div><div class="time-name">MINS</div></div><div class="colon">:</div>
+        <div class="time-unit"><div class="time-number" id="seconds">51</div><div class="time-name">SECS</div></div>
+      </div></div>
+      <a class="cta js-register" href="#register"><span class="cta-title">Yes! Save My Spot Now!</span><span class="cta-sub" id="ctaDate">Starting Sun, Oct 25 @ 5:00 PM GMT-3</span></a>
+      <p class="microcopy"><span class="lock">♙</span> <span id="microcopy">100% free. Takes 10 seconds.</span></p>
+      <div class="trust" aria-label="Rated 4.9 out of 5 by 110 plus agency owners">
+        <div class="faces" id="faces"></div>
+        <div class="trust-copy"><div class="trust-brand"><span class="trust-star">★</span><span>Trustpilot</span><span class="stars" aria-label="5 out of 5 stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></span></div><div class="rating">Rated <strong id="rating">4.9/5 by 110+ agency owners</strong></div></div>
+      </div>
+    </section>
+    <section class="content">
+      <h2 id="sectionTitle">Here’s What We’ll Be Revealing Live On Sunday</h2>
+      <ul class="bullets" id="bullets"></ul>
+      <a class="cta js-register" href="#register"><span class="cta-title">Yes! Save My Spot Now!</span><span class="cta-sub" id="ctaDate2">Starting Sun, Oct 25 @ 5:00 PM GMT-3</span></a>
+      <div class="trust" aria-label="Rated 4.9 out of 5 by 110 plus agency owners">
+        <div class="faces faces-copy"></div>
+        <div class="trust-copy"><div class="trust-brand"><span class="trust-star">★</span><span>Trustpilot</span><span class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></span></div><div class="rating">Rated <strong>4.9/5 by 110+ agency owners</strong></div></div>
+      </div>
+    </section>
+    <footer class="footer"><span id="footerBrand">© 2026 [Your Brand]. All rights reserved.</span> · <a id="privacyLink" href="#" target="_blank" rel="noopener">Privacy Policy</a><p style="font-size:10px;max-width:620px;margin:12px auto 0">Replace this line with any required disclaimer, results disclosure, and terms for your offer.</p></footer>
+  </main>
+  <div class="modal" id="register" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card"><button class="close" type="button" aria-label="Close registration form">×</button><h2 id="modalTitle">Save your free spot</h2><p id="modalSub">[Workshop date] · Live + Q&amp;A</p>
+      <form id="registrationForm"><label class="field" for="firstName">First name</label><input id="firstName" name="firstName" autocomplete="given-name" placeholder="Your first name" required><label class="field" for="email">Email address</label><input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required><button class="submit" type="submit">Reserve my spot →</button><p class="form-note">Template demo: connect this form to your CRM or replace the CTA URL before publishing.</p></form>
+    </div>
+  </div>
+  <script>
+    /*
+      TEMPLATE SETTINGS — edit these values for each prospect.
+      Set registrationUrl to a real opt-in URL to send CTA clicks there instead of opening the demo form.
+      Set workshopDate to an ISO date with timezone, e.g. 2026-10-25T17:00:00-03:00.
+    */
+    const SETTINGS = {
+      brand: 'LICENSE & SCALE',
+      topTag: '100% FREE LIVE WORKSHOP',
+      workshopDate: '2026-10-25T17:00:00-03:00',
+      dateLabel: 'Sun, Oct 25 @ 5:00 PM GMT-3',
+      headlineBefore: 'Seven Figure Agency Owner Reveals How To Scale Your Agency To ',
+      headlineAccent: '$100K+/Month',
+      subhead: 'Without Turning It Into An Operational Hell-Hole On 20% Margins By Simply <em>“Signing More Clients”</em>, Or Working 12-Hour Days To Keep It Alive',
+      sectionTitle: 'Here’s What We’ll Be Revealing Live On Sunday',
+      ctaText: 'Yes! Save My Spot Now!',
+      microcopy: '100% free. Takes 10 seconds.',
+      rating: '4.9/5 by 110+ agency owners',
+      privacyUrl: '#',
+      registrationUrl: '',
+      footer: '© 2026 [Your Brand]. All rights reserved.',
+      bullets: [
+        'Why signing more clients isn’t the answer, and the <strong>three levers</strong> that actually decide how big your agency gets',
+        'The exact structure that took <strong>47+ agencies</strong> from stuck at $10K-$30K to <strong class="accent">$100K+ per month</strong>, so that you can just copy them',
+        'The simple <strong>pricing formula</strong> that makes every client you sign profitable (most are undercharging 3x)',
+        'The <strong>4-Leak Diagnosis</strong> that tells you exactly where you’re leaving money on the table and what to fix first',
+        'How to fill your calendar with <strong>qualified sales calls</strong>, without you being the sole source of clients',
+        'How to get yourself <strong>out of the day-to-day</strong> so the business runs without you working 12-hour days',
+        '<strong>Live Q&amp;A</strong> at the end for you to get clarity on what’s capping your growth and how to get past it'
+      ],
+      // Swap these demo portraits for prospect-approved testimonials/avatars. Remove faces if you don't have permission.
+      avatarUrls: [
+        'https://i.pravatar.cc/100?img=12','https://i.pravatar.cc/100?img=13','https://i.pravatar.cc/100?img=14',
+        'https://i.pravatar.cc/100?img=15','https://i.pravatar.cc/100?img=11','https://i.pravatar.cc/100?img=16',
+        'https://i.pravatar.cc/100?img=17','https://i.pravatar.cc/100?img=18'
+      ]
+    };
+    const $ = id => document.getElementById(id);
+    $('brand').innerHTML = SETTINGS.brand + ' <span class="brand-mark">♙</span>';
+    $('topTag').textContent = SETTINGS.topTag;
+    $('topDate').textContent = SETTINGS.dateLabel;
+    $('headline').innerHTML = SETTINGS.headlineBefore + '<span class="accent">' + SETTINGS.headlineAccent + '</span>';
+    $('subhead').innerHTML = SETTINGS.subhead;
+    $('sectionTitle').textContent = SETTINGS.sectionTitle;
+    $('microcopy').textContent = SETTINGS.microcopy;
+    $('rating').textContent = SETTINGS.rating;
+    $('privacyLink').href = SETTINGS.privacyUrl;
+    $('footerBrand').textContent = SETTINGS.footer;
+    $('ctaDate').textContent = 'Starting ' + SETTINGS.dateLabel;
+    $('ctaDate2').textContent = 'Starting ' + SETTINGS.dateLabel;
+    $('modalSub').textContent = SETTINGS.dateLabel + ' · Live + Q&A';
+    $('bullets').innerHTML = SETTINGS.bullets.map(item => '<li><span class="check">✓</span><span>' + item + '</span></li>').join('');
+    const faceMarkup = SETTINGS.avatarUrls.map((url,i) => '<img class="face" src="' + url + '" alt="" loading="lazy" style="z-index:'+(20-i)+'" onerror="this.style.display=\'none\'">').join('');
+    $('faces').innerHTML = faceMarkup;
+    document.querySelector('.faces-copy').innerHTML = faceMarkup;
+    if (SETTINGS.registrationUrl) document.querySelectorAll('.js-register').forEach(a => {a.href=SETTINGS.registrationUrl;a.target='_blank';a.rel='noopener';});
+    const modal = $('register');
+    document.querySelectorAll('.js-register').forEach(a => a.addEventListener('click',e=>{if(!SETTINGS.registrationUrl){e.preventDefault();modal.classList.add('open');$('firstName').focus();}}));
+    document.querySelector('.close').addEventListener('click',()=>modal.classList.remove('open'));
+    modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('open')});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')modal.classList.remove('open')});
+    $('registrationForm').addEventListener('submit',e=>{e.preventDefault();alert('Demo form only — connect your form provider or set SETTINGS.registrationUrl before publishing.');});
+    const target = new Date(SETTINGS.workshopDate).getTime();
+    function tick(){let diff=Math.max(0,target-Date.now());const vals={days:Math.floor(diff/86400000),hours:Math.floor(diff/3600000)%24,minutes:Math.floor(diff/60000)%60,seconds:Math.floor(diff/1000)%60};Object.entries(vals).forEach(([id,val])=>$(id).textContent=String(val).padStart(2,'0'));}
+    tick();setInterval(tick,1000);
+  </script>
+</body>
+</html>
