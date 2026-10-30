@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Confirmation</title>
+<style>
+:root{
+  --accent:#c2304c;
+  --accent-dark:#9f233b;
+  --ink:#111;
+  --muted:#858585;
+  --card:#fff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--ink);
+  font-family:Arial,Helvetica,sans-serif;
+  background:
+    radial-gradient(ellipse 380px 340px at 50% 28%,rgba(194,48,76,.12),transparent 72%),
+    radial-gradient(ellipse 440px 360px at 50% 59%,rgba(194,48,76,.12),transparent 72%),
+    radial-gradient(ellipse 400px 360px at 50% 83%,rgba(194,48,76,.10),transparent 72%),
+    #fff;
+  font-size:12px;
+}
+.top-strip{
+  height:18px;background:var(--accent);color:#fff;text-align:center;
+  font-size:6px;font-weight:800;font-style:italic;letter-spacing:.2px;
+  line-height:17px;
+}
+.progress-wrap{height:13px;display:flex;justify-content:center;align-items:flex-start}
+.progress{width:268px;height:9px;border-radius:10px;background:#e8e8e8;overflow:hidden;box-shadow:0 0 4px #bbb}
+.progress-fill{height:100%;width:73%;background:var(--accent);border-radius:10px;color:#fff;text-align:center;font-size:6px;line-height:9px;font-weight:bold}
+.intro{text-align:center;margin:2px auto 5px;padding:0 10px}
+h1{font-size:17px;line-height:1.1;margin:0 0 3px;font-weight:800;letter-spacing:-.45px}
+h1 span{color:var(--accent)}
+.intro p{margin:0;color:#777;font-size:8px}
+.page{width:min(100% - 24px,355px);margin:0 auto;padding-bottom:18px}
+.hero-video{
+  height:200px;border-radius:8px;overflow:hidden;position:relative;
+  background:linear-gradient(110deg,#888,#aaa 48%,#777);
+  box-shadow:0 5px 18px rgba(194,48,76,.28);
+  border:1px solid rgba(194,48,76,.35);
+}
+.hero-video:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.08),transparent 18%,transparent 82%,rgba(0,0,0,.08))}
+.hero-video .person-placeholder{
+  position:absolute;width:145px;height:150px;left:50%;bottom:-30px;transform:translateX(-50%);
+  background:linear-gradient(#282828 0 35%,#080808 36%);border-radius:70px 70px 10px 10px;
+}
+.hero-video .person-placeholder:before{
+  content:"";position:absolute;width:67px;height:82px;left:39px;top:-57px;
+  background:linear-gradient(90deg,#8c5638,#bd8056 45%,#70442e);
+  border-radius:45% 45% 42% 42%;
+}
+.play{
+  position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);
+  width:61px;height:61px;border-radius:50%;background:var(--accent);
+  display:grid;place-items:center;box-shadow:0 2px 12px rgba(194,48,76,.35);z-index:2;
+}
+.play:after{content:"";margin-left:5px;border-top:14px solid transparent;border-bottom:14px solid transparent;border-left:22px solid white}
+.hero-video .timer{position:absolute;left:39px;top:72px;width:35px;height:35px;border-radius:50%;background:var(--accent);color:white;display:grid;place-items:center;font-size:10px;z-index:2}
+.video-caption{position:absolute;bottom:37px;left:0;right:0;text-align:center;color:#fff;font-size:9px;font-weight:bold;text-shadow:0 1px 3px #333;z-index:2}
+.video-controls{position:absolute;bottom:0;left:0;right:0;height:19px;background:rgba(0,0,0,.28);color:#fff;font-size:8px;padding:5px 9px;z-index:3}
+.video-controls:after{content:"";position:absolute;height:4px;background:var(--accent);bottom:0;left:0;width:95%}
+.card{
+  background:var(--card);border-radius:6px;
+  box-shadow:0 5px 17px rgba(194,48,76,.15);
+  margin:18px auto 0;padding:12px 15px;text-align:center;
+}
+.card.narrow{width:78%}
+.card.wide{width:100%}
+.step{
+  display:inline-block;background:var(--accent);color:#fff;border-radius:20px;
+  padding:4px 10px;font-size:7px;font-weight:800;letter-spacing:.25px;
+  box-shadow:0 1px 5px rgba(194,48,76,.35);margin-bottom:7px;
+}
+.card h2{font-size:10px;line-height:1.25;margin:0 0 9px;font-weight:800}
+.wallet-icon{font-size:22px;margin:1px 0 7px}
+.black-button{
+  height:25px;width:140px;max-width:100%;margin:0 auto 9px;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  color:#fff;background:#080808;border:1px solid var(--accent);
+  box-shadow:0 0 7px rgba(194,48,76,.55);font-size:8px;font-weight:800;letter-spacing:.5px;
+}
+.qr-placeholder{
+  width:89px;height:89px;margin:0 auto 4px;border:1px solid var(--accent);
+  border-radius:5px;display:grid;place-items:center;background:#fff;
+  box-shadow:0 0 8px rgba(194,48,76,.18);padding:8px;
+}
+.qr-placeholder svg{width:100%;height:100%}
+.small-copy{font-size:7px;line-height:1.5;color:#888;margin:3px auto 0;max-width:235px}
+.gift-image{
+  width:123px;height:116px;margin:2px auto 7px;border-radius:5px;
+  background:radial-gradient(circle at 50% 45%,#5a1424,#1c050a 65%,#0a0204);
+  border:1px solid #5a1424;box-shadow:0 0 10px rgba(194,48,76,.4);
+  display:flex;align-items:center;justify-content:center;color:#ffd9e0;
+  font-size:11px;font-weight:900;text-align:center;line-height:1.2;padding:12px;
+}
+.green-text{color:#398b45;font-weight:900}
+.blue-button{
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  height:25px;width:200px;max-width:100%;margin:10px auto 0;
+  border-radius:6px;background:#078bc7;color:white;text-decoration:none;
+  font-size:8px;font-weight:800;letter-spacing:.3px;box-shadow:0 2px 5px #b8dce8;
+}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px}
+.faq-tile{
+  min-height:90px;border-radius:6px;overflow:hidden;position:relative;
+  background:radial-gradient(ellipse at center,#4a1120,#0a0204 75%);
+  border:1px solid rgba(194,48,76,.75);box-shadow:0 0 5px rgba(194,48,76,.35);
+  display:flex;align-items:center;justify-content:center;padding:13px 8px 10px;
+  color:#fff;font-size:7px;font-weight:800;line-height:1.3;text-align:center;
+}
+.faq-tile .mini-play{
+  position:absolute;top:24px;left:50%;transform:translateX(-50%);
+  width:24px;height:24px;border-radius:50%;background:var(--accent);
+  display:grid;place-items:center;box-shadow:0 0 9px rgba(194,48,76,.8)
+}
+.mini-play:after{content:"";margin-left:2px;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:8px solid white}
+.faq-tile .faq-label{margin-top:30px}
+.faq-tile.person-tile{background:linear-gradient(135deg,#858585,#b4b4b4);padding:0}
+.faq-tile.person-tile:before{content:"";position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);width:90px;height:85px;background:#171717;border-radius:45px 45px 0 0}
+.faq-tile.person-tile:after{content:"";position:absolute;top:8px;left:50%;transform:translateX(-50%);width:38px;height:48px;background:#9c6545;border-radius:45%}
+.faq-tile .duration{position:absolute;bottom:4px;right:5px;background:var(--accent);border-radius:5px;color:#fff;font-size:5px;padding:2px 4px}
+.calendar-icon{font-size:26px;color:var(--accent);margin:0 0 6px}
+.calendar-links{display:grid;gap:4px;margin:0 auto;width:200px;max-width:100%}
+.calendar-links a{
+  height:25px;border:1px solid #e5e5e5;border-radius:5px;display:flex;align-items:center;
+  justify-content:center;color:#333;text-decoration:none;font-size:7px;font-weight:800;letter-spacing:.7px;
+}
+.email-example{
+  background:#222;color:#fff;border-radius:3px;padding:5px 7px;
+  font-size:6px;display:flex;justify-content:space-between;gap:5px;margin:8px 0 10px;text-align:left;
+}
+.instructions{text-align:left;font-size:7px;color:#666;line-height:1.5;margin:0;padding:0;list-style:none}
+.instructions li{margin:4px 0}
+.instructions b{display:inline-grid;place-items:center;background:var(--accent);color:#fff;width:10px;height:10px;border-radius:50%;font-size:6px;margin-right:5px}
+.success{font-size:34px;color:var(--accent);margin:2px 0 4px}
+.final-card{padding:12px 15px 17px}
+.footer{
+  border-top:1px solid #eee;text-align:center;padding:18px 12px 20px;
+  color:#999;font-size:5px;line-height:1.55;background:rgba(255,255,255,.85)
+}
+.footer-logo{width:20px;height:20px;margin:0 auto 7px;background:#101010;color:#d7e6b7;display:grid;place-items:center;font-size:5px;font-weight:bold}
+.footer p{max-width:450px;margin:5px auto}
+.footer a{color:#c2304c}
+@media(min-width:700px){
+  .page{width:355px}
+}
+@media(max-width:390px){
+  .page{width:calc(100% - 24px)}
+  .hero-video{height:auto;aspect-ratio:1.78}
+  .card.narrow{width:78%}
+}
+.hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}.faq-tile.person-tile{background:#4a1120 url("https://i.imgur.com/MnK2IsG.jpeg") center top/cover no-repeat}.faq-tile.person-tile:before,.faq-tile.person-tile:after{display:none}.faq-tile.person-tile .mini-play{top:50%;transform:translate(-50%,-50%)}
+</style>
+</head>
+<body>
+<div class="top-strip">DO NOT CLOSE THIS PAGE</div>
+<div class="progress-wrap"><div class="progress"><div class="progress-fill">73%</div></div></div>
+
+<header class="intro">
+  <h1><span>Wait!</span> Your registration is almost complete...</h1>
+  <p>You're almost registered. Watch the video below and follow the instructions to confirm your spot!</p>
+</header>
+
+<main class="page">
+  <!-- STEP 0: Replace this visual placeholder with the main confirmation video -->
+  <div class="hero-video" data-video-placeholder="main-confirmation-video">
+    <img class="hero-photo" src="https://i.imgur.com/70m40Vl.jpeg" alt="Alli Williams">
+    <div class="timer">10</div>
+    <div class="play"></div>
+    <div class="video-caption">and free information</div>
+    <div class="video-controls">◉ &nbsp; 1:51 &nbsp; ◖))</div>
+  </div>
+
+  <section class="card narrow">
+    <div class="step">STEP 1</div>
+    <h2>Get Your Ticket On Your Phone</h2>
+    <div class="wallet-icon">💳</div>
+    <a class="black-button" href="#" aria-label="Get my pass">▣ &nbsp; GET MY PASS</a>
+    <div class="qr-placeholder" aria-label="QR code placeholder">
+      <!-- Decorative QR-style placeholder. Replace with the real QR image. -->
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <rect width="100" height="100" fill="white"/>
+        <g fill="#111">
+          <path d="M2 2h30v30H2zM7 7v20h20V7zM12 12h10v10H12zM68 2h30v30H68zM73 7v20h20V7zM78 12h10v10H78zM2 68h30v30H2zM7 73v20h20V73zM12 78h10v10H12z"/>
+          <path d="M38 2h7v7h-7zM49 2h7v14h-7zM38 16h7v7h-7zM47 23h9v7h-9zM37 34h7v7h-7zM48 36h7v7h-7zM59 34h7v7h-7zM70 38h7v7h-7zM84 36h7v7h-7zM96 38h2v7h-2zM3 39h7v7H3zM15 38h7v7h-7zM26 38h7v7h-7zM38 48h7v7h-7zM50 48h7v7h-7zM61 47h7v7h-7zM73 49h7v7h-7zM86 49h7v7h-7zM2 51h7v7H2zM14 51h7v7h-7zM25 51h7v7h-7zM37 61h7v7h-7zM49 60h7v7h-7zM61 61h7v7h-7zM72 61h7v7h-7zM84 61h7v7h-7zM38 73h7v7h-7zM49 73h7v7h-7zM60 73h7v7h-7zM72 73h7v7h-7zM84 73h7v7h-7zM37 85h7v7h-7zM49 84h7v7h-7zM61 85h7v7h-7zM73 85h7v7h-7zM85 85h7v7h-7zM95 84h3v14h-3z"/>
+        </g>
+      </svg>
+    </div>
+    <p class="small-copy">Scan this with your iPhone camera to get your pass.<br>Your pass puts the free training on your Phone lock screen before we go live, with your join link one tap away. Tap the button to add it to your Apple Wallet.</p>
+  </section>
+
+  <section class="card narrow">
+    <div class="step">STEP 2</div>
+    <h2><span class="green-text">SUPER IMPORTANT:</span> Join The Telegram Group &amp; Claim Your Free Gift</h2>
+    <!-- Replace this block with the original gift/product image -->
+    <div class="gift-image" data-image-placeholder="free-gift">FLEXIBLE BUDGET<br>STARTER TEMPLATE</div>
+    <p class="small-copy">Your free flexible budget starter template is the <b>pinned message</b> in the group, and everything between now and the training happens there. Watch it before we go live.</p>
+    <a class="blue-button" href="#">➤ &nbsp; JOIN THE TELEGRAM GROUP</a>
+  </section>
+
+  <section class="card wide">
+    <div class="step">STEP 3</div>
+    <h2>Get your burning questions answered</h2>
+    <div class="faq-grid">
+      <!-- Replace each tile with its corresponding video thumbnail/player -->
+      <div class="faq-tile person-tile" data-video-placeholder="faq-video-1"><span class="mini-play"></span><span class="duration">1:24</span></div>
+      <div class="faq-tile" data-video-placeholder="faq-video-2"><span class="mini-play"></span><span class="faq-label">What if I miss the free training?</span><span class="duration">0:42</span></div>
+      <div class="faq-tile" data-video-placeholder="faq-video-3"><span class="mini-play"></span><span class="faq-label">How long is the free training, and what should I have ready?</span><span class="duration">0:51</span></div>
+      <div class="faq-tile" data-video-placeholder="faq-video-4"><span class="mini-play"></span><span class="faq-label">I've watched all your free content already. What's actually new here?</span><span class="duration">0:38</span></div>
+      <div class="faq-tile" data-video-placeholder="faq-video-5"><span class="mini-play"></span><span class="faq-label">Will there be a Q&amp;A? Can I ask you questions live?</span><span class="duration">0:46</span></div>
+      <div class="faq-tile" data-video-placeholder="faq-video-6"><span class="mini-play"></span><span class="faq-label">How do I know your results are real?</span><span class="duration">0:34</span></div>
+      <div class="faq-tile" data-video-placeholder="faq-video-7"><span class="mini-play"></span><span class="faq-label">Will you be selling me something at the end?</span><span class="duration">0:29</span></div>
+      <div class="faq-tile" data-video-placeholder="faq-video-8"><span class="mini-play"></span><span class="faq-label">Anything else I should do to prepare before the free live training?</span><span class="duration">0:33</span></div>
+    </div>
+  </section>
+
+  <section class="card narrow">
+    <div class="step">STEP 4</div>
+    <h2>Add The Event To Your Calendar</h2>
+    <div class="calendar-icon">▦</div>
+    <div class="calendar-links">
+      <a href="#">🌐 &nbsp; GOOGLE CALENDAR</a>
+      <a href="#"> &nbsp; APPLE CALENDAR</a>
+      <a href="#">▣ &nbsp; OUTLOOK CALENDAR</a>
+      <a href="#">♆ &nbsp; YAHOO CALENDAR</a>
+    </div>
+  </section>
+
+  <section class="card narrow">
+    <div class="step">STEP 5</div>
+    <h2>Lastly, Check Your Email And Make Sure You've Got The Invite.</h2>
+    <div class="email-example"><span>□ &nbsp; ☆ &nbsp; Alli Williams</span><b>you're in for sunday, claim your ticket</b></div>
+    <ul class="instructions">
+      <li><b>1</b> Locate the email &amp; save the link (could be in promotions or spam)</li>
+      <li><b>2</b> Move the email to primary, star it, and reply with the word "yes"</li>
+    </ul>
+  </section>
+
+  <section class="card narrow final-card">
+    <div class="step">STEP 6</div>
+    <h2>You're All Set!</h2>
+    <div class="success">✓</div>
+    <p class="small-copy">We've sent you a confirmation email. Mark your calendar and I'll see you on Sunday, November 1st at 7:00 PM EST.</p>
+  </section>
+</main>
+
+<footer class="footer">
+  <img src="https://i.imgur.com/EDh3YCr.jpeg" alt="Alli Williams" style="width:28px;height:28px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 7px">
+  <p>© 2025 All Rights Reserved. All Rights Reserved.</p>
+  <p>DISCLAIMER: This website is not part of Facebook, Google, or any other advertising platform. Additionally, this site is NOT endorsed by Facebook or Google in any way. FACEBOOK is a trademark of Meta, and GOOGLE is a trademark of Alphabet Inc. Google and YouTube are trademarks of Google LLC.</p>
+  <p>ENDORSEMENT DISCLAIMER: Any financial results, savings, debt-payoff figures, or success stories mentioned on this site, in our communications, or in testimonials are not typical and do not guarantee similar outcomes. Your results will vary significantly based on factors such as your level of effort, dedication, and consistency, your income, existing debt and expenses, your individual skills, discipline, and consistency, and more. We do not promise or guarantee any specific financial outcome, income, savings, or debt reduction. The success of any individual depends entirely on their own circumstances, background, and willingness to learn and apply the process.</p>
+  <p>Contact: <u>support@example.com</u> | All rights reserved.</p>
+  <p><a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a></p>
+</footer>
+</body>
+</html>
