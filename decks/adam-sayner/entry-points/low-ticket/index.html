@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Luxury Rental Blueprint — Plan Your First Luxury Short-Term Rental For $27</title>
-<meta name="description" content="A practical blueprint for planning, funding, and launching a luxury short-term rental around a full-time career. Six modules, templates, and four bonuses for $27.">
-<meta property="og:title" content="The Luxury Rental Blueprint — Just $27 Today">
-<meta property="og:description" content="Move from curiosity to a clear plan for your first luxury short-term rental.">
+<title>The Mushroom Farm Starter Blueprint — Launch Your First Mushroom Farm For $27</title>
+<meta name="description" content="A practical blueprint for planning, setting up, and running your first small mushroom farm around everyday life. Six modules, templates, and four bonuses for $27.">
+<meta property="og:title" content="The Mushroom Farm Starter Blueprint — Just $27 Today">
+<meta property="og:description" content="Move from curiosity to a clear plan for your first mushroom farm.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +16,7 @@
 :root{
   --radius:.5rem;
   --background:oklch(97.5% .002 250);--foreground:oklch(17% .01 264);
-  --card:oklch(100% 0 0);--primary:oklch(65% .276 345);--primary-fg:oklch(100% 0 0);--primary-deep:oklch(54.7% .233 345);
+  --card:oklch(100% 0 0);--primary:#13E06E;--primary-fg:#00130b;--primary-deep:#0FBF5D;--primary-text:#0B8A43;
   --secondary:oklch(95.5% .004 250);--muted:oklch(95.5% .004 250);--muted-fg:oklch(42% .015 258);
   --destructive:oklch(56% .21 27);--border:oklch(88% .008 258);
   --paper:oklch(100% 0 0);--paper-muted:oklch(44% .015 258);--paper-border:oklch(90% .01 258);
@@ -24,7 +24,7 @@
   --ink:oklch(16% .008 264);--ink-fg:oklch(99% .002 250);
   --gradient-cta:linear-gradient(180deg,var(--primary),var(--primary-deep));
   --gradient-hero:linear-gradient(180deg,oklch(98.5% .002 250),var(--background));
-  --shadow-cta:0 10px 24px -12px oklch(52% .22 265/.45);
+  --shadow-cta:0 10px 24px -12px rgba(19,224,110,.55);
   --shadow-card:0 10px 30px -18px oklch(20% .02 264/.25);
 }
 *{box-sizing:border-box;margin:0;padding:0;border:0 solid var(--border)}
@@ -38,7 +38,7 @@ img{max-width:100%;display:block}
 .w5{max-width:64rem}.w4{max-width:56rem}.w3{max-width:48rem}
 section{padding:4rem 1rem}
 .center{text-align:center}
-.primary{color:var(--primary)}
+.primary{color:var(--primary-text)}
 .success{color:var(--success)}
 
 /* header */
@@ -50,8 +50,8 @@ section{padding:4rem 1rem}
 
 /* headings */
 .sec-h{font-size:1.5rem;text-wrap:balance;text-align:center}
-.sec-h .block{display:block;color:var(--primary)}
-.eyebrow{text-align:center;font-size:.75rem;font-weight:900;letter-spacing:.2em;text-transform:uppercase;color:var(--primary)}
+.sec-h .block{display:block;color:var(--primary-text)}
+.eyebrow{text-align:center;font-size:.75rem;font-weight:900;letter-spacing:.2em;text-transform:uppercase;color:var(--primary-text)}
 .subline{margin-top:.75rem;text-align:center;font-size:.875rem;font-weight:700;color:var(--muted-fg)}
 @media(min-width:640px){.sec-h{font-size:1.875rem}}
 @media(min-width:768px){.sec-h{font-size:2.25rem}}
@@ -133,7 +133,7 @@ aside.buy{align-self:start;border:2px solid var(--primary);background:var(--card
 .tick-list{display:grid;gap:.75rem}
 .tick-list li{display:flex;gap:.75rem}
 .tick-list .ic{flex:none;margin-top:.125rem;width:1.25rem;height:1.25rem;border-radius:50%;background:color-mix(in oklab,var(--primary) 15%,transparent);display:flex;align-items:center;justify-content:center}
-.tick-list .ic svg{width:.875rem;height:.875rem;color:var(--primary)}
+.tick-list .ic svg{width:.875rem;height:.875rem;color:var(--primary-text)}
 .tick-list span.t{font-size:.875rem;line-height:1.625;color:var(--muted-fg)}
 .tick-list b{color:var(--foreground)}
 .on-paper .tick-list span.t{color:var(--paper-muted)}
@@ -144,7 +144,7 @@ aside.buy{align-self:start;border:2px solid var(--primary);background:var(--card
 /* system steps */
 .steps{margin-top:2.5rem;display:grid;gap:1rem}
 .step{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1.5rem;box-shadow:var(--shadow-card)}
-.step b{display:block;font-size:.75rem;font-weight:900;letter-spacing:.18em;color:var(--primary);margin-bottom:.5rem}
+.step b{display:block;font-size:.75rem;font-weight:900;letter-spacing:.18em;color:var(--primary-text);margin-bottom:.5rem}
 .step .n{font-size:1.25rem;font-weight:900;display:block;margin-bottom:.5rem}
 .step p{font-size:.9rem;color:var(--muted-fg)}
 @media(min-width:640px){.steps{grid-template-columns:repeat(2,1fr)}}
@@ -155,7 +155,7 @@ aside.buy{align-self:start;border:2px solid var(--primary);background:var(--card
 .mods{margin-top:2.5rem;display:grid;gap:1.5rem}
 .mod{display:grid;gap:1.5rem;align-items:center;border:1px solid var(--paper-border);background:color-mix(in oklab,var(--background) 2%,transparent);border-radius:1rem;padding:1.5rem}
 .mod img{width:100%;aspect-ratio:16/9;object-fit:contain}
-.mod .lbl{font-size:.75rem;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:var(--primary)}
+.mod .lbl{font-size:.75rem;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:var(--primary-text)}
 .mod h3{margin-top:.5rem;font-size:1.25rem}
 .mod .desc{margin-top:.75rem;font-size:.9rem;line-height:1.625;color:var(--paper-muted)}
 .mod .tick-list{margin-top:1rem}
@@ -170,7 +170,7 @@ aside.buy{align-self:start;border:2px solid var(--primary);background:var(--card
 .bon .cover .ico{font-size:3rem;line-height:1}
 .bon .cover b{font-size:.75rem;letter-spacing:.18em;text-transform:uppercase}
 .bon .cover span{font-size:1rem;font-weight:900;line-height:1.2}
-.bon .lbl{font-size:.75rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--primary)}
+.bon .lbl{font-size:.75rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--primary-text)}
 .bon h3{margin-top:.5rem;font-size:1.25rem}
 .bon .desc{margin-top:.75rem;font-size:.95rem;color:var(--muted-fg)}
 @media(min-width:640px){.bon h3{font-size:1.5rem}}
@@ -193,7 +193,7 @@ aside.buy{align-self:start;border:2px solid var(--primary);background:var(--card
 .s-guar{background:var(--cream);color:var(--foreground)}
 .guar-grid{max-width:64rem;margin:0 auto;display:grid;gap:2rem;align-items:center}
 .guar-badge{aspect-ratio:1/1;width:100%;max-width:220px;margin:0 auto;border:2px dashed color-mix(in oklab,var(--gold) 60%,transparent);background:color-mix(in oklab,var(--gold) 10%,transparent);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1rem}
-.guar-badge .big{font-size:3.25rem;font-weight:900;line-height:1;color:var(--primary)}
+.guar-badge .big{font-size:3.25rem;font-weight:900;line-height:1;color:var(--primary-text)}
 .guar-badge span{font-size:.8rem;font-weight:900;text-transform:uppercase;letter-spacing:.1em}
 .guar-grid h2{font-size:1.5rem}
 .guar-grid .body{margin-top:1rem;display:grid;gap:.75rem;font-size:.9rem;line-height:1.625;color:var(--paper-muted)}
@@ -227,7 +227,7 @@ aside.buy{align-self:start;border:2px solid var(--primary);background:var(--card
 /* final */
 .s-final{border-top:1px solid var(--border);background:color-mix(in oklab,var(--card) 40%,transparent)}
 .s-final .fine{margin-top:1rem;font-size:.75rem;font-weight:700;color:var(--muted-fg)}
-.s-final .stat{margin-top:1rem;font-size:.75rem;font-weight:900;letter-spacing:.2em;text-transform:uppercase;color:var(--primary)}
+.s-final .stat{margin-top:1rem;font-size:.75rem;font-weight:900;letter-spacing:.2em;text-transform:uppercase;color:var(--primary-text)}
 .s-final .pr{margin-top:1rem;font-size:3rem;font-weight:900;letter-spacing:-.04em}
 .s-final .pr small{font-size:1rem;color:var(--muted-fg)}
 .lock{display:flex;align-items:center;justify-content:center;gap:.5rem;font-size:.75rem;font-weight:700;color:var(--muted-fg)}
@@ -237,9 +237,9 @@ footer{padding:3rem 1rem}
 footer .in{max-width:56rem;margin:0 auto;text-align:center}
 footer p{font-size:.75rem;line-height:1.625;color:var(--muted-fg)}
 footer nav{margin-top:1.25rem;display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem 1.25rem;font-size:.75rem;font-weight:700;color:var(--muted-fg)}
-footer nav a:hover{color:var(--primary)}
+footer nav a:hover{color:var(--primary-text)}
 footer .copy{margin-top:1.25rem}
-.ph-art{width:100%;height:100%;min-height:150px;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;background:linear-gradient(135deg,#ffe0f5,#ffa8e2);color:#6b0750;font:900 .8rem/1.3 Lato,sans-serif;letter-spacing:.12em;text-transform:uppercase;border-radius:inherit}
+.ph-art{width:100%;height:100%;min-height:150px;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;background:linear-gradient(135deg,#d9fbe7,#8ff0b6);color:#064a25;font:900 .8rem/1.3 Lato,sans-serif;letter-spacing:.12em;text-transform:uppercase;border-radius:inherit}
 </style>
 </head>
 <body>
@@ -247,7 +247,7 @@ footer .copy{margin-top:1.25rem}
 <!-- HEADER -->
 <header class="top">
   <div class="wrap">
-    <div class="logo">Logo</div>
+    <div class="logo">GroCycle</div>
     <a class="help" href="mailto:REPLACE_WITH_SUPPORT_EMAIL" id="contact">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
       Need Help? Contact Us
@@ -260,13 +260,13 @@ footer .copy{margin-top:1.25rem}
 <!-- HERO -->
 <section class="hero">
   <div class="wrap">
-    <p class="banner">For Healthcare Workers Who Want To Add A 2nd Income Stream</p>
+    <p class="banner">For Beginners Who Want To Add A 2nd Income Stream</p>
     <h1>
-      <span class="primary">How Busy Healthcare Professionals With Zero Real Estate Experience Are Acquiring Their First Cash-Flowing Luxury Rental With Less Than $5,000 Down.</span>
-      <span class="foreground">(& Generating $5,000-$10,000/Month In Passive Income Without Being A Traditional Landlord Or Fixing A Single Toilet)</span>
+      <span class="primary">How Complete Beginners With Zero Farming Experience Are Launching Their First Cash-Flowing Mushroom Farm With Less Than $200</span>
+      <span class="foreground">(& Without Quitting Their Jobs, Buying Land, Or Spending Months Figuring It Out Alone)</span>
     </h1>
     <ul class="checks">
-      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Fit It Around Your Career</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Start Small, Right Where You Are</li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Plan Your Budget Before You Start</li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Understand The Real Economics</li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Instant Access</li>
@@ -275,7 +275,7 @@ footer .copy{margin-top:1.25rem}
     <div class="hero-grid">
       <div>
         <div class="video">
-          <img src="dr-rachel.png" alt="Dr. Rachel">
+          <img src="video-poster.png" alt="Adam Sayner">
           <div class="ph">
             <span class="play"><svg viewBox="0 0 24 24"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></span>
           </div>
@@ -284,20 +284,20 @@ footer .copy{margin-top:1.25rem}
           
         </div>
         <div class="hero-offer">
-          <img src="https://i.imgur.com/zKuQeYp.png" alt="The Luxury Rental Blueprint">
+          <img src="product.png" alt="The Mushroom Farm Starter Blueprint">
           <div class="t">
             <span class="tag-gold">Instant Digital Access</span>
-            <p>Get The Luxury Rental Blueprint<br><span class="primary">Plus!</span> 4 Free Bonuses Included</p>
+            <p>Get The Mushroom Farm Starter Blueprint<br><span class="primary">Plus!</span> 4 Free Bonuses Included</p>
           </div>
         </div>
       </div>
 
       <aside class="buy">
-        <div class="card-img"><img src="https://i.imgur.com/zKuQeYp.png" alt="The Luxury Rental Blueprint"></div>
+        <div class="card-img"><img src="product.png" alt="The Mushroom Farm Starter Blueprint"></div>
 
         <p class="price">Only $27 Today</p>
         
-        <p class="txt">Get Instant Access To The Luxury Rental Blueprint + 4 Bonuses For Just $27</p>
+        <p class="txt">Get Instant Access To The Mushroom Farm Starter Blueprint + 4 Bonuses For Just $27</p>
         <p class="avail">Now Available For Instant Access</p>
 
         <a class="btn-side" href="REPLACE_WITH_CHECKOUT_URL">
@@ -325,19 +325,19 @@ footer .copy{margin-top:1.25rem}
 <section class="s-pain">
   <div class="wrap w4">
     <p class="eyebrow">The real bottleneck</p>
-    <h2 class="sec-h" style="margin-top:.75rem">You're Interested In Luxury Rentals.<span class="block">You Don't Have The Time To Figure It All Out.</span></h2>
-    <p class="subline">Between a full-time healthcare career and everything else on your plate, there's little room to sort through conflicting advice about short-term rentals.</p>
+    <h2 class="sec-h" style="margin-top:.75rem">You're Interested In Growing Mushrooms.<span class="block">You Don't Want To Waste Money Figuring It All Out.</span></h2>
+    <p class="subline">There's a lot of conflicting advice about equipment, varieties, and setups, and it's hard to know what a small farm actually needs.</p>
     <div class="pain-box">
       <ul class="tick-list">
-        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t"><b>The numbers feel unclear.</b> It's hard to know what a luxury rental can realistically earn, or what it costs to get started.</span></li>
-        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t"><b>Choosing a market feels like a gamble.</b> Without a way to compare locations and properties, it's easy to pick the wrong one.</span></li>
-        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t"><b>No real estate experience feels like a barrier.</b> Terms, tools, and steps all seem to assume you already know the basics.</span></li>
-        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t"><b>Time is the real constraint.</b> A rental business that demands constant attention doesn't fit around a demanding career.</span></li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t"><b>The numbers feel unclear.</b> It's hard to know what a small mushroom farm can realistically earn, or what it costs to get started.</span></li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t"><b>Choosing what to grow feels like a gamble.</b> Without a way to compare varieties and buyers, it's easy to pick the wrong one.</span></li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t"><b>No farming experience feels like a barrier.</b> Terms, equipment, and steps all seem to assume you already know the basics.</span></li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t"><b>Time is the real constraint.</b> A farm that demands constant attention doesn't fit around a job and a busy life.</span></li>
       </ul>
     </div>
     <p class="punch">The answer isn't simply “learn more.” It's to follow a clear process you can act on.</p>
     <div class="cta-wrap">
-      <a class="cta" href="REPLACE_WITH_CHECKOUT_URL">Show Me The Luxury Rental Blueprint</a>
+      <a class="cta" href="REPLACE_WITH_CHECKOUT_URL">Show Me The Mushroom Farm Starter Blueprint</a>
       <p class="guar-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>30-Day Refund Policy Proposed</p>
     </div>
   </div>
@@ -347,13 +347,13 @@ footer .copy{margin-top:1.25rem}
 <section>
   <div class="wrap w5">
     <p class="eyebrow">A practical framework</p>
-    <h2 class="sec-h" style="margin-top:.75rem">The Four-Part<span class="block">Luxury Rental System</span></h2>
-    <p class="subline" style="max-width:46rem;margin-inline:auto">A repeatable workflow for understanding the numbers, choosing a property, preparing it for guests, and managing it around your schedule.</p>
+    <h2 class="sec-h" style="margin-top:.75rem">The Four-Part<span class="block">Backyard Farm System</span></h2>
+    <p class="subline" style="max-width:46rem;margin-inline:auto">A repeatable workflow for understanding the numbers, setting up a small growing space, running your first cycles, and managing it around your schedule.</p>
     <div class="steps">
       <div class="step"><b>01 / LEARN</b><span class="n">Know the economics</span><p>Revenue, costs, and what to expect before you commit.</p></div>
-      <div class="step"><b>02 / CHOOSE</b><span class="n">Pick the right property</span><p>Market comparison, property criteria, and a simple scorecard.</p></div>
-      <div class="step"><b>03 / LAUNCH</b><span class="n">Get it guest-ready</span><p>Furnishing, listing, photos, and guest communication.</p></div>
-      <div class="step"><b>04 / RUN</b><span class="n">Fit it around your life</span><p>Simple routines, checklists, and support so it runs smoothly.</p></div>
+      <div class="step"><b>02 / SET UP</b><span class="n">Build a small growing space</span><p>Space, equipment, and supplies for your garage or backyard.</p></div>
+      <div class="step"><b>03 / GROW</b><span class="n">Run your first cycles</span><p>Inoculation, incubation, fruiting, and harvest, step by step.</p></div>
+      <div class="step"><b>04 / SELL</b><span class="n">Turn harvests into income</span><p>Find buyers, set prices, and keep a simple weekly routine.</p></div>
     </div>
   </div>
 </section>
@@ -361,7 +361,7 @@ footer .copy{margin-top:1.25rem}
 <!-- MODULES -->
 <section class="s-mod" id="offer">
   <div class="wrap">
-    <h2 class="sec-h">Everything You Get Inside<span class="block" style="color:var(--foreground)">The Luxury Rental Blueprint</span></h2>
+    <h2 class="sec-h">Everything You Get Inside<span class="block" style="color:var(--foreground)">The Mushroom Farm Starter Blueprint</span></h2>
     <p class="subline">Six short modules. Practical tools you can put to work.</p>
 
     <div class="mods on-paper">
@@ -370,11 +370,11 @@ footer .copy{margin-top:1.25rem}
         <div class="body">
           <p class="lbl">Module 1: Understand The Economics</p>
           <h3>Know What The Numbers Look Like Before You Commit</h3>
-          <p class="desc">Learn how luxury short-term rentals earn, what the main costs are, and how to set realistic expectations before your first property.</p>
+          <p class="desc">Learn how a small mushroom farm earns, what the main costs are, and how to set realistic expectations before your first harvest.</p>
           <ul class="tick-list">
             <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Revenue and cost worksheet</span></li>
             <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Time-and-budget readiness checklist</span></li>
-            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">A simple way to set your first-property goal</span></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">A simple way to set your first-harvest goal</span></li>
           </ul>
           <a class="cta sm" href="REPLACE_WITH_CHECKOUT_URL">Get The Complete System For Just $27</a>
         </div>
@@ -383,13 +383,13 @@ footer .copy{margin-top:1.25rem}
       <article class="mod">
         <div class="img"><div class="ph-art">Module 2</div></div>
         <div class="body">
-          <p class="lbl">Module 2: Choose Your Market</p>
-          <h3>Compare Markets Without Wasting Hours</h3>
-          <p class="desc">Create a repeatable way to compare locations, research demand, and shortlist properties.</p>
+          <p class="lbl">Module 2: Choose What To Grow</p>
+          <h3>Pick Varieties You Can Actually Sell</h3>
+          <p class="desc">Create a repeatable way to compare varieties, research local demand, and shortlist what to grow first.</p>
           <ul class="tick-list">
-            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Market comparison template</span></li>
-            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Property shortlist checklist</span></li>
-            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Demand research walkthrough</span></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Variety comparison template</span></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">First-crop shortlist checklist</span></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Local buyer research walkthrough</span></li>
           </ul>
           <a class="cta sm" href="REPLACE_WITH_CHECKOUT_URL">Get The Complete System For Just $27</a>
         </div>
@@ -398,11 +398,11 @@ footer .copy{margin-top:1.25rem}
       <article class="mod">
         <div class="img"><div class="ph-art">Module 3</div></div>
         <div class="body">
-          <p class="lbl">Module 3: Analyze The Property</p>
-          <h3>Run The Numbers With A Consistent Process</h3>
-          <p class="desc">Move beyond gut feeling with a repeatable method for estimating income, expenses, and fit.</p>
+          <p class="lbl">Module 3: Plan Your Setup</p>
+          <h3>Build A Small Growing Space Without Overspending</h3>
+          <p class="desc">Plan the space, equipment, and supplies you need for a first farm without guessing.</p>
           <ul class="tick-list">
-            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Property analysis calculator</span></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Space and equipment planner</span></li>
             <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Startup budget worksheet</span></li>
             <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Go / no-go decision checklist</span></li>
           </ul>
@@ -413,13 +413,13 @@ footer .copy{margin-top:1.25rem}
       <article class="mod">
         <div class="img"><div class="ph-art">Module 4</div></div>
         <div class="body">
-          <p class="lbl">Module 4: Design For Luxury</p>
-          <h3>Create A Space Guests Want To Book</h3>
-          <p class="desc">Plan the furnishing, design, and amenities that make a property feel premium without overspending.</p>
+          <p class="lbl">Module 4: Run Your First Cycle</p>
+          <h3>Go From Start To First Harvest</h3>
+          <p class="desc">Understand each stage of the growing cycle and the routines that keep your batches healthy.</p>
           <ul class="tick-list">
-            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Furnishing planner</span></li>
-            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Amenity checklist</span></li>
-            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Pre-launch walkthrough checklist</span></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Cycle timeline planner</span></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Daily and weekly care checklist</span></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Troubleshooting quick reference</span></li>
           </ul>
           <a class="cta sm" href="REPLACE_WITH_CHECKOUT_URL">Get The Complete System For Just $27</a>
         </div>
@@ -428,13 +428,13 @@ footer .copy{margin-top:1.25rem}
       <article class="mod">
         <div class="img"><div class="ph-art">Module 5</div></div>
         <div class="body">
-          <p class="lbl">Module 5: List &amp; Get Booked</p>
-          <h3>Present Your Property Clearly To Guests</h3>
-          <p class="desc">Learn how to write a clear listing, plan your photos, set pricing, and communicate with guests.</p>
+          <p class="lbl">Module 5: Find Buyers &amp; Sell</p>
+          <h3>Turn Your Harvest Into Income</h3>
+          <p class="desc">Learn how to price your mushrooms, find your first buyers, and keep sales simple.</p>
           <ul class="tick-list">
-            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Listing outline</span></li>
-            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Photo shot list</span></li>
-            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Guest message templates</span></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Pricing worksheet</span></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">First-buyer outreach outline</span></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Simple sales tracker</span></li>
           </ul>
           <a class="cta sm" href="REPLACE_WITH_CHECKOUT_URL">Get The Complete System For Just $27</a>
         </div>
@@ -443,12 +443,12 @@ footer .copy{margin-top:1.25rem}
       <article class="mod">
         <div class="img"><div class="ph-art">Module 6</div></div>
         <div class="body">
-          <p class="lbl">Module 6: Run It Around Your Career</p>
+          <p class="lbl">Module 6: Run It Around Your Life</p>
           <h3>Keep It Manageable Alongside A Full-Time Job</h3>
-          <p class="desc">Set up simple routines for turnovers, guest communication, and maintenance so it fits your schedule.</p>
+          <p class="desc">Set up simple routines for care, harvesting, and sales so it fits your schedule.</p>
           <ul class="tick-list">
             <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Weekly routine planner</span></li>
-            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Turnover checklist</span></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">Harvest day checklist</span></li>
             <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t">30-day action plan</span></li>
           </ul>
           <a class="cta sm" href="REPLACE_WITH_CHECKOUT_URL">Get The Complete System For Just $27</a>
@@ -466,11 +466,11 @@ footer .copy{margin-top:1.25rem}
 
     <div class="bons">
       <article class="bon">
-        <div class="cover"><span class="ico">✎</span><b>Bonus #1</b><span>Property Analysis Calculator</span></div>
+        <div class="cover"><span class="ico">✎</span><b>Bonus #1</b><span>Farm Economics Calculator</span></div>
         <div>
-          <p class="lbl">Bonus #1: The Property Analysis Calculator</p>
-          <h3>Compare Properties On Consistent Numbers</h3>
-          <p class="desc">A worksheet for estimating income and expenses so you can compare properties on consistent criteria.</p>
+          <p class="lbl">Bonus #1: The Farm Economics Calculator</p>
+          <h3>Estimate Income And Costs On Consistent Numbers</h3>
+          <p class="desc">A worksheet for estimating revenue and expenses so you can plan on consistent criteria.</p>
           <a class="cta sm" href="REPLACE_WITH_CHECKOUT_URL">Get The Complete System For Just $27</a>
         </div>
       </article>
@@ -484,20 +484,20 @@ footer .copy{margin-top:1.25rem}
         </div>
       </article>
       <article class="bon">
-        <div class="cover"><span class="ico">▤</span><b>Bonus #3</b><span>Listing Launch Checklist</span></div>
+        <div class="cover"><span class="ico">▤</span><b>Bonus #3</b><span>First Harvest Launch Checklist</span></div>
         <div>
-          <p class="lbl">Bonus #3: The Listing Launch Checklist</p>
+          <p class="lbl">Bonus #3: The First Harvest Launch Checklist</p>
           <h3>Launch With A Clearer Plan</h3>
-          <p class="desc">A step-by-step checklist for preparing your property, photos, and listing before the first guest arrives.</p>
+          <p class="desc">A step-by-step checklist for preparing your space and supplies before your first batch.</p>
           <a class="cta sm" href="REPLACE_WITH_CHECKOUT_URL">Get The Complete System For Just $27</a>
         </div>
       </article>
       <article class="bon">
-        <div class="cover"><span class="ico">↗</span><b>Bonus #4</b><span>Guest Messaging Templates</span></div>
+        <div class="cover"><span class="ico">↗</span><b>Bonus #4</b><span>Buyer Outreach Templates</span></div>
         <div>
-          <p class="lbl">Bonus #4: The Guest Messaging Templates</p>
-          <h3>Communicate With Guests Without Starting From Scratch</h3>
-          <p class="desc">Customizable messages for inquiries, check-in, and follow-up so guest communication stays consistent.</p>
+          <p class="lbl">Bonus #4: The Buyer Outreach Templates</p>
+          <h3>Reach Your First Buyers Without Starting From Scratch</h3>
+          <p class="desc">Customizable messages for chefs, markets, and local shops so outreach stays consistent.</p>
           <a class="cta sm" href="REPLACE_WITH_CHECKOUT_URL">Get The Complete System For Just $27</a>
         </div>
       </article>
@@ -510,19 +510,19 @@ footer .copy{margin-top:1.25rem}
   <div class="wrap w3">
     <p class="eyebrow">The goal isn't a magic shortcut</p>
     <h2 class="sec-h" style="margin-top:.75rem">Start With A Plan<span class="block">Instead Of Guesswork</span></h2>
-    <p class="subline">No template guarantees a profitable property. But a documented process gives you a more consistent way to evaluate numbers, choose a market, prepare a listing, and respond when things go wrong.</p>
+    <p class="subline">No template guarantees a profitable farm. But a documented process gives you a more consistent way to evaluate numbers, choose what to grow, prepare your space, and respond when things go wrong.</p>
 
     <div class="tbl">
       <div class="tr head"><div>Feature</div><div>With Process</div><div>Without</div></div>
-      <div class="tr"><div class="f">A repeatable way to compare markets</div><div class="c"><svg class="yes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="c"><svg class="no" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></div></div>
-      <div class="tr"><div class="f">A consistent property-analysis method</div><div class="c"><svg class="yes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="c"><svg class="no" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></div></div>
+      <div class="tr"><div class="f">A repeatable way to compare varieties</div><div class="c"><svg class="yes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="c"><svg class="no" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></div></div>
+      <div class="tr"><div class="f">A consistent method for estimating income</div><div class="c"><svg class="yes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="c"><svg class="no" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></div></div>
       <div class="tr"><div class="f">A startup budget before you commit</div><div class="c"><svg class="yes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="c"><svg class="no" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></div></div>
-      <div class="tr"><div class="f">Launch and turnover checklists</div><div class="c"><svg class="yes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="c"><svg class="no" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></div></div>
-      <div class="tr"><div class="f">A routine that fits around your career</div><div class="c"><svg class="yes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="c"><svg class="no" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></div></div>
+      <div class="tr"><div class="f">Setup and harvest checklists</div><div class="c"><svg class="yes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="c"><svg class="no" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></div></div>
+      <div class="tr"><div class="f">A routine that fits around your life</div><div class="c"><svg class="yes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="c"><svg class="no" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></div></div>
       <div class="tr"><div class="f">Guessing at the numbers</div><div class="c"><svg class="mid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></div><div class="c"><svg class="yes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div></div>
-      <div class="tr"><div class="f">Choosing a property on instinct</div><div class="c"><svg class="mid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></div><div class="c"><svg class="yes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div></div>
+      <div class="tr"><div class="f">Choosing what to grow on instinct</div><div class="c"><svg class="mid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></div><div class="c"><svg class="yes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div></div>
     </div>
-    <p class="subline">The aim is progress toward confident, informed decisions — not a promise of income from any property.</p>
+    <p class="subline">The aim is progress toward confident, informed decisions — not a promise of income from any farm.</p>
 
     <div class="cta-wrap">
       <a class="cta" href="REPLACE_WITH_CHECKOUT_URL">Start Building The System For Just $27</a>
@@ -536,11 +536,11 @@ footer .copy{margin-top:1.25rem}
   <div class="guar-grid">
     <div class="guar-badge"><div class="big">30</div><span>Day Refund<br>Policy</span></div>
     <div>
-      <h2>The Luxury Rental Blueprint Refund Policy: <span class="primary">Confirm Final Terms Before Launch</span></h2>
+      <h2>The Mushroom Farm Starter Blueprint Refund Policy: <span class="primary">Confirm Final Terms Before Launch</span></h2>
       <div class="body">
         <p>A 30-day money-back guarantee is proposed for this offer. Confirm the final policy wording, process, and applicable terms before accepting purchases.</p>
         <p>Publish the full refund policy on your site and link it in the footer so buyers know exactly what to expect.</p>
-        <p class="strong">This is educational content only. No income, occupancy, or profit outcomes are guaranteed.</p>
+        <p class="strong">This is educational content only. No income, yield, or profit outcomes are guaranteed.</p>
       </div>
     </div>
   </div>
@@ -550,10 +550,10 @@ footer .copy{margin-top:1.25rem}
 <section>
   <div class="about">
     <div>
-      <h2 class="sec-h" style="text-align:left">Meet Dr. Rachel:<span class="block">Healthcare Professional By Day, Short-Term Rental Investor By Night</span></h2>
+      <h2 class="sec-h" style="text-align:left">Meet Adam Sayner:<span class="block">Founder Of GroCycle And Mushroom Growing Educator</span></h2>
       <div class="body">
-        <p><b>Dr. Rachel is a healthcare professional and short-term rental investor who teaches others how to build luxury rental businesses through The Luxury Rental Academy.</b></p>
-        <p>This blueprint focuses on a key challenge for busy professionals: turning interest in luxury rentals into a clear, practical plan that fits around a full-time career.</p>
+        <p><b>Adam Sayner is the founder of GroCycle, where he teaches people how to grow mushrooms and build businesses around them.</b></p>
+        <p>This blueprint focuses on a key challenge for beginners: turning interest in mushroom growing into a clear, practical plan that fits around everyday life.</p>
         <p>Rather than promising overnight results, the goal is to help you put the foundations in place — one practical step at a time.</p>
       </div>
       <div class="chips">
@@ -564,7 +564,7 @@ footer .copy{margin-top:1.25rem}
         <p class="guar-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>30-Day Refund Policy Proposed</p>
       </div>
     </div>
-    <div class="photo"><img src="dr-rachel.png" alt="Dr. Rachel"></div>
+    <div class="photo"><img src="adam-sayner.png" alt="Adam Sayner"></div>
   </div>
 </section>
 
@@ -573,15 +573,15 @@ footer .copy{margin-top:1.25rem}
   <div class="wrap w3">
     <h2 class="sec-h">Frequently Asked Questions</h2>
     <div class="faq">
-      <details open><summary>Do I need real estate experience?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>No. The framework is intended for beginners, including healthcare professionals and other busy people who want a more structured starting point.</p></details>
+      <details open><summary>Do I need farming experience?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>No. The framework is intended for complete beginners who want a more structured starting point.</p></details>
       <details><summary>Do I need a lot of money to get started?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>The blueprint teaches you how to plan your budget and understand startup costs. It does not provide capital or guarantee funding.</p></details>
-      <details><summary>Will this guarantee income from a rental?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>No. Outcomes depend on your market, property, pricing, effort, and many other factors. The blueprint provides a repeatable process, not a guarantee of a particular result.</p></details>
-      <details><summary>Is this the same as The Luxury Rental Academy?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>No. This is a low-cost educational digital product. It does not include coaching or community access.</p></details>
-      <details><summary>Can I do this while working full-time?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>The blueprint is designed for busy professionals and includes routines to keep things manageable. Your time commitment will depend on your property and approach.</p></details>
+      <details><summary>Will this guarantee income from a farm?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>No. Outcomes depend on your setup, market, pricing, effort, and many other factors. The blueprint provides a repeatable process, not a guarantee of a particular result.</p></details>
+      <details><summary>Is this the same as the Mushroom Business Accelerator?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>No. This is a low-cost educational digital product. It does not include coaching or community access.</p></details>
+      <details><summary>Can I do this while working full-time?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>The blueprint is designed for busy people and includes routines to keep things manageable. Your time commitment will depend on your setup and approach.</p></details>
       <details><summary>How long is the training?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>The proposed format is six concise video modules, approximately 60–90 minutes in total, plus templates and worksheets.</p></details>
       <details><summary>How do I access the materials?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>The intended delivery is instant digital access after purchase. Add the final platform and access instructions before publishing.</p></details>
       <details><summary>What is the refund policy?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>A 30-day money-back guarantee is proposed. Confirm the final policy wording, process, and applicable terms before accepting purchases.</p></details>
-      <details><summary>Does this provide legal or financial advice?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>No. Short-term rental rules, taxes, and regulations vary by location. Use qualified local professionals for advice on legal and financial obligations.</p></details>
+      <details><summary>Does this provide legal or financial advice?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>No. Food-business rules, permits, taxes, and regulations vary by location. Use qualified local professionals for advice on legal and financial obligations.</p></details>
     </div>
     <div class="faq-cta">
       <a class="cta" href="REPLACE_WITH_CHECKOUT_URL">Get The Complete System For Just $27</a>
@@ -594,10 +594,10 @@ footer .copy{margin-top:1.25rem}
 <section class="s-final" id="checkout">
   <div class="wrap w3 center">
     <h2 class="sec-h">Stop Piecing Together Advice From Everywhere</h2>
-    <p class="subline" style="font-size:1rem">Start with a clear, repeatable way to plan, launch, and run a luxury short-term rental — around the career you already have.</p>
+    <p class="subline" style="font-size:1rem">Start with a clear, repeatable way to plan, set up, and run a small mushroom farm — around the life you already have.</p>
     <p class="pr">$27 <small>one-time</small></p>
     <div class="cta-wrap" style="margin-top:1.5rem">
-      <a class="cta big" href="REPLACE_WITH_CHECKOUT_URL">Get The Luxury Rental Blueprint</a>
+      <a class="cta big" href="REPLACE_WITH_CHECKOUT_URL">Get The Mushroom Farm Starter Blueprint</a>
       <p class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Instant digital access after purchase</p>
       <p class="guar-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>30-Day Refund Policy Proposed</p>
     </div>
@@ -609,14 +609,14 @@ footer .copy{margin-top:1.25rem}
 
 <footer>
   <div class="in">
-    <p>Educational content only. No income, occupancy, or profit outcomes are guaranteed. Results depend on your circumstances and implementation. Short-term rental rules, taxes, and regulations vary by location; consult a qualified professional where appropriate.</p>
+    <p>Educational content only. No income, yield, or profit outcomes are guaranteed. Results depend on your circumstances and implementation. Food-business rules, permits, taxes, and regulations vary by location; consult a qualified professional where appropriate.</p>
     <nav>
       <a href="REPLACE_WITH_TERMS_URL">Terms</a>
       <a href="REPLACE_WITH_PRIVACY_URL">Privacy Policy</a>
       <a href="REPLACE_WITH_REFUND_URL">Refund Policy</a>
       <a href="mailto:REPLACE_WITH_SUPPORT_EMAIL">Contact Us</a>
     </nav>
-    <p class="copy">© 2026 The Luxury Rental Blueprint · Dr. Rachel</p>
+    <p class="copy">© 2026 The Mushroom Farm Starter Blueprint · GroCycle</p>
   </div>
 </footer>
 
