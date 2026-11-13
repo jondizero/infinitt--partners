@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0f1226"><title>The Anthem Co. — VSL (Churches)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f1226;--bg2:#171a36;--gold:#DFC265;--gold-deep:#B8963A;--ink:#f6f3ea;--muted:#a9abc4;--line:rgba(255,255,255,.12);--on-gold:#1b1608}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;min-width:320px;background:radial-gradient(1100px 520px at 85% -10%,rgba(223,194,101,.16),transparent 60%),var(--bg);color:var(--ink);font-family:Inter,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+button{font:inherit}
+.nav{max-width:1120px;margin:0 auto;padding:22px 24px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;font:700 15px Fraunces,Georgia,serif;letter-spacing:.02em}
+.brand i{width:30px;height:30px;border-radius:50%;background:var(--gold);color:var(--on-gold);display:grid;place-items:center;font:800 13px Inter;font-style:normal}
+.nav a{color:var(--gold);font-size:13px;font-weight:600;text-decoration:none;border:1px solid rgba(223,194,101,.45);padding:9px 16px;border-radius:99px}
+.hero{max-width:1120px;margin:0 auto;padding:28px 24px 70px;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.pill{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);background:rgba(223,194,101,.1);border:1px solid rgba(223,194,101,.3);padding:8px 14px;border-radius:99px;margin-bottom:22px;line-height:1.4}
+h1{margin:0 0 18px;font:800 clamp(32px,4.1vw,52px)/1.08 Fraunces,Georgia,serif;letter-spacing:-.02em}
+h1 .blue{color:var(--gold);font-style:italic}
+.sub{margin:0 0 26px;color:var(--muted);font-size:18px;line-height:1.5}
+.points{list-style:none;margin:0 0 30px;padding:0;display:grid;gap:12px}
+.points li{display:flex;gap:12px;font-size:15.5px;line-height:1.45;color:#e4e3ef}
+.points li::before{content:"✦";color:var(--gold);flex:none}
+.cta{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--on-gold);font-weight:700;font-size:16px;padding:17px 30px;border-radius:99px;text-decoration:none;border:0;cursor:pointer;box-shadow:0 18px 40px -16px rgba(223,194,101,.7);transition:transform .15s}
+.cta:hover{transform:translateY(-2px)}
+.video{position:relative;aspect-ratio:4/5;border-radius:24px;overflow:hidden;background:linear-gradient(160deg,#262a55,#12142b 70%);border:1px solid var(--line);box-shadow:0 40px 80px -30px #000}
+.video::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 38%,rgba(223,194,101,.35),transparent 55%)}
+.video-button{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.speaker{width:86px;height:86px;border-radius:50%;background:var(--gold);color:var(--on-gold);display:grid;place-items:center;font-size:30px;padding-left:5px;box-shadow:0 0 0 14px rgba(223,194,101,.18)}
+.video-button strong{font:700 22px Fraunces,Georgia,serif}.video-button small{color:var(--muted);font-size:14px}
+.video-button.active .speaker{padding-left:0}
+.steps{max-width:1120px;margin:0 auto;padding:0 24px 70px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.steps div{background:var(--bg2);border:1px solid var(--line);border-radius:18px;padding:26px}
+.steps b{display:block;font:700 34px Fraunces,Georgia,serif;color:var(--gold);margin-bottom:8px}
+.steps h3{margin:0 0 6px;font:700 18px Fraunces,Georgia,serif}.steps p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.5}
+.apply-section{max-width:760px;margin:0 auto;padding:0 24px 80px}
+.apply-card{text-align:center;border-radius:28px;padding:56px 36px;background:linear-gradient(180deg,#1d2146,#141733);border:1px solid rgba(223,194,101,.35);box-shadow:0 40px 80px -40px #000}
+.apply-card h2{margin:0 0 12px;font:800 clamp(28px,3.6vw,38px)/1.15 Fraunces,Georgia,serif}
+.apply-sub{margin:0 auto 28px;max-width:480px;color:var(--muted);font-size:16px;line-height:1.55}
+.success-mark{width:56px;height:56px;border-radius:50%;background:var(--gold);color:var(--on-gold);display:grid;place-items:center;margin:0 auto 14px;font-size:26px}
+.success h3{margin:0 0 8px;font:700 26px Fraunces,Georgia,serif}.success p{margin:0;color:var(--muted)}
+.footer{padding:26px;border-top:1px solid var(--line);color:var(--muted);text-align:center;font-size:12px}.footer strong{color:var(--ink)}
+@media(max-width:860px){.hero{grid-template-columns:1fr;gap:34px;padding-top:12px}.video{aspect-ratio:16/10}.steps{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="brand"><i>A</i>THE ANTHEM CO.</div><a href="#apply">Book a call</a></nav>
+<section class="hero">
+  <div>
+    <span class="pill">For Worship Pastors And Church Leaders Who Want Their Songs To Reach Beyond Sunday Morning...</span>
+    <h1>How Churches Are Taking Their Original Worship Songs Beyond Sunday Morning And Putting Them In Front Of <span class="blue">Thousands Of New Listeners On Spotify</span></h1>
+    <p class="sub">(Without Building A Music Team From Scratch Or Chasing A Record Deal)</p>
+    <ul class="points">
+      <li>Turn the songs your congregation already loves into a ministry that travels</li>
+      <li>Reach real listeners on Spotify. No bots, no fake streams</li>
+      <li>A release plan your team can run without extra staff</li>
+    </ul>
+    <a class="cta" href="#apply">Book Your Strategy Call ↓</a>
+  </div>
+  <div class="video" id="video"><button class="video-button" type="button" aria-label="Play video"><span class="speaker">▶</span><strong>Watch The Presentation</strong><small>See how churches reach new listeners</small></button></div>
+</section>
+<section class="steps">
+  <div><b>01</b><h3>Choose the song</h3><p>We pick the original worship song with the most reach potential.</p></div>
+  <div><b>02</b><h3>Launch the campaign</h3><p>Your song goes to real listeners who love worship music.</p></div>
+  <div><b>03</b><h3>Carry it further</h3><p>Your church's message reaches people far beyond the building.</p></div>
+</section>
+<section class="apply-section" id="apply">
+  <div class="apply-card" id="applyCard">
+    <div class="apply-inner">
+      <h2>Book Your Strategy Call</h2>
+      <p class="apply-sub">Tell us about your church's music and see whether a campaign with The Anthem Co. is the right fit.</p>
+      <a class="cta" href="#" id="applyBtn">Yes! Book My Call →</a>
+    </div>
+  </div>
+</section>
+<footer class="footer"><strong>Jason &amp; Joey</strong> · The Anthem Co.</footer>
+<script>
+document.querySelector('.video-button').addEventListener('click',function(){
+  this.classList.add('active');
+  this.innerHTML='<span class="speaker">❚❚</span><strong>Presentation Preview</strong><small>Replace this block with the video embed</small>';
+});
+document.getElementById('applyBtn').addEventListener('click',function(e){
+  e.preventDefault();
+  document.getElementById('applyCard').innerHTML='<div class="success"><div class="success-mark">✓</div><h3>You’re In.</h3><p>Check your inbox for the booking details and next steps.</p></div>';
+});
+</script>
+</body>
+</html>

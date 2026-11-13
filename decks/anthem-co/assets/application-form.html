@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Anthem Co. — Quick Application</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --accent:#DFC265;--accent-deep:#C9A94A;--accent-ink:#1b1608;--accent-text:#8A6A00;--accent-soft:rgba(223,194,101,.18);
+  --ink:#14151a;--muted:#6b7077;--line:#e3e8e4;--bg:#ffffff;
+  --display:'Space Grotesk',system-ui,sans-serif;--sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+.shell{height:100%;display:flex;flex-direction:column;max-width:460px;margin:0 auto}
+
+/* header: back · logo · spacer */
+.top{flex:none;display:grid;grid-template-columns:40px 1fr 40px;align-items:center;padding:12px 16px 12px}
+.back-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;display:grid;place-items:center;transition:border-color .2s,background .2s}
+.back-btn:hover{border-color:var(--accent);background:var(--accent-soft)}
+.back-btn svg{width:16px;height:16px}
+.logo{justify-self:center;height:34px;width:34px;border-radius:50%;width:auto;object-fit:contain;display:block}
+
+.progress{flex:none;height:4px;margin:0 22px;background:#edf1ee;border-radius:4px;overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:var(--accent);border-radius:4px;transition:width .35s ease;box-shadow:0 0 10px rgba(223,194,101,.7)}
+
+main{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;padding:22px 22px 26px;overflow-y:auto}
+.panel{width:100%;animation:appear .3s ease}
+@keyframes appear{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+h1{font-family:var(--display);font-size:26px;line-height:1.15;letter-spacing:-.02em;font-weight:700;margin-bottom:22px}
+.sub{font-size:14.5px;line-height:1.55;color:var(--muted);margin:-12px 0 22px}
+
+/* choices */
+.options{display:grid;gap:9px}
+.option{width:100%;text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:13px 14px 13px 16px;min-height:52px;display:flex;align-items:center;justify-content:space-between;gap:12px;font:inherit;font-size:15px;font-weight:500;line-height:1.3;color:var(--ink);cursor:pointer;transition:border-color .18s,background .18s,transform .18s,box-shadow .18s}
+.option:hover{border-color:var(--accent);transform:translateY(-1px)}
+.option:active{transform:scale(.99)}
+.ring{flex:none;width:22px;height:22px;border-radius:50%;border:1.5px solid #cdd6cf;display:grid;place-items:center;transition:.18s}
+.ring svg{width:12px;height:12px;opacity:0;transform:scale(.6);transition:.18s}
+.option.selected{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 8px 20px -14px rgba(184,150,58,.55)}
+.option.selected .ring{background:var(--accent);border-color:var(--accent)}
+.option.selected .ring svg{opacity:1;transform:scale(1);color:var(--accent-ink)}
+
+/* text inputs */
+.field{width:100%;border:1.5px solid var(--line);border-radius:14px;background:#fff;padding:15px 16px;font:inherit;font-size:17px;color:var(--ink);outline:none;transition:border-color .18s,box-shadow .18s}
+.field::placeholder{color:#aab3ac}
+.field:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(223,194,101,.3)}
+.error{display:none;font-size:12.5px;color:#c0392b;margin-top:10px}
+
+.next{margin-top:20px;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:var(--accent-ink);border:0;border-radius:14px;padding:16px 20px;font:inherit;font-size:15px;font-weight:600;cursor:pointer;text-decoration:none;box-shadow:0 14px 26px -14px rgba(184,150,58,.55);transition:transform .18s,background .18s}
+.next:hover{background:var(--accent-deep);transform:translateY(-1px)}
+.next:active{transform:scale(.99)}
+
+/* success */
+.success{text-align:center}
+.success-mark{width:60px;height:60px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;margin:0 auto 22px;box-shadow:0 0 0 8px rgba(223,194,101,.25)}
+.success-mark svg{width:28px;height:28px}
+.success h1{margin-bottom:10px}
+.success .sub{margin:0 0 4px}
+.again{margin-top:16px;background:none;border:0;font:inherit;font-size:13px;color:var(--muted);text-decoration:underline;cursor:pointer}
+
+.info{text-align:center}
+.info .big{font-family:var(--display);font-size:56px;line-height:1;font-weight:700;letter-spacing:-.03em;color:var(--accent-text);margin:4px 0 10px}
+.info .tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-text);background:var(--accent-soft);border-radius:99px;padding:6px 12px;margin-bottom:18px}
+.info h1{font-size:22px;margin-bottom:12px}
+.info .sub{margin:0 0 6px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0 4px}
+.stat{border:1.5px solid var(--line);border-radius:14px;padding:12px 8px}
+.stat b{display:block;font-family:var(--display);font-size:21px;color:var(--accent-text)}
+.stat span{font-size:11.5px;color:var(--muted)}
+@media(max-height:700px){
+  h1{font-size:23px;margin-bottom:18px}.sub{margin:-8px 0 18px;font-size:14px}
+  .option{min-height:48px;padding:11px 14px 11px 16px;font-size:14.5px}.options{gap:8px}
+  main{padding:16px 20px 20px}
+}
+@media(prefers-reduced-motion:reduce){.panel{animation:none}.progress i{transition:none}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="top">
+    <button class="back-btn" id="back" aria-label="Back" style="visibility:hidden"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <img class="logo" src="https://static.wixstatic.com/media/297f8e_c7ad9eb014644e4894e769dfc257f971~mv2.png" alt="The Anthem Co.">
+    <span></span>
+  </header>
+  <div class="progress"><i id="bar"></i></div>
+  <main><section class="panel" id="panel" aria-live="polite"></section></main>
+</div>
+<script>
+const CHECK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+const questions=[
+  {id:"who",type:"choice",title:"Who are you looking to reach more listeners for?",options:["I'm an independent artist","I lead a church or worship team","I run a business or brand","Something else"]},
+  {type:"choice",title:"Where are you with your music today?",sub:"Pick the closest fit.",options:["I haven't released yet","I release occasionally with little reach","I release regularly but streams are flat","I'm ready to scale what's working"]},
+  {type:"info",tag:"Real listeners only",big:"500M+",title:"streams delivered for Christian music",sub:"Every campaign is built on real listeners and real playlists. No bots. No fake streams.",stats:[["1,000+","campaigns run"],["1,000+","artists served"]]},
+  {type:"choice",title:"What would a win look like for you in the next 90 days?",options:["More monthly listeners","Playlist placements","Reaching new audiences beyond my own","A clear plan for each release"]},
+  {type:"choice",title:"Have you run a release or promo campaign before?",options:["Never","Yes, on my own","Yes, with an agency","Yes, but it didn't work"]},
+  {type:"info",tag:"How it works",big:"3 steps",title:"Strategy, campaign, then scale",sub:"We map your release, put it in front of the right listeners, then double down on what's working.",stats:[["Zero","bots or fake plays"],["Real","fans, real data"]]},
+  {type:"choice",title:"What budget are you comfortable investing per release?",sub:"A rough range is fine. It helps us recommend the right campaign.",options:["Under $500","$500–$1,500","$1,500–$5,000","$5,000+"]},
+  {type:"text",title:"What's your name?",placeholder:"First and last name",required:true},
+  {type:"email",title:"What's the best email to reach you?",placeholder:"you@example.com",required:true}
+];
+const NAME_INDEX=7;
+let hist=[],current=0,answers={},locked=false,userDriven=false;
+const panel=document.getElementById("panel"),bar=document.getElementById("bar"),backBtn=document.getElementById("back");
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+
+function render(){
+  locked=false;
+  if(current>=questions.length){finish();return}
+  const q=questions[current];
+  bar.style.width=(current/questions.length*100)+"%";
+  backBtn.style.visibility=current===0?"hidden":"visible";
+  if(q.type==="info"){
+    panel.innerHTML=`<div class="info"><span class="tag">${esc(q.tag)}</span><div class="big">${esc(q.big)}</div><h1>${esc(q.title)}</h1><p class="sub">${esc(q.sub)}</p><div class="stats">${q.stats.map(x=>`<div class="stat"><b>${esc(x[0])}</b><span>${esc(x[1])}</span></div>`).join("")}</div><button class="next" id="continue">Continue <span aria-hidden="true">→</span></button></div>`;
+    document.getElementById("continue").addEventListener("click",()=>{userDriven=true;current++;render()});
+    return;
+  }
+  let html=`<h1>${esc(q.title)}</h1>${q.sub?`<p class="sub">${esc(q.sub)}</p>`:""}`;
+  if(q.type==="choice"){
+    html+=`<div class="options">${q.options.map(o=>`<button class="option${answers[current]===o?" selected":""}" data-value="${esc(o)}"><span>${esc(o)}</span><span class="ring">${CHECK}</span></button>`).join("")}</div>`;
+  }else{
+    html+=`<input class="field" id="answer" type="${q.type==="email"?"email":"text"}" inputmode="${q.type==="email"?"email":"text"}" placeholder="${esc(q.placeholder||"")}" value="${esc(answers[current]||"")}" autocomplete="${q.type==="email"?"email":"off"}">`;
+    html+=`<div class="error" id="error">Please enter a valid answer to continue.</div>`;
+    html+=`<button class="next" id="continue">Continue <span aria-hidden="true">→</span></button>`;
+  }
+  panel.innerHTML=html;
+  if(q.type==="choice"){
+    panel.querySelectorAll(".option").forEach(b=>b.addEventListener("click",()=>{
+      if(locked)return;locked=true;userDriven=true;
+      panel.querySelectorAll(".option").forEach(x=>x.classList.remove("selected"));
+      b.classList.add("selected");answers[current]=b.dataset.value;
+      setTimeout(()=>{current++;render()},230);
+    }));
+  }else{
+    const input=document.getElementById("answer");
+    document.getElementById("continue").addEventListener("click",advance);
+    input.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();advance()}});
+    if(userDriven)input.focus({preventScroll:true});
+  }
+}
+function advance(){
+  const q=questions[current],input=document.getElementById("answer"),value=input.value.trim(),err=document.getElementById("error");
+  if(q.required&&!value){err.style.display="block";input.focus({preventScroll:true});return}
+  if(q.type==="email"&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)){err.textContent="Please enter a valid email address.";err.style.display="block";input.focus({preventScroll:true});return}
+  userDriven=true;answers[current]=value;current++;render();
+}
+function finish(){
+  bar.style.width="100%";backBtn.style.visibility="hidden";
+  const first=(answers[NAME_INDEX]||"").split(" ")[0];
+  panel.innerHTML=`<div class="success"><div class="success-mark">${CHECK}</div><h1>Thanks${first?", "+esc(first):""}.</h1><p class="sub">Your application is in. Pick a time to speak with Jason and Joey.</p><a class="next" href="#" id="book">Book a call <span aria-hidden="true">→</span></a><button class="again" id="again">Start again</button></div>`;
+  document.getElementById("book").addEventListener("click",e=>e.preventDefault());
+  document.getElementById("again").addEventListener("click",()=>{current=0;answers={};userDriven=false;render()});
+}
+backBtn.addEventListener("click",()=>{if(current>0){current--;render()}});
+render();
+</script>
+</body>
+</html>
