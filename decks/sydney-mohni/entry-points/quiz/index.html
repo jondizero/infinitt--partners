@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sydney Mohni — UGC Quiz</title>
+<style>
+:root{--brand:#DA372A;--brand-d:#B02A1E;--soft:#FFF0EE;--line:#F2D6D2;--ink:#1d1210;--mut:#6b5a57}
+*{box-sizing:border-box}html,body{margin:0}
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#fff;color:var(--ink);min-height:100vh;display:flex;flex-direction:column;align-items:center}
+.top{width:100%;max-width:640px;padding:18px 20px 0;display:flex;align-items:center;gap:12px}
+.top img{width:34px;height:34px;border-radius:50%;object-fit:cover}
+.bar{flex:1;height:8px;border-radius:99px;background:var(--soft);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--brand);transition:width .35s}
+.cnt{font:700 12px ui-monospace,monospace;color:var(--mut)}
+main{width:100%;max-width:640px;padding:26px 20px 48px;flex:1}
+.step{display:none;animation:in .3s}.step.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.kick{font:700 11px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--brand);margin-bottom:10px}
+h1,h2{font-size:clamp(24px,5.5vw,34px);line-height:1.15;margin:0 0 14px;letter-spacing:-.02em}
+p{color:var(--mut);line-height:1.55;margin:0 0 20px;font-size:16px}
+.opts{display:grid;gap:10px}
+.opt{text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:15px 16px;font:600 15.5px inherit;font-family:inherit;color:var(--ink);cursor:pointer;transition:.15s}
+.opt:hover{border-color:var(--brand);background:var(--soft)}
+.opt.sel{border-color:var(--brand);background:var(--soft)}
+.btn{display:inline-block;border:0;background:var(--brand);color:#fff;font:700 16px inherit;font-family:inherit;padding:15px 26px;border-radius:12px;cursor:pointer;width:100%}
+.btn:hover{background:var(--brand-d)}
+.info{border:1.5px solid var(--brand);background:var(--soft);border-radius:14px;padding:20px;margin-bottom:20px}
+.info h2{font-size:22px}.info p{margin:0;color:var(--ink)}
+.res{border:1px solid var(--line);border-radius:14px;padding:18px;margin:0 0 18px}
+.res small{font:700 11px ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--brand)}
+.res h3{margin:6px 0 8px;font-size:20px}.res p{margin:0}
+.fine{font-size:12px;color:var(--mut);text-align:center;margin-top:14px}
+</style></head><body>
+<div class="top"><img src="https://i.imgur.com/eed934n.jpeg" alt="Sydney Mohni"><div class="bar"><i id="bar"></i></div><span class="cnt" id="cnt"></span></div>
+<main id="app"></main>
+<script>
+var Q=[
+{q:"Where are you in your UGC journey right now?",o:["I'm curious, but haven't created anything yet","I've made a few videos, but no paid deals yet","I've landed a few brand deals","I work with brands regularly, but my income isn't steady"],k:"stage"},
+{q:"What is your biggest challenge right now?",o:["Knowing where to start","Getting brands to reply to my pitches","Knowing what to charge","Turning one-off deals into repeat income"]},
+{info:{t:"You don't need a big following.",b:"Brands hire UGC creators for the content, not the audience. What matters is showing that you can make content that fits what a brand needs."}},
+{q:"How do you currently find brands to work with?",o:["I don't yet","I wait for brands to find me","I send pitches when I have time","I have a regular outreach routine"]},
+{q:"How confident are you pricing your work?",o:["I wouldn't know where to start","I guess and hope it's right","I have rates, but I often lower them","I price confidently and rarely negotiate down"]},
+{info:{t:"Pricing is a skill, not a guess.",b:"Creators who earn more tend to quote packages and usage rights instead of a single video price. It's something you can learn and practice."}},
+{q:"How much time can you give UGC each week?",o:["A few hours","Around half a day","A full day or more","It's my main focus"]},
+{q:"What kind of content do you enjoy creating most?",o:["Talking-to-camera reviews","Product demos and tutorials","Lifestyle and day-in-the-life videos","I'm not sure yet"]},
+{q:"Do you have a portfolio brands can look at?",o:["Not yet","A few practice videos","A small portfolio","A strong portfolio with brand work"]},
+{info:{t:"Steady income comes from systems.",b:"Pitch templates, outreach scripts and a simple follow-up routine make it far easier to keep deals coming in, without starting from scratch every time."}},
+{q:"What would make the biggest difference for you right now?",o:["A clear step-by-step plan to start","Ready-to-use pitches and scripts","Feedback on my portfolio and pricing","A way to build retainers and repeat clients"]},
+{q:"What is your income goal for UGC?",o:["Some extra spending money","A solid side income","Replace my current job","Build a lasting business"]},
+{q:"Which describes you best?",o:["I'm ready to start now","I want to learn first","I'm ready to invest in support","I'd like to talk through the options"]}
+];
+var RESULTS={
+ start:{t:"The Getting Started Creator",b:"You're at the beginning, and that's a great place to be. Your next step is a clear path to your first brand deal: a simple portfolio, ready-to-use pitches and a process to follow.",c:"Start Your UGC Journey →"},
+ build:{t:"The Building Creator",b:"You have the basics. Now it's about consistency: sharper pitches, confident pricing and an outreach routine that brings brands to the table regularly.",c:"Get Ready-To-Use Pitches →"},
+ grow:{t:"The Growth Creator",b:"You already know what UGC is. Your next step isn't learning more content skills, it's pricing, negotiation, retainers and client acquisition that turn deals into predictable monthly income.",c:"Build Predictable Income →"}
+};
+var app=document.getElementById('app'),bar=document.getElementById('bar'),cnt=document.getElementById('cnt');
+var qs=Q.filter(function(x){return x.q}).length,done=0,i=-1,ans=[];
+function render(){
+ var h='';
+ if(i<0){h='<div class="step on"><div class="kick">10-question quiz</div><h1>Where are you in your UGC journey?</h1><p>Answer a few quick questions and get a personalized recommendation for your next step. It takes about two minutes.</p><button class="btn" onclick="next()">Start the quiz →</button></div>';cnt.textContent='';bar.style.width='0';}
+ else if(i>=Q.length){
+  var s=ans[0]||0,r=s<=1?RESULTS.start:(s==2?RESULTS.build:RESULTS.grow);
+  h='<div class="step on"><div class="kick">Your result</div><h1>'+r.t+'</h1><div class="res"><small>Recommended next step</small><h3>'+r.c.replace(' →','')+'</h3><p>'+r.b+'</p></div><button class="btn" onclick="void 0">'+r.c+'</button><div class="fine">Your answers are used only to tailor this recommendation.</div></div>';
+  bar.style.width='100%';cnt.textContent='';
+ } else {
+  var x=Q[i];
+  if(x.info){h='<div class="step on"><div class="info"><div class="kick">Good to know</div><h2>'+x.info.t+'</h2><p>'+x.info.b+'</p></div><button class="btn" onclick="next()">Continue →</button></div>';}
+  else{h='<div class="step on"><div class="kick">Question '+(done+1)+' of '+qs+'</div><h2>'+x.q+'</h2><div class="opts">'+x.o.map(function(o,j){return '<button class="opt" onclick="pick('+j+')">'+o+'</button>'}).join('')+'</div></div>';cnt.textContent=(done+1)+'/'+qs;}
+  bar.style.width=Math.round(done/qs*100)+'%';
+ }
+ app.innerHTML=h;
+}
+function pick(j){var x=Q[i];if(x.k)ans[0]=j;done++;next();}
+function next(){i++;render();window.scrollTo(0,0);}
+render();
+</script></body></html>
